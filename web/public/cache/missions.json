@@ -1,0 +1,44 @@
+{
+  "missions": [
+    {
+      "file": "mission_synthetic_real_null.json",
+      "mission_id": "synthetic_real_null",
+      "scenario": "real_null",
+      "provenance": {
+        "adaptation": "SYNTHETIC",
+        "illness": "NONE",
+        "events": "SYNTHETIC"
+      }
+    },
+    {
+      "file": "mission_synthetic_transplant_single.json",
+      "mission_id": "synthetic_transplant_single",
+      "scenario": "transplant_single",
+      "provenance": {
+        "adaptation": "SYNTHETIC",
+        "illness": "SYNTHETIC",
+        "events": "SYNTHETIC"
+      }
+    },
+    {
+      "file": "mission_synthetic_transplant_outbreak.json",
+      "mission_id": "synthetic_transplant_outbreak",
+      "scenario": "transplant_outbreak",
+      "provenance": {
+        "adaptation": "SYNTHETIC",
+        "illness": "SYNTHETIC",
+        "events": "SYNTHETIC"
+      }
+    },
+    {
+      "file": "mission_synthetic_shared_event.json",
+      "mission_id": "synthetic_shared_event",
+      "scenario": "shared_event",
+      "provenance": {
+        "adaptation": "SYNTHETIC",
+        "illness": "NONE",
+        "events": "SYNTHETIC"
+      }
+    }
+  ]
+}

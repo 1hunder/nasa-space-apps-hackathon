@@ -1,0 +1,2115 @@
+{
+  "accessed": "2026-11-14",
+  "experiment": "eeb9bd34-bdd4-5115-b139-adf2c9927962",
+  "experiment_title": "Case Report Form",
+  "files": [
+    {
+      "bytes": 458033,
+      "file": "CRF_CFT70_FARUMEALS_FINAL.csv",
+      "folder": "CRF_CFT70_FARUMEALS",
+      "sha256": "11598aaca36d600ac9b132d3daab93fc54e4b76b8c10be06a203252eabc6a5a3",
+      "uuid": "8ec52ccc-6c6b-54fc-8abb-52b90a18d95e"
+    },
+    {
+      "bytes": 387504,
+      "file": "CRF_CFT70_FARUMEDLOGS_FINAL.csv",
+      "folder": "CRF_CFT70_FARUMEDLOGS",
+      "sha256": "016908f7e138eda164fc8fb674d81244d71e6db1cc6c10c6cd4d2f83beb9303e",
+      "uuid": "366f1526-883a-5571-970e-348e6c543a10"
+    },
+    {
+      "bytes": 137709,
+      "file": "CRF_CFT70_FARUWATERIO_FINAL_daily.csv",
+      "folder": "CRF_CFT70_FARUWATERIO",
+      "sha256": "239a3932f3c3f01ae55a3087afc3532f948a180c93c4c6d8c116046824db317e",
+      "uuid": "a41b4efe-0f95-56e3-b847-1e5917bbaf71"
+    },
+    {
+      "bytes": 546312,
+      "file": "CRF_CFT70_FARUWATERIO_FINAL_obsv.csv",
+      "folder": "CRF_CFT70_FARUWATERIO",
+      "sha256": "4a79756ceedf0d8ce4f76b5281e4da5c5d4fceba1e8e45e44567e00cbe17dbc4",
+      "uuid": "fa7b2609-f4d1-530f-9182-20936d76c86a"
+    },
+    {
+      "bytes": 7096,
+      "file": "CRF_CFT70_ISSUES_5160.csv",
+      "folder": "CRF_CFT70_ISSUES",
+      "sha256": "9eee9cc5f8c9952c4d325e9fb9112b5cbab3b897bfaaa735c59ec7ccb7318031",
+      "uuid": "d612beaf-371c-56f9-b966-e2f9a7aa3874"
+    },
+    {
+      "bytes": 3509,
+      "file": "CRF_CFT70_ISSUES_8072.csv",
+      "folder": "CRF_CFT70_ISSUES",
+      "sha256": "90c82fd336ec6c2aeb2426e9b2438c1b4a42c0449448ae9486840b9091af0160",
+      "uuid": "4dc6292f-1012-5f12-adcf-da2037d3a3a1"
+    },
+    {
+      "bytes": 19031,
+      "file": "CRF_CFT70_ISSUES_8936.csv",
+      "folder": "CRF_CFT70_ISSUES",
+      "sha256": "602364e85d69967751b91e2106631bc912416542b02b5bf9c88b27eb32317352",
+      "uuid": "89fade8c-f9cf-5475-95d1-af8e652ad045"
+    },
+    {
+      "bytes": 18109,
+      "file": "CRF_CFT70_MEALS_5160.csv",
+      "folder": "CRF_CFT70_MEALS",
+      "sha256": "dfb4fbae4fd9c21f066d95baab2f6907e46fa4a2dcb39b25063781fb7e4d1645",
+      "uuid": "dd051002-2363-5ebc-99fa-3ef33bd9baac"
+    },
+    {
+      "bytes": 23755,
+      "file": "CRF_CFT70_MEALS_8072.csv",
+      "folder": "CRF_CFT70_MEALS",
+      "sha256": "720d0794073dbbbbc5dea22933ce364535014e504768f3401653903a38e6e595",
+      "uuid": "d6dc5e30-446d-59ac-af67-20da03b4fb9e"
+    },
+    {
+      "bytes": 26079,
+      "file": "CRF_CFT70_MEALS_8936.csv",
+      "folder": "CRF_CFT70_MEALS",
+      "sha256": "32a3026a1a14630578b5a3e07115067795fe63d2c540225bebca6284147a7514",
+      "uuid": "b880b265-8797-5821-82dd-88f87b95c119"
+    },
+    {
+      "bytes": 14267,
+      "file": "CRF_CFT70_MEDLOG_5160.csv",
+      "folder": "CRF_CFT70_MEDLOG",
+      "sha256": "5cd68dd2873ba1153145799fe39bf2e0b079bbb78d641c696bb53cbafb4a3150",
+      "uuid": "b058b40b-dd11-5d8e-a44b-d41c19e0e550"
+    },
+    {
+      "bytes": 23759,
+      "file": "CRF_CFT70_MEDLOG_8072.csv",
+      "folder": "CRF_CFT70_MEDLOG",
+      "sha256": "a2bf2a708f18b10195bef27cc1c71d72f78d087aca7b50201095b8869f6c7422",
+      "uuid": "712a9404-d64b-5caf-b42d-9f7c26155db2"
+    },
+    {
+      "bytes": 34047,
+      "file": "CRF_CFT70_MEDLOG_8936.csv",
+      "folder": "CRF_CFT70_MEDLOG",
+      "sha256": "6b3475beac20bb823e79d72ee3295b904abe41e58ec3147af207ad08216c6602",
+      "uuid": "8a4fb604-f18c-5b52-a40d-42d99854c353"
+    },
+    {
+      "bytes": 2062,
+      "file": "CRF_CFT70_SYMPTOMS_5160.csv",
+      "folder": "CRF_CFT70_SYMPTOMS",
+      "sha256": "1cc366cbeb5e9519b41675ae399701d0721785e944d879675fd144e19b0428ec",
+      "uuid": "ec989516-ed54-518c-889d-f47eef208f33"
+    },
+    {
+      "bytes": 24530,
+      "file": "CRF_CFT70_SYMPTOMS_8072.csv",
+      "folder": "CRF_CFT70_SYMPTOMS",
+      "sha256": "d7f5526ea0a6ed06180b0092f5038c16ba7d2a2db5671239f06ecd0c2e178b29",
+      "uuid": "f16f11f4-b2f9-559c-9200-0500098aa6cd"
+    },
+    {
+      "bytes": 20657,
+      "file": "CRF_CFT70_SYMPTOMS_8936.csv",
+      "folder": "CRF_CFT70_SYMPTOMS",
+      "sha256": "ddeaaaad90405dc8e93cb693075e95b25fec072513434185cb2261c395764c22",
+      "uuid": "c42e1758-9274-5eb7-99b2-1f2f9d1b3534"
+    },
+    {
+      "bytes": 5178,
+      "file": "CRF_CFT70_VITALS_5160.csv",
+      "folder": "CRF_CFT70_VITALS",
+      "sha256": "8d4af2434e8b2ca9c9c26766b4936a70f46b12fda2d7a576dcecf7f43b3a13c3",
+      "uuid": "a876c861-69e7-5370-831c-3b34ea453d4a"
+    },
+    {
+      "bytes": 6849,
+      "file": "CRF_CFT70_VITALS_8072.csv",
+      "folder": "CRF_CFT70_VITALS",
+      "sha256": "34a9dd103b51f78e9763988bc0e641a53f29a5e6c4bc493866c6a9538fd29c5d",
+      "uuid": "09384b09-4e53-5fc8-bdb6-282103345621"
+    },
+    {
+      "bytes": 7292,
+      "file": "CRF_CFT70_VITALS_8936.csv",
+      "folder": "CRF_CFT70_VITALS",
+      "sha256": "ee9266fd8c5cd1680bd21e9bc22f2c628606cc83153b764581b7344056e5ecb0",
+      "uuid": "d295be98-50c5-5fac-bb8b-2b80c16a223c"
+    },
+    {
+      "bytes": 11525,
+      "file": "CRF_CFT70_WATERINTAKE_obsv_5160.csv",
+      "folder": "CRF_CFT70_WATERINTAKE",
+      "sha256": "4d5abb61644906a071f71d02408b5ef50520a963e90fa5eb2e1e608f716c41a4",
+      "uuid": "59fde8af-5383-589a-8491-1f4719348d99"
+    },
+    {
+      "bytes": 14699,
+      "file": "CRF_CFT70_WATERINTAKE_obsv_8072.csv",
+      "folder": "CRF_CFT70_WATERINTAKE",
+      "sha256": "f160d14468565a70b50ec8ff7118620d24cf330731f98a62a910e43d0dfda013",
+      "uuid": "fbc2fac4-9bc9-52dc-b919-a6be09d5b4b2"
+    },
+    {
+      "bytes": 22418,
+      "file": "CRF_CFT70_WATERINTAKE_obsv_8936.csv",
+      "folder": "CRF_CFT70_WATERINTAKE",
+      "sha256": "1fcfbdc084633587d868bce8420ccb967d33d7feafd6e341289a01d5fa84e095",
+      "uuid": "ef17bfe9-ed14-5fa4-9261-d0642704e2f6"
+    },
+    {
+      "bytes": 2990,
+      "file": "CRF_CFT70_WATERINTAKE_summary_5160.csv",
+      "folder": "CRF_CFT70_WATERINTAKE",
+      "sha256": "6e376db4ece6e1470276aff1b61c9100326ede87d99c06468286efc8b649c05f",
+      "uuid": "b5799d40-9e7b-5e9e-827f-2b2f4d1c4bab"
+    },
+    {
+      "bytes": 3705,
+      "file": "CRF_CFT70_WATERINTAKE_summary_8072.csv",
+      "folder": "CRF_CFT70_WATERINTAKE",
+      "sha256": "2e4cc9c2cb6cd7fa30de737f5a30788e4f2b61dfe7735571e4966c976df85daf",
+      "uuid": "6c0c542c-b2e2-594a-bbab-7f68476f4e23"
+    },
+    {
+      "bytes": 18841,
+      "file": "CRF_CFT70_WATERINTAKE_summary_8936.csv",
+      "folder": "CRF_CFT70_WATERINTAKE",
+      "sha256": "f801353d1d342c51f1bc8ac884004d7005bc8324a0b31278a285d30a2a1c7fa3",
+      "uuid": "f34a71cf-346f-55c3-93ae-13f28650e041"
+    },
+    {
+      "bytes": 1124,
+      "file": "CRF_Campaign_1_Misc_Antioxidant.csv",
+      "folder": "CRF_Campaign_1_Case_Report_Form",
+      "sha256": "0e37d9621ef600107e8b12e61f3a08f6e59d1367cde9ba56295ba9fc479289e6",
+      "uuid": "275b7d48-9a4e-58b4-9aa5-292f30d96cb9"
+    },
+    {
+      "bytes": 7373,
+      "file": "CRF_Campaign_1_Misc_Bodyweights.csv",
+      "folder": "CRF_Campaign_1_Case_Report_Form",
+      "sha256": "b6918154d45cc9f0716c8b4f3002921631127c893f6322931e702c0184705c27",
+      "uuid": "fce166fe-01e6-5005-b0e6-20761e6208e6"
+    },
+    {
+      "bytes": 1100,
+      "file": "CRF_Campaign_1_Misc_Fat_Soluble.csv",
+      "folder": "CRF_Campaign_1_Case_Report_Form",
+      "sha256": "6ca35118ae9012bf9e66f93616cef82b30d813e86491eaef95e174d2b263b2d1",
+      "uuid": "8aa02af9-6196-510c-80db-736d76411e5a"
+    },
+    {
+      "bytes": 1368,
+      "file": "CRF_Campaign_1_Misc_Serum_Iron.csv",
+      "folder": "CRF_Campaign_1_Case_Report_Form",
+      "sha256": "f6d6b7439254aedb30cb24d6a32c44366772d2c983fec2275111ef9f26b30cc7",
+      "uuid": "d9f8581b-2ef7-52b7-91a6-28126f03cff5"
+    },
+    {
+      "bytes": 965,
+      "file": "CRF_Campaign_1_Misc_Serum_Minerals.csv",
+      "folder": "CRF_Campaign_1_Case_Report_Form",
+      "sha256": "3700c44b3105463e897df7db9557b3541f2ec01e37806a84ebdd435a767f4b04",
+      "uuid": "f0443577-16c4-500b-9381-8147d1f52221"
+    },
+    {
+      "bytes": 896,
+      "file": "CRF_Campaign_1_Misc_Water_Soluble.csv",
+      "folder": "CRF_Campaign_1_Case_Report_Form",
+      "sha256": "fa09a6dede4e9edf4979b25703433c81c516e73a7c521d034f7547849cb77543",
+      "uuid": "4547577d-b59f-508e-9a4b-bfdf0d022573"
+    },
+    {
+      "bytes": 31474,
+      "file": "CRF_Campaign_1_Daily_Vitals_All.csv",
+      "folder": "CRF_Campaign_1_Daily_Vitals",
+      "sha256": "08c1b527eea76d17bfdaf8484f77adc611bf076349ad65a77deda09258bf6267",
+      "uuid": "3f1a61ee-55b7-54fd-a00f-e9f7751ce16c"
+    },
+    {
+      "bytes": 10388,
+      "file": "CRF_Campaign_1_Daily_Vitals_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Daily_Vitals",
+      "sha256": "bab48a69dffe98b00a02a88c8900fc507f377afb034726c819d2cd07d3819bc5",
+      "uuid": "c1cefa2d-b405-5a63-99ab-60b047e8a136"
+    },
+    {
+      "bytes": 11032,
+      "file": "CRF_Campaign_1_Daily_Vitals_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Daily_Vitals",
+      "sha256": "8916082e2f0e827860a6ee1c45bb5d6336e81b2bc83a10bfcefa565db2178ab0",
+      "uuid": "1bc72cdb-ad78-55a2-97bd-ac4033d26ce2"
+    },
+    {
+      "bytes": 10516,
+      "file": "CRF_Campaign_1_Daily_Vitals_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Daily_Vitals",
+      "sha256": "8a2bc1a69473c80269cbeba5dad16f9f8ba8f8d41fd9187d195ebc0a5a5eae4e",
+      "uuid": "6d3ea70c-33cd-50be-86b6-ee8b0826a72f"
+    },
+    {
+      "bytes": 44517,
+      "file": "CRF_Campaign_1_Meal_Status_All.csv",
+      "folder": "CRF_Campaign_1_Meal_Status",
+      "sha256": "05587b22fed652397bb854e6f6b2ecc53afabc7461169e0fd64315fc361395c2",
+      "uuid": "4154da6a-38a9-56e0-92a1-c98adc43f8f2"
+    },
+    {
+      "bytes": 14012,
+      "file": "CRF_Campaign_1_Meal_Status_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Meal_Status",
+      "sha256": "493d8799f68c8d1211e099b51a1da0a846c00f40af569c7bd602f5c3c6e5bcac",
+      "uuid": "5070a2eb-5db2-52fd-9e6e-8ebe69519dce"
+    },
+    {
+      "bytes": 14439,
+      "file": "CRF_Campaign_1_Meal_Status_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Meal_Status",
+      "sha256": "e44704d72907adef8e604103263b55cce88d31287b306f38d610292623ede10b",
+      "uuid": "9f11f1fc-2d01-5fb9-a4ea-8f5673d625cb"
+    },
+    {
+      "bytes": 14463,
+      "file": "CRF_Campaign_1_Meal_Status_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Meal_Status",
+      "sha256": "3ad74d70e6bb01a23c118eefe714effbb4cbf6f9b8b72beab3217fd77232b1a8",
+      "uuid": "92b283d8-49d6-5e25-8943-4cdc23ee00f9"
+    },
+    {
+      "bytes": 38249,
+      "file": "CRF_Campaign_1_Medical_Log_All.csv",
+      "folder": "CRF_Campaign_1_Medical_Log",
+      "sha256": "9c876a1158262cea4f503897eee25a9ef7de38c3c0707c26582614ded7e07ba0",
+      "uuid": "1f7d2664-3804-5086-955a-57ec7d0accb2"
+    },
+    {
+      "bytes": 11051,
+      "file": "CRF_Campaign_1_Medical_Log_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Medical_Log",
+      "sha256": "80085ee2068573a06032e693cd3440fc704fc332ccd5c120a076b61bfefa9eb0",
+      "uuid": "e1825fa1-95e4-5485-b3a6-57b2328bf048"
+    },
+    {
+      "bytes": 14802,
+      "file": "CRF_Campaign_1_Medical_Log_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Medical_Log",
+      "sha256": "d0cd3768c6f8b93f3d8d6dfa8643a6e7bbca83f4d1c9c9434e1751ed45889268",
+      "uuid": "5b59ce5f-c527-5e06-98a5-9cf6ebbaa6f5"
+    },
+    {
+      "bytes": 12327,
+      "file": "CRF_Campaign_1_Medical_Log_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Medical_Log",
+      "sha256": "ca27c63ac7c47d8630aff8bdabf76c96e2fe680a7811c245d4592a4593f0dc4f",
+      "uuid": "d43d5718-d12c-5dc1-a9dd-cbf2827d80aa"
+    },
+    {
+      "bytes": 13224,
+      "file": "CRF_Campaign_1_Protocol_Deviation_All.csv",
+      "folder": "CRF_Campaign_1_Protocol_Deviations",
+      "sha256": "74ab28221205c387c11686f27ea4e9afe7c89440280dba97146488a6e726712e",
+      "uuid": "bddff4ea-8442-5e20-8b5c-8a9d52aa09dd"
+    },
+    {
+      "bytes": 1887,
+      "file": "CRF_Campaign_1_Protocol_Deviation_P_Dev_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Protocol_Deviations",
+      "sha256": "9dbf568d7fdc0d465ddf3302bf853de479435b636368e2a091d57dc52dc5c3a8",
+      "uuid": "988c8069-029a-5cfa-8192-e5093e9fcd40"
+    },
+    {
+      "bytes": 5486,
+      "file": "CRF_Campaign_1_Protocol_Deviation_P_Dev_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Protocol_Deviations",
+      "sha256": "8aee029c4cde226d5000f250204842a0de851689be0a13689d1c8757e162a35e",
+      "uuid": "4c48979a-4ba2-5cc2-b972-89c21be57090"
+    },
+    {
+      "bytes": 6190,
+      "file": "CRF_Campaign_1_Protocol_Deviations_P_Dev_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Protocol_Deviations",
+      "sha256": "6ef6e1f1128ba69acb2e5827ca0b00123abc48d105a892d771e637c6e4fe96f1",
+      "uuid": "1f246d3f-78d2-52da-b5c2-26d84d671ac4"
+    },
+    {
+      "bytes": 128830,
+      "file": "CRF_Campaign_1_Urine_Collection_Obsv_All.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "d5f4ac48002c9db39fc0f4ccea0fdc79b9cd706a6208393cfe51291555ea8426",
+      "uuid": "262b324a-8d42-50b5-958c-4636374d5f76"
+    },
+    {
+      "bytes": 35981,
+      "file": "CRF_Campaign_1_Urine_Collection_Obsv_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "84f63db6d68fd0310dfd8b9f9302d5356f320533a12ff8f0c85e9777b7c1680f",
+      "uuid": "1e73d57d-1361-5d7c-b9e1-cf65068bada6"
+    },
+    {
+      "bytes": 52023,
+      "file": "CRF_Campaign_1_Urine_Collection_Obsv_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "99a7a1547c6767612f40607622e1700432d9cf58fee6014d24204800e8e5a84a",
+      "uuid": "4916721a-c23b-5e42-98c8-15a73fcf6e54"
+    },
+    {
+      "bytes": 39846,
+      "file": "CRF_Campaign_1_Urine_Collection_Obsv_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "2cd05735a11cbac1cd7bdb97d5082847e8d2ebb3e308447bc02c856ecf537e0b",
+      "uuid": "a06ac550-eb9d-5d4e-9a0b-6e2aae123753"
+    },
+    {
+      "bytes": 14723,
+      "file": "CRF_Campaign_1_Urine_Collection_Summ_All.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "169d70b1a34e04cc2abc3a72b215459d18d738beb30339d72c2332a2601273f3",
+      "uuid": "aa638fc1-d73b-58f7-9d16-a7f6b1908aaa"
+    },
+    {
+      "bytes": 3701,
+      "file": "CRF_Campaign_1_Urine_Collection_Summ_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "5a39d8dee108e46f273f97ca107a9b13e16251aa6931b77c305c72b94960322f",
+      "uuid": "68fd5ad9-2005-586c-9bad-d12b7262adad"
+    },
+    {
+      "bytes": 5331,
+      "file": "CRF_Campaign_1_Urine_Collection_Summ_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "7890c5a49319779f1b8f704e1f038c5e08e8378ac4cf283b9a9821ca2dfec4fc",
+      "uuid": "5b26de13-882b-57fd-865e-8b41115fa3a3"
+    },
+    {
+      "bytes": 5578,
+      "file": "CRF_Campaign_1_Urine_Collection_Summ_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Urine_Collection",
+      "sha256": "405c07bdb7b572447f8c83c76475d400c47d4863d53bdf3d76d8dfa458b08147",
+      "uuid": "0d10a323-5691-5311-b2d7-0cd270750077"
+    },
+    {
+      "bytes": 65925,
+      "file": "CRF_Campaign_1_Water_Intake_Obsv_All.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "3b0937349101acdf446f32ec0c73a468529a820189edd7fc337776e74df62987",
+      "uuid": "3ec32daf-7803-52de-8227-b9ea00d8f7cb"
+    },
+    {
+      "bytes": 21723,
+      "file": "CRF_Campaign_1_Water_Intake_Obsv_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "a0155c5ba3b556e4f2a62e9f6a48828b14b5fdc56f3bb868b38d4ef646a7e761",
+      "uuid": "a1e15715-cf7a-5efa-8a88-5eba5015b608"
+    },
+    {
+      "bytes": 22762,
+      "file": "CRF_Campaign_1_Water_Intake_Obsv_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "be50b59cc7eb39f21ef34f0b9665cdec0c203465e063abd1c74ec0b78b47ca02",
+      "uuid": "7ba0014e-ddb0-5a34-976f-35c882ffd3bf"
+    },
+    {
+      "bytes": 21164,
+      "file": "CRF_Campaign_1_Water_Intake_Obsv_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "b2111609efebe13be0d0fb40d93b728a5f70f8283c79e06e13ee04144866c7a7",
+      "uuid": "3fb0fb31-bcef-5ef3-8722-564c1fafdc67"
+    },
+    {
+      "bytes": 414,
+      "file": "CRF_Campaign_1_Water_Intake_ReadMe.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "7a353449e1317711703394d0af452fa2f3805e9eed97f0195c3bb2dabe1f1feb",
+      "uuid": "cafcdfe2-757e-5eb6-a90f-f64dc47eaade"
+    },
+    {
+      "bytes": 12047,
+      "file": "CRF_Campaign_1_Water_Intake_Summ_All.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "b2afff01575b587e08662ed3f057d7c63aad2d0e82c060bfa262b35ee8e35b57",
+      "uuid": "389a3e01-4f1b-5d1d-a840-b22aa8ec934f"
+    },
+    {
+      "bytes": 4058,
+      "file": "CRF_Campaign_1_Water_Intake_Summ_Subject_1.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "b23b334295459e67a4b74dab404afef86b078b9eb224e0d3fd352b2011f1dd42",
+      "uuid": "981e4e44-f0d7-57ad-8c12-0cda2eb3b2ef"
+    },
+    {
+      "bytes": 4050,
+      "file": "CRF_Campaign_1_Water_Intake_Summ_Subject_2.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "6831728ab04fa6b272d6f33292cc402312096f04dae92d0fcb65214f702cde8a",
+      "uuid": "5b4527c6-6cc7-56cb-8c33-b058142558d6"
+    },
+    {
+      "bytes": 4044,
+      "file": "CRF_Campaign_1_Water_Intake_Summ_Subject_3.csv",
+      "folder": "CRF_Campaign_1_Water_Intake",
+      "sha256": "2e58ab6b22f132d9198b003dde394eaa9934b55606167fd247be64e6d0b72b33",
+      "uuid": "d0b7bdbe-b8c0-59e1-a19e-bd2316a4700a"
+    },
+    {
+      "bytes": 5768,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3D_5165.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "ae6b97126191dddc824d233e691d97d724fe63fda6427513e40513525b8e8811",
+      "uuid": "0e4a1484-a531-50ef-8e9f-3c2d0712ac08"
+    },
+    {
+      "bytes": 5405,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3D_8615.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "e12ba9301a0cefcb09f3a4380cbe3f59067cb6d3c3e965748a6da25e136b9e19",
+      "uuid": "6b38c041-3249-5e18-9376-a25c86b65e27"
+    },
+    {
+      "bytes": 5875,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3D_8881.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "5bf2d416c3619e77754503c0ca3d9801438bd56237ac2a02a424884b788cf2c0",
+      "uuid": "7dfd882a-c386-5d48-b738-328ea16652f4"
+    },
+    {
+      "bytes": 6478,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3E_6043.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "42e08543531870498ddebed562094a03a81a8639efd48769467b9de43bf9d722",
+      "uuid": "3f70050a-7e98-58eb-b318-766610db0a42"
+    },
+    {
+      "bytes": 5191,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3E_6607.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "a8e8274623349320c7a41d20596782c08732fbdde8a279f3d19d153acefc60ff",
+      "uuid": "6c33f6ca-ad06-5afb-8e84-c64e6afe75fd"
+    },
+    {
+      "bytes": 4814,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3G_5580.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "2a81f659903b580f92f19072224a293f94fb5fe58c76892e819f3f08bbb159ee",
+      "uuid": "761b0ba6-5e2b-56e6-bd42-3a468aba3965"
+    },
+    {
+      "bytes": 4395,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3G_5814.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "4c70b3464133706a6fe45f986f54c20b1538d7d97c191673ebbee667dbaf6975",
+      "uuid": "6f97f290-2d18-58b8-9c64-a0b9741ee767"
+    },
+    {
+      "bytes": 4854,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3G_6858.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "5b20189859228b77463e4a32c1177dd2c196a70ad5859ca30f3f328750bd50d0",
+      "uuid": "9e0f1494-b30e-5b0a-bf6b-94b71e391f6d"
+    },
+    {
+      "bytes": 4567,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3G_9032.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "e4a3a22722cfcf85bc6234ffc9f98676adc8bb1172c9b9f76d5fb04437172db9",
+      "uuid": "b1a8627d-da3e-5479-8af3-1835061b0478"
+    },
+    {
+      "bytes": 4201,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3G_9139.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "f3bf7986ee73f99ca5c7c341a60b550a4ed89971e818397868a6f25403412bc6",
+      "uuid": "b4de6750-c6b4-5271-aa7f-556d4977cbb7"
+    },
+    {
+      "bytes": 4305,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3G_9314.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "89eace31d265a8bc50b534a9518769fbdcdf5e92a598b1bae4774df7ab17e0c3",
+      "uuid": "b528ce12-d0b3-52d3-b631-5187d560ba98"
+    },
+    {
+      "bytes": 4431,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3G_9485.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "f17dbd1b0b43a561c48ff5d90c9a65ae8f47592e817cc07e17c30b8e559c41e7",
+      "uuid": "e8fc447e-b1fc-57cf-9a4c-e1a9b9c28bc8"
+    },
+    {
+      "bytes": 4913,
+      "file": "CRF_Campaign_3_Bowel_Movement_C3H_5907.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "6152b95a37d3887b5b8841def7786eab30ddb5728b8b52ddd25c1dd140cf3189",
+      "uuid": "e40789c6-f4d7-5138-a192-0e65d815a692"
+    },
+    {
+      "bytes": 65229,
+      "file": "CRF_Campaign_3_Bowel_Movement_Master.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "9793d686436d937ff8d3c15c25ba30df4b41c8a590aba5d45541a19c8097148e",
+      "uuid": "3d81e7b8-6131-5e3f-abb3-7b02c8c3d12c"
+    },
+    {
+      "bytes": 1983,
+      "file": "CRF_Campaign_3_Bowel_Movement_ReadMe.csv",
+      "folder": "CRF_Campaign_3_Bowel_Movement",
+      "sha256": "df2e4dd053528116dbad06971dd11af0b747f6916ac031857a6d4a4e55218239",
+      "uuid": "939980a6-e030-552c-83b7-ba8f6d973a18"
+    },
+    {
+      "bytes": 9844,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3A_0224.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "02735d29ca8886f84359ede2f2fc08f553a3df702d9d3af097c0195eb267b6e2",
+      "uuid": "02d9f871-ba6a-56a4-8828-42d60b24cbd6"
+    },
+    {
+      "bytes": 9620,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3A_0446.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "0d4ce1681cb0ecdb3ede3e97be5dff0e80cd4649985f9950e8e76cfe5972ebd2",
+      "uuid": "010a1c05-9b11-51cf-a72e-2688d7ee3796"
+    },
+    {
+      "bytes": 9208,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3A_0992.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "bd764c818079903b67adabc7e5935bd1ba9b7d83b9decbb4881bf1029e88f24b",
+      "uuid": "99d4b78e-02ff-516d-b9ec-06ed5b35b17c"
+    },
+    {
+      "bytes": 9926,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3A_5788.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "e2d197651a44f96cba2792df812a52d256d373b81ba5b312de48e3485891e834",
+      "uuid": "0e54b5c5-934f-5f67-8a5d-5fe30727c06b"
+    },
+    {
+      "bytes": 10397,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3C_7352.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "028f202ad96c6e7fb0da1c70ccaffc90ad8338074497dd7a8122f1b6306cd325",
+      "uuid": "580ed7ea-d571-5806-9666-932162effb5e"
+    },
+    {
+      "bytes": 9805,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3C_7772.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "d05deb5b5dca60cf067c4d2db8c009c912ff33a4e60823c0bd6ae95618e5c310",
+      "uuid": "5681f24f-b6fe-5576-a4cb-196faadf6f16"
+    },
+    {
+      "bytes": 8131,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3D_3985.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "d39d4cdd530e04db782cf9ebedf465eba967c01834071d128eef2c7e764f91bf",
+      "uuid": "afa9a34f-71b7-5526-851a-6aa19da4c606"
+    },
+    {
+      "bytes": 8898,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3D_5165.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "845b954d5971c8f902efa80789c7f0c822fadc3484df81088ead02b649448dbb",
+      "uuid": "b664d046-cac2-5286-a35f-04cfc8f585f2"
+    },
+    {
+      "bytes": 7748,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3D_7961.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "679e2fa4de59fb987064c6c919935d3a4ca48c2e580f820477424b2fb618d781",
+      "uuid": "ca6836e4-6ba2-5f10-89a6-4f6c594213f9"
+    },
+    {
+      "bytes": 7823,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3D_7984.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "1b337ca3813fc3de839022267414de259467f0f40c935f62b5600aaf041acd09",
+      "uuid": "bc606545-4e93-5bf7-afa2-2e584c98835b"
+    },
+    {
+      "bytes": 8850,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3D_8615.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "6aa6705dd04fed8fa9c27bc7e87a42e0b172253c25787f141c2da8dab54ab1b5",
+      "uuid": "8a438e79-85fe-54f9-b7cd-e89958724131"
+    },
+    {
+      "bytes": 7937,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3D_8779.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "dafad17db32b38200f42103f1c46494c9b033e4a82d154b80649e0c352ae93cf",
+      "uuid": "ea3c7a54-4099-5f64-bea9-cdd1419ee689"
+    },
+    {
+      "bytes": 10095,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3D_8881.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "433719a283f30ee9e84ca40d738d5ea84da4de8f76f6947fee1e5feef06ab83b",
+      "uuid": "8cda595d-0c84-5dbb-b7a0-efa084250bce"
+    },
+    {
+      "bytes": 10502,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3E_6043.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "b255c2a7a17f6c2bdfd99c59c8d383d8e6ed89cb2ed934fe4ddbd83b36445114",
+      "uuid": "65e00a67-667c-5ad9-9960-45591af04431"
+    },
+    {
+      "bytes": 9789,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3E_6607.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "85b6dadc7a1a1475af815326c09914c01ad81ef6489faf404771ed7895baadfc",
+      "uuid": "e2ea83cc-03ce-5512-8a46-bb44c4e4a14d"
+    },
+    {
+      "bytes": 7578,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3G_5580.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "8f42b2607ad22fbd31ddb0bbacdb723d64e5b2b82c74d18cd8ffa91801c2255e",
+      "uuid": "e72dc984-dea8-50ff-975e-a032dc957f86"
+    },
+    {
+      "bytes": 8085,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3G_5814.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "7addd74c2301c2dc89aabd2003d60ea5d2b20a7226a2925d09f241e5959895ca",
+      "uuid": "f29b4dff-afcf-59ae-b403-89eb6faaac83"
+    },
+    {
+      "bytes": 7837,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3G_6858.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "91c797bc2ec3daef006d20df7a9ca72c4be28c1215f68d66d54c27d9a47a3fb3",
+      "uuid": "1a44d173-c668-5d49-b532-3299858db088"
+    },
+    {
+      "bytes": 7887,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3G_9032.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "89f8049d50033a68fbbd2a89010830ba68c2317f2c860e2cdfdd3ecd1c7c9daf",
+      "uuid": "84122279-f56c-5e7c-a0b6-cd9c49099546"
+    },
+    {
+      "bytes": 7868,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3G_9139.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "460a324a2ff154d6aeddf1e0c9ee97d60838ac5d7b65c1a6dfb164c4e9b32be8",
+      "uuid": "952fa96f-57a6-5dd1-bb39-3d6d1e503197"
+    },
+    {
+      "bytes": 8064,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3G_9314.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "812edf0e7d4f0552d2fd27dae714cb87fe913105fa7f004fcd58d9c46f08832e",
+      "uuid": "8773a930-2e16-53a7-8b25-4f0c5dfdb5a5"
+    },
+    {
+      "bytes": 7953,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3G_9485.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "cc9bcce218f1149e2969756567f9a64259c28858adb9ec9e9226a9b1275acdb3",
+      "uuid": "5521ade1-fce7-5803-b9d6-0dcea740a6eb"
+    },
+    {
+      "bytes": 7588,
+      "file": "CRF_Campaign_3_Daily_Vitals_C3H_5907.csv",
+      "folder": "CRF_Campaign_3_Daily_Vitals",
+      "sha256": "68c526193480b411583f647184b988c1f9bfc44c87f1b4e4cf7e37e81a27be1e",
+      "uuid": "c65f56df-d4fa-5096-b840-ef7782a9e0df"
+    },
+    {
+      "bytes": 17963,
+      "file": "CRF_Campaign_3_Meal_Status_C3A_0224.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "3d9bc59a19fa0a992e3da2f4d6ad80deb55367b3cd5db19307efd2b7cede74ff",
+      "uuid": "31ab3e38-31b7-526f-97ad-fe9409ad00da"
+    },
+    {
+      "bytes": 17492,
+      "file": "CRF_Campaign_3_Meal_Status_C3A_0446.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "5f93f387b768b1d9f947d4c0f20a180757a0f7dcc627d873c4aaeb0706f23905",
+      "uuid": "c19ebf82-d2bd-5fc9-b8aa-6a601e11b002"
+    },
+    {
+      "bytes": 19851,
+      "file": "CRF_Campaign_3_Meal_Status_C3A_0992.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "51c097bcbcca965f583e2f0adb5cd2b249d32796f197902a1f62df6dda6d56e1",
+      "uuid": "d57dab8e-e9ed-5a2e-b8db-2ef2f7239f65"
+    },
+    {
+      "bytes": 18812,
+      "file": "CRF_Campaign_3_Meal_Status_C3A_5788.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "ae8d56c84d2aadada534083e5ca5ab3bdd969c635ce78781a77f2087f3684841",
+      "uuid": "0db3771a-3d8a-5f84-a1d3-cf2bc70714c9"
+    },
+    {
+      "bytes": 20698,
+      "file": "CRF_Campaign_3_Meal_Status_C3C_7352.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "c92ff73cd2a24df9da2cae37175e476afb95ee3cd4193dfad9bec5c0101ede4a",
+      "uuid": "de3ed0f8-8eb7-5091-8877-8cd7be2f6ec7"
+    },
+    {
+      "bytes": 20303,
+      "file": "CRF_Campaign_3_Meal_Status_C3C_7772.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "65af45777daf560dda758f37037c00f81776d2b8b37546fa3028ae531f62e7d5",
+      "uuid": "efc0faaf-6daa-5288-a262-c06ae056a5e1"
+    },
+    {
+      "bytes": 23234,
+      "file": "CRF_Campaign_3_Meal_Status_C3D_3985.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "79e0d603bbb8285e34ae15c15a2cd11e8300e2f00b40a6290264e5975bd8cc12",
+      "uuid": "82ac32ec-6f9e-5162-9cf7-382d1f828105"
+    },
+    {
+      "bytes": 25384,
+      "file": "CRF_Campaign_3_Meal_Status_C3D_5165.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "f5d85da6590e51b3710460163867fab713ad8fe76f224e92222acaf55bcf83a3",
+      "uuid": "5a6c2680-5abd-595c-b991-1ebb0a18acb5"
+    },
+    {
+      "bytes": 28928,
+      "file": "CRF_Campaign_3_Meal_Status_C3D_7961.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "409dbe37d4d00770fd411d9f8035ea41a8a1b699b00caf7acda19b3b3c5a2a4b",
+      "uuid": "21ab97d5-42c1-5ab7-aa8f-50cc1c80a51d"
+    },
+    {
+      "bytes": 19878,
+      "file": "CRF_Campaign_3_Meal_Status_C3D_7984.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "92ee0c7571b65ae4c91f3495e055579326c7c96d81324a1097fe6dca766495b4",
+      "uuid": "a57ca152-9064-5925-85ed-92f81377af3b"
+    },
+    {
+      "bytes": 23274,
+      "file": "CRF_Campaign_3_Meal_Status_C3D_8615.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "6b52e40824ca1cfd1f56bbb05039556c223db110502ac370695b951b02a1cb7d",
+      "uuid": "e7bc3571-9b37-52ab-a679-8fff63f7635e"
+    },
+    {
+      "bytes": 24905,
+      "file": "CRF_Campaign_3_Meal_Status_C3D_8779.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "533bee65f1821f620c1ea6d0336886ea6d904ca3a289468cd28eac7e9fb45c4e",
+      "uuid": "f556acb6-6ebd-5c98-9001-9c37d7b02e62"
+    },
+    {
+      "bytes": 37309,
+      "file": "CRF_Campaign_3_Meal_Status_C3D_8881.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "2b4651acba0d2a46da595d706b9fe859c0ad0d6186308a9e44200b12149d7392",
+      "uuid": "98c402c5-1ef0-5976-99ce-b1bdd4b88e50"
+    },
+    {
+      "bytes": 33608,
+      "file": "CRF_Campaign_3_Meal_Status_C3E_6043.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "48318c1f8e9e7480491a5f30aa697788d560acd1253cf97137e31eef691c3f9a",
+      "uuid": "ff2d26cd-d8e8-5ffe-ba93-ef12d140f551"
+    },
+    {
+      "bytes": 34136,
+      "file": "CRF_Campaign_3_Meal_Status_C3E_6607.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "b00882d467f8dd89c7acbe92aa06571ae854cfab9e5ccccdd1ea9adbbe8e20dd",
+      "uuid": "35e2d958-eed1-533a-8f28-59bc883cb614"
+    },
+    {
+      "bytes": 23557,
+      "file": "CRF_Campaign_3_Meal_Status_C3G_5580.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "80f310f63e4daf6bf002ce9482bda96d506fca961e077ad67fe2f8e05be33d64",
+      "uuid": "93a1aad6-848a-5ebf-b90f-6f989966e340"
+    },
+    {
+      "bytes": 25561,
+      "file": "CRF_Campaign_3_Meal_Status_C3G_5814.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "7672d66b1d4d6ffc26ab188f8ee96e74ebdd1a8a5b02552d4c7e229d90fa7d2a",
+      "uuid": "d7cbdd93-b289-557e-ae4b-3f43ae167701"
+    },
+    {
+      "bytes": 24291,
+      "file": "CRF_Campaign_3_Meal_Status_C3G_6858.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "d46589919a074eae23dcce8b2d3db9ec66230f962db40d96a0e8982678b64c3a",
+      "uuid": "5410dfa3-63ae-525d-96f4-269328ac34f6"
+    },
+    {
+      "bytes": 24896,
+      "file": "CRF_Campaign_3_Meal_Status_C3G_9032.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "39226ccb0bdb4c61989085ca72ae444d5651311ff20ddf885b831ba2dbef5cf5",
+      "uuid": "ac3a51ef-f3a0-5cb7-aa2f-5a6821726ae5"
+    },
+    {
+      "bytes": 25134,
+      "file": "CRF_Campaign_3_Meal_Status_C3G_9139.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "15e393bb6ff9a3b95dc124e21e6e179cfa78b0f2bb0619c08dd31c897930f0b1",
+      "uuid": "b568823b-3373-5736-9037-321df8017471"
+    },
+    {
+      "bytes": 25773,
+      "file": "CRF_Campaign_3_Meal_Status_C3G_9314.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "e0bc8bdee3c6f20025c7c5af4523337fa0ae048b63d14f783a9443248c234c1a",
+      "uuid": "ba2ff1ca-3e72-5ca0-a132-1dfe4fc350bd"
+    },
+    {
+      "bytes": 23910,
+      "file": "CRF_Campaign_3_Meal_Status_C3G_9485.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "ca4be42831a39cba4cdd27710136e090816e0c3fa1c60be7b313c73729e289e1",
+      "uuid": "d8930761-de6e-5fec-b56c-cbf9b211c7d3"
+    },
+    {
+      "bytes": 27183,
+      "file": "CRF_Campaign_3_Meal_Status_C3H_5907.csv",
+      "folder": "CRF_Campaign_3_Meal_Status",
+      "sha256": "d00ad8a450f57e2fc434e967657a6eab2f42e4cbea82ceabce654ab61c676404",
+      "uuid": "86df247d-1a59-59ea-8995-54666435bca7"
+    },
+    {
+      "bytes": 2793,
+      "file": "CRF_Campaign_3_Medication_Log_C3A_0224.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "d8e1857e5ec568eff75bd14a810a7d1b9ec7df73955963752e2137942b2f57ab",
+      "uuid": "9f0020ac-8a06-534f-84f9-b51263663f9b"
+    },
+    {
+      "bytes": 12101,
+      "file": "CRF_Campaign_3_Medication_Log_C3A_0446.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "34e078fda472ddb6f5af3e2912ae697b3c3cad831909d0dbfc7f406beb851555",
+      "uuid": "f6fc1825-c587-5a42-bb01-2c9bf86a3191"
+    },
+    {
+      "bytes": 8218,
+      "file": "CRF_Campaign_3_Medication_Log_C3A_0992.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "c01933600e4ccfc031eeb57e2b134ae4ad0feb10cf0b02b6d6f48867b107eb03",
+      "uuid": "8aa93e33-58c7-558f-b5e4-b44cfee900a8"
+    },
+    {
+      "bytes": 11692,
+      "file": "CRF_Campaign_3_Medication_Log_C3A_5788.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "de5b9c318e7e8280961695a5e6b3c910910d6d535649f35c5ae96d83c1a442a3",
+      "uuid": "a50df389-2d7e-563e-9eae-29e19413ef59"
+    },
+    {
+      "bytes": 25485,
+      "file": "CRF_Campaign_3_Medication_Log_C3C_7352.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "4bbea45cc17975fdc2d676774c2b8ac22ab3482b043db7f9a9bfa57f013940f1",
+      "uuid": "576678b2-14fd-52f5-aa71-260be3b61027"
+    },
+    {
+      "bytes": 26596,
+      "file": "CRF_Campaign_3_Medication_Log_C3C_7772.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "d361e82163834570a7cb5628637e1e6e059db451ad3eab31f017c871a2346282",
+      "uuid": "347cf509-066c-5540-973a-f231c12087a2"
+    },
+    {
+      "bytes": 47514,
+      "file": "CRF_Campaign_3_Medication_Log_C3D_3985.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "ffb067e290ea82649b4245b0c1bb338ea3a8ab031cfdeeeb7e93f03246777e68",
+      "uuid": "5b6d5b57-9fa8-5ed8-9ad8-d39a28b754a5"
+    },
+    {
+      "bytes": 61504,
+      "file": "CRF_Campaign_3_Medication_Log_C3D_5165.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "ae5654ba8dfc6674ea99f754d27a0608fef2d83339e4f727d3caca99a98611e3",
+      "uuid": "60d37339-6fb6-5ea6-8379-1b85d9c5ca38"
+    },
+    {
+      "bytes": 43798,
+      "file": "CRF_Campaign_3_Medication_Log_C3D_7961.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "e3b6589eae99e37eecd50841aa52b86374b3823459f58d3e43ada3e7e3fe7f54",
+      "uuid": "efd63696-9beb-5b51-8d36-4cb3db352f99"
+    },
+    {
+      "bytes": 48232,
+      "file": "CRF_Campaign_3_Medication_Log_C3D_7984.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "42f50b397e7c285e222743cabe465269996bc06ce0b3bd795f63283ffdf3312e",
+      "uuid": "89cec557-6c7e-5d91-9c3d-37ec073a4835"
+    },
+    {
+      "bytes": 60534,
+      "file": "CRF_Campaign_3_Medication_Log_C3D_8615.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "d052ac3106dcb86c6f014888cb6fe745064ed7caee78378ef4d98611aa45d20f",
+      "uuid": "1d0bcdd3-c299-55cf-ace9-9f03d125c7dc"
+    },
+    {
+      "bytes": 37539,
+      "file": "CRF_Campaign_3_Medication_Log_C3D_8779.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "f24637b4af3195a0a081ae093d9c038fd992ade061a0619f7be9101ad3787ba1",
+      "uuid": "7804412f-29cf-5190-8c8a-651ed4692c06"
+    },
+    {
+      "bytes": 53727,
+      "file": "CRF_Campaign_3_Medication_Log_C3D_8881.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "a04307626d036641ca20dd07cb0af628ea4136000039833dfe2fa72593887204",
+      "uuid": "c6467216-82ce-506a-a0fb-8c6b88729aec"
+    },
+    {
+      "bytes": 47439,
+      "file": "CRF_Campaign_3_Medication_Log_C3E_6043.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "48a77919771c3c7fa6499c07e1e73ccb075c9f9ed32bb284353b636d14f57565",
+      "uuid": "c03d9846-eb26-5f19-adb5-aac1ce5558e9"
+    },
+    {
+      "bytes": 27595,
+      "file": "CRF_Campaign_3_Medication_Log_C3E_6607.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "1d82b8ac58d9a306d2657a81afca61d59ee1b84e6f1cd7d6cf76fe46ed3d2dde",
+      "uuid": "2509e424-6714-583b-8282-c2bc6a110ca3"
+    },
+    {
+      "bytes": 62767,
+      "file": "CRF_Campaign_3_Medication_Log_C3G_5580.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "69b28c00aaea3d307ee052d6bca5f45639107d5d017d32d2fcf280c0ea80633c",
+      "uuid": "d88176e8-b50e-5714-b43a-93c76a3e9928"
+    },
+    {
+      "bytes": 39683,
+      "file": "CRF_Campaign_3_Medication_Log_C3G_5814.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "23880be778ad229abc130d5878de96dcaf36d2849e64ec75de5a845fdcecc120",
+      "uuid": "75efb27b-52bb-59b3-a0f0-4e50e9c9c503"
+    },
+    {
+      "bytes": 69453,
+      "file": "CRF_Campaign_3_Medication_Log_C3G_6858.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "571cf92731cd2011be9e951ae15de19d0405dfffae43a73ad0398877433dc4c1",
+      "uuid": "3549a8c6-c833-5109-84b7-8b34084a5c08"
+    },
+    {
+      "bytes": 55360,
+      "file": "CRF_Campaign_3_Medication_Log_C3G_9032.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "bb2284ce787ce6c7800cab6099dbf8e90793a999a47166b86cc346ebd0b80da5",
+      "uuid": "e34a26ec-9854-5e88-94fd-fc1131edd8da"
+    },
+    {
+      "bytes": 56658,
+      "file": "CRF_Campaign_3_Medication_Log_C3G_9139.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "942122f53cd053684811b152951a53696bb3e54cad0f6911e20a06b7a479b255",
+      "uuid": "d0295be4-0d6d-51ec-a8ff-7a010a779367"
+    },
+    {
+      "bytes": 67856,
+      "file": "CRF_Campaign_3_Medication_Log_C3G_9314.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "1eab2f70fe1739a7bdd76e1e3dfa7c100cb494a49eba875a929e1647d56c2b91",
+      "uuid": "33b722d0-3e7f-5871-8159-14b6a328ad47"
+    },
+    {
+      "bytes": 57533,
+      "file": "CRF_Campaign_3_Medication_Log_C3G_9485.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "0a17a5e61a622afffd0603dadb9eab94abf7d7e1aeb22e3f9795422e307ac5cf",
+      "uuid": "fa2c531e-caf0-5fe6-89c1-979b0649e432"
+    },
+    {
+      "bytes": 31530,
+      "file": "CRF_Campaign_3_Medication_Log_C3H_5907.csv",
+      "folder": "CRF_Campaign_3_Medication_Log",
+      "sha256": "de5790e2e223bc46974ff9fff86f074d8ace519eaf92808899930940dbd93150",
+      "uuid": "aa323d47-0895-5748-a5c7-34cb36df6a4f"
+    },
+    {
+      "bytes": 6731,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3A_0224.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "54352b8254366c472be7c9fc1ff27389d575961afea462c1ba20cff8dc43e133",
+      "uuid": "21185f81-8e68-5c5b-a927-02da143febcd"
+    },
+    {
+      "bytes": 12015,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3A_0446.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "b1124173847efc336731e2f3755c3da582c555dcbb2cfdf64ece41c9e56e0eb3",
+      "uuid": "fdd3edea-d6b3-5ed0-9382-424bc2157e1d"
+    },
+    {
+      "bytes": 11684,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3A_0992.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "fe418749c4fb4da5a1dee718c28b8f52dba4ed6614eb259f93db357a687462f0",
+      "uuid": "0ea1b72b-f8ea-5ac6-a9e2-80fd955d0fcc"
+    },
+    {
+      "bytes": 7327,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3A_5788.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "447cf25ca7bb31ae545c3336204a13142f640bda1e81321249a275415e56495d",
+      "uuid": "3b231be0-0fae-51ad-951a-39cc196ef088"
+    },
+    {
+      "bytes": 15020,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3C_7352.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "2f9701d818b5110e3acfd155675ec7b88eb9db4273064ae34676e89b6f927269",
+      "uuid": "dc2593f8-c700-5666-96ec-343dac41653f"
+    },
+    {
+      "bytes": 3830,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3C_7772.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "52081f65c368bc10ef13a0b86e4b9ea3acf9228e34613f6f6a19c6438991445d",
+      "uuid": "6820ae48-2c91-53f2-8ea6-8bca43e90583"
+    },
+    {
+      "bytes": 8319,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3D_3985.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "ee185abc97c5b750fa87f539ca82f1817d5c36f4783d9974be975e2809291895",
+      "uuid": "300bb0bb-7991-551c-a51d-96cfca189db4"
+    },
+    {
+      "bytes": 2805,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3D_5165.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "c5ad7fe48d3220844ad79a3c8543a5c097b5009d86ce8c8ddf0bc285b71e776e",
+      "uuid": "66cf9ee5-5124-557f-a01a-722bd8beb686"
+    },
+    {
+      "bytes": 12439,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3D_7961.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "437a614c37f30d099b700a6df5df4be66fd3d259d9cca96a152516da02ddf7c5",
+      "uuid": "61e04393-24f2-5ea7-a98b-faf2ab7cfe6e"
+    },
+    {
+      "bytes": 2495,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3D_7984.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "823354c7ac1fb3c8733cc29620c50a06fdf8dd12a3b7422fcef2ad6f547d8447",
+      "uuid": "267b11de-403b-5134-a98a-db8292fc7116"
+    },
+    {
+      "bytes": 3671,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3D_8615.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "69805bdd62cf5b0bdeb07adfc68bed1c4cb12aa2fc85c591f93d508ac64ef740",
+      "uuid": "7ae19952-f847-5461-a035-cfd7955da98f"
+    },
+    {
+      "bytes": 8258,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3D_8779.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "8f2a063bb44cfc7a323f69c03b461a073f312145fe99b0c2627e47f93a000cf7",
+      "uuid": "50db13a9-3169-5ad3-b15b-0ac7bf17e747"
+    },
+    {
+      "bytes": 9198,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3D_8881.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "38c4633540ca7fcb3d2a74f223bdce1c1c8c5e25f62ae64feca30fe6505a294f",
+      "uuid": "41d50230-246d-5a00-b0d3-308b082d7f36"
+    },
+    {
+      "bytes": 12739,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3E_6043.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "b0514966ffb7014625277e3b172d8465fe9ffa5bccbeaeda5b5a613a8cc2cfed",
+      "uuid": "c6ba9ec8-0a37-523e-b219-9f9cf57daf55"
+    },
+    {
+      "bytes": 50407,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3E_6607.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "6c7cb46b5aa2811605d57efcabe6a46b7310c3edc9657ace5ec7e81a5863af24",
+      "uuid": "3eefadcb-0be5-5e5d-90ca-f00b0be3ae9a"
+    },
+    {
+      "bytes": 52666,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3G_5580.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "dfa76e993b1400021c5dfb099f8436a07332453fe78c4e334ef9d5e73007b9c5",
+      "uuid": "b12741f2-41e0-598b-8325-4f371cdf21cc"
+    },
+    {
+      "bytes": 10472,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3G_5814.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "00a44eadea4deeb42218bc159ff328a3e423df98dda90c1e379ad782696fa28d",
+      "uuid": "556f87a5-fe09-5080-acfc-4dd88681dc62"
+    },
+    {
+      "bytes": 11709,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3G_6858.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "3cc091c2c5563be78b1be70025bd6e63a8ddad42121b4c73c38aba14b3307775",
+      "uuid": "c3052c6c-e96f-5ab0-8ce5-8841ab3e910a"
+    },
+    {
+      "bytes": 12803,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3G_9032.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "7cd1b0559c01cec6f923b543eb7a789e4315de7427bb7f9c19b25c904cf4b941",
+      "uuid": "0ea47bd5-3f93-5fff-ba7a-c2a249dfaf5a"
+    },
+    {
+      "bytes": 28391,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3G_9139.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "41c87bd2714ee77728ae6a7008e7ac87d8f3119cd891f76c1781b606c9b3c4ed",
+      "uuid": "e79b9b33-71e3-5bc7-9ea6-e0cb7aa74f53"
+    },
+    {
+      "bytes": 20189,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3G_9314.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "19d328312c37071f165cbd0fbd3fa2f3ea6884fbd6ead132d878c7c81b34d559",
+      "uuid": "4cd72dc7-aef2-52c1-b181-0e379330f079"
+    },
+    {
+      "bytes": 14129,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3G_9485.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "4723ba160b69a0479645a98c9881754e9890bbff24c797be4ce8414a108202c1",
+      "uuid": "df50f9bf-6fbd-5b1f-9b65-06c842044cb2"
+    },
+    {
+      "bytes": 10105,
+      "file": "CRF_Campaign_3_Protocol_Deviations_C3H_5907.csv",
+      "folder": "CRF_Campaign_3_Protocol_Deviations",
+      "sha256": "7bd4663a0b05e377cfeb621bd1765f6d5c5a5058ccc8aa6ce3c24563ea2f8312",
+      "uuid": "b46698e1-909b-517f-a31b-8ae3c84a1748"
+    },
+    {
+      "bytes": 10066,
+      "file": "CRF_Campaign_3_Stretch_Log_C3D_3985.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "b63d952ad1d5cde5e7759c76e2e2805c171c52680b1388aca340cb7d51d62b6d",
+      "uuid": "397a32bc-16fe-5396-a33a-b9c47921e1eb"
+    },
+    {
+      "bytes": 13017,
+      "file": "CRF_Campaign_3_Stretch_Log_C3D_5165.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "856125a77b0ca751d26902b8443b79a9738c048312dbe9455e06612677a5ac74",
+      "uuid": "c3e17138-a2a7-5e2d-bc49-1d0e939f07a6"
+    },
+    {
+      "bytes": 10283,
+      "file": "CRF_Campaign_3_Stretch_Log_C3D_7961.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "9ca0d10d6f2c554b76f54a8ad0b72ec0c26e349e6691384e162c1901a56c35db",
+      "uuid": "e6761793-a738-52e7-ac18-6381f25d1072"
+    },
+    {
+      "bytes": 10381,
+      "file": "CRF_Campaign_3_Stretch_Log_C3D_7984.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "9e145bd95388fbf4fa514e686f08e635df968d9f705704c1794991044a83eed4",
+      "uuid": "359396c3-3af4-58fe-9ae9-ff0b78c48b63"
+    },
+    {
+      "bytes": 9488,
+      "file": "CRF_Campaign_3_Stretch_Log_C3D_8615.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "18b7a2bd8ba9d975ca205de704b0066496737317572f64ee898f9abaea1efa32",
+      "uuid": "777ad388-ffe5-5b39-b278-93f5f0eecd37"
+    },
+    {
+      "bytes": 9971,
+      "file": "CRF_Campaign_3_Stretch_Log_C3D_8779.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "4e51c8d2df00a842e8984ba43ee264185cfe6f40a169288a9983aa1506c280f0",
+      "uuid": "13fbbb38-91b1-5530-8665-4370e96074fb"
+    },
+    {
+      "bytes": 13533,
+      "file": "CRF_Campaign_3_Stretch_Log_C3D_8881.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "98114c010a88ecdffd4a0b96034f633396096b0c8efcacdb4f1a7aff9f204845",
+      "uuid": "498921c3-c238-598f-84d6-ac945891a5bb"
+    },
+    {
+      "bytes": 13624,
+      "file": "CRF_Campaign_3_Stretch_Log_C3E_6043.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "0392d4b196d96264245e61a880dfa2bf100fedd7ab169fb5f0d94f56a5cf8f03",
+      "uuid": "68b33780-83d7-5f5a-b14e-94b167c87f9f"
+    },
+    {
+      "bytes": 13606,
+      "file": "CRF_Campaign_3_Stretch_Log_C3E_6607.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "6ee5da0efdf52f5a46380b4dbc153a17aac595a884e602cd490397bebb85a18e",
+      "uuid": "070f5a6f-7ffe-58fa-a75d-1449b749c4c4"
+    },
+    {
+      "bytes": 9259,
+      "file": "CRF_Campaign_3_Stretch_Log_C3G_5580.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "46a7e882f6ace0c675bfd3801c96a2ceb4dcf79eaa5a20b62fcde899dc0aa38d",
+      "uuid": "45d6ac10-2864-5c54-9eed-3d6216250480"
+    },
+    {
+      "bytes": 8252,
+      "file": "CRF_Campaign_3_Stretch_Log_C3G_5814.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "f04d2deffc7a3b0db6a0824e1211f0844d51f9e09338b0fbd588918e4c63a56b",
+      "uuid": "70584618-0149-58ab-8ade-e901fb486727"
+    },
+    {
+      "bytes": 8474,
+      "file": "CRF_Campaign_3_Stretch_Log_C3G_6858.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "7a875189f52e63a57ae065468c6f4607a8b6e405980e609393f483b3ef54f472",
+      "uuid": "1f566141-c56f-52ea-93f7-4c4734bf863e"
+    },
+    {
+      "bytes": 8216,
+      "file": "CRF_Campaign_3_Stretch_Log_C3G_9032.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "ee61654e8df7de6e4b5d770ec07715869b94e88aba5340944ed9788211f75f52",
+      "uuid": "e9666074-6067-5372-8533-07130954f5c7"
+    },
+    {
+      "bytes": 9734,
+      "file": "CRF_Campaign_3_Stretch_Log_C3G_9139.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "9ac092b8b25629852966a1ab40659538fcf30886535b3843ef57299988279f8b",
+      "uuid": "69ceded7-f375-532e-b76a-6a5279600dcf"
+    },
+    {
+      "bytes": 9553,
+      "file": "CRF_Campaign_3_Stretch_Log_C3G_9314.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "94b27bab423d8c1b88935ca80d1410b814772892bb2f5c8d8b8965f2dc0dddfd",
+      "uuid": "3cbfcdf4-700f-5525-9596-472158219ce6"
+    },
+    {
+      "bytes": 8651,
+      "file": "CRF_Campaign_3_Stretch_Log_C3G_9485.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "d4ef245f77b084d10bfdc118a8376260cd4c7ef48254f2d0a86bf331790c261d",
+      "uuid": "7354dfbc-b1db-521e-821d-1f4e98e0696e"
+    },
+    {
+      "bytes": 8193,
+      "file": "CRF_Campaign_3_Stretch_Log_C3H_5907.csv",
+      "folder": "CRF_Campaign_3_Stretch_Log",
+      "sha256": "f958a0ba84d10bac954838e1cb9271e74b0a90d243bed9830498b7dd043eef9a",
+      "uuid": "e1ea87ba-e104-5381-9e20-1e7b1b53e1bd"
+    },
+    {
+      "bytes": 2678,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3A_0224.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "6f775759abbdcd431604407c005ac5cdf3d566c1c31664223fe3f7150db71112",
+      "uuid": "107f6a12-e01b-503d-ba77-7f7f782ac541"
+    },
+    {
+      "bytes": 18763,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3A_0446.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "762ee4c4babfe89ba609445a89e22b5a676ab2482c10d10a2dcd561d8aeb192c",
+      "uuid": "ff603189-1b75-5756-8a6c-adce8a5e37b9"
+    },
+    {
+      "bytes": 13377,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3A_0992.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "e3c9a5d39b42469a25409164b6e8183791f333398ed7ee2276d2aabfd857fb1d",
+      "uuid": "e1be4e57-0961-5130-b52d-290a623818d2"
+    },
+    {
+      "bytes": 8474,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3A_5788.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "3f7faa4537a62406983f1a0c582cf81b9d80cb10d3db436edc5896bb4dad557a",
+      "uuid": "cdccb216-08a7-5dc1-8e15-eec17f0e4c66"
+    },
+    {
+      "bytes": 5593,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3C_7352.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "f7220b41bb5501f04d1ec546158a63a6c13fa14bc28f52536c9a47066877129b",
+      "uuid": "90f2d6c2-cb46-5d70-bbe6-1c837ec8d043"
+    },
+    {
+      "bytes": 7603,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3C_7772.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "791878208ce0ce31a6afefbe599b34fbb07e362bd2dfc150f41e329442858b54",
+      "uuid": "edbc0d9e-a902-5768-9b38-943e6ac5aba5"
+    },
+    {
+      "bytes": 6954,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3D_3985.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "5294976222357a380cbedead4e278db0a3055c2af2ba4c3f17fe5b5df5133dc0",
+      "uuid": "ca0c2c17-1047-5233-8c74-6011406f8fdc"
+    },
+    {
+      "bytes": 10188,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3D_5165.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "f83fc81caf6add4accd06c92f0c78435d7d6177e72f6c4cf4da7baf4d235575e",
+      "uuid": "c2b7e726-acf6-5d03-ab84-44298d53de0f"
+    },
+    {
+      "bytes": 4040,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3D_7961.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "0ebca3523d4e4da9bca956857d5831b38311700046c53747c5a7a248d078c6c3",
+      "uuid": "05903aaa-011d-5865-abf1-579246e4599c"
+    },
+    {
+      "bytes": 14241,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3D_7984.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "fefbfd6709efb47c7ca173a8d4b5fbc56ae2c77b9f093a9fed584175f5ae9eb2",
+      "uuid": "605ad423-25bd-5c19-9d35-42bcd930fa16"
+    },
+    {
+      "bytes": 12712,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3D_8615.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "67bbf67d397e9ca1a19d35c2a301ed515c68d55344f88b72d7fa752631d9d0ba",
+      "uuid": "2bf07d1f-394f-517e-af3a-de7ad90a5a27"
+    },
+    {
+      "bytes": 14455,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3D_8779.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "fa202f37883b4dd48eed178baa5ef0f44e06b3f39964926e4fa5f2c1acaca11a",
+      "uuid": "239e28d0-5824-5e6c-b7ed-30f76860b04f"
+    },
+    {
+      "bytes": 17785,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3D_8881.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "074610e97e770b2974cb94395cb7216307af615ef58eeeb204f440218dbf356b",
+      "uuid": "1dc112c4-9abd-5bf3-8a94-73e923b7c65c"
+    },
+    {
+      "bytes": 6697,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3E_6043.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "6de93dd8e1b00ee9471997c1efe86b9f06a6dc19b297035ae40e0d3861dbc0fb",
+      "uuid": "581136f5-6c8f-56f7-9f54-c2bae9acabb3"
+    },
+    {
+      "bytes": 10748,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3E_6607.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "1877027cca584c83933ea877cbd2b0fad20291cf5466f745de51e35d35afb06c",
+      "uuid": "ac4d414e-229f-574d-96ae-20e7249e323a"
+    },
+    {
+      "bytes": 6623,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3G_5580.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "270c4e53c0e0c2e8a3a0ce05952bb12dfdb7717b6732b56c800419cd0fda044f",
+      "uuid": "6c3a7ae8-f9e8-5e9e-8d99-a81d02cb1544"
+    },
+    {
+      "bytes": 35486,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3G_5814.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "2c55a10131192f7bc100cce126e27e661130fcf928693f06b50b2b59ae48671d",
+      "uuid": "e7d24677-37b7-5334-8670-70ea17d6452e"
+    },
+    {
+      "bytes": 9429,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3G_6858.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "21db80ef08b38b3f4464e16e31b9dbb03c171ee6c107c5243d7f820fb7b0bf2b",
+      "uuid": "a2ecb01d-86db-5dfa-a1f3-23e982006c3f"
+    },
+    {
+      "bytes": 11715,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3G_9032.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "572a808dd0ac648491c087a0212b29ed9b56aafb3ca3f26e4d65adffab619df6",
+      "uuid": "9abe4e08-48e2-5058-a222-70f9724cce09"
+    },
+    {
+      "bytes": 8974,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3G_9139.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "8b07f234e287d12a26bcfb88af21bc38869d8823188c11c70703dd015006fbb1",
+      "uuid": "e3348275-f27c-5a71-86a2-cdb89ffa28bb"
+    },
+    {
+      "bytes": 8593,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3G_9314.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "92b9a9e96bff02238ee774299bbef4e22fc89f00334a9b3328044708aede28f2",
+      "uuid": "ce191672-16ac-5bae-9922-01a4389a30fe"
+    },
+    {
+      "bytes": 18390,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3G_9485.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "cb7f26ae37b8f5f28eb93a93e21a77e0b4f507b8f3efa0658d4f6468c31e84b9",
+      "uuid": "1691ee07-676e-58b9-b80d-d34aadef805d"
+    },
+    {
+      "bytes": 7726,
+      "file": "CRF_Campaign_3_Symptom_Complaint_C3H_5907.csv",
+      "folder": "CRF_Campaign_3_Symptom_Complaint",
+      "sha256": "2d5c8710c512ea74fefc8306961dc0a821d42481b906477cccd36749fe9e205a",
+      "uuid": "c745e098-6395-57cf-ac21-101faee085e3"
+    },
+    {
+      "bytes": 44831,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_0224_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "2f58c6a54bf5907910560e5f5897c3888a666107e06e01a7211342de482c8122",
+      "uuid": "91eddf17-2286-55d4-b3a7-c4e7958a7a77"
+    },
+    {
+      "bytes": 5005,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_0224_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "76bad6a3c1c634edf4318757618d32181b6c78873923385f685c46a451e4cf30",
+      "uuid": "45717c59-43b4-5111-a4d6-dae91a673e26"
+    },
+    {
+      "bytes": 74330,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_0446_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "7c06d456ed13cd579584c897819171dadfcc56c8b9784eef4a5c33472aa31c6b",
+      "uuid": "4c399f91-2d57-5d55-a687-e0eb01ca9772"
+    },
+    {
+      "bytes": 4933,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_0446_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "5904dc2bd6ccc3cb282beae6f5c001f9695797434d5905fff50639e54c1f8002",
+      "uuid": "8d121a74-4f2a-5a61-84ad-f64ac37635aa"
+    },
+    {
+      "bytes": 46450,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_0992_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "7ed5b1a177577704db19711955341cef35bee2b274fc0e6980743e78fcae29b4",
+      "uuid": "5395c6e0-0559-580b-a9cb-f00edab7221f"
+    },
+    {
+      "bytes": 4988,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_0992_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "60249bc57e38a3f772332e5ede4b6781a079f1986c573d3b29d8d0f595f4491a",
+      "uuid": "8d25113a-f4ac-5655-afc1-10f774fff254"
+    },
+    {
+      "bytes": 39546,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_5788_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "f044499f7ddde5ed1d2bf648b5aae2916c5679783cc953a272a1378f2eb04124",
+      "uuid": "0aca4d9c-c1b2-5850-937d-5e1cd669c035"
+    },
+    {
+      "bytes": 5126,
+      "file": "CRF_Campaign_3_Urine_Collection_C3A_5788_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "087a1231a63d368603f2fe78bcc6a35d8facae48e9a781e7dfa4e69b3e98782b",
+      "uuid": "316ab340-8e7b-5b74-9477-ff9abda0fcbf"
+    },
+    {
+      "bytes": 70698,
+      "file": "CRF_Campaign_3_Urine_Collection_C3C_7352_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "9d8bf41464ba45843fbae4bdefe1c2f20808435d7a3cb8511aa61b75664b5095",
+      "uuid": "4cd1fa1a-a11b-567f-b27c-8400bb867a46"
+    },
+    {
+      "bytes": 5417,
+      "file": "CRF_Campaign_3_Urine_Collection_C3C_7352_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "b2989613591618177d65cbdf7c3d4eb28a0361f2080195cfa0c8ff4ed681180f",
+      "uuid": "5d134f7c-12cb-5668-812d-047015728ef9"
+    },
+    {
+      "bytes": 70096,
+      "file": "CRF_Campaign_3_Urine_Collection_C3C_7772_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "388594a0dc60e4240e191500d290776a2a07f0cd3daecff82c63019392a9c84a",
+      "uuid": "3f22801b-3e1d-5a2c-867a-858f6460b9cc"
+    },
+    {
+      "bytes": 4997,
+      "file": "CRF_Campaign_3_Urine_Collection_C3C_7772_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "abaa1aff87b88db24a913be824f31b3affef86169956d7ee0bc17e9da4839083",
+      "uuid": "0b61f6b5-8efc-5e33-9087-33fc6e9b7cb5"
+    },
+    {
+      "bytes": 76308,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_3985_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "509e22ab803eb10beeac83fc122a71bc8a9fcf38b6493eda0e68f8d3910ec04c",
+      "uuid": "1a29d946-96f5-5e47-9e56-4a15bd2b6400"
+    },
+    {
+      "bytes": 5395,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_3985_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "9cf59510f93c953d58ace4d7e73bcb5a6c50a738e6686e044d61da5158f7031c",
+      "uuid": "4365d83b-bde8-5796-932a-dd24cdc7d33f"
+    },
+    {
+      "bytes": 78501,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_5165_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "5edbcb4f791a4f2ad4fc2b7a422db7c8f8c9b58a3ed9ac329e9e44d25867e2e6",
+      "uuid": "84212bb8-e1bb-5ae3-aae3-7cc7fed48a5c"
+    },
+    {
+      "bytes": 5263,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_5165_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "bf95f7ed209dbffbb4fa02cbf8955f3767fcc6e3941e3e1323842483a03ea060",
+      "uuid": "c1e2453d-5ba0-5386-85b5-70bd50c4f8d0"
+    },
+    {
+      "bytes": 96937,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_7961_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "e28b56bb8ccf4975db3eb6916c282f7363b05cde4b736fca801dfaea535d5524",
+      "uuid": "8a78abfc-397f-5271-99b6-ff612d362557"
+    },
+    {
+      "bytes": 5252,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_7961_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "d19e0a28acc5a77eb767af3fb7cb3d6925ab2d6398511581e7c45443a4b06096",
+      "uuid": "3380c261-1bd3-53c6-a3ae-83cd5c6a6e57"
+    },
+    {
+      "bytes": 72406,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_7984_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "39d8c9cc19d6705ccc7a3875553b90a8f6ee13b7e79db236f8ad9e0cd43d58c1",
+      "uuid": "f62f49d3-4549-5e7f-b1fb-46869861920d"
+    },
+    {
+      "bytes": 5346,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_7984_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "4e35a95e728243ff7a8f91f0a60602807fa7a2505a2b441e471bcbddb8f1a950",
+      "uuid": "f0d209d6-28cb-5690-b4ac-8d3ab9ea9420"
+    },
+    {
+      "bytes": 87208,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_8615_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "bbc6b2a5c34807149511688f236805998c9c8f21c19f1c05d2d2cf084ac02699",
+      "uuid": "d35eb745-dfcd-50c5-bf9a-f38f8cfc9aef"
+    },
+    {
+      "bytes": 5066,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_8615_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "8dea922466e01bcc752c1fc354b014cc7b5ac5d6702b2cbdadcb88e06afe5eeb",
+      "uuid": "d60f87d9-96fe-51c4-9be7-b3eb2fa29656"
+    },
+    {
+      "bytes": 101409,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_8779_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "09f94e4cc657f6939601f3eb669e9c5361f1510a2bcd78477f149d004f499fa9",
+      "uuid": "36fde265-952e-5265-81d8-e52926bed8c5"
+    },
+    {
+      "bytes": 5294,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_8779_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "deb4f1068bf5b4d54384a074e4f66f07add3df9d2f05763eebadc82926a61924",
+      "uuid": "fd5ba919-acd1-5efd-b1cf-9adc72328793"
+    },
+    {
+      "bytes": 76154,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_8881_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "766b27923e85b21055e532bb1542afe526413f73fe4608a8993e169b7bfe82dd",
+      "uuid": "6e2da18f-4c30-5764-9959-5038631c36b5"
+    },
+    {
+      "bytes": 5245,
+      "file": "CRF_Campaign_3_Urine_Collection_C3D_8881_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "1c5436bd5013284972835e035896bf710583f040c9eb47e805e6d2913e23b325",
+      "uuid": "18dadf25-5e15-5621-bc55-151b5c9262a3"
+    },
+    {
+      "bytes": 76349,
+      "file": "CRF_Campaign_3_Urine_Collection_C3E_6043_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "934baa0b7368afaae7f61a5f49d3bdf489d91aef0e07418da5885e1914a33bb3",
+      "uuid": "f9a89707-e914-5019-8cac-d540066fa0aa"
+    },
+    {
+      "bytes": 5338,
+      "file": "CRF_Campaign_3_Urine_Collection_C3E_6043_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "5a6accc42a82abf61a9d3e8bf28410df83fe895540fc8ea4417d8e96c0eb65b3",
+      "uuid": "76049555-e2ea-5089-9dca-c765c2b2b8e2"
+    },
+    {
+      "bytes": 90695,
+      "file": "CRF_Campaign_3_Urine_Collection_C3E_6607_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "21c626c9a41e10552ac08d9af17241d847bb43f266c09cf8d3348672041529f1",
+      "uuid": "2c9d5077-19f3-531e-acf9-c9d39832b047"
+    },
+    {
+      "bytes": 4831,
+      "file": "CRF_Campaign_3_Urine_Collection_C3E_6607_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "d46bb36cf3264305f1dd604e16554775f96984f88a2e48dfaaba9b1b692c85b0",
+      "uuid": "9b3ba5db-c8af-5f05-a173-9755c1ed8075"
+    },
+    {
+      "bytes": 62805,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_5580_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "9c2f8b7f3fb4eba397b85bde5f93b8bced0076ab49010fc20c465016a3ce6ad5",
+      "uuid": "afec07e4-2e4e-5be0-ab84-06c1d0aaea76"
+    },
+    {
+      "bytes": 3931,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_5580_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "e33921ff5a89c5af6e9ecc3d5d7c7bda5bd784f56e55766b87a4e659d85735f9",
+      "uuid": "91844fb7-2cd6-5b8a-9296-c42ae19d46d0"
+    },
+    {
+      "bytes": 42713,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_5814_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "92eac4edc262f27a7028d16d58e36a072e08abe6a36cb7c7ccbb166df10e2502",
+      "uuid": "727a1053-3ad6-51ae-87b2-9d15e7de2eb8"
+    },
+    {
+      "bytes": 3893,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_5814_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "36901fd1273765b91a8389ed2a7950f041d7ceb9517c057f29cb2f3bb6477329",
+      "uuid": "256f4136-bdb4-57b5-aec1-e630c218074e"
+    },
+    {
+      "bytes": 53181,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_6858_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "6c0a014946b5d40d813b46cdb5276fc6492f8f3a34a02305209febe157578873",
+      "uuid": "7cf070e8-7e36-520d-a59d-c5009da6290b"
+    },
+    {
+      "bytes": 4030,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_6858_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "26d10d926109df2a824208eeaa4697265d23e10702e9745f6cf10e8837261acf",
+      "uuid": "80d47fda-89e6-5d78-a98f-62761b166c06"
+    },
+    {
+      "bytes": 45234,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9032_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "c116f8877a03fdafee2b6f8f099d7821f166a4f7f9a110b6a4f33c5eb64f624f",
+      "uuid": "49b7da43-5b26-56a8-a26a-1814b025ebfc"
+    },
+    {
+      "bytes": 3984,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9032_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "66ad9f706ee9cc54b8be49838ec56c534252ea9503d839678b4e62a1859c41cf",
+      "uuid": "b10c29a2-e0cb-5a8a-9fb9-aaf17d395bfa"
+    },
+    {
+      "bytes": 58969,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9139_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "c4e2072299ff3fcb265bd3fe04411bd8155dd8590f89a531892a6682d180fbda",
+      "uuid": "8b0c3dac-8986-5b1f-bff8-3c6923ca6a27"
+    },
+    {
+      "bytes": 3976,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9139_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "5210813a56d8c3c3cb0cb1848589cc09b688557df991df9093c0150cd5f13c05",
+      "uuid": "2ced1e90-1655-59b2-8d1f-c19b1bc84b2e"
+    },
+    {
+      "bytes": 42093,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9314_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "afd0f7887fa232100e3cf7bc38e7e4c1daaee14a3564b9ff04e65966f24b0d56",
+      "uuid": "a3be544c-25b9-5273-b12c-7aa53426c441"
+    },
+    {
+      "bytes": 4037,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9314_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "f1dba93a1f92f6dbb20da918111d2e13a226e9f161430d8411e74f3a7b163d39",
+      "uuid": "968d8b76-1fed-50bc-a60c-de3bd591d9b8"
+    },
+    {
+      "bytes": 51895,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9485_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "3416b6e352475e38e77dbe9c01625a51756b612afb1511b9abe1cb3c2034a19e",
+      "uuid": "3f7f1bf8-e60e-5d54-85ce-aaa6de9efdcd"
+    },
+    {
+      "bytes": 4029,
+      "file": "CRF_Campaign_3_Urine_Collection_C3G_9485_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "13f0157d5dd24a0dce65ae5df30d2d6fb243f75a20f7aa20a2b01882479ecffe",
+      "uuid": "03882704-5b62-5cf4-a9af-4975e78e39c6"
+    },
+    {
+      "bytes": 48801,
+      "file": "CRF_Campaign_3_Urine_Collection_C3H_5907_Obsv.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "811666fb5a5ff0080f897ab6b0d41266e9d7ac7501dcf4e134dffc3ab30b51db",
+      "uuid": "e5d54117-0d8a-5f39-b411-ff1f528e525d"
+    },
+    {
+      "bytes": 3891,
+      "file": "CRF_Campaign_3_Urine_Collection_C3H_5907_Summary.csv",
+      "folder": "CRF_Campaign_3_Urine_Collection",
+      "sha256": "6f09b73306c7db17435d16303e621f9c159bb22647d98cd22d3b6a5fb337c444",
+      "uuid": "998ab87c-81f9-52bf-a4d3-a2c473bf65d2"
+    },
+    {
+      "bytes": 22986,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_0224_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "a54b864d8f1b801238559380634207d5b2b9768ca2c5a0e3c60ff6a10fbacbb1",
+      "uuid": "753c8de8-ee7f-509f-9b24-ddc07d961b25"
+    },
+    {
+      "bytes": 5748,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_0224_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "5e9371d7f7230f9732000f95e729b7520a105da3a8b86c1d7f78552cb962af54",
+      "uuid": "2170b01a-9788-59dd-b8b5-545f979ecaa8"
+    },
+    {
+      "bytes": 20990,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_0446_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "61c5c6673678e7c8e671a50e2e053a81582da5be2adeca7a948390950e146719",
+      "uuid": "da66b34d-458e-5c89-b77e-2d86b0b9d740"
+    },
+    {
+      "bytes": 5847,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_0446_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "197cdf2c3395a737a47113a2b52b2db23a0aa992cec3b55373cf7b128f5a512b",
+      "uuid": "e7a50523-7cbd-5538-9ae2-a9ce3b43156b"
+    },
+    {
+      "bytes": 32196,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_0992_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "6c55fedbdddcd424b8d90e9c98e363a82db477c9eac02086d7e51c226406a059",
+      "uuid": "cb004a52-fead-5d7f-8057-6ae079f2e6c8"
+    },
+    {
+      "bytes": 5907,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_0992_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "e55fefe86bba0d3e807cfa2494b4973406eec50d9039009fdf48bcfa3e8d631b",
+      "uuid": "c39897b2-2c4f-5c39-90a8-207831b090fb"
+    },
+    {
+      "bytes": 15832,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_5788_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "731e4d435ea4478de125c81d3e797dbc3a3b3fc94d8dfe3a558251a1938fc244",
+      "uuid": "245ea6b6-e4e2-5ee8-a079-2c358af9f964"
+    },
+    {
+      "bytes": 5962,
+      "file": "CRF_Campaign_3_Water_Intake_C3A_5788_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "c1af4ee6a7ee358c41ffb88b4522a7bda915964c13fd3699b24bf1079596b0a0",
+      "uuid": "eeeeba10-9e00-59ec-a0e7-de2993a8cc32"
+    },
+    {
+      "bytes": 6163,
+      "file": "CRF_Campaign_3_Water_Intake_C3C_7352_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "adcd59b83efe846a31ebeb5fed0401720265b27f8539788977575acb3162efb3",
+      "uuid": "0e2ad7bc-543a-565a-a12b-f5f12b37c2fe"
+    },
+    {
+      "bytes": 15339,
+      "file": "CRF_Campaign_3_Water_Intake_C3C_7772_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "76611bc3fb556b2c48f3991507d1208fa55de1b5822131387d8d802cb940049a",
+      "uuid": "95330c5e-6e3e-5250-8424-9d54b135446f"
+    },
+    {
+      "bytes": 6136,
+      "file": "CRF_Campaign_3_Water_Intake_C3C_7772_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "8599569dc4f17022448189384c4ef9c061cc46e9ea14e278676bb8ee983a727c",
+      "uuid": "d8a114b8-4ec1-5531-bef4-2515027e36a9"
+    },
+    {
+      "bytes": 24912,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_3985_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "0fdfe7910f0909fc392ee0e449a06c9a0109965bc6d55143e9ace9ac50c8918f",
+      "uuid": "33b1b50e-8beb-56f0-a1e5-c82ec882b5cf"
+    },
+    {
+      "bytes": 8027,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_3985_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "6e61d5251c0e21635b78e595efa19f2b4f78ba069d6ad0f1f9b6df16f263863d",
+      "uuid": "ab563789-0937-5b02-9994-25c3452f8018"
+    },
+    {
+      "bytes": 29432,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_5165_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "189302733061ee4b7335cf58db994f419912ea5554ec946f4357e9e3449d9035",
+      "uuid": "54bde4c7-5fc5-52e6-bc95-77e3c59ed772"
+    },
+    {
+      "bytes": 5990,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_5165_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "5320e21c55a150d4634329155795b30c6169eea476d36f65f2b0807897ca6939",
+      "uuid": "8a81a651-8767-5c69-8c4c-2f4c1b5bf9ab"
+    },
+    {
+      "bytes": 21120,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_7961_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "ae463a8f0cc18ee47e926edb0f9ab39ff405588ec574b9870eac215334508b6f",
+      "uuid": "1c75eaf1-e820-53d8-b83a-27643b723bb2"
+    },
+    {
+      "bytes": 5578,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_7961_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "ae258c14119ba4edaf64854229612098f70039c4cc17d3bacaef9253f3a31120",
+      "uuid": "a0d1cdad-c56c-5e75-8811-c078fe983365"
+    },
+    {
+      "bytes": 20601,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_7984_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "756017e90dd721225b489469b829369969609f2eb7ceb3bf6ed9163d231bad5c",
+      "uuid": "2d2a405e-932c-5305-89c0-7c80626abeba"
+    },
+    {
+      "bytes": 5576,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_7984_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "8ab100b821cba878756affd589de372a41ab9f34d9c92ee235c563778234ff26",
+      "uuid": "1ee3d42d-4acc-5ffa-a301-345b9c5b616f"
+    },
+    {
+      "bytes": 13896,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_8615_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "4bd62fa4e09cc536dde404b61fc340fa7d112509190cdee789efe20768acbf51",
+      "uuid": "4d30d109-9d71-5d4c-ae20-1538fffc6e38"
+    },
+    {
+      "bytes": 18949,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_8779_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "1f6dd5a48324db7c99c24f6aa736e8b14db70f2c9b2b1909a382ffbd584df54a",
+      "uuid": "878cf9d6-7d61-5a88-9935-9f427170b1f9"
+    },
+    {
+      "bytes": 21911,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_8881_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "f51faca41750ff1c3c54738ebf61d9e57bfea6495a94c32f400a3633df84d77e",
+      "uuid": "14ef7c9e-6aa4-5de5-ae7a-75ec26d0bd51"
+    },
+    {
+      "bytes": 6764,
+      "file": "CRF_Campaign_3_Water_Intake_C3D_8881_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "d293550d8eaf688b4fb803433c73e3430be24efcabbaaa992e681386f6de3ff8",
+      "uuid": "1d2aa2d6-147c-5110-8cb7-b82604bc2bcd"
+    },
+    {
+      "bytes": 23878,
+      "file": "CRF_Campaign_3_Water_Intake_C3E_6043_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "3281cd616b4156067512a5ff43cf21f56488416d345e2f77af6d36894f3fa3e9",
+      "uuid": "e2836c42-21bb-5835-9566-60a626927b2b"
+    },
+    {
+      "bytes": 7391,
+      "file": "CRF_Campaign_3_Water_Intake_C3E_6043_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "aebd790939041e2b78343ff53b0f636d088a4cc7757104427ef45e816982d1a7",
+      "uuid": "c46e8382-b692-506d-b0da-f24119f18868"
+    },
+    {
+      "bytes": 31087,
+      "file": "CRF_Campaign_3_Water_Intake_C3E_6607_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "fa5b6302a19bdf59fcecba82ae1299db78b57bf1d368e860d1c449245b42b2c8",
+      "uuid": "2c36ce0f-918d-5f3a-bce5-4665a02dc687"
+    },
+    {
+      "bytes": 6232,
+      "file": "CRF_Campaign_3_Water_Intake_C3E_6607_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "07ee9b062c30f51520577da6f4099994687564e12a349fc66b16c661060d030c",
+      "uuid": "0c180ef0-c501-53d9-aa86-d604bb97c1ca"
+    },
+    {
+      "bytes": 13555,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_5580_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "ca79e4e017b4ca7c165eacf18dd43f68936f9676e6c97f24ce67bfb94f9a94a3",
+      "uuid": "3752223f-5e3c-5f83-88ad-b499d777e540"
+    },
+    {
+      "bytes": 4776,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_5580_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "90ea8ddf79e4201823b4b5918494c4475881a71d7e453f740f95a06bf88c9d08",
+      "uuid": "004c7992-3168-5a08-8a13-a15b22232f3a"
+    },
+    {
+      "bytes": 10699,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_5814_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "4f84bf2a322b06227a8ae6821b7809d3c3019fd678a7861750701b32c350833b",
+      "uuid": "9ba49dd5-63ef-518f-aa7b-5b0320f0bccf"
+    },
+    {
+      "bytes": 4739,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_5814_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "fb11b47298f8d277b9b19ea62a4530c6a3077b7526fc06005594f6f0d4a1a998",
+      "uuid": "fc6dbeef-6fe1-567b-9b5c-24fa6f363df6"
+    },
+    {
+      "bytes": 10427,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_6858_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "0608885e2fc3d8a5b9f38c225ba28487b4f1ce8d01da94dd7fcd2892aafc5af2",
+      "uuid": "b5fb6319-b6e9-59e3-9902-aa492d933250"
+    },
+    {
+      "bytes": 4747,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_6858_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "83493e331ab245100b3fdcd62e40d7520521dd8897307ff8e222b6a1f4838baf",
+      "uuid": "21c5d319-cf70-5d93-b392-62d3806028aa"
+    },
+    {
+      "bytes": 11546,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9032_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "7910e515ac46033e1ef79d35a5ec41302cd6a61c36de851e528c54fd9ae15914",
+      "uuid": "72d6d742-8e69-5786-846c-2c857c48306a"
+    },
+    {
+      "bytes": 4720,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9032_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "ba3b627310a2e4ef29230a76b1bd189dbc64dc103ba5bad33902f332a179d70f",
+      "uuid": "a4fa7790-de86-5731-9c8c-b84f453015e8"
+    },
+    {
+      "bytes": 11671,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9139_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "868a96e3469fd6e2ff714527e9da77c882549b769b3850b5ed25f7e2703da4b9",
+      "uuid": "3d8c9371-6f0f-5719-8002-dfcd09efe1fd"
+    },
+    {
+      "bytes": 4690,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9139_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "121a65859f94c0d1aaf9a13bc7d72b14f0ab6adb1170421a245253fb082f8ad4",
+      "uuid": "4c4feb3a-c6d7-57aa-93cf-d60969e98983"
+    },
+    {
+      "bytes": 10468,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9314_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "117393e7d0ded4deeb540ae7fbff62d1b47b1c3f5058b64a69529c24f3bac956",
+      "uuid": "8a9deda0-d8d5-5bf6-a15f-4fa5dab01660"
+    },
+    {
+      "bytes": 4824,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9314_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "32104de2d470fe42046190cf47e927f8f7704088cfad970851973041a11c77eb",
+      "uuid": "11884269-fc4c-583a-ac2e-d6ec8f1ac290"
+    },
+    {
+      "bytes": 12463,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9485_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "cdb4994c640713cd02588a0d0d0929cabf9dd1da33bed498d28d9c5e1170cfad",
+      "uuid": "3d2071f9-51b1-5bc9-a5fb-5fe0b1e7b9de"
+    },
+    {
+      "bytes": 4804,
+      "file": "CRF_Campaign_3_Water_Intake_C3G_9485_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "fb27370ce74a7f8ee180f6b31f577585f378afdb846f62f17350b4a7263dd296",
+      "uuid": "94fd1e89-e86b-5f96-aca7-2a5216bf089a"
+    },
+    {
+      "bytes": 12995,
+      "file": "CRF_Campaign_3_Water_Intake_C3H_5907_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "9ffaf3b87b626c21c550cb91a78680627f077197b95cb6d0da0c9c2b0824a513",
+      "uuid": "e8f71b6f-c668-582c-8ac5-13783b07fc57"
+    },
+    {
+      "bytes": 4989,
+      "file": "CRF_Campaign_3_Water_Intake_C3H_5907_Summary.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "b87eb5a7f2d91fff6cd5ae0c351c0b82a6bd27fd72d2f78ab296468e06cec2c9",
+      "uuid": "209b7a9d-ac3d-58bd-96fc-099383112678"
+    },
+    {
+      "bytes": 24050,
+      "file": "CRF_Campaign_3_Water_Intaken_C3C_7352_Obsv.csv",
+      "folder": "CRF_Campaign_3_Water_Intake",
+      "sha256": "5652a358916bc942bf3326d44a88f9d4762e32ff08dd0b03462fc881e17a2cc8",
+      "uuid": "725bd84b-e2bc-505d-a89a-06294ae9dbd3"
+    }
+  ],
+  "source": "https://nlsp.nasa.gov/api/v1"
+}

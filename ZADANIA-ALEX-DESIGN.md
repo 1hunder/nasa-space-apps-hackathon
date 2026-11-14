@@ -9,7 +9,7 @@ Ten plik ma Ci dać dwie rzeczy: **zrozumienie, co aplikacja robi**, i **kolejno
 ## 0. Space-Normal w 60 sekund
 
 - **Wyzwanie NASA:** „Create Health Monitoring Software for Astronauts on Space Missions”. Kluczowe zdanie z opisu: *astronauts carry much of the responsibility for spotting these changes in themselves… enable astronauts to evaluate and act on the status of their health.*
-- **Problem:** w kosmosie zdrowe ciało zmienia się w normalny sposób (np. temperatura w spoczynku rośnie do ok. 38°C, ciśnienie spada). Ziemska norma albo stały zakres sprzed lotu biorą taką adaptację za chorobę albo — po poluzowaniu — przeoczają prawdziwą chorobę. Dziś różnicę ocenia lekarz na Ziemi. W drodze na Marsa lekarz jest do 24 min opóźnienia dalej.
+- **Problem:** w kosmosie zdrowe ciało zmienia się w normalny sposób (np. temperatura w spoczynku rośnie do ok. 38°C, ciśnienie spada). Ziemska norma albo stały zakres sprzed lotu biorą taką adaptację za chorobę albo — po poluzowaniu — przeoczają prawdziwą chorobę. Dziś różnicę ocenia lekarz na Ziemi. W drodze na Marsa lekarz jest do 22 min opóźnienia dalej (w jedną stronę), a przy koniunkcji ok. 2 tygodnie bez łączności.
 - **Nasze rozwiązanie:** każdy członek załogi ma **korytarz normy** — pasmo wartości, których *oczekujemy* u tej osoby w tym dniu misji. Korytarz przesuwa się razem z fazą misji. Alarm jest tylko wtedy, gdy pomiar wychodzi poza korytarz i nie tłumaczy go żadne zapisane zdarzenie (trening, zmiana grafiku, klimat w kabinie).
 - **Główny użytkownik:** astronauta. Dostaje krótką kartę: **co widzimy → co sprawdzić teraz → kiedy eskalować**. Lekarz na Ziemi dostaje zwięzły pakiet, który dotrze z opóźnieniem.
 - **Dane:** prawdziwe dzienne pomiary z badań NASA bed rest (ludzie leżą tygodniami z głową lekko w dół — naziemny analog lotu). Zawsze mówimy „ground analog”, nigdy „dane z lotu”.
@@ -22,11 +22,11 @@ Repo: https://github.com/1hunder/nasa-space-apps-hackathon
 
 | # | Plik | Branch | Co z niego wyciągnąć | Czas |
 |---|---|---|---|---|
-| 1 | `space-normal-merged-concept.md` — **§0, §2, §4, §7, §8** | `V2` | Idea, użytkownicy, **karta astronauty (§4)**, scenariusz 30-sekundowego demo (§7), co jest w zakresie (§8) | 15 min |
-| 2 | `reports/Ziemskie normy w monitoringu astronautów.md` — tylko sekcja **„Werdykt dla pitchu”** (tabela „Wolno powiedzieć / Nie mówić”) | `V2` | Czego nie wolno pisać na ekranie i slajdach | 5 min |
-| 3 | `README.md` | `p0-scaffold` | Jak działa silnik Viktora, krótko | 3 min |
-| 4 | `web/src/contract.ts` | `p0-scaffold` | **Najważniejsze dla Ciebie:** jakie dane dostanie ekran. Tłumaczenie w §2 poniżej | 10 min |
-| 5 | `web/public/cache/mission_synthetic_transplant_single.json` (otwórz w przeglądarce / VS Code, przewiń) | `p0-scaffold` | Jak wyglądają prawdziwe dane, które Davyd podłączy | 5 min |
+| 1 | `docs/00-kontekst.md` (całość) + `docs/01-produkt-i-zakres.md` **§1–3** | `main` | Idea, korytarz, użytkownicy, **makieta ekranu i karty**, zasady designu, co jest w zakresie | 15 min |
+| 2 | `docs/00-kontekst.md` **§10** (tabela „Wolno / Nie wolno”) + `docs/03-pitch-i-film.md` **§1** (storyboard filmu) | `main` | Czego nie wolno pisać na ekranie; kadry filmu | 5 min |
+| 3 | `README.md` | `main` | Jak działa silnik Viktora, krótko | 3 min |
+| 4 | `web/src/contract.ts` | `main` | **Najważniejsze dla Ciebie:** jakie dane dostanie ekran. Tłumaczenie w §2 poniżej | 10 min |
+| 5 | `web/public/cache/mission_synthetic_transplant_single.json` (otwórz w przeglądarce / VS Code, przewiń) | `main` | Jak wyglądają prawdziwe dane, które Davyd podłączy | 5 min |
 | 6 | `Space-Normal-architecture.png` | `V2` | Obraz całości | 2 min |
 
 **Zasada nadrzędna z kontraktu:** *the UI shows no number that is not in this JSON.* Nie projektuj liczb, których silnik nie liczy.

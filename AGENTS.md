@@ -16,8 +16,11 @@ Ten plik obowiązuje każdego agenta AI w tym repo (Claude Code, Codex, Cursor i
 ## 2. Kolejność czytania
 
 1. [`docs/00-kontekst.md`](docs/00-kontekst.md) — **źródło prawdy.** Jeśli inny plik mu przeczy, wygrywa ten.
-2. Plik dla Twojego zadania (tabela w §3).
-3. [`docs/README.md`](docs/README.md) — pełna mapa dokumentów.
+2. [`docs/05-stan-prac.md`](docs/05-stan-prac.md) — **co już działa, co następne, kto nad czym pracuje.** Nie zaczynaj zadania, które ma innego ownera, bez pytania.
+3. Plik dla Twojego zadania (tabela w §3).
+4. [`docs/README.md`](docs/README.md) — pełna mapa dokumentów.
+
+Uwaga: [`PLAN.md`](PLAN.md) to specyfikacja sprzed researchu. Gdzie przeczy [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §4, wygrywa `01` §4.
 
 **Nie używaj** [`docs/archiwum/`](docs/archiwum/) jako źródła decyzji. Są tam nieaktualne dane, np. „24 min” i „Kerremans i in.”.
 
@@ -28,6 +31,8 @@ Ten plik obowiązuje każdego agenta AI w tym repo (Claude Code, Codex, Cursor i
 | Kod: pipeline, model, detektory, ewaluacja | [`PLAN.md`](PLAN.md) (specyfikacja, EN) + **delta** w [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §4 + [`docs/data_notes.md`](docs/data_notes.md) |
 | Kod: dashboard / UI (`web/`) | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
 | Deploy | [`README.md`](README.md) (uruchomienie) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §5 |
+| Design ekranu, film 30 s | [`ZADANIA-ALEX-DESIGN.md`](ZADANIA-ALEX-DESIGN.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §1 |
+| Co robić teraz / stan faz P0–P8 | [`docs/05-stan-prac.md`](docs/05-stan-prac.md) |
 | Teksty: pitch, film, strona zgłoszenia | [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) + [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) + [`docs/00-kontekst.md`](docs/00-kontekst.md) §10 |
 | Pole References | [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) §4 |
 | Organizacja pracy, terminy | [`docs/04-zespol-i-plan.md`](docs/04-zespol-i-plan.md) + [`docs/zrodla/judging-awards-guide-2026.pdf`](docs/zrodla/judging-awards-guide-2026.pdf) |
@@ -52,7 +57,8 @@ W notatkach research każde twierdzenie ma tag ([FAKT]/[CZĘŚCIOWE]/[BRAK] albo
 
 1. **Język:** dokumenty projektu piszemy po polsku. Kod, komentarze, UI, strona zgłoszenia, film i napisy są po angielsku. Cytaty źródeł zostają w oryginale.
 2. **Liczby:**
-   - wyniki bierzemy tylko z `docs/claims.md`, który generuje pipeline;
+   - wyniki bierzemy tylko z [`docs/claims.md`](docs/claims.md), który wypełnia pipeline. **Dziś to stub bez wyników** — do tego czasu tylko placeholdery `{X}`;
+   - nigdy nie dopisuj do `docs/claims.md` linii z hashem konfiguracji: loader odblokowuje wtedy zbiór testowy. Robi to wyłącznie `scripts/hash_config.py` w fazie P5;
    - fakty bierzemy tylko z [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) albo z notatek research z tagiem [FAKT];
    - nigdy nie wymyślaj liczb ani nie przepisuj ich ręcznie.
 3. **Uczciwość danych:**
@@ -87,7 +93,24 @@ Układ kodu jest opisany w [`README.md`](README.md) (sekcja Layout). Kontrakt da
 - Zmianę kierunku produktu wprowadza tylko Petro, w `docs/00-kontekst.md`. Jeśli zadanie jej wymaga, zatrzymaj się i zapytaj.
 - Role, harmonogram i zamrożenia (zakres na T+3h, funkcje na T+5h) są w [`docs/04-zespol-i-plan.md`](docs/04-zespol-i-plan.md).
 
-## 8. Definicja „gotowe”
+## 8. Słowniczek
+
+| Termin | Znaczenie |
+|---|---|
+| **Korytarz** | Pas wartości oczekiwanych u *tej osoby* w *tym dniu misji* (baza + oczekiwana adaptacja + zalogowane zdarzenia ± rozrzut). Ugina się z fazą misji |
+| **Residual (reszta)** | Pomiar minus oczekiwanie; alarm liczymy tylko na reszcie |
+| **CUSUM** | Detektor sumujący małe, uporczywe odchylenia reszty; daje żółty/czerwony alert |
+| **Zakres sprzed lotu** (`frozen_baseline`) | Płaski osobisty zakres z dni przed misją/bed rest; koncepcja NASA CDSS (HRP-48033). W UI: „Pre-flight range” |
+| **Ziemska norma** (`fixed_thresholds`) | Te same progi kliniczne dla wszystkich. W UI: „Earth normal” |
+| **Rolling** (`rolling_14`) | „Normalne = ostatnie 14 dni”; silny baseline, uwzględniany w liczbie głównej |
+| **CMO** | Crew Medical Officer: członek załogi z krótkim szkoleniem medycznym, nie lekarz |
+| **Bed rest / HDT** | Naziemny analog nieważkości: tygodnie leżenia z głową 6° w dół |
+| **C1, C3, CFT70** | Kampanie NASA bed rest: C1 + C3 A/C/D/E = dopasowanie; CFT70 i C3 G/H = wydzielony test |
+| **Track A / B** | A: fałszywe alarmy na zdrowych danych (null); B: czułość i wyprzedzenie na przeszczepionych chorobach |
+| **Flight-like** | Scenariusz syntetyczny z wielkościami zmian z publikacji z lotów (np. temperatura +1°C); zawsze `SYNTHETIC` |
+| **Przeszczep (transplant)** | Wklejenie prawdziwej sygnatury choroby z danych Stanford w reszty z bed rest |
+
+## 9. Definicja „gotowe”
 
 - `make test` przechodzi; kontrakt jest zwalidowany (`make demo-synthetic`).
 - Każda nowa liczba w UI lub tekście ma źródło (`docs/claims.md` albo `docs/02-dowody-nasa.md`).

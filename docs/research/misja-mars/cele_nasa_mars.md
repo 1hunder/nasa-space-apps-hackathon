@@ -142,6 +142,12 @@ Obecny układ luk: stare luki ExMC „Med01–Med13” zostały **scalone** w no
   > "Early results showed promise for reliable diagnoses based on reported symptoms."
   - [CZĘŚCIOWE] Media (TechCrunch, Space.com) podają: scenariusze testowe – uraz kostki, ból w boku, ból ucha; ~88% trafności dla kostki; plan testów na ISS. Niezweryfikowane w źródle pierwotnym.
   - Wniosek dla nas: CMO-DA zajmuje się **diagnozą objawów zgłaszanych przez załogę** (reaktywnie). Nasz produkt jest **proaktywny** (trend codziennych parametrów vs osobisty zakres zależny od fazy) — komplementarny, nie konkurencyjny.
+- **CMO-DA offline (NASA JSC + Red Hat), 24 czerwca 2026** [FAKT, źródło: blog Red Hat, nie nasa.gov] — https://www.redhat.com/en/blog/moon-and-beyond-ramalama-being-tested-nasa-potentially-support-medical-ai-assistant-future-deep-space-missions
+  > "had to move from a cloud-dependent model to a fully disconnected, edge deployment"
+  > "Powered by RamaLama for local AI inference"
+  - Działa na naziemnym bliźniaku HPE Spaceborne Computer; LLM do rozumowania medycznego + VLM do „image-based symptom analysis”; następna iteracja z RHEL AI; po walidacji na Ziemi demo dla kierownictwa NASA, potem ISS.
+  - [BRAK] W obu wpisach (Google 2025, Red Hat 2026) nie ma wzmianki o danych z czujników/wearables, codziennym monitoringu, osobistym baseline ani adaptacji do nieważkości.
+  - Wniosek dla nas: „offline” przestaje być różnicą. Różnica zostaje: dane wejściowe (pomiary vs objawy), osobisty korytarz zależny od fazy, alarm bez LLM.
 - **Artemis II** [CZĘŚCIOWE, źródła prasowe] — załogowy przelot wokół Księżyca, wodowanie 10 kwietnia 2026 (Wiseman, Glover, Koch, Hansen), ~10 dni.
 - **Artemis III** [CZĘŚCIOWE] — wg wywiadu z Isaacmanem cel: połowa 2027, przekształcona w test dokowania z lądownikami na orbicie okołoziemskiej; Artemis IV (2028) — powrót na powierzchnię Księżyca.
 - **2025 Architecture Update** [FAKT]: na 2026 NASA zapowiada m.in. "examining the communications and navigation needs of crewed Mars missions".

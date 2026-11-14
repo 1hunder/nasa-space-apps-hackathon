@@ -44,7 +44,8 @@ Nie powołujemy się na lukę **Med07** (zamknięta). Publicznych, ponumerowanyc
 | Ferraro i in. 2026, CCLM ([doi](https://doi.org/10.1515/cclm-2025-0526)) | postulat kosmicznych reference change values dla biomarkerów | My dla parametrów życiowych, działający prototyp |
 | Scott i in. 2023, Nat Mach Intell ([link](https://www.nature.com/articles/s42256-023-00617-5)) | „the best baseline for an individual is oneself”, rekomendacje warsztatu NASA | Jw. — realizujemy ten postulat |
 | Zheng i in. 2023, Front Physiol | 27 astronautów, zalecają osobisty baseline | Retrospektywnie; my prospektywnie, dziennie |
-| CMO-DA, Google + NASA 2025 ([blog](https://cloud.google.com/blog/topics/public-sector/how-google-and-nasa-are-testing-ai-for-medical-care-in-space)) | diagnoza zgłoszonych objawów (reaktywna) | My proaktywnie, przed objawami; uzupełniamy |
+| CMO-DA, Google + NASA 2025 ([blog Google](https://cloud.google.com/blog/topics/public-sector/how-google-and-nasa-are-testing-ai-for-medical-care-in-space)) | diagnoza i leczenie zgłoszonych objawów (reaktywna), LLM trenowany na literaturze lotów | My proaktywnie, przed objawami; warstwa *przed* diagnozą, która daje jej kontekst |
+| CMO-DA offline, NASA JSC + Red Hat, czerwiec 2026 ([blog Red Hat](https://www.redhat.com/en/blog/moon-and-beyond-ramalama-being-tested-nasa-potentially-support-medical-ai-assistant-future-deep-space-missions)) | ten sam CMO-DA na edge, bez chmury (RamaLama, HPE Spaceborne Computer), LLM + model wizyjny; testy naziemne | Offline **nie** jest już naszą różnicą. Różnica: dzienne pomiary vs osobisty korytarz zależny od fazy; alarm bez LLM |
 | CSA Bio-Monitor / Astroskin | zbiera parametry, analiza na Ziemi | My interpretujemy na pokładzie |
 
 **Korekta:** praca CCLM 2026 to **Ferraro i in.**, nie „Kerremans i in.” (błąd we wcześniejszych dokumentach).
@@ -54,4 +55,5 @@ Nie powołujemy się na lukę **Med07** (zamknięta). Publicznych, ponumerowanyc
 Dane: NASA Life Sciences Portal — Bed Rest Case Report Form (nlsp.nasa.gov); Stanford COVID-19 Wearables (Mishra et al. 2020; Alavi et al. 2022).
 Dokumenty NASA: N1–N10 powyżej.
 Publikacje: Stahn 2017; Trudel 2022; Norsk 2015; Ferraro 2026; Scott 2023; Zheng 2023; Baevsky 2006/2013; Mishra 2020.
+Prior art (blogi firm): Google Cloud, „How Google and NASA are testing AI for medical care in space” (2025); Red Hat blog: RamaLama tested by NASA to support a medical AI assistant (2026), https://www.redhat.com/en/blog/moon-and-beyond-ramalama-being-tested-nasa-potentially-support-medical-ai-assistant-future-deep-space-missions .
 Narzędzia: wpisać faktycznie użyte biblioteki, narzędzia AI do wideo/obrazów/głosu i muzykę (z licencją).

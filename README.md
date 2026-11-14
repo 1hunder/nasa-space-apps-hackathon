@@ -2,7 +2,7 @@
 
 Crew health monitoring that knows how a body under microgravity is *expected* to change, and alarms only on what is left over after removing the personal baseline, the expected adaptation for that day, and the effects of logged events. NASA Space Apps hackathon prototype.
 
-- Spec: [`PLAN.md`](PLAN.md) · Summary: [`space-normal-summary.md`](space-normal-summary.md)
+- Spec: [`PLAN.md`](PLAN.md) · Kontekst projektu (PL): [`docs/README.md`](docs/README.md)
 - **Status:** pipeline, NASA bed rest loader and demo dashboard work. The dashboard replays synthetic missions; every output so far is labelled `SYNTHETIC` and is not a result.
 
 ## Run

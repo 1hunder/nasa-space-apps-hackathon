@@ -39,7 +39,7 @@ Stan na 2026-11-14. Budżet: **8 h pracy** do zgłoszenia (oficjalny termin: nie
 - **Liczby płyną w jedną stronę:** pipeline → `docs/claims.md` → dashboard / film / pitch. Nikt nie wpisuje liczb ręcznie do filmu.
 - **Zamrożenia:** zakres na T+3:00, funkcje na T+5:00. Po T+5:00 tylko poprawki błędów i tekstu.
 - **Blokady:** jeśli coś stoi > 30 min, eskaluj do Petro; plan B zawsze gotowy (np. film na samym syntetycznym replayu z uczciwą etykietą).
-- **Agenci AI:** każdy agent zaczyna od `CLAUDE.md` → `docs/README.md` → `00-kontekst.md`; dostaje zadanie z jednym plikiem wynikowym.
+- **Agenci AI:** każdy agent zaczyna od `AGENTS.md` (główna instrukcja; `CLAUDE.md` ją importuje) → `00-kontekst.md`; dostaje zadanie z jednym plikiem wynikowym.
 
 ## 4. Git
 

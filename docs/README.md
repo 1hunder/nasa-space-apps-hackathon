@@ -1,7 +1,7 @@
 # Dokumentacja Space-Normal — mapa
 
 Język dokumentów: **polski** (cytaty źródeł i teksty do zgłoszenia — po angielsku).
-Kolejność czytania dla nowej osoby lub agenta: **00 → 01 → 02 → 03 → 04**.
+Kolejność czytania dla nowej osoby: **00 → 01 → 02 → 03 → 04**. Agenci AI zaczynają od [`../AGENTS.md`](../AGENTS.md).
 
 | Plik | Co zawiera | Dla kogo | Status |
 |---|---|---|---|

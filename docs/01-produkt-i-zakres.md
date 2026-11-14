@@ -64,7 +64,9 @@ Nigdy nie wycinamy: wydzielonego testu, porównania z zakresem sprzed lotu, etyk
 | Gdzie | Zmiana | Dlaczego |
 |---|---|---|
 | `web/src/labels.ts` | `frozen_baseline` nazwać **„Pre-flight range”** (how: „Personal range fixed before launch — NASA CDSS concept”) zamiast „Earth-normal monitor”. `fixed_thresholds` zostaje jako **„Earth normal”** | NASA planuje właśnie zakres sprzed lotu (HRP-48033); to nasz prawdziwy rywal, nie ziemska norma |
-| Ewaluacja / claims | Główne porównanie: **Space-Normal vs zakres sprzed lotu** (przy wyrównanym budżecie fałszywych alarmów); ziemskie progi jako dodatkowa linia | Jw. |
+| Ewaluacja / claims | **Bez zmian względem PLAN.md:** liczba główna = Space-Normal vs **najlepszy** baseline (ziemskie progi, zakres sprzed lotu, rolling) przy wyrównanym budżecie fałszywych alarmów. Porównanie tylko ze słabszym rywalem byłoby wybieraniem wygodnego przeciwnika | Uczciwość (Validity) |
+| Narracja (film, pitch, główny wykres) | Pokazujemy **ziemską normę i zakres sprzed lotu** jako płaskie pasy obok korytarza; rolling zostaje w ewaluacji i w widoku szczegółów | To rozumie juror; zakres sprzed lotu to koncepcja NASA (HRP-48033) |
+| Priorytety UI (PLAN.md §14) | Najpierw: kadry do filmu 30 s (główny wykres + karta + lista załogi) i publiczny link. **Opcjonalne:** ekran Proof, zakładki pod 3-minutowe demo dashboardu, mapa ciała, Data & Honesty — pitch jest na żywo **bez ekranu** | Format: film 30 s + pitch bez slajdów |
 | Dashboard | Pasek misji: „Mars transit · day N · one-way delay 22 min · no physician on board” (oznaczone jako założenie demo) | Zawężenie do misji na Marsa, NASA-STD-3001 Rev C |
 | Dashboard | Fazy misji na osi X | NASA TH-8LM „throughout all mission phases” |
 | Teksty, pitch, README | 22 min zamiast 24; dodać ~2 tygodnie bez łączności | Źródła NASA |

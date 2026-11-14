@@ -1,5 +1,7 @@
 # Space-Normal — implementation plan for Claude Code (v2.1: NASA bed rest data + dashboard spec)
 
+> **Update 2026-11-15 (read first):** product direction and priorities changed after research. Mission framing = crewed Mars transit (22 min one-way delay, not 24); primary user = astronaut, then Crew Medical Officer. Headline comparison stays vs the best baseline. UI priority = frames for the 30 s video + public link; Proof screen and 3-minute dashboard demo are optional (live pitch has no screen). See `AGENTS.md` and `docs/01-produkt-i-zakres.md` §4 (Polish) for the full delta; `docs/05-stan-prac.md` for current status.
+
 ## Kickoff prompt (paste this into Claude Code)
 
 > Read `PLAN.md` (this file) fully before writing code. Implement Space-Normal phase by phase, in the order given in "Phases". At the end of each phase, run the tests, show me the acceptance-criteria results, and wait for my go-ahead before the next phase.

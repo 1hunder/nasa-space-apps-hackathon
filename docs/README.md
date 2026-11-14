@@ -1,7 +1,7 @@
 # Dokumentacja Space-Normal — mapa
 
 Język dokumentów: **polski** (cytaty źródeł i teksty do zgłoszenia — po angielsku).
-Kolejność czytania dla nowej osoby: **00 → 01 → 02 → 03 → 04**. Agenci AI zaczynają od [`../AGENTS.md`](../AGENTS.md).
+Kolejność czytania dla nowej osoby: **00 → 05 → 01 → 02 → 03 → 04**. Agenci AI zaczynają od [`../AGENTS.md`](../AGENTS.md).
 
 | Plik | Co zawiera | Dla kogo | Status |
 |---|---|---|---|
@@ -10,6 +10,9 @@ Kolejność czytania dla nowej osoby: **00 → 01 → 02 → 03 → 04**. Agenci
 | [`02-dowody-nasa.md`](02-dowody-nasa.md) | Wymagania NASA → funkcje (cytaty + linki), fakty, prior art, lista References | Petro, Anna, agenci piszący teksty | aktualny |
 | [`03-pitch-i-film.md`](03-pitch-i-film.md) | Storyboard filmu 30 s, pitch 3 min, odpowiedzi na pytania jurorów | Petro, Alex, Anna | aktualny |
 | [`04-zespol-i-plan.md`](04-zespol-i-plan.md) | Role, harmonogram 8 h, checkpointy, zasady iteracji | wszyscy | aktualny |
+| [`05-stan-prac.md`](05-stan-prac.md) | Co działa, czego brakuje, następne zadania z ownerami, plan B | wszyscy | **aktualizowany na bieżąco** |
+| [`claims.md`](claims.md) | Wyniki do cytowania (generuje pipeline w P5); dziś stub | wszyscy | stub |
+| [`../ZADANIA-ALEX-DESIGN.md`](../ZADANIA-ALEX-DESIGN.md) | Brief krok po kroku dla designera: kontrakt danych → elementy ekranu, film, slajdy zapasowe | Alex | aktualny |
 | [`data_notes.md`](data_notes.md) | Inwentaryzacja danych NASA bed rest i Stanford (EN, Viktor) | dev | aktualny |
 | [`../PLAN.md`](../PLAN.md) | Specyfikacja techniczna v2.1 (EN, Viktor) | dev | aktualny + delta w `01` §4 |
 

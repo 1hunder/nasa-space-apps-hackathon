@@ -28,5 +28,10 @@ def load_scenarios() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=None)
+def load_journal() -> dict[str, Any]:
+    return _load("journal.yaml")
+
+
+@lru_cache(maxsize=None)
 def load_eval_config() -> dict[str, Any]:
     return _load("eval.yaml")

@@ -58,7 +58,7 @@ export function App() {
           )}
         </div>
         <button className="play" onClick={r.toggle}>
-          {r.playing ? "Pause" : r.day >= lastDay ? "Replay" : "Play"}
+          {r.playing ? "Pause" : r.day >= lastDay ? "Replay" : r.day > mission.days[0] ? "Continue" : "Play"}
         </button>
       </header>
 
@@ -92,7 +92,8 @@ export function App() {
             Adaptation: {PROVENANCE_LABEL[p.adaptation]}. Illness: {PROVENANCE_LABEL[p.illness]}. Events:{" "}
             {PROVENANCE_LABEL[p.events]}. Heart, lungs and body temperature are tracked; eyes, bone, muscle and immune
             function are not monitored yet. The faint line is the hourly readings with each person's time-of-day pattern
-            removed; the bold line is the daily mean, which the ranges and monitors use. Keys: space to play, R to restart, arrows to step, D for details.
+            removed; the bold line is the daily mean, which the ranges and monitors use. Click a point for that day's breakdown or a journal mark for the entry, drag to scrub. Journal readings are
+            mocked here; no language model runs in this demo. They add context and never raise or lower an alert. Keys: space to play, R to restart, arrows to step, D for details.
           </p>
         )}
       </main>

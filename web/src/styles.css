@@ -63,7 +63,35 @@ button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px
 .more:hover { color: var(--text); border-color: var(--muted); }
 .fineprint { color: var(--muted); font-size: 14px; line-height: 1.5; max-width: 78ch; margin: 10px 0 0 44px; }
 
-.figure { width: 100%; }
+.figure { width: 100%; position: relative; }
+.picked { fill: none; stroke: var(--text); stroke-width: 2; }
+.tip {
+  position: absolute; width: 224px; transform: translate(-50%, calc(-100% - 16px)); z-index: 2;
+  background: var(--ink-3); border: 1px solid var(--muted); border-radius: 12px; padding: 12px 14px;
+  box-shadow: 0 10px 30px rgba(4, 6, 24, 0.6); font-size: 14px; pointer-events: none;
+}
+.tip-below { transform: translate(-50%, 16px); }
+.tip-journal { width: 288px; }
+.tip-quote { font-size: 16px; line-height: 1.35; margin: 6px 0 10px; }
+.tip-read { color: var(--muted); padding-top: 8px; border-top: 1px solid var(--line); }
+.tip-effect { margin-top: 2px; }
+.tip-effect.accounted { color: var(--event); }
+.entry { fill: #c9cff0; stroke: var(--ink); stroke-width: 1.5; }
+.entry-accounted { fill: var(--event); }
+.entry-open { stroke: var(--text); stroke-width: 2; }
+.tip-day { color: var(--muted); }
+.tip-value { font-size: 26px; font-weight: 760; font-stretch: 118%; line-height: 1.15; margin-bottom: 8px; }
+.tip-value small { font-size: 14px; font-weight: 500; color: var(--muted); }
+.tip dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; margin: 0; }
+.tip dt { padding-left: 9px; border-left: 3px solid var(--line); }
+.tip dd { margin: 0; font-weight: 640; text-align: right; }
+.tip .t-adapt { border-left-color: var(--space); }
+.tip .t-event { border-left-color: var(--event); }
+.tip .t-unexplained { border-left-color: var(--alarm); }
+.tip .t-noise { border-left-color: var(--noise); }
+.tip-verdict { margin-top: 9px; color: var(--space); font-weight: 620; }
+.tip-verdict.bad { color: var(--alarm); }
+.tip-earth { color: var(--earth); }
 .figure svg { display: block; user-select: none; }
 .figure text { fill: var(--text); font-size: 14px; }
 .figure .tick { fill: var(--muted); }

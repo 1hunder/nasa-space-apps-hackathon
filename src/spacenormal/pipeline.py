@@ -89,9 +89,13 @@ def _system_states(dec: dict[str, Decomposition], red_days: np.ndarray, crew_day
     return out
 
 
-def _context_items(events: pd.DataFrame, day: int) -> list[dict[str, str]]:
+def _context_items(events: pd.DataFrame, day: int, journal: list[dict], cid: str) -> list[dict[str, str]]:
     near = events[(events["study_day"] >= day - 1) & (events["study_day"] <= day)]
-    return [
+    from_journal = [
+        {"text": f"Journal, day {j['day']}: \"{j['text']}\"", "source_ref": f"journal:{j['day']}:{j['hour']}"}
+        for j in journal if cid in j["crew_ids"] and day - 2 <= j["day"] <= day
+    ]
+    return from_journal + [
         {"text": f"{r.event_type.replace('_', ' ')} logged on day {int(r.study_day)}",
          "source_ref": f"events:{r.event_type}:{int(r.study_day)}"}
         for r in near.itertuples()
@@ -138,7 +142,7 @@ def run_pipeline(mission: Mission, cfg: dict[str, Any] | None = None,
             i = int(np.where(days == a["day"])[0][0])
             d = dec[a["vital"]]
             numbers = {k: float(getattr(d, k)[i]) for k in ("y", "baseline", "adaptation", "events", "residual", "z")}
-            notes[a["id"]] = build_note(mission.names.get(cid, cid), a["day"], a["vital"], numbers, _context_items(ev, a["day"]))
+            notes[a["id"]] = build_note(mission.names.get(cid, cid), a["day"], a["vital"], numbers, _context_items(ev, a["day"], mission.journal, cid))
 
     assert days is not None
     in_events = mission.events[mission.events["study_day"] >= 1]
@@ -202,5 +206,5 @@ def run_pipeline(mission: Mission, cfg: dict[str, Any] | None = None,
         "days": [int(d) for d in days], "samples_per_day": spd, "provenance": mission.provenance,
         "crew": crew, "events": events,
         "alerts": sorted(alerts, key=lambda a: (a["day"], a["detector"], a["crew_id"])),
-        "crew_alerts": crew_alerts, "episodes": episodes, "notes": notes,
+        "crew_alerts": crew_alerts, "episodes": episodes, "journal": mission.journal, "notes": notes,
     })

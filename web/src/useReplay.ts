@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Alert, Mission, MissionIndex, Vital } from "./contract";
 
 const FULL_REPLAY_SECONDS = 13; // one mission at 1x
-const HOLD_MS = 1500; // pause on a Space-Normal alert so it can be read
 
 export interface Replay {
   index: MissionIndex | null;
@@ -38,7 +37,6 @@ export function useReplay(): Replay {
   const [crewId, setCrewId] = useState("");
   const [vital, setVital] = useState<Vital>("temp_c");
   const dayRef = useRef(1);
-  const holdUntil = useRef(0);
 
   useEffect(() => {
     fetch("./cache/missions.json")
@@ -87,15 +85,16 @@ export function useReplay(): Replay {
     let frame = 0;
     let prev = performance.now();
     const tick = (now: number) => {
-      const dt = Math.min(0.1, (now - prev) / 1000);
+      // A frame's timestamp can precede the moment the loop started; never step backwards.
+      const dt = Math.max(0, Math.min(0.1, (now - prev) / 1000));
       prev = now;
-      if (now >= holdUntil.current) {
+      {
         const before = dayRef.current;
         let next = Math.min(last, before + dt * rate);
         const crossed = reds.find((a) => a.day > before && a.day <= next);
         if (crossed) {
+          // An alert stops the replay on that day; Play continues from there.
           next = crossed.day;
-          holdUntil.current = now + HOLD_MS;
           setCrewId(crossed.crew_id);
           // Stay on the vital being watched if it is also clearly off; otherwise show the one that led the alert.
           const i = mission.days.indexOf(crossed.day);
@@ -104,7 +103,7 @@ export function useReplay(): Replay {
         }
         dayRef.current = next;
         setDayState(next);
-        if (next >= last) {
+        if (crossed || next >= last) {
           setPlaying(false);
           return;
         }
@@ -118,14 +117,12 @@ export function useReplay(): Replay {
   const toggle = useCallback(() => {
     if (!mission) return;
     if (dayRef.current >= mission.days[mission.days.length - 1]) setDay(mission.days[0]);
-    holdUntil.current = 0;
     setPlaying((p) => !p);
   }, [mission, setDay]);
 
   const restart = useCallback(() => {
     if (!mission) return;
     setDay(mission.days[0]);
-    holdUntil.current = 0;
     setPlaying(true);
   }, [mission, setDay]);
 

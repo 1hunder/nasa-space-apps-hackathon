@@ -1,0 +1,112 @@
+seed: 20261114
+
+mission:
+  pre_days: 13
+  in_days: 70
+  crew_size: 4
+  # Display names for the demo crew (the team). Ids stay C1..C4 internally.
+  crew_names: [Anna Uhalnik, Davyd Antoniuk, Petro Melnyk, Viktor Kulyk]
+  burn_in_days: 3
+
+model:
+  scale_prior_sd: 0.4
+  scale_bounds: [0.3, 2.0]
+  scale_fit_days: [4, 21]
+  exclude_abs_z: 2.0
+  min_baseline_days: 7
+  huber_c: 1.345
+  band_sigma: 2.0
+  # Slow, gated correction of the personal level and noise scale after burn-in.
+  level_halflife_days: 10
+  level_gate_z: 2.0
+  var_halflife_days: 20
+  room_temp_ref_c: 22.0
+
+detector:
+  k: 0.5
+  yellow: 3.0
+  red: 7.0
+  weights: {pulse: 0.6, temp_c: 0.25, resp_rate: 0.15}
+
+crew:
+  z_threshold: 1.5
+  min_run_days: 2
+  window_days: 4
+  min_crew: 2
+
+baselines:
+  rolling_windows: [14]
+  fixed_thresholds:
+    pulse: {high: 100, low: 45}
+    temp_c: {high: 38.0}
+    resp_rate: {high: 22}
+    sbp: {high: 150, low: 90}
+    dbp: {high: 95}
+
+# SYNTHETIC mock, sized from published spaceflight findings and our NASA bed rest fit set
+# (see docs/data_notes.md, "How big the expected shifts are"). None of these numbers is a result.
+#   temp_c  +1.0 C over ~2.5 months in flight        Stahn et al. 2017, Sci Rep
+#   sbp/dbp -8 to -10 mmHg (24 h ambulatory)          Norsk et al. 2015, J Physiol
+#   pulse   unchanged in flight (Norsk 2015); +4.5 bpm median by days 41-60 in NASA bed rest
+#   resp    no shift in NASA bed rest
+# Readings are hourly; the model and detectors work on daily means.
+synthetic:
+  samples_per_day: 24
+  gap_rate: 0.02
+  scale_sd: 0.2
+  scale_clip: [0.6, 1.3]   # keeps the largest drift near the published mean, not beyond it
+  tau_log_sd: 0.15
+  noise_df: 5
+  hour_ar: 0.6
+  illness: {pulse: 7.0, temp_c: 0.8, resp_rate: 2.0, sbp: 0.0, dbp: 0.0}
+  priors:
+    pulse:
+      base_mean: 64.0
+      base_sd: 6.0
+      noise_sd: 2.0          # day-to-day SD of the daily mean
+      hour_sd: 4.0           # hour-to-hour SD within a day
+      circadian: 6.0         # amplitude of the time-of-day pattern
+      amp: 4.0
+      tau: 18.0
+      sigma_floor: 1.0
+      beta: {room_temp_c: 0.3, exercise: 1.0, schedule_shift: 4.0}
+    temp_c:
+      base_mean: 36.6
+      base_sd: 0.15
+      noise_sd: 0.12
+      hour_sd: 0.15
+      circadian: 0.3
+      amp: 0.9
+      tau: 25.0
+      sigma_floor: 0.08
+      beta: {room_temp_c: 0.03, exercise: 0.0, schedule_shift: 0.3}
+    resp_rate:
+      base_mean: 16.0
+      base_sd: 1.2
+      noise_sd: 0.6
+      hour_sd: 1.2
+      circadian: 1.0
+      amp: 0.0
+      tau: 10.0
+      sigma_floor: 0.4
+      beta: {room_temp_c: 0.0, exercise: 0.0, schedule_shift: 0.3}
+    sbp:
+      base_mean: 118.0
+      base_sd: 8.0
+      noise_sd: 3.0
+      hour_sd: 6.0
+      circadian: 6.0
+      amp: -8.0
+      tau: 15.0
+      sigma_floor: 2.0
+      beta: {room_temp_c: 0.0, exercise: -1.0, schedule_shift: 2.0}
+    dbp:
+      base_mean: 74.0
+      base_sd: 6.0
+      noise_sd: 2.5
+      hour_sd: 5.0
+      circadian: 4.0
+      amp: -9.0
+      tau: 15.0
+      sigma_floor: 2.0
+      beta: {room_temp_c: 0.0, exercise: 0.0, schedule_shift: 1.5}

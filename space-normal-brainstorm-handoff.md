@@ -7,7 +7,7 @@
 Read alongside:
 
 - [Existing concept summary](space-normal-summary.md)
-- [Existing implementation plan v2.1](space-normal-claude-code-plan.md)
+- [Existing implementation plan v2.1](PLAN.md)
 
 This document supplements those files. It does not replace their implementation plan or authorize a product pivot. In particular, **thermal/exercise monitoring was the assistant's latest recommendation; Petro has not explicitly selected it as the final MVP.**
 

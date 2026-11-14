@@ -15,6 +15,8 @@ make demo-synthetic   # synthetic missions -> model -> detectors -> web/public/c
 
 ## Dashboard
 
+Live: https://1hunder.github.io/nasa-space-apps-hackathon/ (deployed from `main` by `.github/workflows/deploy-pages.yml`).
+
 ```bash
 make demo-synthetic          # writes the JSON the dashboard reads
 cd web && npm install && npm run dev

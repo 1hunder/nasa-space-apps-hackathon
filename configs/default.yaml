@@ -1,0 +1,88 @@
+seed: 20261114
+
+mission:
+  pre_days: 13
+  in_days: 70
+  crew_size: 4
+  burn_in_days: 3
+
+model:
+  scale_prior_sd: 0.4
+  scale_bounds: [0.3, 2.0]
+  scale_fit_days: [4, 21]
+  exclude_abs_z: 2.0
+  min_baseline_days: 7
+  huber_c: 1.345
+  band_sigma: 2.0
+  room_temp_ref_c: 22.0
+
+detector:
+  k: 0.5
+  yellow: 3.0
+  red: 5.0
+  weights: {pulse: 0.6, temp_c: 0.25, resp_rate: 0.15}
+
+crew:
+  z_threshold: 1.5
+  min_run_days: 2
+  window_days: 4
+  min_crew: 2
+
+baselines:
+  rolling_windows: [14]
+  fixed_thresholds:
+    pulse: {high: 100, low: 45}
+    temp_c: {high: 38.0}
+    resp_rate: {high: 22}
+    sbp: {high: 150, low: 90}
+    dbp: {high: 95}
+
+# SYNTHETIC placeholder priors. Used by the synthetic fallback and, until P2 writes
+# data/processed/priors_bedrest.json, by the model. None of these numbers is a result.
+synthetic:
+  gap_rate: 0.02
+  scale_sd: 0.3
+  tau_log_sd: 0.25
+  noise_df: 5
+  illness: {pulse: 11.0, temp_c: 0.7, resp_rate: 2.5, sbp: 0.0, dbp: 0.0}
+  priors:
+    pulse:
+      base_mean: 64.0
+      base_sd: 6.0
+      noise_sd: 3.0
+      amp: 6.0
+      tau: 9.0
+      sigma_floor: 2.0
+      beta: {room_temp_c: 0.5, exercise: 2.0, schedule_shift: 6.0}
+    temp_c:
+      base_mean: 36.6
+      base_sd: 0.15
+      noise_sd: 0.18
+      amp: 0.1
+      tau: 20.0
+      sigma_floor: 0.15
+      beta: {room_temp_c: 0.03, exercise: 0.0, schedule_shift: 0.1}
+    resp_rate:
+      base_mean: 16.0
+      base_sd: 1.2
+      noise_sd: 1.3
+      amp: 0.0
+      tau: 10.0
+      sigma_floor: 1.0
+      beta: {room_temp_c: 0.0, exercise: 0.0, schedule_shift: 0.5}
+    sbp:
+      base_mean: 118.0
+      base_sd: 8.0
+      noise_sd: 6.0
+      amp: -4.0
+      tau: 7.0
+      sigma_floor: 3.0
+      beta: {room_temp_c: 0.0, exercise: -1.0, schedule_shift: 3.0}
+    dbp:
+      base_mean: 74.0
+      base_sd: 6.0
+      noise_sd: 5.0
+      amp: 2.0
+      tau: 10.0
+      sigma_floor: 3.0
+      beta: {room_temp_c: 0.0, exercise: 0.0, schedule_shift: 2.0}

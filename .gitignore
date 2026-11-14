@@ -7,3 +7,11 @@ __pycache__/
 .venv/
 dist/
 build/
+.pytest_cache/
+.hypothesis/
+*.egg-info/
+
+# Data is never committed; manifests record what was fetched.
+data/raw/
+data/processed/
+data/cache/

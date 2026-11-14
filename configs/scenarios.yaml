@@ -1,0 +1,23 @@
+# crew: index into the crew list. onset: in-bed day, or null for a random day after burn-in.
+real_null:
+  illness: []
+  shared_events: []
+
+transplant_single:
+  illness:
+    - {crew: 2, onset: 41}
+  shared_events:
+    - {type: schedule_shift, day: 24, duration: 3}
+
+transplant_outbreak:
+  illness:
+    - {crew: 0, onset: 38}
+    - {crew: 2, onset: 40}
+    - {crew: 3, onset: 42}
+  shared_events:
+    - {type: schedule_shift, day: 24, duration: 3}
+
+shared_event:
+  illness: []
+  shared_events:
+    - {type: schedule_shift, day: 30, duration: 3}

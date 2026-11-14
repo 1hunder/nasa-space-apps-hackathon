@@ -1,0 +1,19 @@
+# Splits approved 2026-11-14. Test sets are never used for priors, betas or thresholds.
+splits:
+  fit:
+    campaign_1: all
+    campaign_3_blocks: [C3A, C3C, C3D, C3E]
+  test_headline:
+    campaign: CFT70          # 3 subjects with public daily vitals; one crew of 3
+  test_power:
+    campaign_3_blocks: [C3G, C3H]   # 8 subjects; two crews of 4
+
+scoring:
+  hit_window: [-7, 3]          # red alert in [onset-7, onset+3]
+  false_alarm_exclusion_days: 21
+  crew_month_days: 30
+  bootstrap_reps: 2000
+  budget_red_per_crew_month: 1.0
+
+monte_carlo:
+  transplant_missions: 200

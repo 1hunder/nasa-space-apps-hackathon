@@ -10,6 +10,10 @@ For each person and vital:
   Huber-weighted MAP on in-bed days 4-21 only, excluding flagged days, frozen after.
 - Scoring is causal: day t is scored with the scale fitted on days before t.
 - sigma_t widens early on by the remaining uncertainty in s.
+- The 10-16 day baseline leaves a persistent error in each person's level. After the
+  burn-in a slow, gated update corrects it: days with |z| above the gate never update,
+  so an illness bump is not absorbed. The noise scale is tracked the same way and can
+  only widen relative to the baseline estimate.
 """
 
 from __future__ import annotations
@@ -39,6 +43,8 @@ class Decomposition:
     band_high: np.ndarray
     scale: np.ndarray
     sigma0: float
+    earth_low: np.ndarray
+    earth_high: np.ndarray
 
 
 def prior_curve(day: np.ndarray, prior: dict[str, Any]) -> np.ndarray:
@@ -98,27 +104,41 @@ def decompose_vital(
     fit_lo, fit_hi = mc["scale_fit_days"]
 
     n = len(days)
-    adaptation, sigma, scale = np.zeros(n), np.zeros(n), np.ones(n)
+    adaptation, sigma, scale, level = np.zeros(n), np.zeros(n), np.ones(n), np.zeros(n)
     eligible: list[int] = []
     s, post_sd = 1.0, mc["scale_prior_sd"]
+    lvl, var = 0.0, sigma0**2
+    a_level = 1 - 0.5 ** (1 / mc["level_halflife_days"])
+    a_var = 1 - 0.5 ** (1 / mc["var_halflife_days"])
+    burn_in = cfg["mission"]["burn_in_days"]
     for i in range(n):
         if days[i] <= fit_hi + 1:
             idx = np.array(eligible, dtype=int)
-            s, post_sd = _fit_scale(g[idx], r[idx], sigma0, mc["scale_prior_sd"], mc["huber_c"], mc["scale_bounds"])
-        scale[i] = s
+            s, post_sd = _fit_scale(g[idx], (r - level)[idx], sigma0, mc["scale_prior_sd"], mc["huber_c"], mc["scale_bounds"])
+        scale[i], level[i] = s, lvl
         adaptation[i] = s * g[i]
-        sigma[i] = np.sqrt(sigma0**2 + (post_sd * g[i]) ** 2)
-        z_i = (r[i] - adaptation[i]) / sigma[i]
-        if fit_lo <= days[i] <= fit_hi and np.isfinite(z_i) and abs(z_i) <= mc["exclude_abs_z"]:
+        sigma[i] = np.sqrt(max(sigma0**2, var) + (post_sd * g[i]) ** 2)
+        resid_i = r[i] - lvl - adaptation[i]
+        z_i = resid_i / sigma[i]
+        if not np.isfinite(z_i):
+            continue
+        if fit_lo <= days[i] <= fit_hi and abs(z_i) <= mc["exclude_abs_z"]:
             eligible.append(i)
+        if days[i] > burn_in:  # updates apply from the next day on: scoring stays causal
+            if abs(z_i) <= mc["level_gate_z"]:
+                lvl += a_level * resid_i
+            if abs(z_i) <= 3:
+                var += a_var * (resid_i**2 - var)
 
-    residual = r - adaptation
-    expected = baseline + adaptation + ev
+    residual = r - level - adaptation
+    expected = baseline + level + adaptation + ev
     return Decomposition(
-        days=days, y=y, baseline=np.full(n, baseline), adaptation=adaptation, events=ev,
+        days=days, y=y, baseline=baseline + level, adaptation=adaptation, events=ev,
         residual=residual, z=residual / sigma, sigma=sigma,
         band_low=expected - mc["band_sigma"] * sigma, band_high=expected + mc["band_sigma"] * sigma,
         scale=scale, sigma0=sigma0,
+        earth_low=np.full(n, baseline - mc["band_sigma"] * sigma0),
+        earth_high=np.full(n, baseline + mc["band_sigma"] * sigma0),
     )
 
 

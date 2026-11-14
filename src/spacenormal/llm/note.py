@@ -7,6 +7,7 @@ must pass `verify_numbers` or the raw template is sent instead.
 from __future__ import annotations
 
 import json
+import math
 import re
 from typing import Any
 
@@ -22,7 +23,12 @@ _NUMBER = re.compile(r"(?<![A-Za-z\d.])[-+]?\d+(?:\.\d+)?")
 
 
 def _fmt(x: float, signed: bool = False) -> str:
-    return f"{x:+.1f}" if signed else f"{x:.1f}"
+    """One decimal, rounding half up on the 3-decimal value the dashboard also receives.
+    web/src/labels.ts uses the same rule, so the note and the panel never disagree."""
+    x = round(x, 3)
+    mag = math.floor(abs(x) * 10 + 0.5 + 1e-9) / 10
+    sign = "-" if x < 0 and mag > 0 else ("+" if signed else "")
+    return f"{sign}{mag:.1f}"
 
 
 def verify_numbers(text: str, allowed: set[str]) -> bool:

@@ -3,7 +3,7 @@
 Crew health monitoring that knows how a body under microgravity is *expected* to change, and alarms only on what is left over after removing the personal baseline, the expected adaptation for that day, and the effects of logged events. NASA Space Apps hackathon prototype.
 
 - Spec: [`PLAN.md`](PLAN.md) · Summary: [`space-normal-summary.md`](space-normal-summary.md)
-- **Status:** P0 (scaffold + synthetic fallback). No real data is loaded yet; every output so far is labelled `SYNTHETIC` and is not a result.
+- **Status:** pipeline, NASA bed rest loader and demo dashboard work. The dashboard replays synthetic missions; every output so far is labelled `SYNTHETIC` and is not a result.
 
 ## Run
 
@@ -12,6 +12,20 @@ make setup            # Python 3.11 venv via uv, installs the package
 make test             # pytest + hypothesis
 make demo-synthetic   # synthetic missions -> model -> detectors -> web/public/cache/*.json, then validates them
 ```
+
+## Dashboard
+
+```bash
+make demo-synthetic          # writes the JSON the dashboard reads
+cd web && npm install && npm run dev
+```
+
+Open the printed URL and press space. One replay takes about 15 seconds: core temperature drifts out of the flat "Earth normal" band while the Earth-calibrated monitor collects false alarms, stays inside the moving Space-Normal range, then leaves it when illness starts. Readings are hourly; ranges and monitors work on daily means. The size of each drift follows published spaceflight findings (`docs/data_notes.md`, section 5).
+
+- The default view shows only the chart, the two monitors and the crew list. "Show details" (or D) adds the other two monitors and the per-day breakdown; the alert card expands to the flight-surgeon note.
+- Keys: space play/pause, R restart, D details, arrow keys step one day, 1–4 switch scenario. Drag on the chart to scrub.
+- `?scenario=transplant_outbreak&day=40` opens a specific moment.
+- The four cached missions are synthetic, with seeds picked by hand for a clean replay (`configs/scenarios.yaml`). They illustrate the idea; they are not results.
 
 ## Layout
 

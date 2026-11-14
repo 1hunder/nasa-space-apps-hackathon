@@ -11,6 +11,7 @@ from spacenormal.data.schema import VITALS
 Provenance = Literal["REAL_BEDREST", "REAL_EARTH_ILLNESS", "SYNTHETIC"]
 State = Literal["expected", "event", "unexplained", "crew", "not_monitored"]
 Level = Literal["yellow", "red"]
+Truth = Literal["hit", "false_alarm", "near_episode"]
 DETECTORS: tuple[str, ...] = ("fixed_thresholds", "frozen_baseline", "rolling_14", "space_normal")
 
 
@@ -19,7 +20,8 @@ class _Strict(BaseModel):
 
 
 class VitalSeries(_Strict):
-    y: list[float | None]          # null = no measurement that day
+    y: list[float | None]          # daily mean; null = no measurement that day
+    y_hourly: list[float | None]   # samples_per_day readings per day, time-of-day pattern removed
     baseline: list[float]
     adaptation: list[float]
     events: list[float]
@@ -27,6 +29,8 @@ class VitalSeries(_Strict):
     z: list[float | None]
     band_low: list[float]
     band_high: list[float]
+    earth_low: list[float]         # fixed band around the pre-mission baseline
+    earth_high: list[float]
 
 
 class SystemsDay(_Strict):
@@ -39,6 +43,7 @@ class SystemsDay(_Strict):
 
 class CrewMember(_Strict):
     id: str
+    name: str                      # display name; equals id when none is given
     group: str
     vitals: dict[str, VitalSeries]
     systems: list[SystemsDay]
@@ -52,12 +57,19 @@ class Alert(_Strict):
     level: Level
     vital: str
     z: float
+    truth: Truth                   # scored against known episodes; false_alarm when there are none nearby
 
 
 class MissionEvent(_Strict):
     day: int
     type: str
     crew_ids: list[str]
+
+
+class Episode(_Strict):
+    crew_id: str
+    onset_day: int
+    provenance: Provenance
 
 
 class CrewAlert(_Strict):
@@ -89,11 +101,13 @@ class Mission(_Strict):
     mission_id: str
     scenario: str
     days: list[int]
+    samples_per_day: int           # length of y_hourly = len(days) * samples_per_day
     provenance: MissionProvenance
     crew: list[CrewMember]
     events: list[MissionEvent]
     alerts: list[Alert]
     crew_alerts: list[CrewAlert]
+    episodes: list[Episode]
     notes: dict[str, Note]
 
     @model_validator(mode="after")
@@ -109,6 +123,10 @@ class Mission(_Strict):
                 raise ValueError(f"{member.id}: vitals must be exactly {VITALS}")
             for name, series in member.vitals.items():
                 for field, values in series:
+                    if field == "y_hourly":
+                        if len(values) != n * self.samples_per_day:
+                            raise ValueError(f"{member.id}.{name}.y_hourly: wrong length")
+                        continue
                     if len(values) != n:
                         raise ValueError(f"{member.id}.{name}.{field}: length {len(values)} != {n} days")
             if [s.day for s in member.systems] != self.days:
@@ -130,6 +148,9 @@ class Mission(_Strict):
         for ca in self.crew_alerts:
             if not set(ca.crew_ids) <= crew_ids or len(ca.crew_ids) != len(ca.onsets):
                 raise ValueError(f"crew alert on day {ca.day} is inconsistent")
+        for ep in self.episodes:
+            if ep.crew_id not in crew_ids:
+                raise ValueError(f"episode refers to unknown crew member {ep.crew_id}")
         if not set(self.notes) <= alert_ids:
             raise ValueError("notes must be keyed by existing alert ids")
         return self

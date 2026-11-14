@@ -76,19 +76,18 @@ Reading of the fit-set entries:
 
 **Consequence:** the logs give real, dated symptom events, enough for Track D case studies. They do not give confirmed illness labels, so sensitivity still has to come from transplanted signatures.
 
-## 3. Stanford COVID-19 wearables (illness signatures) — not downloaded yet
+## 3. Stanford COVID-19 wearables (illness signatures)
 
-| | Phase 1 | Phase 2 |
-|---|---|---|
-| Archive | `https://storage.googleapis.com/gbsc-gcp-project-ipop_public/COVID-19/COVID-19-Wearables.zip` | `https://storage.googleapis.com/gbsc-gcp-project-ipop_public/COVID-19-Phase2/COVID-19-Phase2-Wearables.zip` |
-| Size | 378 MB (3.6 GB unpacked) | 5.5 GB (36 GB unpacked) |
-| Participants | 117 with heart rate and steps, 32 with sleep | 2,123 |
-| Unpack into | `data/raw/stanford_p1/` | `data/raw/stanford_p2/` |
+**Phase 1 — downloaded 2026-11-14.**
 
-- Both URLs respond publicly; the file layouts were read from the archive directory and the first lines of one file per type. Nothing else was downloaded.
+- Archive: `https://storage.googleapis.com/gbsc-gcp-project-ipop_public/COVID-19/COVID-19-Wearables.zip` (378 MB, SHA-256 `52ca976e…e380f4`), unpacked into `data/raw/stanford_p1/`. Public, no terms.
+- 117 participants with minute-level heart rate and steps; 32 also have sleep.
+- Labels: Mishra et al. 2020 (Nat Biomed Eng, doi 10.1038/s41551-020-00640-6), Supplementary Table 3, saved as `mishra2020_MOESM3.xlsx`. `scripts/build_stanford_labels.py` turns it into `labels.csv`: 30 COVID-19 episodes (30 participants) and 17 other-illness episodes, all with files in the archive.
 - Dates are shifted per participant, so only day offsets are usable.
-- **Symptom-onset dates are not in the archives.** They are in the papers' supplementary tables (Mishra et al. 2020, Nat Biomed Eng; Alavi et al. 2022, Nat Med). Save them as `labels.csv` beside the data with columns `participant_id, symptom_onset_date`.
-- Loader: `src/spacenormal/data/stanford.py` (night resting HR = mean HR 00:00–06:00 on zero-step minutes). Tested on hand-written files in the real layouts only.
+- Loader: `src/spacenormal/data/stanford.py`. Night resting HR = mean HR 00:00–06:00 on zero-step minutes, at least 30 such minutes per night.
+- **Usable episodes:** requiring at least 14 of the 28 baseline nights (days −42 to −15) and at least 25 of the 36 nights in the signature window (days −14 to +21) leaves 19 COVID-19 and 5 other-illness episodes. The thresholds are a first choice, to be fixed in P2 before any tuning.
+
+**Phase 2 — not downloaded.** `https://storage.googleapis.com/gbsc-gcp-project-ipop_public/COVID-19-Phase2/COVID-19-Phase2-Wearables.zip` is 5.5 GB (36 GB unpacked, 2,123 participants). Its labels are in the supplementary tables of Alavi et al. 2022 (Nat Med) and have not been located yet. The loader handles its layout but has only been tested on hand-written files.
 
 ## 4. What this changes for later phases
 
@@ -99,3 +98,27 @@ Reading of the fit-set entries:
 5. **Treatment arms for Campaign 3 blocks** are not in the vitals files and are not yet identified.
 6. **Baselines are short** (10–16 pre days, 21 for two CFT70 subjects), and the pre phase is ambulatory while the in-bed phase is tilted. The first in-bed days mix a posture change with adaptation.
 7. **Track D** is feasible as case studies on logged symptoms; there are no confirmed infections.
+
+## 5. How big the expected shifts are
+
+Checked on 2026-11-14 to size the synthetic demo, after the first mock used a pulse drift of +10 to +12 bpm.
+
+**NASA bed rest, our 18 fit subjects** (change from each person's pre-bed-rest median; morning spot readings):
+
+| Vital | Days 4–10 | Days 11–21 | Days 22–40 | Days 41–60 | Day-to-day SD in bed |
+|---|---|---|---|---|---|
+| Pulse, bpm | +0.25 | +0.75 | +4.25 | +4.5 (IQR −1.3 to +7.9) | 4.5 |
+| Body temperature, °C (15 subjects) | 0.00 | +0.05 | 0.00 | +0.10 | 0.15 |
+| Respiratory rate, /min | 0 | 0 | 0 | 0 | readings are whole numbers; no measurable spread |
+| Systolic BP, mmHg | +0.5 | +0.75 | +0.25 | +2.0 | 5.4 |
+| Diastolic BP, mmHg | +0.25 | +2.0 | +2.25 | +3.0 | 4.5 |
+
+Values are medians across subjects. The pulse shift is under one day-to-day SD, and individuals range from −5 to +13.5 bpm at days 41–60.
+
+**Published spaceflight findings:**
+
+- Resting core temperature rises by about 1 °C, gradually over 2.5 months, reaching roughly 38 °C (Stahn et al. 2017, Sci Rep 7:16180, 11 astronauts, forehead heat-flux sensor).
+- 24-hour ambulatory blood pressure falls by 8–10 mmHg; heart rate does not change (Norsk et al. 2015, J Physiol 593:573, 8 astronauts, 85–192 days on the ISS).
+- Bed rest and flight differ: bed rest raises resting pulse and barely moves temperature, flight leaves pulse alone and raises temperature.
+
+**What the mock now uses** (`configs/default.yaml`, flight-like): core temperature +1.0 °C with a 25-day time constant, systolic −8 and diastolic −9 mmHg, pulse +4 bpm (the bed rest figure, as an upper bound for flight), respiratory rate unchanged. The time courses for blood pressure and the person-to-person spread are assumptions.

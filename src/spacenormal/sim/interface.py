@@ -58,6 +58,10 @@ class Mission:
     episodes: pd.DataFrame
     provenance: dict[str, str]
     truth: pd.DataFrame | None = field(default=None, repr=False)
+    names: dict[str, str] = field(default_factory=dict)  # crew id -> display name (optional)
+    # Optional finer-grained readings behind `daily`: subject_id, study_day, hour, <vitals>,
+    # with each person's time-of-day pattern already removed. `daily` holds their daily means.
+    hourly: pd.DataFrame | None = field(default=None, repr=False)
 
 
 class MissionBuilder(Protocol):

@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 from spacenormal import baselines, contract
-from spacenormal.config import load_config
+from spacenormal.config import load_config, load_eval_config
 from spacenormal.data.schema import VITALS
 from spacenormal.detect import crew as crew_layer
 from spacenormal.detect.cusum import LEVEL_NAMES, RED, combine_z, cusum, levels, upcrossings
@@ -138,7 +138,7 @@ def run_pipeline(mission: Mission, cfg: dict[str, Any] | None = None,
             i = int(np.where(days == a["day"])[0][0])
             d = dec[a["vital"]]
             numbers = {k: float(getattr(d, k)[i]) for k in ("y", "baseline", "adaptation", "events", "residual", "z")}
-            notes[a["id"]] = build_note(cid, a["day"], a["vital"], numbers, _context_items(ev, a["day"]))
+            notes[a["id"]] = build_note(mission.names.get(cid, cid), a["day"], a["vital"], numbers, _context_items(ev, a["day"]))
 
     assert days is not None
     in_events = mission.events[mission.events["study_day"] >= 1]
@@ -152,27 +152,55 @@ def run_pipeline(mission: Mission, cfg: dict[str, Any] | None = None,
         for cid, onset in zip(ca["crew_ids"], ca["onsets"]):
             crew_days[cid].update(range(onset, ca["day"] + 6))
 
+    spd = 1
+    if mission.hourly is not None:
+        spd = int(mission.hourly.groupby(["subject_id", "study_day"]).size().iloc[0])
+
+    def hourly_series(cid: str, vital: str, daily_y: np.ndarray) -> list[float | None]:
+        if mission.hourly is None:
+            return _series(daily_y, True)
+        h = mission.hourly[(mission.hourly["subject_id"] == cid) & (mission.hourly["study_day"] >= 1)]
+        return _series(h.sort_values(["study_day", "hour"])[vital].to_numpy(dtype=float), True)
+
     crew = []
     for cid in mission.crew:
         dec = decs[cid]
         group = mission.daily.loc[mission.daily["subject_id"] == cid, "group"].iloc[0]
         crew.append({
-            "id": cid, "group": group,
+            "id": cid, "name": mission.names.get(cid, cid), "group": group,
             "vitals": {
                 v: {
-                    "y": _series(d.y, True), "baseline": _series(d.baseline),
+                    "y": _series(d.y, True), "y_hourly": hourly_series(cid, v, d.y),
+                    "baseline": _series(d.baseline),
                     "adaptation": _series(d.adaptation), "events": _series(d.events),
                     "residual": _series(d.residual, True), "z": _series(d.z, True),
                     "band_low": _series(d.band_low), "band_high": _series(d.band_high),
+                    "earth_low": _series(d.earth_low), "earth_high": _series(d.earth_high),
                 } for v, d in dec.items()
             },
             "systems": _system_states(dec, sn_levels[cid] == RED, crew_days[cid], days),
         })
 
+    lo, hi = load_eval_config()["scoring"]["hit_window"]
+    far = load_eval_config()["scoring"]["false_alarm_exclusion_days"]
+    onsets: dict[str, list[int]] = {}
+    for ep in mission.episodes.itertuples():
+        onsets.setdefault(ep.subject_id, []).append(int(ep.onset_day))
+    for a in alerts:
+        offsets = [a["day"] - o for o in onsets.get(a["crew_id"], [])]
+        if any(lo <= off <= hi for off in offsets):
+            a["truth"] = "hit"
+        elif all(abs(off) > far for off in offsets):
+            a["truth"] = "false_alarm"
+        else:
+            a["truth"] = "near_episode"
+    episodes = [{"crew_id": ep.subject_id, "onset_day": int(ep.onset_day), "provenance": ep.source}
+                for ep in mission.episodes.itertuples()]
+
     return contract.Mission.model_validate({
         "mission_id": mission.mission_id, "scenario": mission.scenario,
-        "days": [int(d) for d in days], "provenance": mission.provenance,
+        "days": [int(d) for d in days], "samples_per_day": spd, "provenance": mission.provenance,
         "crew": crew, "events": events,
         "alerts": sorted(alerts, key=lambda a: (a["day"], a["detector"], a["crew_id"])),
-        "crew_alerts": crew_alerts, "notes": notes,
+        "crew_alerts": crew_alerts, "episodes": episodes, "notes": notes,
     })

@@ -8,8 +8,8 @@ Only the synthetic fallback exists so far; real-data caches arrive with P5.
 from __future__ import annotations
 
 import argparse
+import copy
 import json
-import zlib
 from collections import Counter
 from pathlib import Path
 
@@ -30,15 +30,18 @@ def main() -> None:
     if not args.synthetic:
         raise SystemExit("Only --synthetic is available until real data is loaded (P1) and evaluated (P5).")
 
-    cfg = load_config()
+    cfg = copy.deepcopy(load_config())
+    cfg["synthetic"]["gap_rate"] = 0.0  # the replay shows every day; missing readings are covered by the tests
     crew = [f"C{i + 1}" for i in range(cfg["mission"]["crew_size"])]
     args.out.mkdir(parents=True, exist_ok=True)
 
     index, rows = [], []
     for name, spec in load_scenarios().items():
         scenario = Scenario.from_dict(name, spec)
-        rng = np.random.default_rng([cfg["seed"], zlib.crc32(name.encode())])
-        mission = run_pipeline(synthetic.make_mission(crew, scenario, rng, cfg), cfg)
+        rng = np.random.default_rng(spec["demo_seed"])
+        raw = synthetic.make_mission(crew, scenario, rng, cfg)
+        raw.names = dict(zip(crew, cfg["mission"]["crew_names"]))
+        mission = run_pipeline(raw, cfg)
         file = f"mission_{mission.mission_id}.json"
         (args.out / file).write_text(mission.model_dump_json(), encoding="utf-8")
         index.append({"file": file, "mission_id": mission.mission_id, "scenario": mission.scenario,
@@ -48,7 +51,7 @@ def main() -> None:
 
     (args.out / "missions.json").write_text(json.dumps({"missions": index}, indent=2), encoding="utf-8")
 
-    print("SYNTHETIC — pipeline smoke test, not a result. Red alerts per detector, one mission each:")
+    print("SYNTHETIC — illustrative missions with hand-picked seeds, not a result. Red alerts per detector:")
     print(f"{'scenario':<22}" + "".join(f"{d:>18}" for d in DETECTORS) + f"{'crew alerts':>13}{'notes':>7}")
     for name, counts, n_crew, n_notes in rows:
         print(f"{name:<22}" + "".join(f"{c:>18}" for c in counts) + f"{n_crew:>13}{n_notes:>7}")

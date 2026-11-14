@@ -11,7 +11,7 @@ from typing import Any, Sequence
 import numpy as np
 import pandas as pd
 
-from spacenormal.config import load_config
+from spacenormal.config import load_config, load_journal
 from spacenormal.data.schema import (
     DAILY_COLUMNS, EPISODES_COLUMNS, EVENTS_COLUMNS, VITALS,
     validate_daily, validate_episodes, validate_events,
@@ -148,6 +148,22 @@ def make_mission(
         if idx in onsets:
             episode_rows.append((sid, onsets[idx], "synthetic_illness", "synthetic", SOURCE))
 
+    # Journal entries are drawn last so they never change the simulated vitals.
+    jr = load_journal()
+    journal: list[dict] = []
+    for ev in scenario.shared_events:
+        journal.append({"day": ev.day, "hour": 8, "crew_ids": list(crew), "accounted": True, **jr[ev.type]})
+    # Each crew member gets their own shuffled run through the entries, so nobody repeats themselves.
+    per_person = {c: list(rng.permutation(len(jr["personal"]))) for c in crew}
+    for who in rng.choice(list(crew), size=jr["personal_entries_per_mission"]):
+        k = per_person[who].pop()
+        journal.append({"day": int(rng.integers(2, m["in_days"])), "hour": int(rng.integers(7, 23)),
+                        "crew_ids": [str(who)], "accounted": False, **jr["personal"][int(k)]})
+    for entry in jr["shared"]:
+        journal.append({"day": int(rng.integers(5, m["in_days"] - 3)), "hour": int(rng.integers(9, 18)),
+                        "crew_ids": list(crew), "accounted": False, **entry})
+    journal = [{**j, "reader": "mock"} for j in sorted(journal, key=lambda j: (j["day"], j["hour"]))]
+
     daily = pd.concat(daily_rows, ignore_index=True)[list(DAILY_COLUMNS)]
     events = pd.DataFrame(event_rows, columns=list(EVENTS_COLUMNS))
     episodes = pd.DataFrame(episode_rows, columns=list(EPISODES_COLUMNS))
@@ -169,4 +185,5 @@ def make_mission(
         },
         truth=truth,
         hourly=pd.concat(hourly_rows, ignore_index=True),
+        journal=journal,
     )

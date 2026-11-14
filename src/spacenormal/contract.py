@@ -72,6 +72,17 @@ class Episode(_Strict):
     provenance: Provenance
 
 
+class JournalEntry(_Strict):
+    day: int
+    hour: int
+    crew_ids: list[str]
+    text: str                      # the crew's own words
+    category: str
+    effect: str                    # the reader's interpretation
+    accounted: bool                # True when the model already treats it as a logged event
+    reader: Literal["mock", "llm"]
+
+
 class CrewAlert(_Strict):
     day: int
     crew_ids: list[str]
@@ -108,6 +119,7 @@ class Mission(_Strict):
     alerts: list[Alert]
     crew_alerts: list[CrewAlert]
     episodes: list[Episode]
+    journal: list[JournalEntry]
     notes: dict[str, Note]
 
     @model_validator(mode="after")
@@ -148,6 +160,9 @@ class Mission(_Strict):
         for ca in self.crew_alerts:
             if not set(ca.crew_ids) <= crew_ids or len(ca.crew_ids) != len(ca.onsets):
                 raise ValueError(f"crew alert on day {ca.day} is inconsistent")
+        for j in self.journal:
+            if not set(j.crew_ids) <= crew_ids or j.day not in day_set or not 0 <= j.hour <= 23:
+                raise ValueError(f"journal entry on day {j.day} is inconsistent")
         for ep in self.episodes:
             if ep.crew_id not in crew_ids:
                 raise ValueError(f"episode refers to unknown crew member {ep.crew_id}")

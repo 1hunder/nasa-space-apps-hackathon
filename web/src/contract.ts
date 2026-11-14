@@ -69,6 +69,19 @@ export interface Episode {
   provenance: Provenance;
 }
 
+/** A free-text crew journal entry and how the assistant read it. Context only, never a detector input. */
+export interface JournalEntry {
+  day: number;
+  hour: number;
+  crew_ids: string[];
+  text: string;
+  category: string;
+  effect: string;
+  /** True when the model already treats it as a logged event. */
+  accounted: boolean;
+  reader: "mock" | "llm";
+}
+
 export interface CrewAlert {
   day: number;
   crew_ids: string[];
@@ -102,6 +115,7 @@ export interface Mission {
   crew_alerts: CrewAlert[];
   /** Known illness onsets (planted in synthetic and transplant scenarios). */
   episodes: Episode[];
+  journal: JournalEntry[];
   /** Keyed by Alert.id. Present for Space-Normal red alerts. */
   notes: Record<string, Note>;
 }

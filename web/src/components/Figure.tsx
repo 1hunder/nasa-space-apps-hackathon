@@ -1,6 +1,6 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { DETECTORS, type CrewMember, type Detector, type Mission, type Vital } from "../contract";
-import { DETECTOR_LABEL, EVENT_LABEL, VITAL_LABEL } from "../labels";
+import { DETECTOR_LABEL, DIGITS, EVENT_LABEL, VITAL_LABEL, fixed, signed } from "../labels";
 
 interface Props {
   mission: Mission;
@@ -58,11 +58,20 @@ function areaRuns(n: number, keep: (i: number) => boolean, upper: (i: number) =>
 
 export function Figure({ mission, member, vital, day, dayIndex, detail, reserve, onScrub }: Props) {
   const [ref, width] = useWidth();
+  const [picked, setPicked] = useState<number | null>(null); // index of the day whose point was clicked
+  const press = useRef<{ x: number; dragged: boolean } | null>(null);
+  const [note, setNote] = useState<number | null>(null); // index into the visible journal entries
+  useEffect(() => { setPicked(null); setNote(null); }, [mission, member.id, vital]);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { setPicked(null); setNote(null); } };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
   const s = member.vitals[vital];
   const days = mission.days;
   const n = days.length;
   // The chart takes the height the window can spare; detail rows trade some of it away.
-  const spare = Math.max(380, Math.min(640, window.innerHeight - 340 - reserve));
+  const spare = Math.max(380, Math.min(640, window.innerHeight - 384 - reserve));
   const chartBottom = detail ? Math.max(260, spare - 190) : spare;
   const plotW = Math.max(240, width - GUTTER_L - GUTTER_R);
   const right = GUTTER_L + plotW;
@@ -131,7 +140,13 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const firstMajor = majors[0];
 
   // Optional detail rows.
-  const decompTitle = chartBottom + 40;
+  // Crew journal: free-text entries for this crew member (and whole-crew ones), revealed as days pass.
+  const journalTitle = chartBottom + 40;
+  const journalY = journalTitle + 17;
+  const entries = mission.journal.filter((j) => j.crew_ids.includes(member.id) && j.day <= dayNow);
+  const entryX = (j: { day: number; hour: number }) => x(Math.max(days[0], j.day - 0.5 + (j.hour + 0.5) / 24));
+
+  const decompTitle = journalY + 38;
   const decompTop = decompTitle + 10;
   const dMax = useMemo(() => {
     let up = 1e-9, down = 1e-9;
@@ -146,16 +161,47 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const zeroY = decompTop + dMax.up * dScale;
 
   const lanes = detail ? [...DETECTORS] : SIMPLE_LANES;
-  const lanesTop = detail ? decompTop + DECOMP_H + 14 : chartBottom + 30;
+  const lanesTop = detail ? decompTop + DECOMP_H + 14 : journalY + 18;
   const axisY = lanesTop + lanes.length * LANE_H + 4;
   const height = axisY + 26;
   const reds = mission.alerts.filter((a) => a.level === "red");
   const knownIllness = mission.episodes.filter((e) => e.onset_day <= dayNow + 3).length;
 
-  const scrub = (e: React.PointerEvent<SVGRectElement>) => {
+  const dayAt = (e: React.PointerEvent<SVGRectElement>) => {
     const box = e.currentTarget.getBoundingClientRect();
-    onScrub(days[0] + ((e.clientX - box.left) / box.width) * (days[n - 1] - days[0]));
+    return days[0] + ((e.clientX - box.left) / box.width) * (days[n - 1] - days[0]);
   };
+  // A click picks the nearest revealed point; a drag scrubs the replay.
+  const onDown = (e: React.PointerEvent<SVGRectElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    press.current = { x: e.clientX, dragged: false };
+  };
+  const onMove = (e: React.PointerEvent<SVGRectElement>) => {
+    if (!press.current || !e.buttons) return;
+    if (Math.abs(e.clientX - press.current.x) > 4) press.current.dragged = true;
+    if (press.current.dragged) { setPicked(null); setNote(null); onScrub(dayAt(e)); }
+  };
+  const onUp = (e: React.PointerEvent<SVGRectElement>) => {
+    const wasDrag = press.current?.dragged;
+    press.current = null;
+    if (wasDrag) return;
+    const box = e.currentTarget.getBoundingClientRect();
+    const localY = e.clientY - box.top + CHART_TOP;
+    if (Math.abs(localY - journalY) <= 13) {
+      // A click on the journal row opens the nearest entry.
+      const px = e.clientX - box.left + GUTTER_L;
+      let best = -1, dist = 14;
+      entries.forEach((j, k) => { const d = Math.abs(entryX(j) - px); if (d < dist) { best = k; dist = d; } });
+      setPicked(null);
+      setNote(best >= 0 && best !== note ? best : null);
+      return;
+    }
+    setNote(null);
+    const i = Math.round(dayAt(e)) - days[0];
+    setPicked(i >= 0 && i <= dayIndex && s.y[i] !== null && i !== picked ? i : null);
+  };
+  const tip = picked !== null && picked <= dayIndex && s.y[picked] !== null ? picked : null;
+  const dg = DIGITS[vital];
 
   return (
     <div ref={ref} className="figure">
@@ -193,7 +239,9 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
           {days.map((d, i) => {
             const v = s.y[i];
             if (v === null) return null;
-            const unexplained = (s.z[i] ?? 0) > 2 && v > s.band_high[i] && d > 3;
+            // One noisy day is not a finding: mark a reading only if it stays high for two days, or is far out.
+            const high = (j: number) => (s.z[j] ?? 0) > 2;
+            const unexplained = d > 3 && high(i) && v > s.band_high[i] && (high(i - 1) || high(i + 1) || (s.z[i] ?? 0) > 3);
             return <circle key={d} cx={x(d)} cy={y(v)} r={unexplained ? 5 : 2.6} className={unexplained ? "dot dot-red" : "dot"} />;
           })}
         </g>
@@ -223,6 +271,20 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
             <text x={-14} y={12} className="alert-text" textAnchor="end">Space-Normal alert, day {a.day}</text>
           </g>
         ))}
+
+        {/* crew journal */}
+        <text x={GUTTER_L} y={journalTitle} className="row-title">
+          Crew journal
+          <tspan className="lane-how" dx="10">free text, read by the assistant</tspan>
+        </text>
+        <line x1={GUTTER_L} x2={right} y1={journalY} y2={journalY} className="lane-line" />
+        {entries.map((j, k) => (
+          <rect key={k} x={entryX(j) - 6} y={journalY - 6} width={12} height={12} rx={j.crew_ids.length > 1 ? 2.5 : 6}
+            className={`entry ${j.accounted ? "entry-accounted" : ""} ${k === note ? "entry-open" : ""}`} />
+        ))}
+        <text x={right + 16} y={journalY + 5} className="lane-how">
+          {entries.length} {entries.length === 1 ? "entry" : "entries"} so far
+        </text>
 
         {detail && (
           <g>
@@ -295,10 +357,47 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
         ))}
         <text x={right + 16} y={axisY + 18} className="tick">mission day</text>
         <line x1={playX} x2={playX} y1={CHART_TOP - 4} y2={axisY} className="playhead" />
-        <rect x={GUTTER_L} y={CHART_TOP} width={plotW} height={height - CHART_TOP} fill="transparent" style={{ cursor: "ew-resize" }}
-          onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); scrub(e); }}
-          onPointerMove={(e) => { if (e.buttons) scrub(e); }} />
+        {tip !== null && <circle cx={x(days[tip])} cy={y(s.y[tip] as number)} r={8.5} className="picked" />}
+        <rect x={GUTTER_L} y={CHART_TOP} width={plotW} height={height - CHART_TOP} fill="transparent" style={{ cursor: "pointer" }}
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} />
       </svg>
+      {note !== null && entries[note] && (() => {
+        const j = entries[note];
+        return (
+          <div className="tip tip-journal" role="dialog" aria-label={`Journal entry, day ${j.day}`}
+            style={{ left: Math.min(Math.max(entryX(j), 150), width - 150), top: journalY - 8 }}>
+            <p className="tip-day">
+              Day {j.day}, {String(j.hour).padStart(2, "0")}:00, {j.crew_ids.length > 1 ? "whole crew" : member.name}
+            </p>
+            <p className="tip-quote">“{j.text}”</p>
+            <p className="tip-read">Assistant's reading: {j.category}</p>
+            <p className={j.accounted ? "tip-effect accounted" : "tip-effect"}>{j.effect}</p>
+          </div>
+        );
+      })()}
+      {tip !== null && (() => {
+        const v = s.y[tip] as number;
+        const z = s.z[tip] ?? 0;
+        const verdict = v > s.band_high[tip] ? "Above the expected range" : v < s.band_low[tip] ? "Below the expected range" : "Inside the expected range";
+        const outsideEarth = v > s.earth_high[tip] || v < s.earth_low[tip];
+        const px = x(days[tip]), py = y(v);
+        return (
+          <div className={`tip ${py < 190 ? "tip-below" : ""}`} role="dialog" aria-label={`Day ${days[tip]} reading`}
+            style={{ left: Math.min(Math.max(px, 118), width - 118), top: py }}>
+            <p className="tip-day">Day {days[tip]}</p>
+            <p className="tip-value">{fixed(v, dg)} <small>{VITAL_LABEL[vital].unit}</small></p>
+            <dl>
+              <dt>Earth baseline</dt><dd>{fixed(s.baseline[tip], dg)}</dd>
+              <dt className="t-adapt">Expected adaptation</dt><dd>{signed(s.adaptation[tip], dg)}</dd>
+              <dt className="t-event">Logged events</dt><dd>{signed(s.events[tip], dg)}</dd>
+              <dt className={z > 2 ? "t-unexplained" : "t-noise"}>{z > 2 ? "Unexplained" : "Day-to-day variation"}</dt>
+              <dd>{signed(s.residual[tip] ?? 0, dg)}</dd>
+            </dl>
+            <p className={`tip-verdict ${v > s.band_high[tip] ? "bad" : ""}`}>{verdict}</p>
+            {outsideEarth && <p className="tip-earth">Outside Earth normal</p>}
+          </div>
+        );
+      })()}
     </div>
   );
 }

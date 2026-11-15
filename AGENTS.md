@@ -29,7 +29,7 @@ Uwaga: [`PLAN.md`](PLAN.md) to specyfikacja sprzed researchu. Gdzie przeczy [`do
 | Zadanie | Czytaj |
 |---|---|
 | Kod: pipeline, model, detektory, ewaluacja | [`PLAN.md`](PLAN.md) (specyfikacja, EN) + **delta** w [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §4 + [`docs/data_notes.md`](docs/data_notes.md) |
-| Kod: dashboard / UI (`web/`) | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
+| Kod: dashboard / UI (`web/`) | [`ZADANIA-VIKTOR-DASHBOARD.md`](ZADANIA-VIKTOR-DASHBOARD.md) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
 | Deploy | [`README.md`](README.md) (uruchomienie) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §5 |
 | Design ekranu, film 30 s | [`ZADANIA-ALEX-DESIGN.md`](ZADANIA-ALEX-DESIGN.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §1 |
 | Co robić teraz / stan faz P0–P8 | [`docs/05-stan-prac.md`](docs/05-stan-prac.md) |
@@ -72,7 +72,7 @@ W notatkach research każde twierdzenie ma tag ([FAKT]/[CZĘŚCIOWE]/[BRAK] albo
    - „jesteśmy dokładniejsi niż CMO-DA”.
 5. **Wydzielony test** (CFT70, Campaign 3 G/H) nigdy nie służy do strojenia. Loader blokuje go, dopóki w `docs/claims.md` nie ma hasha konfiguracji. Nie obchodź tej blokady.
 6. **LLM nie decyduje o alarmie.** Może tylko sformułować tekst. Nie może alarmu wywołać, opóźnić ani obniżyć.
-7. **Bez logo NASA** i bez stylizacji na oficjalny produkt NASA. Bez prawdziwych osób w materiałach AI.
+7. **Bez logo NASA** i bez stylizacji na oficjalny produkt NASA. Bez prawdziwych osób w materiałach generowanych przez AI (wideo, obrazy, głos). Wyjątek: imiona członków zespołu jako załoga w demo dashboardu — decyzja Petra z 2026-11-15.
 8. **Każde zewnętrzne źródło, narzędzie i asset** (w tym narzędzia AI) dopisz do listy References.
 
 ## 6. Kod i polecenia

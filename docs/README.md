@@ -13,6 +13,7 @@ Kolejność czytania dla nowej osoby: **00 → 05 → 01 → 02 → 03 → 04**.
 | [`05-stan-prac.md`](05-stan-prac.md) | Co działa, czego brakuje, następne zadania z ownerami, plan B | wszyscy | **aktualizowany na bieżąco** |
 | [`claims.md`](claims.md) | Wyniki do cytowania (generuje pipeline w P5); dziś stub | wszyscy | stub |
 | [`../ZADANIA-ALEX-DESIGN.md`](../ZADANIA-ALEX-DESIGN.md) | Brief krok po kroku dla designera: kontrakt danych → elementy ekranu, film, slajdy zapasowe | Alex | aktualny |
+| [`../ZADANIA-VIKTOR-DASHBOARD.md`](../ZADANIA-VIKTOR-DASHBOARD.md) | Poprawki dashboardu przed demo: co usunąć, co poprawić, które parametry zostają (temp + tętno) | Viktor | aktualny |
 | [`data_notes.md`](data_notes.md) | Inwentaryzacja danych NASA bed rest i Stanford (EN, Viktor) | dev | aktualny |
 | [`../PLAN.md`](../PLAN.md) | Specyfikacja techniczna v2.1 (EN, Viktor) | dev | aktualny + delta w `01` §4 |
 

@@ -29,10 +29,10 @@ Fazy według [`../PLAN.md`](../PLAN.md) §16. Priorytety według [`01-produkt-i-
 
 | # | Zadanie | Owner | Gotowe, gdy |
 |---|---|---|---|
-| 1 | Publiczny deploy obecnego dashboardu | Davyd | Link otwiera replay; wpisany tutaj |
+| 1 | ~~Publiczny deploy obecnego dashboardu~~ **zrobione:** https://spacenormal.vercel.app/ | Davyd | Link otwiera replay; wpisany tutaj |
 | 2 | P2: krzywe adaptacji z C1 + C3 dla tętna i ciśnienia | Viktor | Plik z priorami + krótki opis w `data_notes.md` |
 | 3 | P5 minimum: hash konfiguracji → Track A na CFT70 i C3 G/H, porównanie z najlepszym baseline'em | Viktor | `docs/claims.md` z liczbą główną; jeśli Track B nie zdąży, piszemy tylko Track A |
-| 4 | Zmiany z `01` §4 w UI | Viktor lub Davyd (po deployu) | Etykieta „Pre-flight range”, pasek „Mars transit · day N · 22 min”, fazy na osi X |
+| 4 | Odchudzenie i poprawki dashboardu wg [`../ZADANIA-VIKTOR-DASHBOARD.md`](../ZADANIA-VIKTOR-DASHBOARD.md) (A + B = P0; zawiera zmiany z `01` §4) | Viktor | Lista „Gotowe, gdy” z briefu; deploy zaktualizowany |
 | 5 | Ekran wg makiety Alexa | Davyd | Kadry 12–26 s filmu nagrane z prawdziwego dashboardu |
 | 6 | Film 30 s | Alex + Anna | Plik ≤ 30 s, napisy EN |
 | 7 | Pitch 3 min + strona zgłoszenia EN + References | Petro + Anna | Próba na stoperze < 3:00; formularz wypełniony |

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Mission, State, Vital } from "../contract";
+import type { CrewMember, Mission, State, Vital } from "../contract";
 import { BodyFigure, activeReports, describe, type PainReport, type System } from "./BodyFigure";
 
 const ALERT_DAYS = 10; // how long a Space-Normal alert keeps a crew member marked
@@ -45,6 +45,44 @@ function CrewCard({ name, state, parts, reports }: {
   );
 }
 
+/** One crew member's status on a given day, and the state of each body system behind it. */
+function crewStatus(mission: Mission, m: CrewMember, dayIndex: number): { state: State; parts: Record<System, State> } {
+  // A single noisy day should not turn a name red: status follows Space-Normal's own
+  // alerts (shown for ALERT_DAYS after they fire), then the crew layer, then logged events.
+  const dayNow = mission.days[dayIndex];
+  const sys = m.systems[dayIndex];
+  const alerts = mission.alerts.filter((a) => a.detector === "space_normal" && a.level === "red"
+    && a.crew_id === m.id && a.day <= dayNow && dayNow - a.day <= ALERT_DAYS);
+  const inOutbreak = mission.crew_alerts.some((c) => c.day <= dayNow && c.crew_ids.includes(m.id));
+  const flagged: State = inOutbreak ? "crew" : "unexplained";
+  const systemState = (name: System): State =>
+    alerts.length && (alerts.some((a) => SYSTEM_OF[a.vital] === name) || sys[name] === "unexplained" || sys[name] === "crew")
+      ? flagged : sys[name] === "event" ? "event" : "expected";
+  const parts = { cardio: systemState("cardio"), thermo: systemState("thermo") };
+  const state: State = alerts.length ? flagged : parts.cardio === "event" || parts.thermo === "event" ? "event" : "expected";
+  return { state, parts };
+}
+
+/** Phone layout only: the crew as a row of tabs above the chart. Hidden on wide screens, where the side list does this job. */
+export function CrewTabs({ mission, dayIndex, crewId, onSelect }: {
+  mission: Mission; dayIndex: number; crewId: string; onSelect: (id: string) => void;
+}) {
+  return (
+    <nav className="crew-tabs" aria-label="Crew">
+      {mission.crew.map((m) => {
+        const { state } = crewStatus(mission, m, dayIndex);
+        return (
+          <button key={m.id} type="button" className={`crew-tab state-${state}`} aria-pressed={m.id === crewId}
+            aria-label={`${m.name}: ${SHORT[state]}`} onClick={() => onSelect(m.id)}>
+            <span className="crew-mark" aria-hidden="true">{ICON[state]}</span>
+            <span className="crew-tab-name">{m.name.split(" ")[0]}</span>
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
+
 export function CrewList({ mission, dayIndex, crewId, onSelect }: {
   mission: Mission; dayIndex: number; crewId: string; onSelect: (id: string) => void;
 }) {
@@ -52,18 +90,7 @@ export function CrewList({ mission, dayIndex, crewId, onSelect }: {
   return (
     <div className="crew" role="group" aria-label="Crew">
       {mission.crew.map((m) => {
-        // A single noisy day should not turn a name red: status follows Space-Normal's own
-        // alerts (shown for ALERT_DAYS after they fire), then the crew layer, then logged events.
-        const sys = m.systems[dayIndex];
-        const alerts = mission.alerts.filter((a) => a.detector === "space_normal" && a.level === "red"
-          && a.crew_id === m.id && a.day <= dayNow && dayNow - a.day <= ALERT_DAYS);
-        const inOutbreak = mission.crew_alerts.some((c) => c.day <= dayNow && c.crew_ids.includes(m.id));
-        const flagged: State = inOutbreak ? "crew" : "unexplained";
-        const systemState = (name: System): State =>
-          alerts.length && (alerts.some((a) => SYSTEM_OF[a.vital] === name) || sys[name] === "unexplained" || sys[name] === "crew")
-            ? flagged : sys[name] === "event" ? "event" : "expected";
-        const parts = { cardio: systemState("cardio"), thermo: systemState("thermo") };
-        const state: State = alerts.length ? flagged : parts.cardio === "event" || parts.thermo === "event" ? "event" : "expected";
+        const { state, parts } = crewStatus(mission, m, dayIndex);
         const selected = m.id === crewId;
 
         if (!selected) {

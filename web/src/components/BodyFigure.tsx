@@ -123,7 +123,7 @@ export function BodyFigure({ parts, reports, onInspect }: {
     const tip = tipText(hits);
     return (
       <g key={shape.id} className="region" tabIndex={0} role="img" aria-label={tip} {...watch(shape.id)}
-        onFocus={() => onInspect(shape.id)} onBlur={() => onInspect(null)}>
+        onFocus={() => onInspect(shape.id)} onBlur={() => onInspect(null)} onClick={() => onInspect(shape.id)}>
         <title>{tip}</title>
         {draw("")}
         <g style={{ opacity: strength }}>{draw("reported")}</g>

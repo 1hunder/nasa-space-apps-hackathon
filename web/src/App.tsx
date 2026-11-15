@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AlertPanel } from "./components/AlertPanel";
-import { CrewList } from "./components/CrewList";
+import { CrewList, CrewTabs } from "./components/CrewList";
 import { Figure } from "./components/Figure";
 import { JournalStrip } from "./components/JournalStrip";
 import { MethodCards } from "./components/MethodCards";
@@ -70,6 +70,8 @@ export function App() {
         </button>
       </header>
 
+      <CrewTabs mission={mission} dayIndex={r.dayIndex} crewId={member.id} onSelect={r.setCrewId} />
+
       <main className="stage">
         <div className="stage-head">
           <h2>{member.name}</h2>
@@ -103,7 +105,8 @@ export function App() {
           <p className="fineprint">
             Data in this replay: adaptation {PROVENANCE_LABEL[p.adaptation]}, illness {PROVENANCE_LABEL[p.illness]},
             events {PROVENANCE_LABEL[p.events]}; the journal readings are mocked and no language model runs.
-            Keys: space plays or pauses, R restarts, the arrow keys step one day, D shows or hides details.
+            Drag across the chart to move through the mission; tap a reading for its breakdown.{" "}
+            <span className="keys">Keys: space plays or pauses, R restarts, the arrow keys step one day, D shows or hides details.{" "}</span>
             Mars image: NASA/JPL/USGS.
           </p>
         )}

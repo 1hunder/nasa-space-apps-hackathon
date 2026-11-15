@@ -16,8 +16,9 @@ interface Props {
 }
 
 // Every row shares one day axis, so a single playhead reads across all of them.
-const GUTTER_L = 44;
-const GUTTER_R = 172;
+// Wide screens keep the band labels in a right-hand gutter. Below COMPACT_BELOW px the plot takes the
+// full width and the labels move into a legend under the chart.
+const COMPACT_BELOW = 560;
 const CHART_TOP = 26;
 const DECOMP_H = 64;
 // A Space-Normal red alert counts as active from its day until this many days after it,
@@ -73,9 +74,14 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const days = mission.days;
   const n = days.length;
   // The chart takes the height the window can spare; detail rows trade some of it away.
-  const spare = Math.max(330, Math.min(640, window.innerHeight - 432 - reserve));
-  const chartBottom = detail ? Math.max(240, spare - 110) : spare;
-  const plotW = Math.max(240, width - GUTTER_L - GUTTER_R);
+  const compact = width < COMPACT_BELOW;
+  const GUTTER_L = compact ? 38 : 44;
+  const GUTTER_R = compact ? 10 : 172;
+  const spare = compact
+    ? Math.max(250, Math.min(340, window.innerHeight * 0.42))
+    : Math.max(330, Math.min(640, window.innerHeight - 432 - reserve));
+  const chartBottom = detail ? Math.max(compact ? 210 : 240, spare - (compact ? 60 : 110)) : spare;
+  const plotW = Math.max(compact ? 120 : 240, width - GUTTER_L - GUTTER_R);
   const right = GUTTER_L + plotW;
   const x = (d: number) => GUTTER_L + ((d - days[0]) / (days[n - 1] - days[0])) * plotW;
   const playX = x(day);
@@ -185,6 +191,8 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const zeroY = decompTop + dMax.up * dScale;
 
   const height = detail ? decompTop + DECOMP_H + 10 : journalY + 16;
+  // Rough width of 14px chart text, to keep notes inside a narrow plot.
+  const textW = (text: string) => text.length * 7.2;
 
   const dayAt = (e: React.PointerEvent<SVGRectElement>) => {
     const box = e.currentTarget.getBoundingClientRect();
@@ -195,6 +203,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
     e.currentTarget.setPointerCapture(e.pointerId);
     press.current = { x: e.clientX, dragged: false };
   };
+  const onCancel = () => { press.current = null; };
   const onMove = (e: React.PointerEvent<SVGRectElement>) => {
     if (!press.current || !e.buttons) return;
     if (Math.abs(e.clientX - press.current.x) > 4) press.current.dragged = true;
@@ -206,10 +215,11 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
     if (wasDrag) return;
     const box = e.currentTarget.getBoundingClientRect();
     const localY = e.clientY - box.top + CHART_TOP;
-    if (Math.abs(localY - journalY) <= 14) {
+    const reach = e.pointerType === "mouse" ? 14 : 24; // a fingertip needs a larger target
+    if (Math.abs(localY - journalY) <= reach) {
       // A click on the journal row opens the nearest entry.
       const px = e.clientX - box.left + GUTTER_L;
-      let best = -1, dist = 14;
+      let best = -1, dist = reach;
       entries.forEach((j, k) => { const d = Math.abs(entryX(j) - px); if (d < dist) { best = k; dist = d; } });
       setPicked(null);
       if (best >= 0) onPickEntry(best);
@@ -244,17 +254,25 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
         <rect x={GUTTER_L} y={earthTop} width={plotW} height={earthBottom - earthTop} fill="url(#earth-hatch)" />
         <line x1={GUTTER_L} x2={right} y1={earthTop} y2={earthTop} className="earth-edge" />
         <line x1={GUTTER_L} x2={right} y1={earthBottom} y2={earthBottom} className="earth-edge" />
-        <text x={right + 16} y={earthLabelY} className="band-label earth-text">Pre-flight range</text>
-        <text x={right + 16} y={earthLabelY + 19} className="band-sub">personal, fixed at launch</text>
+        {!compact && (
+          <>
+            <text x={right + 16} y={earthLabelY} className="band-label earth-text">Pre-flight range</text>
+            <text x={right + 16} y={earthLabelY + 19} className="band-sub">personal, fixed at launch</text>
+          </>
+        )}
         {/* Earth normal: one limit for everyone */}
         {limitShown.map((limit, k) => (
           <g key={k}>
             <line x1={GUTTER_L} x2={right} y1={y(limit)} y2={y(limit)} className="fixed-limit" />
-            <line x1={right} x2={right + 10} y1={y(limit)} y2={labelY[`limit${k}`] - 5} className="fixed-leader" />
-            <text x={right + 16} y={labelY[`limit${k}`]} className="band-label fixed-text">Earth normal</text>
-            <text x={right + 16} y={labelY[`limit${k}`] + 19} className="band-sub">
-              {limit === s.fixed_high ? "upper" : "lower"} limit, same for all
-            </text>
+            {!compact && (
+              <>
+                <line x1={right} x2={right + 10} y1={y(limit)} y2={labelY[`limit${k}`] - 5} className="fixed-leader" />
+                <text x={right + 16} y={labelY[`limit${k}`]} className="band-label fixed-text">Earth normal</text>
+                <text x={right + 16} y={labelY[`limit${k}`] + 19} className="band-sub">
+                  {limit === s.fixed_high ? "upper" : "lower"} limit, same for all
+                </text>
+              </>
+            )}
           </g>
         ))}
 
@@ -277,48 +295,68 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
               className={unexplained ? "dot dot-red" : watched ? "dot dot-watch" : "dot"} />;
           })}
         </g>
-        {dayIndex >= 5 && (
+        {dayIndex >= 5 && !compact && (
           <g>
             <line x1={playX} x2={right + 10} y1={rangeTopNow} y2={spaceLabelY - 5} className="leader" />
             <text x={right + 16} y={spaceLabelY} className="band-label space-text">Space-Normal</text>
             <text x={right + 16} y={spaceLabelY + 19} className="band-sub">moves with adaptation</text>
           </g>
         )}
-        {firstMajor && (
-          <text x={x(firstMajor.day) + barW} y={y(s.band_high[firstMajor.day - days[0]]) - 9}
-            className="note-text event-text" textAnchor="middle">
-            logged {(EVENT_LABEL[firstMajor.type] ?? firstMajor.type).toLowerCase()}
-          </text>
-        )}
+        {firstMajor && (() => {
+          const text = `logged ${(EVENT_LABEL[firstMajor.type] ?? firstMajor.type).toLowerCase()}`;
+          const half = textW(text) / 2;
+          return (
+            <text x={Math.min(Math.max(x(firstMajor.day) + barW, GUTTER_L + half), Math.max(GUTTER_L + half, width - half - 4))}
+              y={y(s.band_high[firstMajor.day - days[0]]) - 9} className="note-text event-text" textAnchor="middle">
+              {text}
+            </text>
+          );
+        })()}
 
         {episodes.map((e) => (
           <g key={`ep${e.onset_day}`}>
             <line x1={x(e.onset_day)} x2={x(e.onset_day)} y1={CHART_TOP} y2={chartBottom} className="onset" />
-            <text x={x(e.onset_day) + 8} y={chartBottom - 8} className="note-text">symptoms start, day {e.onset_day}</text>
+            {(() => {
+              const text = `symptoms start, day ${e.onset_day}`;
+              const flip = x(e.onset_day) + 8 + textW(text) > width;
+              return (
+                <text x={x(e.onset_day) + (flip ? -8 : 8)} y={chartBottom - 8} className="note-text" textAnchor={flip ? "end" : "start"}>
+                  {text}
+                </text>
+              );
+            })()}
           </g>
         ))}
         {snAlerts.map((a) => (
           <g key={a.id} transform={`translate(${x(a.day)},${CHART_TOP - 14})`}>
             <path d="M0,16 L-8,0 L8,0 Z" className="alert-flag" />
-            <text x={-14} y={12} className="alert-text" textAnchor="end">Space-Normal alert, day {a.day}</text>
+            {(() => {
+              const text = compact ? `Alert, day ${a.day}` : `Space-Normal alert, day ${a.day}`;
+              const flip = x(a.day) - 14 - text.length * 8.4 < 0;
+              return <text x={flip ? 14 : -14} y={12} className="alert-text" textAnchor={flip ? "start" : "end"}>{text}</text>;
+            })()}
           </g>
         ))}
 
         {/* day axis, then the crew journal marks on their own line */}
-        {days.filter((d) => d === 1 || d % 7 === 0).map((d) => (
-          <text key={d} x={x(d)} y={axisY + 18} className="tick" textAnchor="middle">{d}</text>
+        {days.filter((d) => d === 1 || (compact ? d % 14 === 0 && x(d) - x(days[0]) > 58 : d % 7 === 0)).map((d) => (
+          <text key={d} x={x(d)} y={axisY + 18} className="tick" textAnchor={compact && d === 1 ? "start" : "middle"}>
+            {compact && d === 1 ? "day 1" : d}
+          </text>
         ))}
-        <text x={right + 16} y={axisY + 18} className="tick">mission day</text>
+        {!compact && <text x={right + 16} y={axisY + 18} className="tick">mission day</text>}
         <line x1={GUTTER_L} x2={right} y1={journalY} y2={journalY} className="lane-line" />
         {entries.map((j, k) => (
           <rect key={k} x={entryX(j) - 6} y={journalY - 6} width={12} height={12} rx={j.crew_ids.length > 1 ? 2.5 : 6}
             className={`entry ${j.accounted ? "entry-accounted" : ""} ${k === entryIndex ? "entry-open" : ""}`} />
         ))}
-        <text x={right + 16} y={journalY + 5} className="tick">journal entries</text>
+        {!compact && <text x={right + 16} y={journalY + 5} className="tick">journal entries</text>}
 
         {detail && (
           <g>
-            <text x={GUTTER_L} y={decompTitle} className="row-title">What moved each reading away from the pre-flight baseline</text>
+            <text x={GUTTER_L} y={decompTitle} className="row-title">
+              {compact ? "What moved each reading" : "What moved each reading away from the pre-flight baseline"}
+            </text>
             <line x1={GUTTER_L} x2={right} y1={zeroY} y2={zeroY} className="grid" />
             <g clipPath="url(#reveal)">
               {days.map((d, i) => {
@@ -340,21 +378,39 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
                 );
               })}
             </g>
-            <g transform={`translate(${right + 16},${decompTop - 4})`} className="legend">
+            {!compact && <g transform={`translate(${right + 16},${decompTop - 4})`} className="legend">
               <rect width="10" height="10" rx="2" className="bar-adapt" /><text x="17" y="10">expected adaptation</text>
               <rect y="19" width="10" height="10" rx="2" className="bar-event" /><text x="17" y="29">logged events</text>
               <rect y="38" width="10" height="10" rx="2" className="bar-unexplained" /><text x="17" y="48">unexplained</text>
               <rect y="57" width="10" height="10" rx="2" className="bar-noise" /><text x="17" y="67">day-to-day noise</text>
-            </g>
+            </g>}
           </g>
         )}
 
         {/* playhead */}
         <line x1={playX} x2={playX} y1={CHART_TOP - 4} y2={height - 6} className="playhead" />
         {tip !== null && <circle cx={x(days[tip])} cy={y(s.y[tip] as number)} r={8.5} className="picked" />}
-        <rect x={GUTTER_L} y={CHART_TOP} width={plotW} height={height - CHART_TOP} fill="transparent" style={{ cursor: "pointer" }}
-          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} />
+        <rect x={GUTTER_L} y={CHART_TOP} width={plotW} height={height - CHART_TOP} fill="transparent" style={{ cursor: "pointer", touchAction: "pan-y" }}
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onCancel} />
       </svg>
+      {compact && (
+        <ul className="chart-key">
+          <li><span className="key-swatch key-space" aria-hidden="true" /><b className="space-key">Space-Normal</b> moves with adaptation</li>
+          <li><span className="key-swatch key-preflight" aria-hidden="true" /><b className="earth-key">Pre-flight range</b> personal, fixed at launch</li>
+          {limitShown.length > 0 && (
+            <li><span className="key-swatch key-limit" aria-hidden="true" /><b>Earth normal</b> same limit for all</li>
+          )}
+          <li><span className="key-swatch key-entry" aria-hidden="true" /><b>Journal entries</b> on the line under the days</li>
+          {detail && (
+            <>
+              <li><span className="key-swatch bar-adapt-key" aria-hidden="true" />expected adaptation</li>
+              <li><span className="key-swatch bar-event-key" aria-hidden="true" />logged events</li>
+              <li><span className="key-swatch bar-unexplained-key" aria-hidden="true" />unexplained</li>
+              <li><span className="key-swatch bar-noise-key" aria-hidden="true" />day-to-day noise</li>
+            </>
+          )}
+        </ul>
+      )}
       {tip !== null && (() => {
         const v = s.y[tip] as number;
         const z = s.z[tip] ?? 0;
@@ -369,7 +425,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
         const px = x(days[tip]), py = y(v);
         return (
           <div className={`tip ${py < 190 ? "tip-below" : ""}`} role="dialog" aria-label={`Day ${days[tip]} reading`}
-            style={{ left: Math.min(Math.max(px, 118), width - 118), top: py }}>
+            style={{ left: Math.min(Math.max(px, 118), Math.max(118, width - 118)), top: py }}>
             <p className="tip-day">Day {days[tip]}</p>
             <p className="tip-value">{fixed(v, dg)} <small>{VITAL_LABEL[vital].unit}</small></p>
             <dl>

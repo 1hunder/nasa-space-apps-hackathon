@@ -72,7 +72,7 @@ W notatkach research każde twierdzenie ma tag ([FAKT]/[CZĘŚCIOWE]/[BRAK] albo
    - „jesteśmy dokładniejsi niż CMO-DA”.
 5. **Wydzielony test** (CFT70, Campaign 3 G/H) nigdy nie służy do strojenia. Loader blokuje go, dopóki w `docs/claims.md` nie ma hasha konfiguracji. Nie obchodź tej blokady.
 6. **LLM nie decyduje o alarmie.** Może tylko sformułować tekst. Nie może alarmu wywołać, opóźnić ani obniżyć.
-7. **Bez logo NASA** i bez stylizacji na oficjalny produkt NASA. Bez prawdziwych osób w materiałach AI.
+7. **Bez logo NASA** i bez stylizacji na oficjalny produkt NASA. Bez prawdziwych osób w materiałach generowanych przez AI (wideo, obrazy, głos). Wyjątek: imiona członków zespołu jako załoga w demo dashboardu — decyzja Petra z 2026-11-15.
 8. **Każde zewnętrzne źródło, narzędzie i asset** (w tym narzędzia AI) dopisz do listy References.
 
 ## 6. Kod i polecenia

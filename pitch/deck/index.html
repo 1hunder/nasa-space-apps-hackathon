@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Space-Normal: pitch</title>
+<!--
+  Space-Normal, pitch na żywo (2:30, po polsku). Reveal.js 5, w pełni offline.
+  Źródło prawdy dla treści i kliknięć: pitch/SKRYPT.md.
+
+  KLIKNIĘCIA: 19 naciśnięć od stanu otwarcia do ostatniego zdania.
+  Każde [klik] ze skryptu = jedno naciśnięcie (nowy slajd albo fragment).
+
+    stan otwarcia (START)  0   plansza tytułowa, zanim cokolwiek naciśniesz
+    1 Haczyk               2   klik 1 = wejście na slajd, klik 2 = „gorączka”
+    2 Problem              4   klik 3 = wejście, 4 = 22 min, 5 = 2 tygodnie, 6 = lekarz
+    3 Korytarz             6   klik 7 = wejście (temperatura Vegi), 8 = ziemska norma,
+                               9 = zakres sprzed lotu, 10 = korytarz, 11 = 37,7, 12 = 37,0
+    4 Produkt              2   klik 13 = wejście (trzy linijki), 14 = ekran aplikacji
+    5 Dane                 1   klik 15 = wejście
+    6 Różnica              2   klik 16 = wejście (CMO-DA), 17 = Space-Normal
+    7 Zamknięcie           2   klik 18 = wejście, 19 = „Space-Normal. Twoja norma. W kosmosie.”
+    ------------------------
+    razem                 19
+    Źródła (Q&A)          +1   dwudzieste naciśnięcie, poza mową
+
+  KLAWISZE: → / spacja / PageDown = dalej, ← / PageUp = wstecz, F = pełny ekran,
+            S = notatki prelegenta, T = stoper (pokaż/ukryj), R = zeruj stoper.
+  Stoper rusza przy pierwszym kliknięciu i zatrzymuje się na ostatnim zdaniu.
+
+  PDF: index.html?print-pdf        jedna strona na slajd, stan końcowy
+       index.html?print-pdf&steps  jedna strona na każde kliknięcie (zapas na scenę)
+       Odtworzenie obu plików: node pitch/deck/export-pdf.mjs
+-->
+<link rel="stylesheet" href="vendor/reveal/reveal.min.css">
+<style>
+@font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:block;
+  src:url("fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:block;
+  src:url("fonts/archivo-latin-wdth-normal.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --void:#000;            /* czerń zdjęć planet: fotografie wtapiają się w tło */
+  --light:#f3f1ea;        /* światło gwiazd, tekst */
+  --dim:#a7acb9;          /* tekst drugiego planu */
+  --faint:#5d6272;        /* siatka, osie */
+  --quiet:#868c9c;        /* drobne przypisy */
+  --corridor:#3fe0b6;     /* korytarz: ten sam kolor co w aplikacji */
+  --preflight:#d8c48c;    /* zakres sprzed lotu */
+  --earth:#a9c6f2;        /* ziemska norma */
+  --alarm:#ff5f64;        /* alarm */
+  --check:#ffb454;        /* sygnał „sprawdź” */
+  --slow:1.2s;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html,body{background:var(--void);margin:0}
+.reveal{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;color:var(--light);font-size:40px;font-weight:400;
+  font-stretch:100%;font-kerning:normal;-webkit-font-smoothing:antialiased}
+.reveal .slides{text-align:left}
+.reveal .slides section{height:1080px;padding:0;box-sizing:border-box;top:0!important;
+  background:var(--void) var(--sky,none) center/100% 100% no-repeat;overflow:hidden}
+.reveal .slides section>*{position:absolute;margin:0}
+.reveal h1,.reveal h2,.reveal p{margin:0;line-height:1.05;font-weight:inherit;letter-spacing:0}
+.reveal .slides section .fragment{transition:opacity var(--slow) var(--ease)}
+.reveal .wide{font-stretch:125%;font-weight:700;letter-spacing:-.012em}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.dim{color:var(--dim)}
+
+/* rehearsal aids ----------------------------------------------------- */
+.parts{left:120px;bottom:34px;display:flex;gap:10px;align-items:flex-end;height:14px}
+.parts i{display:block;width:34px;height:3px;background:var(--faint);opacity:.55}
+.parts i.on{background:var(--light);opacity:.9;height:7px}
+#timer{position:fixed;right:22px;bottom:14px;z-index:50;font:500 22px/1 "Archivo",sans-serif;
+  font-variant-numeric:tabular-nums;color:var(--dim);opacity:.75;display:none;letter-spacing:.02em}
+#timer.show{display:block}
+#timer.near{color:var(--check)} #timer.over{color:var(--alarm)}
+
+/* journey line: Earth to Mars ---------------------------------------- */
+.journey{left:120px;top:96px;width:1680px;height:150px}
+.journey img{position:absolute;top:50%;transform:translateY(-50%);mix-blend-mode:lighten;border-radius:50%}
+.journey .e{left:0;width:150px}
+.journey .m{right:0;width:78px}
+.journey .track{position:absolute;left:176px;right:104px;top:50%;border-top:2px dashed var(--faint)}
+.journey .ship{position:absolute;left:58%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;
+  background:var(--light);box-shadow:0 0 0 8px rgba(243,241,234,.14)}
+
+/* START --------------------------------------------------------------- */
+#start h1{left:114px;top:480px;font-size:172px}
+#start .sub{left:126px;top:700px;font-size:52px;color:var(--light);width:1500px;line-height:1.2}
+#start .ev{left:126px;top:880px;font-size:30px;color:var(--dim);width:1500px;line-height:1.35}
+
+/* 1 Haczyk ------------------------------------------------------------ */
+#p1 .day{left:120px;top:296px;font-size:84px}
+#p1 .day span{font-stretch:100%;font-weight:400;color:var(--dim);font-size:52px;margin-left:26px;letter-spacing:0}
+#p1 .temp{left:106px;top:404px;font-size:360px;line-height:1;font-weight:800;font-stretch:112%;letter-spacing:-.03em;white-space:nowrap}
+#p1 .temp small{font-size:.42em;font-weight:500;font-stretch:100%;letter-spacing:0;margin-left:.12em;color:var(--dim)}
+#p1 .who{left:126px;top:770px;font-size:40px;color:var(--dim)}
+#p1 .verdict{right:120px;top:790px;text-align:right}
+#p1 .verdict .f{font-size:80px;color:var(--alarm);white-space:nowrap}
+#p1 .verdict .q{font-size:50px;margin-top:22px}
+
+/* 2 Problem ------------------------------------------------------------ */
+#p2 .far{right:120px;top:92px;width:104px;mix-blend-mode:lighten;border-radius:50%}
+#p2 .farl{right:250px;top:128px;font-size:28px;color:var(--dim)}
+#p2 h2{left:114px;top:256px;font-size:122px}
+#p2 .cols{left:120px;top:560px;width:1680px;display:grid;grid-template-columns:1fr 1fr 1.36fr;gap:60px}
+#p2 .cols>div{border-top:2px solid var(--faint);padding-top:30px}
+#p2 .k{font-size:34px;color:var(--dim)}
+#p2 .v{font-size:98px;margin:22px 0 22px;white-space:nowrap;line-height:1}
+.reveal #p2 .v{font-stretch:100%;font-weight:750;letter-spacing:-.01em}
+#p2 .v small{font-size:.5em;font-weight:500;letter-spacing:0;color:var(--dim)}
+#p2 .n{font-size:34px;line-height:1.25;color:var(--light)}
+#p2 .src{left:120px;bottom:70px;font-size:22px;color:var(--quiet)}
+
+/* 3 Korytarz ----------------------------------------------------------- */
+#p3 h2{left:116px;top:80px;font-size:78px;transition:opacity var(--slow) var(--ease)}
+#p3 h2.b{opacity:0}
+#p3:has(.s-corr.visible) h2.a{opacity:0}
+#p3:has(.s-corr.visible) h2.b{opacity:1}
+#p3 svg{left:0;top:0;width:1920px;height:1080px}
+#p3 svg text{font-family:"Archivo",sans-serif;fill:var(--light)}
+#p3 .tick{font-size:28px;fill:var(--dim)}
+#p3 .axl{font-size:26px;fill:var(--dim)}
+#p3 .grid{stroke:var(--faint);stroke-width:1;opacity:.45}
+#p3 .axis{stroke:var(--faint);stroke-width:2}
+#p3 .trace{fill:none;stroke:var(--light);stroke-width:4;stroke-linejoin:round;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:0}
+#p3 .lab{font-size:38px;font-weight:700}
+#p3 .sublab{font-size:25px;fill:var(--dim)}
+#p3 .earthline{stroke:var(--earth);stroke-width:4;stroke-dasharray:3 13;stroke-linecap:round;fill:none}
+#p3 .preband{fill:url(#hatch);stroke:var(--preflight);stroke-width:2;stroke-dasharray:14 9}
+#p3 .corrband{fill:var(--corridor);fill-opacity:.26}
+#p3 .corredge{fill:none;stroke:var(--corridor);stroke-width:4}
+#p3 .corrmid{fill:none;stroke:var(--corridor);stroke-width:2;stroke-dasharray:4 10;opacity:.7}
+#p3 .wipe{transform:scaleX(0);transform-origin:170px 0;transition:transform 2.8s var(--ease)}
+#p3:has(.s-corr.visible) .wipe{transform:scaleX(1)}
+#p3 .dayline{stroke:var(--light);stroke-width:2;opacity:.55}
+#p3 .pt{font-size:50px;font-weight:800;font-stretch:112%}
+#p3 .hd{font-size:34px;font-weight:800;font-stretch:112%}
+#p3 .vd{font-size:32px;font-weight:700}
+#p3 .note{font-size:21px;fill:var(--quiet)}
+
+/* 4 Produkt ------------------------------------------------------------ */
+#p4 .left{left:120px;top:150px;width:520px;transform-origin:0 46%;transform:translateX(400px) scale(1.36);
+  transition:transform 1.6s var(--ease)}
+#p4:has(.shot.visible) .left{transform:none}
+#p4 h2{font-size:76px;white-space:nowrap}
+#p4 .when{font-size:38px;color:var(--dim);margin-top:16px}
+#p4 ol{list-style:none;margin:70px 0 0;padding:0}
+#p4 li{border-top:2px solid var(--faint);padding:26px 0 28px}
+#p4 li b{display:block;font-size:46px;font-weight:700}
+#p4 li span{display:block;font-size:32px;color:var(--dim);margin-top:8px}
+#p4 .shot{left:700px;top:130px;width:1100px}
+#p4 .shot img{display:block;width:1100px;height:auto;border-radius:10px;outline:1px solid #2a2f3d}
+#p4 .shot .cap{font-size:40px;font-weight:700;margin-top:34px}
+#p4 .shot .cap2{font-size:34px;margin-top:14px;color:var(--light)}
+#p4 .shot .prov{font-size:22px;color:var(--dim);margin-top:22px}
+
+/* 5 Dane --------------------------------------------------------------- */
+#p5 h2{left:114px;top:110px;font-size:110px}
+#p5 .how{left:124px;top:262px;font-size:38px;color:var(--dim);width:1700px;line-height:1.3}
+#p5 svg{left:0;top:0;width:1920px;height:1080px}
+#p5 svg text{font-family:"Archivo",sans-serif;fill:var(--light)}
+#p5 .big{font-size:150px;font-weight:800;font-stretch:112%}
+#p5 .cap{font-size:42px;font-weight:600}
+#p5 .capn{font-size:26px;fill:var(--dim)}
+#p5 .notes3{left:120px;top:880px;width:1680px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:60px}
+#p5 .notes3 p{font-size:33px;line-height:1.25;border-top:2px solid var(--faint);padding-top:22px}
+#p5 .notes3 p b{font-weight:700}
+
+/* 6 Różnica ------------------------------------------------------------ */
+#p6 h2{left:114px;top:110px;font-size:110px}
+#p6 svg{left:0;top:0;width:1920px;height:1080px}
+#p6 .when{font-size:32px;color:var(--dim)}
+#p6 .name{font-size:46px;font-weight:800;font-stretch:125%}
+#p6 .q{font-size:74px;font-weight:700;line-height:1.08;margin-top:20px}
+#p6 .s{font-size:29px;color:var(--dim);margin-top:24px;line-height:1.3}
+#p6 .us{left:120px;top:470px;width:990px}
+#p6 .us .name{color:var(--corridor)}
+#p6 .them{left:1130px;top:470px;width:700px}
+#p6 .wus{left:120px;top:356px} #p6 .wthem{left:1130px;top:356px}
+#p6 .new{left:120px;top:940px;font-size:40px;width:1700px}
+
+/* 7 Zamknięcie --------------------------------------------------------- */
+#p7 .mars{left:1180px;top:650px;width:1100px;mix-blend-mode:lighten;border-radius:50%}
+#p7 svg{left:0;top:0;width:1920px;height:1080px}
+#p7 .l1{left:120px;top:150px;font-size:76px;font-weight:700;transition:opacity var(--slow) var(--ease)}
+#p7 .l1 em{font-style:normal;color:var(--corridor)}
+#p7 .l2{left:120px;top:262px;font-size:44px;color:var(--dim);line-height:1.25;width:1100px;transition:opacity var(--slow) var(--ease)}
+#p7:has(.brand.visible) .l2{opacity:0}
+#p7 .brand{left:120px;top:400px}
+#p7 .brand h1{font-size:160px;margin-left:-6px}
+#p7 .brand p{font-size:80px;font-weight:600;margin-top:26px}
+
+/* Źródła --------------------------------------------------------------- */
+#zrodla h2{left:120px;top:80px;font-size:64px}
+#zrodla .g{left:120px;top:190px;width:1700px;display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:56px}
+#zrodla h3{font-size:27px;font-weight:700;margin:0 0 10px;color:var(--light);text-transform:none;letter-spacing:0}
+#zrodla h3:not(:first-child){margin-top:24px}
+#zrodla p,#zrodla li{font-size:21.5px;line-height:1.36;color:var(--dim);margin:0}
+#zrodla ul{margin:0;padding:0;list-style:none}
+#zrodla li{margin-bottom:7px}
+#zrodla li b{color:var(--light);font-weight:600}
+
+/* print: no motion, every page in its settled state --------------------- */
+html.is-print *{transition:none!important;animation:none!important}
+html.is-print #timer{display:none!important}
+html.is-print #p3 .wipe{transform:none!important}  /* cloned print pages share the clip id */
+html:not(.is-print) #p3:not(.present) .trace{stroke-dashoffset:1;transition:stroke-dashoffset 0s 1.3s}
+html:not(.is-print) #p3.present .trace{transition:stroke-dashoffset 2.6s var(--ease) .5s}
+@media (prefers-reduced-motion:reduce){
+  .reveal .slides section .fragment,#p3 .wipe,#p3 .trace,#p4 .left{transition-duration:.01s!important;transition-delay:0s!important}
+}
+</style>
+</head>
+<body>
+<div id="timer" aria-hidden="true">0:00</div>
+<div class="reveal"><div class="slides">
+
+<!-- ===== STAN OTWARCIA: przed pierwszym kliknięciem ===== -->
+<section id="start" data-part="0">
+  <div class="journey"><img class="e" src="assets/earth.jpg" alt=""><div class="track"></div><img class="m" src="assets/mars.jpg" alt=""></div>
+  <h1 class="wide">Space-Normal</h1>
+  <p class="sub">Osobisty korytarz normy dla astronauty w drodze na Marsa</p>
+  <p class="ev">NASA Space Apps 2026, wyzwanie „Create Health Monitoring Software for Astronauts on Space Missions”</p>
+  <aside class="notes">
+    <p><strong>[START: stań, 2 s ciszy, kontakt wzrokowy. klik → intro]</strong></p>
+    <p>Nic nie mów. Pierwsze kliknięcie otwiera slajd 1 i uruchamia stoper (T pokazuje/ukrywa, R zeruje).</p>
+  </aside>
+</section>
+
+<!-- ===== 1 · HACZYK: 2 kliknięcia (wejście + 1 fragment) ===== -->
+<section id="p1" data-part="1">
+  <div class="journey"><img class="e" src="assets/earth.jpg" alt=""><div class="track"></div><div class="ship"></div><img class="m" src="assets/mars.jpg" alt=""></div>
+  <p class="day wide">Dzień 80<span>w drodze na Marsa</span></p>
+  <p class="temp num">37,7<small>°C</small></p>
+  <p class="who">Vega, pomiar poranny</p>
+  <div class="verdict fragment" data-fragment-index="0">
+    <p class="f wide">Na Ziemi: gorączka.</p>
+    <p class="q">Czy Vega jest chora?</p>
+  </div>
+  <aside class="notes">
+    <p><strong>1 · Haczyk (0:00–0:15), kotwica: „DZIEŃ 80”. Na pamięć.</strong></p>
+    <p>Dzień <strong>osiemdziesiąty</strong> w drodze na Marsa.<br>
+    Vega rano mierzy temperaturę. Trzydzieści siedem i <strong>siedem</strong>.</p>
+    <p><strong>[klik]</strong> Na Ziemi lekarz powiedziałby: <strong>gorączka</strong>.<br>
+    Czy Vega jest chora?</p>
+  </aside>
+</section>
+
+<!-- ===== 2 · PROBLEM: 4 kliknięcia (wejście + 3 fragmenty) ===== -->
+<section id="p2" data-part="2">
+  <img class="far" src="assets/earth.jpg" alt="">
+  <p class="farl">Ziemia</p>
+  <h2 class="wide">Nie ma kogo zapytać.</h2>
+  <div class="cols">
+    <div class="fragment" data-fragment-index="0">
+      <p class="k">wiadomość do Ziemi</p>
+      <p class="v wide num"><small>do</small> 22 min</p>
+      <p class="n">w jedną stronę</p>
+    </div>
+    <div class="fragment" data-fragment-index="1">
+      <p class="k">cisza w łączności</p>
+      <p class="v wide num"><small>ok.</small> 2 tyg.</p>
+      <p class="n">przy koniunkcji Słońca</p>
+    </div>
+    <div class="fragment" data-fragment-index="2">
+      <p class="k">lekarz na pokładzie</p>
+      <p class="v wide">niewymagany</p>
+      <p class="n">jest oficer medyczny po krótkim szkoleniu</p>
+    </div>
+  </div>
+  <p class="src">Źródła: ASCEND/NASA i 2025 Architecture Update, HRP 48021, NASA-STD-3001 Vol 1 Rev C</p>
+  <aside class="notes">
+    <p><strong>2 · Problem (0:15–0:35), kotwica: „NIE MA KOGO ZAPYTAĆ”</strong></p>
+    <p><strong>[klik]</strong> Problem w tym, że nie ma kogo <strong>zapytać</strong>.</p>
+    <p><strong>[klik]</strong> Wiadomość do Ziemi leci do <strong>dwudziestu dwóch</strong> minut.</p>
+    <p><strong>[klik]</strong> Czasem trwa ok. <strong>dwóch tygodni</strong> cisza.</p>
+    <p><strong>[klik]</strong> A standard NASA <strong>nie wymaga</strong> lekarza na pokładzie. Jest oficer medyczny — po krótkim szkoleniu.</p>
+  </aside>
+</section>
+
+<!-- ===== 3 · KORYTARZ: 6 kliknięć (wejście + 5 fragmentów) ===== -->
+<section id="p3" data-part="3">
+  <h2 class="wide a">Temperatura Vegi</h2>
+  <h2 class="wide b">Jej norma się przesuwa</h2>
+  <svg viewBox="0 0 1920 1080" role="img" aria-label="Wykres: temperatura Vegi, ziemska norma, zakres sprzed lotu i korytarz Space-Normal w kolejnych dniach misji">
+    <defs>
+      <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+        <rect width="14" height="14" fill="#d8c48c" fill-opacity=".10"/><line x1="0" y1="0" x2="0" y2="14" stroke="#d8c48c" stroke-opacity=".5" stroke-width="3"/>
+      </pattern>
+      <clipPath id="wipeclip"><rect class="wipe" x="170" y="200" width="1030" height="720"/></clipPath>
+    </defs>
+    <g id="c-base"></g>
+    <!-- klik 9: zakres sprzed lotu (pod spodem) -->
+    <g class="fragment s-pre" data-fragment-index="1">
+      <rect class="preband" id="c-pre" x="170" width="1020"/>
+      <text class="lab" x="1222" y="716" style="fill:var(--preflight)">Zakres sprzed lotu</text>
+      <text class="sublab" x="1222" y="752">osobisty, ale płaski</text>
+    </g>
+    <!-- klik 10: korytarz -->
+    <g class="fragment s-corr" data-fragment-index="2">
+      <g clip-path="url(#wipeclip)">
+        <path class="corrband" id="c-band"/><path class="corredge" id="c-up"/><path class="corredge" id="c-lo"/><path class="corrmid" id="c-mid"/>
+      </g>
+      <text class="lab" x="1222" y="392" style="fill:var(--corridor)">Korytarz</text>
+      <text class="sublab" x="1222" y="428">ugina się z dniem misji</text>
+    </g>
+    <!-- klik 8: ziemska norma -->
+    <g class="fragment s-earth" data-fragment-index="0">
+      <line class="earthline" id="c-earth" x1="170" x2="1190"/>
+      <text class="lab" x="1222" y="526" style="fill:var(--earth)">Ziemska norma</text>
+      <text class="sublab" x="1222" y="562">jedna dla wszystkich</text>
+    </g>
+    <!-- wejście (klik 7): pomiary Vegi -->
+    <path class="trace" id="c-trace" pathLength="1"/>
+    <!-- klik 11: 37,7 w dniu 80 -->
+    <g class="fragment s-377" data-fragment-index="3">
+      <line class="dayline" id="c-day" y1="250" y2="890"/>
+      <text class="tick" id="c-dayl" y="936" text-anchor="middle" style="fill:var(--light);font-weight:700">dzień 80</text>
+      <circle id="c-p377h" r="24" fill="#3fe0b6" fill-opacity=".28"/>
+      <circle id="c-p377" r="11" fill="#f3f1ea"/>
+      <text class="pt" id="c-p377l">37,7</text>
+      <text class="hd" x="1650" y="290" text-anchor="middle">37,7 °C</text>
+      <text class="vd" x="1650" y="392" text-anchor="middle" style="fill:var(--corridor)">norma</text>
+      <text class="vd" x="1650" y="526" text-anchor="middle" style="fill:var(--alarm)">alarm</text>
+      <text class="vd" x="1650" y="716" text-anchor="middle" style="fill:var(--alarm)">alarm</text>
+    </g>
+    <!-- klik 12: 37,0 w dniu 80 -->
+    <g class="fragment s-370" data-fragment-index="4">
+      <circle id="c-p370h" r="24" fill="#ffb454" fill-opacity=".25"/>
+      <circle id="c-p370" r="11" fill="#000" stroke="#ffb454" stroke-width="5"/>
+      <text class="pt" id="c-p370l" style="fill:var(--check)">37,0</text>
+      <text class="hd" x="1810" y="290" text-anchor="middle" style="fill:var(--check)">37,0 °C</text>
+      <text class="vd" x="1810" y="392" text-anchor="middle" style="fill:var(--check)">sprawdź</text>
+      <text class="vd" x="1810" y="526" text-anchor="middle" style="fill:var(--dim)">OK</text>
+      <text class="vd" x="1810" y="716" text-anchor="middle" style="fill:var(--dim)">OK</text>
+    </g>
+    <text class="note" x="170" y="1000">Wykres poglądowy. Scenariusz lotu syntetyczny, oparty na literaturze (Stahn i in. 2017), nie na danych z lotu.</text>
+  </svg>
+  <aside class="notes">
+    <p><strong>3 · Korytarz (0:35–1:05), kotwica: „JEJ NORMA SIĘ PRZESUWA”</strong></p>
+    <p><strong>[klik]</strong> Spójrzmy na temperaturę Vegi.</p>
+    <p><strong>[klik]</strong> Ziemska norma jest jedna — dla <strong>wszystkich</strong>.</p>
+    <p><strong>[klik]</strong> Zakres sprzed lotu jest osobisty, ale <strong>płaski</strong>.</p>
+    <p><strong>[klik]</strong> A ciało w kosmosie <strong>powinno</strong> się zmieniać. Zdrowy astronauta po paru miesiącach może mieć ok. <strong>trzydziestu ośmiu</strong> stopni. Dlatego Space-Normal rysuje każdemu jego <strong>korytarz</strong>. Jak siatka centylowa u pediatry — tylko zamiast wieku jest <strong>dzień misji</strong>.</p>
+    <p><strong>[klik]</strong> Trzydzieści siedem i siedem? Dla Vegi w dniu osiemdziesiątym to <strong>norma</strong>.</p>
+    <p><strong>[klik]</strong> A równe trzydzieści siedem? Dla Ziemi — OK. Dla niej — <strong>sygnał</strong>: sprawdź.</p>
+  </aside>
+</section>
+
+<!-- ===== 4 · PRODUKT: 2 kliknięcia (wejście + 1 fragment) ===== -->
+<section id="p4" data-part="4">
+  <div class="left">
+    <h2 class="wide">Trzy linijki</h2>
+    <p class="when">dla astronauty, każdego ranka</p>
+    <ol>
+      <li><b>Obserwacja</b><span>co widzimy</span></li>
+      <li><b>Sprawdź teraz</b><span>co sprawdzić</span></li>
+      <li><b>Eskaluj, jeśli</b><span>kiedy eskalować</span></li>
+    </ol>
+  </div>
+  <div class="shot fragment" data-fragment-index="0">
+    <img src="assets/dashboard-day44.png" alt="Zrzut ekranu działającej aplikacji Space-Normal: wykres z korytarzem, lista załogi i karta z obserwacją">
+    <p class="cap">Oficer medyczny widzi całą załogę.</p>
+    <p class="cap2">Alarm liczy statystyka, nie AI. Offline.</p>
+    <p class="prov">Zrzut ekranu działającej aplikacji (interfejs po angielsku). Załoga i pomiary w demo są syntetyczne.</p>
+  </div>
+  <aside class="notes">
+    <p><strong>4 · Produkt (1:05–1:25), kotwica: „TRZY LINIJKI”</strong></p>
+    <p><strong>[klik]</strong> Co dostaje Vega? Każdego ranka <strong>trzy linijki</strong>: co widzimy, co sprawdzić teraz, kiedy eskalować.</p>
+    <p><strong>[klik]</strong> Oficer medyczny widzi <strong>całą załogę</strong>. Lekarz na Ziemi dostaje krótki pakiet — tylko gdy ktoś <strong>wypada</strong> z korytarza.<br>
+    Alarmu <strong>nie</strong> wywołuje AI. Liczy go przejrzysta statystyka, <strong>offline</strong>.</p>
+    <p><em>Na ekranie: prawdziwa aplikacja, demo z syntetyczną załogą (imiona zespołu), nie Vega.</em></p>
+  </aside>
+</section>
+
+<!-- ===== 5 · DANE: 1 kliknięcie (wejście) ===== -->
+<section id="p5" data-part="5">
+  <h2 class="wide">Dane NASA</h2>
+  <p class="how">Eksperymenty bed rest: tygodnie leżenia z głową lekko w dół.<br>Tak NASA symuluje nieważkość.</p>
+  <svg viewBox="0 0 1920 1080" aria-hidden="true">
+    <g id="d-fit"></g><g id="d-test"></g>
+    <line x1="1150" y1="410" x2="1150" y2="790" stroke="#5d6272" stroke-width="2" stroke-dasharray="6 10"/>
+    <text class="big" x="112" y="700">18</text>
+    <text class="cap" x="400" y="640">osób do nauki</text>
+    <text class="capn" x="400" y="686">dopasowanie modelu</text>
+    <text class="big" x="1196" y="700" style="fill:var(--corridor)">11</text>
+    <text class="cap" x="1460" y="630">w zamkniętym teście</text>
+    <text class="capn" x="1460" y="672">kod blokuje dostęp,</text>
+    <text class="capn" x="1460" y="706">dopóki nie zamrozimy modelu</text>
+    <!-- kłódka -->
+    <g transform="translate(1128,560)" fill="none" stroke="#f3f1ea" stroke-width="4">
+      <rect x="0" y="20" width="44" height="34" rx="5" fill="#000"/><path d="M9 20v-9a13 13 0 0 1 26 0v9"/>
+    </g>
+  </svg>
+  <div class="notes3">
+    <p><b>Choroby:</b> prawdziwe sygnały z&nbsp;badań Stanforda.</p>
+    <p><b>Bed rest</b> to analog naziemny, nie&nbsp;lot.</p>
+    <p><b>Tryb lotu</b> w demo jest oznaczony jako syntetyczny.</p>
+  </div>
+  <aside class="notes">
+    <p><strong>5 · Dane (1:25–1:55), kotwica: „DANE NASA”</strong></p>
+    <p><strong>[klik]</strong> Budujemy to na <strong>prawdziwych</strong> danych NASA z eksperymentów bed rest. Ludzie leżą tygodniami z głową lekko w dół — tak NASA symuluje <strong>nieważkość</strong>.</p>
+    <p>Osiemnaście osób do nauki. <strong>Jedenaście</strong> w zamkniętym teście — kod blokuje do nich dostęp, dopóki nie zamrozimy modelu.</p>
+    <p>Choroby to <strong>prawdziwe</strong> sygnały z badań Stanforda.</p>
+    <p>Uczciwie: bed rest to analog <strong>naziemny</strong>, nie lot. Tryb lotu w demo jest oznaczony jako <strong>syntetyczny</strong>.</p>
+    <p><em>(Plan A — tylko jeśli Viktor wpisze liczbę do docs/claims.md: „Na zamkniętym teście: {X} …”. Dziś claims.md to stub, więc na slajdzie nie ma liczby wyniku.)</em></p>
+  </aside>
+</section>
+
+<!-- ===== 6 · RÓŻNICA: 2 kliknięcia (wejście + 1 fragment) ===== -->
+<section id="p6" data-part="6">
+  <h2 class="wide">Przed diagnozą</h2>
+  <svg viewBox="0 0 1920 1080" aria-hidden="true">
+    <line x1="120" y1="420" x2="1790" y2="420" stroke="#5d6272" stroke-width="2"/>
+    <path d="M1776 408l20 12-20 12" fill="none" stroke="#5d6272" stroke-width="2"/>
+    <circle cx="1140" cy="420" r="11" fill="#f3f1ea"/>
+    <g class="fragment" data-fragment-index="0">
+      <line x1="130" y1="420" x2="1108" y2="420" stroke="#3fe0b6" stroke-width="5"/>
+      <path d="M1090 404l22 16-22 16" fill="none" stroke="#3fe0b6" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="130" cy="420" r="11" fill="#3fe0b6"/>
+    </g>
+  </svg>
+  <p class="when wthem">gdy są już objawy</p>
+  <div class="them">
+    <p class="name">CMO-DA</p>
+    <p class="q">„Co mi jest?”</p>
+    <p class="s">Asystent, którego NASA już testuje: najpierw z Google, teraz offline z Red Hat.</p>
+  </div>
+  <p class="when wus fragment" data-fragment-index="0">każdego ranka</p>
+  <div class="us fragment" data-fragment-index="0">
+    <p class="name">Space-Normal</p>
+    <p class="q">„Czy to jeszcze normalne<br>u mnie, dziś?”</p>
+    <p class="s">I przekazujemy tę odpowiedź dalej.</p>
+  </div>
+  <p class="new fragment" data-fragment-index="0"><span class="dim">Osobisty baseline nie jest nowy.</span> Nowy jest korytarz, który ugina się z misją.</p>
+  <aside class="notes">
+    <p><strong>6 · Różnica (1:55–2:15), kotwica: „PRZED DIAGNOZĄ”</strong></p>
+    <p><strong>[klik]</strong> NASA już testuje asystenta <strong>CMO-DA</strong> — najpierw z Google, teraz offline z Red Hat. On odpowiada na pytanie: <strong>co mi jest?</strong></p>
+    <p><strong>[klik]</strong> My — na pytanie <strong>wcześniejsze</strong>: czy to jeszcze normalne — <strong>u mnie, dziś?</strong> I przekazujemy tę odpowiedź dalej.<br>
+    Osobisty baseline nie jest nowy. Nowy jest korytarz, który <strong>ugina się</strong> z misją.</p>
+  </aside>
+</section>
+
+<!-- ===== 7 · ZAMKNIĘCIE: 2 kliknięcia (wejście + 1 fragment) ===== -->
+<section id="p7" data-part="7">
+  <img class="mars" src="assets/mars.jpg" alt="">
+  <svg viewBox="0 0 1920 1080" aria-hidden="true">
+    <path id="z-band" fill="#3fe0b6" fill-opacity=".22"/><path id="z-up" fill="none" stroke="#3fe0b6" stroke-width="3"/><path id="z-lo" fill="none" stroke="#3fe0b6" stroke-width="3"/>
+    <circle id="z-h" r="26" fill="#3fe0b6" fill-opacity=".3"/><circle id="z-p" r="12" fill="#f3f1ea"/>
+  </svg>
+  <p class="l1 num">Dzień 80. 37,7 °C, <em>w swoim korytarzu.</em></p>
+  <p class="l2">Na Marsie nie zapytasz lekarza. Możesz wiedzieć, co jest normalne dla ciebie.</p>
+  <div class="brand fragment" data-fragment-index="0">
+    <h1 class="wide">Space-Normal</h1>
+    <p>Twoja norma. W kosmosie.</p>
+  </div>
+  <aside class="notes">
+    <p><strong>7 · Zamknięcie (2:15–2:30). Na pamięć.</strong></p>
+    <p><strong>[klik]</strong> Dzień osiemdziesiąty. Vega: trzydzieści siedem i siedem — <strong>w swoim korytarzu</strong>.<br>
+    Na Marsie nie zapytasz lekarza. Ale możesz wiedzieć, co jest normalne — <strong>dla ciebie</strong>.</p>
+    <p><strong>[klik]</strong> <strong>Space-Normal. Twoja norma. W kosmosie.</strong></p>
+    <p><strong>[stop, 2 s kontaktu wzrokowego, „Dziękuję”]</strong></p>
+    <p><em>Nie klikaj dalej: następny slajd to źródła, na pytania jurorów.</em></p>
+  </aside>
+</section>
+
+<!-- ===== ŹRÓDŁA: poza sekwencją mowy, na Q&A ===== -->
+<section id="zrodla" data-part="0">
+  <h2 class="wide">Źródła i autorstwo</h2>
+  <div class="g">
+    <div>
+      <h3>Fakty o misji (dokumenty NASA)</h3>
+      <ul>
+        <li><b>Do 22 min w jedną stronę:</b> ASCEND/NASA, „Communication Delays, Disruptions, and Blackouts for Crewed Mars Missions”; NASA 2025 Architecture Update</li>
+        <li><b>Ok. 2 tygodnie bez łączności:</b> HRP 48021, Medical System ConOps for Mars Exploration</li>
+        <li><b>Lekarz niewymagany:</b> NASA-STD-3001 Vol 1 Rev C (oficerowie medyczni „often are, but are not required, to be physicians”)</li>
+        <li><b>Zakres sprzed lotu:</b> CDSS ConOps HRP-48033 (2021), „pre-flight determined reference ranges”</li>
+        <li><b>Cele NASA:</b> Moon to Mars Objectives TH-8LM i HBS-2LM; HRP Gap Medical-701; ADD Rev C (2025)</li>
+      </ul>
+      <h3>Fizjologia</h3>
+      <ul>
+        <li><b>Ok. 38 °C w spoczynku po ok. 2,5 mies. lotu:</b> Stahn i in. 2017, Scientific Reports (11 astronautów)</li>
+        <li><b>Osobisty baseline u poprzedników:</b> Bajewski (IBMP); Scott i in. 2023; Ferraro i in. 2026</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Dane</h3>
+      <ul>
+        <li><b>NASA Life Sciences Portal, bed rest:</b> Campaign 1 i 3 A/C/D/E (18 osób) do dopasowania; CFT70 (3) i Campaign 3 G/H (8) jako zamknięty test</li>
+        <li><b>Sygnatury chorób:</b> Stanford COVID-19 Wearables (Mishra i in. 2020; Alavi i in. 2022)</li>
+        <li><b>Bed rest to analog naziemny, nie lot.</b> Scenariusz temperatury na wykresie i w demo jest syntetyczny (flight-like, wg literatury).</li>
+        <li>Wyników na zamkniętym teście jeszcze nie cytujemy: ewaluacja przed zamrożeniem modelu się nie odbyła.</li>
+      </ul>
+      <h3>Wcześniejsze prace</h3>
+      <ul>
+        <li><b>CMO-DA:</b> Google Cloud, „How Google and NASA are testing AI for medical care in space” (2025); Red Hat, wpis o RamaLama testowanym w NASA (2026). To blogi firm, nie dokumenty NASA.</li>
+        <li>Nie mamy współpracy ani integracji z CMO-DA.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Obrazy</h3>
+      <ul>
+        <li><b>Ziemia:</b> „The Blue Marble”, zdjęcie AS17-148-22727, NASA / załoga Apollo 17, domena publiczna (pomniejszone)</li>
+        <li><b>Mars:</b> „Global Color Views of Mars”, PIA00407, NASA/JPL/USGS, domena publiczna (pomniejszone)</li>
+        <li><b>Ekran aplikacji:</b> zrzut naszego dashboardu, dzień 44 scenariusza demo; w tle to samo zdjęcie Marsa PIA00407</li>
+        <li>Wykresy, gwiazdy i ikony narysowane w kodzie tej prezentacji.</li>
+      </ul>
+      <h3>Narzędzia</h3>
+      <ul>
+        <li>Reveal.js (Hakim El Hattab, licencja MIT); krój Archivo (Omnibus-Type, SIL OFL 1.1)</li>
+        <li>Asystent kodowania AI: Claude Code (Anthropic)</li>
+      </ul>
+      <h3>Zastrzeżenie</h3>
+      <p>Projekt hackathonowy, nie produkt NASA. NASA nie popiera tego projektu; użycie materiałów NASA nie oznacza poparcia. Vega to postać fikcyjna. To nie jest narzędzie diagnostyczne.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><strong>Źródła, poza mową.</strong> Na pytania jurorów. Kto odpowiada: Viktor (model, dane), Davyd (aplikacja), Petro (NASA, produkt).</p>
+  </aside>
+</section>
+
+</div></div>
+
+<script src="vendor/reveal/reveal.min.js"></script>
+<script src="vendor/reveal/plugin/notes.min.js"></script>
+<script>
+(function(){
+  var q = location.search, PRINT = /print-pdf/i.test(q), STEPS = /steps/i.test(q);
+  if (PRINT) document.documentElement.classList.add('is-print');
+  var NS = 'http://www.w3.org/2000/svg';
+  function $(id){ return document.getElementById(id); }
+  function el(name, attrs, parent){ var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function rng(seed){ return function(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }; }
+
+  /* stars: drawn in code, one shared image behind every slide */
+  (function(){
+    var r = rng(80), s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">';
+    for (var i = 0; i < 150; i++){
+      var big = r() > .9;
+      s += '<circle cx="' + (r()*1920).toFixed(0) + '" cy="' + (r()*1080).toFixed(0) + '" r="' + (big ? 1.7 : .6 + r()*.6).toFixed(2) +
+           '" fill="#f3f1ea" fill-opacity="' + (big ? .75 : .18 + r()*.34).toFixed(2) + '"/>';
+    }
+    document.documentElement.style.setProperty('--sky', 'url("data:image/svg+xml,' + encodeURIComponent(s + '</svg>') + '")');
+  })();
+
+  /* part markers: seven ticks, the current part is lit */
+  document.querySelectorAll('section[data-part]').forEach(function(sec){
+    var p = +sec.getAttribute('data-part'); if (!p) return;
+    var d = document.createElement('div'); d.className = 'parts'; d.setAttribute('aria-hidden', 'true');
+    for (var i = 1; i <= 7; i++){ var t = document.createElement('i'); if (i === p) t.className = 'on'; d.appendChild(t); }
+    sec.appendChild(d);
+  });
+
+  /* ---- corridor chart (docs/00-kontekst.md §5) ----
+     Earth normal: flat upper limit 37.5 °C. Pre-flight range: flat personal band.
+     Corridor: personal base + expected adaptation of about +1 °C over ~2.5 months, ± spread. */
+  var X0 = 170, PXD = 10.2, YB = 890, PXC = 300, T0 = 36.2;
+  function X(d){ return X0 + d * PXD; }
+  function Y(t){ return YB - (t - T0) * PXC; }
+  function mid(d){ return 36.8 + 1.05 * (1 - Math.exp(-d / 26)); }
+  var HALF = 0.25, EARTH = 37.5, PRE_LO = 36.5, PRE_HI = 37.1, DAY = 80;
+  function curve(f, d0, d1, sx, sy){ var p = ''; for (var d = d0; d <= d1; d += 2) p += (p ? 'L' : 'M') + sx(d).toFixed(1) + ' ' + sy(f(d)).toFixed(1); return p; }
+  function band(up, lo, d0, d1, sx, sy){ var p = curve(up, d0, d1, sx, sy); for (var d = d1; d >= d0; d -= 2) p += 'L' + sx(d).toFixed(1) + ' ' + sy(lo(d)).toFixed(1); return p + 'Z'; }
+  var up = function(d){ return mid(d) + HALF; }, lo = function(d){ return mid(d) - HALF; };
+
+  var base = $('c-base');
+  [36.5, 37.0, 37.5, 38.0].forEach(function(t){
+    el('line', {class:'grid', x1:X0, x2:X(100), y1:Y(t), y2:Y(t)}, base);
+    el('text', {class:'tick', x:X0 - 22, y:Y(t) + 10, 'text-anchor':'end'}, base).textContent = t.toFixed(1).replace('.', ',');
+  });
+  el('text', {class:'axl', x:X0 - 22, y:Y(38.0) - 62, 'text-anchor':'end'}, base).textContent = '°C';
+  el('line', {class:'axis', x1:X0, x2:X(100), y1:YB, y2:YB}, base);
+  el('line', {class:'axis', x1:X0, x2:X0, y1:250, y2:YB}, base);
+  [[0,'start'],[30,'dzień 30'],[60,'dzień 60']].forEach(function(a){
+    el('line', {class:'axis', x1:X(a[0]), x2:X(a[0]), y1:YB, y2:YB + 12}, base);
+    el('text', {class:'tick', x:X(a[0]), y:936, 'text-anchor': a[0] ? 'middle' : 'start'}, base).textContent = a[1];
+  });
+  el('text', {class:'axl', x:X(100), y:936, 'text-anchor':'end'}, base).textContent = 'dzień misji';
+
+  $('c-earth').setAttribute('y1', Y(EARTH)); $('c-earth').setAttribute('y2', Y(EARTH));
+  $('c-pre').setAttribute('y', Y(PRE_HI)); $('c-pre').setAttribute('height', Y(PRE_LO) - Y(PRE_HI));
+  $('c-band').setAttribute('d', band(up, lo, 0, 100, X, Y));
+  $('c-up').setAttribute('d', curve(up, 0, 100, X, Y));
+  $('c-lo').setAttribute('d', curve(lo, 0, 100, X, Y));
+  $('c-mid').setAttribute('d', curve(mid, 0, 100, X, Y));
+
+  /* Vega's morning readings, day 0 to 80: inside her corridor, ending at 37.7 */
+  (function(){
+    var r = rng(377), p = '', n = 0;
+    for (var d = 0; d <= DAY; d++){
+      n = n * .55 + (r() - .5) * .22;
+      var t = d === DAY ? 37.7 : Math.max(lo(d) + .05, Math.min(up(d) - .05, mid(d) - .03 + n));
+      p += (p ? 'L' : 'M') + X(d).toFixed(1) + ' ' + Y(t).toFixed(1);
+    }
+    $('c-trace').setAttribute('d', p);
+  })();
+  $('c-day').setAttribute('x1', X(DAY)); $('c-day').setAttribute('x2', X(DAY)); $('c-dayl').setAttribute('x', X(DAY));
+  [['c-p377', 37.7], ['c-p370', 37.0]].forEach(function(a){
+    [a[0], a[0] + 'h'].forEach(function(id){ $(id).setAttribute('cx', X(DAY)); $(id).setAttribute('cy', Y(a[1])); });
+    $(a[0] + 'l').setAttribute('x', X(DAY) + 34); $(a[0] + 'l').setAttribute('y', Y(a[1]) + 16);
+  });
+
+  /* data slide: 18 people to fit, 11 locked away */
+  (function(){
+    var i, g = $('d-fit');
+    for (i = 0; i < 18; i++) el('circle', {cx:140 + i * 55, cy:470, r:19, fill:'#f3f1ea'}, g);
+    g = $('d-test');
+    for (i = 0; i < 11; i++) el('circle', {cx:1222 + i * 55, cy:470, r:17.5, fill:'none', stroke:'#3fe0b6', 'stroke-width':4}, g);
+  })();
+
+  /* closing slide: the same corridor, wide */
+  (function(){
+    var sx = function(d){ return d * 13.75; }, sy = function(t){ return 1010 - (t - 36.5) * 150; };
+    var u = function(d){ return mid(d) + .3; }, l = function(d){ return mid(d) - .3; };
+    $('z-band').setAttribute('d', band(u, l, 0, 140, sx, sy));
+    $('z-up').setAttribute('d', curve(u, 0, 140, sx, sy));
+    $('z-lo').setAttribute('d', curve(l, 0, 140, sx, sy));
+    ['z-h', 'z-p'].forEach(function(id){ $(id).setAttribute('cx', sx(80)); $(id).setAttribute('cy', sy(37.7)); });
+  })();
+
+  /* rehearsal timer: T shows or hides, R resets. Starts on the first click, stops on the last line. */
+  var timer = $('timer'), t0 = null, frozen = null;
+  function fmt(ms){ var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+  function paint(){
+    var ms = frozen != null ? frozen : (t0 ? Date.now() - t0 : 0);
+    timer.textContent = fmt(ms);
+    timer.classList.toggle('near', ms >= 140000 && ms <= 150000);
+    timer.classList.toggle('over', ms > 150000);
+  }
+  setInterval(paint, 250);
+  function onMove(){
+    var i = Reveal.getIndices(), last = Reveal.getSlides().length - 2;   // closing slide
+    if (i.h === 0){ t0 = null; frozen = null; }
+    else if (!t0){ t0 = Date.now(); frozen = null; }
+    if (t0 && frozen == null && i.h === last && Reveal.getProgress && !Reveal.availableFragments().next) frozen = Date.now() - t0;
+    if (i.h < last || (i.h === last && Reveal.availableFragments().next)) frozen = null;
+    paint();
+  }
+
+  Reveal.initialize({
+    width: 1920, height: 1080, margin: 0, minScale: .1, maxScale: 4,
+    center: false, controls: false, progress: false, slideNumber: false, hash: true, history: false,
+    transition: 'fade', transitionSpeed: 'slow', backgroundTransition: 'none',
+    overview: false, help: false, touch: true, mouseWheel: false, fragmentInURL: true,
+    pdfSeparateFragments: STEPS, pdfMaxPagesPerSlide: 1, showNotes: false,
+    keyboard: {
+      84: function(){ timer.classList.toggle('show'); },          // T
+      82: function(){ t0 = Reveal.getIndices().h === 0 ? null : Date.now(); frozen = null; paint(); }  // R
+    },
+    plugins: [ RevealNotes ]
+  }).then(function(){
+    ['slidechanged', 'fragmentshown', 'fragmenthidden'].forEach(function(ev){ Reveal.on(ev, onMove); });
+  });
+})();
+</script>
+</body>
+</html>

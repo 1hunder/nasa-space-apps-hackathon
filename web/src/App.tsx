@@ -36,8 +36,6 @@ export function App() {
   const lastDay = mission.days[mission.days.length - 1];
   const outbreak = mission.crew_alerts.find((c) => c.day <= dayNow);
   const first = (id: string) => (mission.crew.find((c) => c.id === id)?.name ?? id).split(" ")[0];
-  const synthetic = [mission.provenance.adaptation, mission.provenance.illness, mission.provenance.events]
-    .every((v) => v === "SYNTHETIC" || v === "NONE");
   const p = mission.provenance;
 
   return (
@@ -67,13 +65,6 @@ export function App() {
       <p className="strip">
         <span>Mars transit</span>
         <span>day {dayNow}</span>
-        <span>one-way delay up to 22 min</span>
-        <span>no physician on board</span>
-        <span className="strip-note">demo assumptions</span>
-        <span className={synthetic ? "strip-prov syn" : "strip-prov"}
-          title="Where the data in this replay comes from. Counts on this screen illustrate the idea; they are not measured results.">
-          {synthetic ? "SYNTHETIC: flight-like, literature-based. Illustration, not a result." : "Ground analog: NASA bed rest"}
-        </span>
       </p>
 
       <main className="stage">

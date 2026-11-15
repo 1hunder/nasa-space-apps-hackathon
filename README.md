@@ -15,6 +15,8 @@ make demo-synthetic   # synthetic missions -> model -> detectors -> web/public/c
 
 ## Dashboard
 
+Live: https://spacenormal.vercel.app (hosted on Vercel; deploy manually with `cd web && npx vercel deploy --prod` until auto-deploy from `main` is connected).
+
 ```bash
 make demo-synthetic          # writes the JSON the dashboard reads
 cd web && npm install && npm run dev

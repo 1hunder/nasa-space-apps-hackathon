@@ -17,9 +17,9 @@ export const VITAL_LABEL: Record<Vital, { name: string; unit: string }> = {
 
 export const DETECTOR_LABEL: Record<Detector, { name: string; how: string }> = {
   fixed_thresholds: { name: "Earth normal", how: "Same limits for everyone" },
-  frozen_baseline: { name: "Pre-flight range", how: "Personal range fixed before launch (NASA CDSS concept)" },
+  frozen_baseline: { name: "Pre-flight range", how: "Personal, fixed at launch" },
   rolling_14: { name: "Rolling 14-day baseline", how: "Normal = the last 14 days" },
-  space_normal: { name: "Space-Normal", how: "Normal moves with the expected adaptation" },
+  space_normal: { name: "Space-Normal", how: "Personal, moves with the mission" },
 };
 
 export const EVENT_LABEL: Record<string, string> = {

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { AlertPanel } from "./components/AlertPanel";
 import { CrewList } from "./components/CrewList";
 import { Figure } from "./components/Figure";
+import { JournalStrip } from "./components/JournalStrip";
+import { MethodCards } from "./components/MethodCards";
 import { DEMO_VITALS, PROVENANCE_LABEL, VITAL_LABEL } from "./labels";
 import { useReplay } from "./useReplay";
 
@@ -9,6 +11,9 @@ export function App() {
   const r = useReplay();
   const { mission, index } = r;
   const [detail, setDetail] = useState(false);
+  // Journal entry open below the chart: -1 follows the replay (latest entry so far).
+  const [entryIndex, setEntryIndex] = useState(-1);
+  useEffect(() => setEntryIndex(-1), [r.dayIndex, r.crewId]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -89,7 +94,10 @@ export function App() {
         )}
 
         <Figure mission={mission} member={member} vital={r.vital} day={r.day} dayIndex={r.dayIndex}
-          detail={detail} reserve={outbreak ? 56 : 0} onScrub={r.setDay} />
+          detail={detail} reserve={outbreak ? 56 : 0} entryIndex={entryIndex} onPickEntry={setEntryIndex} onScrub={r.setDay} />
+
+        <MethodCards mission={mission} dayNow={dayNow} detail={detail} />
+        <JournalStrip mission={mission} member={member} dayNow={dayNow} index={entryIndex} onIndex={setEntryIndex} />
 
         {detail && (
           <p className="fineprint">

@@ -385,3 +385,48 @@ body { background: #05070f; }
 @media (prefers-reduced-motion: no-preference) { .mars { transition: transform 0.5s linear; } }
 .figure .fixed-text { fill: var(--text); font-size: 18px; opacity: 1; }
 .fixed-leader { stroke: var(--text); stroke-width: 1; opacity: 0.5; }
+
+/* ---------- method cards: how each way of judging the readings has done so far ---------- */
+.methods { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 12px; margin: 4px 0 10px; }
+.method {
+  display: grid; grid-template-columns: 1fr auto; column-gap: 12px; row-gap: 3px; align-items: baseline;
+  padding: 10px 14px; border-radius: 14px; background: rgba(255, 255, 255, 0.035); border: 1px solid var(--line);
+}
+.method-ours { background: rgba(69, 214, 196, 0.09); border-color: rgba(69, 214, 196, 0.5); }
+.method h3 { font-size: 17px; font-weight: 700; font-stretch: 106%; line-height: 1.2; }
+.method-ours h3 { color: var(--space); }
+.method-how { grid-column: 1 / -1; color: var(--muted); font-size: 14px; line-height: 1.25; }
+.method-count { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.method-count strong { font-size: 26px; font-weight: 760; font-stretch: 116%; line-height: 1; margin-right: 3px; }
+.method-count.is-bad strong { color: var(--alarm); }
+.method-count.is-good strong { color: var(--space); }
+.method-strip { grid-column: 1 / -1; position: relative; height: 10px; margin: 6px 0 5px; border-radius: 5px; background: rgba(255, 255, 255, 0.06); }
+.strip-done { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: rgba(255, 255, 255, 0.08); }
+.strip-false, .strip-near, .strip-hit { position: absolute; top: 0; bottom: 0; width: 4px; margin-left: -2px; border-radius: 2px; }
+.strip-false { background: var(--alarm); }
+.strip-near { background: var(--muted); opacity: 0.7; }
+.strip-hit { width: 14px; height: 14px; top: -2px; margin-left: -7px; border-radius: 50%; background: var(--ink); border: 3px solid var(--space); }
+.method-verdict { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; line-height: 1.2; }
+.verdict-icon { flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: 13px; font-weight: 800; background: rgba(255, 255, 255, 0.1); }
+.tone-good { color: var(--space); }
+.tone-good .verdict-icon { background: var(--space); color: var(--ink); }
+.tone-bad { color: var(--alarm); }
+.tone-bad .verdict-icon { background: var(--alarm); color: var(--ink); }
+.tone-wait { color: var(--event); }
+.tone-none { color: var(--muted); font-weight: 500; }
+
+/* ---------- crew journal: one readable entry at a time ---------- */
+.journal { padding: 9px 14px 10px; border-radius: 14px; background: rgba(255, 255, 255, 0.035); border: 1px solid var(--line); margin-bottom: 6px; min-height: 96px; }
+.journal-head { display: flex; align-items: baseline; gap: 12px; }
+.journal h3 { font-size: 15px; font-weight: 680; }
+.journal-when { color: var(--muted); font-size: 14px; }
+.journal-nav { margin-left: auto; display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; }
+.journal-nav button { width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); font-size: 18px; line-height: 1; color: var(--text); }
+.journal-nav button:hover:not(:disabled) { border-color: var(--muted); }
+.journal-nav button:disabled { opacity: 0.35; cursor: default; }
+.journal-quote { font-size: 17px; line-height: 1.3; margin: 3px 0 4px; }
+.journal-read { color: var(--muted); font-size: 14px; line-height: 1.4; }
+.journal-tag { display: inline-block; margin-right: 8px; padding: 1px 9px; border-radius: 999px; background: rgba(201, 207, 240, 0.16); color: #dfe3fb; }
+.journal-tag.is-accounted { background: rgba(244, 183, 64, 0.2); color: var(--event); }
+.journal-mock { margin-left: 8px; font-style: italic; opacity: 0.8; }
+.journal-empty p { color: var(--muted); margin-top: 4px; }

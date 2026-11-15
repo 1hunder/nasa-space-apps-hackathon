@@ -37,29 +37,27 @@ export function AlertPanel({ mission, alert, viewing }: { mission: Mission; aler
         {name} is <strong>{fixed(s.residual[i] ?? 0, dg)} {unit}</strong> above what is expected for you today.
         No logged event explains it.
       </p>
-
-      <h3 className="step">CHECK NOW</h3>
-      <p className="step-text">
-        Repeat the reading at rest{note ? `, then answer ${note.questions.length} questions (about 1 minute).` : "."}
-      </p>
-      {note && (
-        <details className="questions">
-          <summary>Show the questions</summary>
-          <ol className="step-list">{note.questions.map((q) => <li key={q}>{q}</li>)}</ol>
-        </details>
-      )}
-
-      <h3 className="step">ESCALATE IF</h3>
-      <p className="step-text">
-        Still outside your range tomorrow, or a medical limit is crossed
-        <span className="assumption"> (limits are placeholders)</span>.
-        {note && <> Handover note ready, {note.bytes} bytes.</>}
-      </p>
-
       <p className="not-dx">Not a diagnosis.</p>
 
       <details>
-        <summary>Numbers and handover note</summary>
+        <summary>What to check now</summary>
+        <p className="step-text">
+          Repeat the reading at rest{note ? `, then answer these ${note.questions.length} questions (about 1 minute).` : "."}
+        </p>
+        {note && <ol className="step-list">{note.questions.map((q) => <li key={q}>{q}</li>)}</ol>}
+      </details>
+
+      <details>
+        <summary>When to escalate</summary>
+        <p className="step-text">
+          If the reading is still outside your range tomorrow, or a medical limit is crossed
+          <span className="assumption"> (limits are placeholders)</span>.
+          {note && <> A handover note is ready, {note.bytes} bytes.</>}
+        </p>
+      </details>
+
+      <details>
+        <summary>Numbers behind this alert</summary>
         <div className="sum">
           <div className="sum-total">
             <span>Daily mean</span>
@@ -74,25 +72,26 @@ export function AlertPanel({ mission, alert, viewing }: { mission: Mission; aler
         {lead !== null && lead > 0 && (
           <p className="lead">In this simulation the illness was planted: flagged {lead} {lead === 1 ? "day" : "days"} before its symptoms start.</p>
         )}
-        {note && (
-          <>
-            <h3 className="handover-title">Handover note</h3>
-            <p className="handover-sub">for the flight surgeon or a diagnostic assistant</p>
-            <p className="note">{note.text.split("\n")[0]}</p>
-            <p className="chips">
-              <span className="chip">{note.numbers_verified ? "Numbers verified against data" : "Numbers not verified"}</span>
-              <span className="chip">{note.bytes} bytes to downlink</span>
-            </p>
-            <p className="note muted">The detector alone raises and grades alerts. The assistant only words the note; it cannot raise, delay or lower an alert.</p>
-            {note.context_items.length > 0 && (
-              <>
-                <h3>Possible contributors, unverified</h3>
-                <ul>{note.context_items.map((c) => <li key={c.source_ref}>{c.text}</li>)}</ul>
-              </>
-            )}
-          </>
-        )}
       </details>
+
+      {note && (
+        <details>
+          <summary>Handover note for the flight surgeon</summary>
+          <p className="note muted">For the flight surgeon or a diagnostic assistant.</p>
+          <p className="note">{note.text.split("\n")[0]}</p>
+          <p className="chips">
+            <span className="chip">{note.numbers_verified ? "Numbers verified against data" : "Numbers not verified"}</span>
+            <span className="chip">{note.bytes} bytes to downlink</span>
+          </p>
+          <p className="note muted">The detector alone raises and grades alerts. The assistant only words the note; it cannot raise, delay or lower an alert.</p>
+          {note.context_items.length > 0 && (
+            <>
+              <h3>Possible contributors, unverified</h3>
+              <ul>{note.context_items.map((c) => <li key={c.source_ref}>{c.text}</li>)}</ul>
+            </>
+          )}
+        </details>
+      )}
     </section>
   );
 }

@@ -73,7 +73,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const days = mission.days;
   const n = days.length;
   // The chart takes the height the window can spare; detail rows trade some of it away.
-  const spare = Math.max(330, Math.min(640, window.innerHeight - 506 - reserve));
+  const spare = Math.max(330, Math.min(640, window.innerHeight - 432 - reserve));
   const chartBottom = detail ? Math.max(240, spare - 110) : spare;
   const plotW = Math.max(240, width - GUTTER_L - GUTTER_R);
   const right = GUTTER_L + plotW;

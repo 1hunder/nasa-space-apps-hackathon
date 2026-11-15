@@ -1,12 +1,13 @@
 import { DETECTORS, type Detector, type Mission } from "../contract";
 import { DETECTOR_LABEL } from "../labels";
 
-const MAIN: Detector[] = ["fixed_thresholds", "frozen_baseline", "space_normal"];
+// Our own method first, then the ones it is compared with.
+const ORDER: Detector[] = ["space_normal", "frozen_baseline", "fixed_thresholds", "rolling_14"];
 const NOISY = 3; // with this many false alarms, a matching alarm cannot be told apart from the rest
 const WINDOW_DAYS = 3; // a method has missed an illness once this many days have passed since symptoms began
 
-/** One card per way of judging the readings: how often it cried wolf, and whether it caught the illness. */
-export function MethodCards({ mission, dayNow, detail }: { mission: Mission; dayNow: number; detail: boolean }) {
+/** An expandable list, one row per way of judging the readings: how often it cried wolf, and whether it caught the illness. */
+export function MethodCards({ mission, dayNow }: { mission: Mission; dayNow: number }) {
   const first = mission.days[0];
   const span = mission.days[mission.days.length - 1] - first;
   const pct = (day: number) => `${((day - first) / span) * 100}%`;
@@ -14,8 +15,13 @@ export function MethodCards({ mission, dayNow, detail }: { mission: Mission; day
   const closed = new Set(mission.episodes.filter((e) => e.onset_day + WINDOW_DAYS < dayNow).map((e) => e.crew_id));
 
   return (
-    <section className="methods" aria-label="How each method has done so far">
-      {(detail ? [...DETECTORS] : MAIN).map((det) => {
+    <details className="methods">
+      <summary>
+        <span className="methods-title">Compare monitoring methods</span>
+        <span className="methods-sub">false alarms and missed illness so far, for {ORDER.length} ways of judging the same readings</span>
+      </summary>
+      <ul className="method-list">
+      {ORDER.filter((d) => (DETECTORS as readonly string[]).includes(d)).map((det) => {
         const seen = mission.alerts.filter((a) => a.level === "red" && a.detector === det && a.day <= dayNow);
         const falseAlarms = seen.filter((a) => a.truth === "false_alarm");
         const hits = seen.filter((a) => a.truth === "hit");
@@ -40,12 +46,14 @@ export function MethodCards({ mission, dayNow, detail }: { mission: Mission; day
         else verdict = { tone: "bad", icon: "✕", text: "Missed the illness" };
 
         return (
-          <article key={det} className={det === "space_normal" ? "method method-ours" : "method"}>
-            <h3>{DETECTOR_LABEL[det].name}</h3>
+          <li key={det} className={det === "space_normal" ? "method method-ours" : "method"}>
+            <div className="method-name">
+              <h3>{DETECTOR_LABEL[det].name}</h3>
+              <p className="method-how">{DETECTOR_LABEL[det].how}</p>
+            </div>
             <p className={falseAlarms.length ? "method-count is-bad" : "method-count is-good"}>
               <strong>{falseAlarms.length}</strong> false {falseAlarms.length === 1 ? "alarm" : "alarms"}
             </p>
-            <p className="method-how">{DETECTOR_LABEL[det].how}</p>
             <div className="method-strip" aria-hidden="true">
               <span className="strip-done" style={{ width: pct(dayNow) }} />
               {seen.map((a) => (
@@ -56,9 +64,10 @@ export function MethodCards({ mission, dayNow, detail }: { mission: Mission; day
             <p className={`method-verdict tone-${verdict.tone}`}>
               <span className="verdict-icon" aria-hidden="true">{verdict.icon}</span>{verdict.text}
             </p>
-          </article>
+          </li>
         );
       })}
-    </section>
+      </ul>
+    </details>
   );
 }

@@ -96,8 +96,8 @@ export function App() {
         <Figure mission={mission} member={member} vital={r.vital} day={r.day} dayIndex={r.dayIndex}
           detail={detail} reserve={outbreak ? 56 : 0} entryIndex={entryIndex} onPickEntry={setEntryIndex} onScrub={r.setDay} />
 
-        <MethodCards mission={mission} dayNow={dayNow} detail={detail} />
         <JournalStrip mission={mission} member={member} dayNow={dayNow} index={entryIndex} onIndex={setEntryIndex} />
+        <MethodCards mission={mission} dayNow={dayNow} />
 
         {detail && (
           <p className="fineprint">

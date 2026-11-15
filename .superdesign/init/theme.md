@@ -1,0 +1,329 @@
+# Theme
+
+## Summary
+- Font: Archivo Variable (weight and width axes), fallback system-ui. Tabular numerals. Minimum text 14px; body 16px; headings 21-40px using wider font-stretch (108-125%) and weight 700-760.
+- Colours (CSS variables on :root):
+  - --ink #0e1230 (page), --ink-2 #161b40 (raised surface), --ink-3 #222a60 (controls/selection), --line #2f3875
+  - --text #f1f2fb, --muted #a3abd6
+  - --space #45d6c4 (teal: as expected / the moving normal), --space-fill rgba(69,214,196,.2)
+  - --earth #d8c39a (sand: the flat pre-flight range), --earth-fill rgba(216,195,154,.07)
+  - --event #f4b740 (amber: explained by a logged event), --alarm #ff5a6a (red: unexplained), --crew #b693ff (purple: crew-wide), --noise #5e68a8
+- Radius: 9-14px on controls and cards, 999px pills. Borders 1-1.5px in --line or a state colour.
+- Layout: CSS grid, main column + 348px side column, 36px gutters, 22px/36px page padding. Single breakpoint at 1000px collapses to one column.
+- Motion: heart beat and outline pulse on alert states, card arrive/open; all disabled under prefers-reduced-motion.
+
+## Raw source
+
+### `web/src/styles.css`
+
+```css
+:root {
+  --ink: #0e1230;          /* orbital night */
+  --ink-2: #161b40;        /* raised surface */
+  --ink-3: #222a60;        /* controls, selection */
+  --line: #2f3875;
+  --text: #f1f2fb;
+  --muted: #a3abd6;
+  --space: #45d6c4;        /* the normal that moves */
+  --space-fill: rgba(69, 214, 196, 0.2);
+  --earth: #d8c39a;        /* the old, fixed normal */
+  --earth-fill: rgba(216, 195, 154, 0.07);
+  --event: #f4b740;
+  --alarm: #ff5a6a;
+  --crew: #b693ff;
+  --noise: #5e68a8;
+  font-family: "Archivo Variable", system-ui, sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ink); }
+h1, h2, h3, p { margin: 0; }
+button, select { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 348px;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 0 36px;
+  min-height: 100vh;
+  padding: 22px 36px 20px;
+}
+
+/* ---------- top bar ---------- */
+.top { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; margin-bottom: 10px; }
+.top h1 { font-size: 26px; font-weight: 760; font-stretch: 122%; letter-spacing: -0.01em; margin-right: 6px; }
+.pick select {
+  appearance: none; padding: 8px 34px 8px 13px; border-radius: 9px; border: 1px solid var(--line);
+  background: var(--ink-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23a3abd6' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 12px center;
+  font-size: 15px; font-weight: 520; cursor: pointer;
+}
+.badge { font-size: 14px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.badge-syn { border-color: rgba(244, 183, 64, 0.6); color: var(--event); }
+.badge-real { border-color: var(--space); color: var(--space); }
+.clock { margin-left: auto; display: flex; align-items: baseline; gap: 8px; }
+.clock-day { font-size: 40px; font-weight: 760; font-stretch: 125%; line-height: 1; min-width: 5.4ch; text-align: right; }
+.clock-of { color: var(--muted); }
+.clock-hour { font-size: 22px; font-weight: 600; font-stretch: 112%; min-width: 3.4ch; }
+.play { min-width: 104px; padding: 11px 20px; border-radius: 10px; font-weight: 650; background: var(--text); color: var(--ink); }
+.play:hover { background: #fff; }
+
+/* ---------- stage ---------- */
+.stage { min-width: 0; }
+.stage-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.stage-head h2 { font-size: 30px; font-weight: 720; font-stretch: 116%; line-height: 1.1; margin-right: 4px; }
+.more { margin-left: auto; padding: 8px 13px; border-radius: 9px; border: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+.more:hover { color: var(--text); border-color: var(--muted); }
+.fineprint { color: var(--muted); font-size: 14px; line-height: 1.5; max-width: 78ch; margin: 10px 0 0 44px; }
+
+.figure { width: 100%; position: relative; }
+.picked { fill: none; stroke: var(--text); stroke-width: 2; }
+.tip {
+  position: absolute; width: 224px; transform: translate(-50%, calc(-100% - 16px)); z-index: 2;
+  background: var(--ink-3); border: 1px solid var(--muted); border-radius: 12px; padding: 12px 14px;
+  box-shadow: 0 10px 30px rgba(4, 6, 24, 0.6); font-size: 14px; pointer-events: none;
+}
+.tip-below { transform: translate(-50%, 16px); }
+.tip-journal { width: 288px; }
+.tip-quote { font-size: 16px; line-height: 1.35; margin: 6px 0 10px; }
+.tip-read { color: var(--muted); padding-top: 8px; border-top: 1px solid var(--line); }
+.tip-effect { margin-top: 2px; }
+.tip-effect.accounted { color: var(--event); }
+.entry { fill: #c9cff0; stroke: var(--ink); stroke-width: 1.5; }
+.entry-accounted { fill: var(--event); }
+.entry-open { stroke: var(--text); stroke-width: 2; }
+.tip-day { color: var(--muted); }
+.tip-value { font-size: 26px; font-weight: 760; font-stretch: 118%; line-height: 1.15; margin-bottom: 8px; }
+.tip-value small { font-size: 14px; font-weight: 500; color: var(--muted); }
+.tip dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; margin: 0; }
+.tip dt { padding-left: 9px; border-left: 3px solid var(--line); }
+.tip dd { margin: 0; font-weight: 640; text-align: right; }
+.tip .t-adapt { border-left-color: var(--space); }
+.tip .t-event { border-left-color: var(--event); }
+.tip .t-unexplained { border-left-color: var(--alarm); }
+.tip .t-noise { border-left-color: var(--noise); }
+.tip-verdict { margin-top: 9px; color: var(--space); font-weight: 620; }
+.tip-verdict.bad { color: var(--alarm); }
+.tip-earth { color: var(--earth); }
+.figure svg { display: block; user-select: none; }
+.figure text { fill: var(--text); font-size: 14px; }
+.figure .tick { fill: var(--muted); }
+.grid { stroke: var(--line); stroke-width: 1; opacity: 0.5; }
+.earth-edge { stroke: var(--earth); stroke-width: 1.4; stroke-dasharray: 7 5; opacity: 0.85; }
+.corridor { fill: var(--space-fill); stroke: var(--space); stroke-width: 1.8; stroke-linejoin: round; }
+.allowance { fill: var(--event); opacity: 0.5; }
+.excess { fill: var(--alarm); opacity: 0.42; }
+.hourly { fill: none; stroke: var(--text); stroke-width: 0.8; stroke-linejoin: round; opacity: 0.2; }
+.trace { fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linejoin: round; opacity: 0.95; }
+.dot { fill: var(--text); }
+.dot-red { fill: var(--alarm); stroke: var(--ink); stroke-width: 1.5; }
+.leader { stroke: var(--space); stroke-width: 1; opacity: 0.6; }
+.figure .band-label { font-size: 18px; font-weight: 700; font-stretch: 108%; }
+.figure .earth-text { fill: var(--earth); }
+.figure .space-text { fill: var(--space); }
+.figure .band-sub, .figure .lane-how { fill: var(--muted); font-size: 14px; }
+.onset { stroke: var(--alarm); stroke-width: 1.4; stroke-dasharray: 3 4; }
+.figure .note-text { fill: var(--alarm); font-size: 14px; }
+.figure .event-text { fill: var(--event); }
+.alert-flag { fill: var(--alarm); }
+.figure .alert-text { fill: var(--alarm); font-weight: 680; font-size: 16px; }
+.figure .row-title { font-weight: 620; font-size: 15px; }
+.bar-adapt { fill: var(--space); }
+.bar-event { fill: var(--event); }
+.bar-unexplained { fill: var(--alarm); }
+.bar-noise { fill: var(--noise); }
+.legend text { fill: var(--muted); font-size: 14px; }
+.lane-line { stroke: var(--line); stroke-width: 1; }
+.lane-highlight { fill: rgba(69, 214, 196, 0.09); stroke: rgba(69, 214, 196, 0.45); stroke-width: 1; }
+.figure .lane-name { font-weight: 660; font-size: 16px; }
+.figure .lane-sn .lane-name { fill: var(--space); }
+.tick-false { fill: var(--alarm); }
+.tick-near { fill: var(--muted); }
+.tick-hit { fill: var(--ink); stroke: var(--space); stroke-width: 3; }
+.figure .count { font-weight: 700; font-size: 16px; }
+.figure .count-bad { fill: var(--alarm); }
+.figure .count-good { fill: var(--space); }
+.playhead { stroke: var(--text); stroke-width: 1.5; opacity: 0.7; }
+
+/* ---------- side column ---------- */
+.side { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+.crew { display: flex; flex-direction: column; gap: 2px; }
+.crew-row {
+  display: grid; grid-template-columns: 26px 1fr; column-gap: 8px; text-align: left;
+  padding: 9px 12px; border-radius: 10px; border: 1.5px solid transparent;
+}
+.crew-row:hover { background: var(--ink-2); }
+.crew-mark { grid-row: 1 / 3; align-self: center; font-weight: 800; font-size: 18px; text-align: center; color: var(--space); }
+.crew-name { font-size: 17px; font-weight: 640; }
+.crew-state { font-size: 14px; color: var(--muted); }
+.state-event .crew-mark { color: var(--event); }
+.state-unexplained .crew-mark, .state-unexplained .crew-state { color: var(--alarm); }
+.state-crew .crew-mark, .state-crew .crew-state { color: var(--crew); }
+.state-unexplained.crew-row { border-color: rgba(255, 90, 106, 0.55); }
+.state-crew.crew-row { border-color: rgba(182, 147, 255, 0.55); }
+
+/* The selected crew member opens into a card. The body map is its main content. */
+.crew-card {
+  --report: #c9cff0;       /* the crew's own words: same pale mark as the journal row of the chart */
+  display: grid; grid-template-columns: 90px 1fr; column-gap: 16px; align-items: start;
+  padding: 7px 14px 7px 12px; margin: 4px 0; border-radius: 14px;
+  background: linear-gradient(160deg, var(--ink-3), var(--ink-2) 70%);
+  border: 1.5px solid var(--line); animation: open 0.28s ease-out;
+}
+@keyframes open { from { opacity: 0; transform: scale(0.97); } }
+.crew-card.state-unexplained { border-color: var(--alarm); }
+.crew-card.state-crew { border-color: var(--crew); }
+.crew-card-text { display: flex; flex-direction: column; min-width: 0; padding-top: 14px; }
+.crew-card .crew-name { font-size: 19px; font-weight: 700; font-stretch: 108%; line-height: 1.15; }
+.readout { display: flex; flex-direction: column; gap: 3px; margin-top: 12px; padding-left: 10px; border-left: 2px solid transparent; font-size: 14px; line-height: 1.32; }
+.readout:not(:empty) { border-left-color: var(--space); }
+.readout-title { font-weight: 660; }
+.readout-quote { color: var(--text); }
+.readout-day { display: block; color: var(--muted); }
+.readout-report:not(:empty) { border-left: 2px dotted var(--report); }
+.readout-event:not(:empty) { border-left-color: var(--event); }
+.readout-unexplained:not(:empty) { border-left-color: var(--alarm); }
+.readout-crew:not(:empty) { border-left-color: var(--crew); }
+
+/* Body map. Detector states are colour plus form: expected = thin solid outline and dim organ,
+   logged event = dashed outline and hatched organ, unexplained = heavy outline, haloed solid organ, motion,
+   crew-wide = long-dash heavy outline and striped haloed organ. */
+.body { width: 90px; height: 177px; overflow: visible; }
+.sys { color: var(--space); }
+.sys-event { color: var(--event); }
+.sys-unexplained { color: var(--alarm); }
+.sys-crew { color: var(--crew); }
+.body .glow { opacity: 0.55; pointer-events: none; }
+.sys-unexplained .glow, .sys-crew .glow { opacity: 1; }
+.body .plate { fill: currentColor; fill-opacity: 0.1; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: round; }
+.sys-event .plate { stroke-dasharray: 3.5 2.5; }
+.sys-unexplained .plate { fill-opacity: 0.2; stroke-width: 2.3; }
+.sys-crew .plate { fill-opacity: 0.2; stroke-width: 2.3; stroke-dasharray: 9 3; }
+.body .vertebra { fill: currentColor; opacity: 0.3; }
+.body .organ { fill: currentColor; fill-opacity: 0.5; stroke: none; }
+.body .heart { fill-opacity: 1; }
+.sys-event .organ { fill: url(#bf-hatch); fill-opacity: 1; stroke: currentColor; stroke-width: 1.2; }
+.sys-unexplained .organ { fill-opacity: 1; stroke: currentColor; stroke-width: 5; stroke-opacity: 0.38; paint-order: stroke; stroke-linejoin: round; }
+.sys-crew .organ { fill: url(#bf-stripes); fill-opacity: 1; stroke: currentColor; stroke-width: 5; stroke-opacity: 0.38; paint-order: stroke; stroke-linejoin: round; }
+.body .heart, .sys-event .heart, .sys-unexplained .heart, .sys-crew .heart { stroke: var(--ink-2); stroke-width: 1.3; stroke-opacity: 1; paint-order: normal; }
+.body .halo { display: none; fill: currentColor; fill-opacity: 0.22; stroke: currentColor; stroke-width: 1.4; }
+.sys-unexplained .halo, .sys-crew .halo { display: inline; }
+.pat-event { fill: var(--event); }
+.pat-event-bg { fill: var(--event); opacity: 0.25; }
+.pat-crew { fill: var(--crew); }
+.pat-crew-bg { fill: var(--crew); opacity: 0.25; }
+.sys-unexplained .heart, .sys-crew .heart { transform-box: fill-box; transform-origin: center; animation: beat 0.85s ease-in-out infinite; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.28); } }
+.sys-unexplained .plate, .sys-crew .plate { animation: fever 1.7s ease-in-out infinite; }
+@keyframes fever { 50% { stroke-opacity: 0.45; } }
+
+/* A crew member's own report (journal): pale dotted plate plus a ringed dot. Still, never red. */
+.pat-report { fill: var(--report); }
+.pat-report-bg { fill: var(--report); opacity: 0.22; }
+.body .plate.reported { fill: url(#bf-dots); fill-opacity: 1; stroke: var(--report); stroke-width: 2; stroke-dasharray: none; animation: none; }
+.body .spine.reported .vertebra { fill: var(--report); opacity: 1; stroke: var(--ink-2); stroke-width: 1; }
+.body .region { cursor: help; outline: none; }
+.body .region:focus-visible .plate.reported, .body .region:hover .plate.reported { stroke: var(--text); stroke-width: 2.8; }
+.body .region:focus-visible .spine.reported .vertebra, .body .region:hover .spine.reported .vertebra { fill: var(--text); }
+.body .markers { pointer-events: none; }
+.marker-ring { fill: var(--ink-2); fill-opacity: 0.55; stroke: var(--report); stroke-width: 1.5; }
+.marker-dot { fill: var(--report); stroke: var(--ink); stroke-width: 1.2; }
+
+.quiet { color: var(--muted); padding: 12px 14px; border-top: 1px solid var(--line); }
+.quiet span { color: var(--space); font-weight: 800; margin-right: 6px; }
+
+.outbreak { margin: 0 0 12px 44px; padding: 9px 14px; border-radius: 10px; font-size: 15px; line-height: 1.4; background: rgba(182, 147, 255, 0.13); border: 1.5px solid var(--crew); }
+.outbreak strong { color: var(--crew); }
+
+.alert { background: var(--ink-2); border: 1.5px solid var(--alarm); border-radius: 14px; padding: 15px 18px; animation: arrive 0.45s ease-out; }
+@keyframes arrive { from { transform: translateY(12px); opacity: 0; } }
+.alert-kicker { color: var(--alarm); font-weight: 650; font-size: 15px; margin-bottom: 4px; }
+.alert h2 { font-size: 21px; font-weight: 720; font-stretch: 110%; line-height: 1.22; }
+.sum { margin: 12px 0 10px; }
+.sum-total { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 9px; border-bottom: 1px solid var(--line); }
+.sum-total strong { font-size: 32px; font-weight: 760; font-stretch: 120%; line-height: 1; }
+.sum-total small { font-size: 15px; font-weight: 500; color: var(--muted); }
+.sum-row { display: flex; justify-content: space-between; padding: 4px 0 4px 11px; border-left: 4px solid var(--line); margin-top: 6px; }
+.sum-row .num { font-weight: 650; }
+.row-adapt { border-left-color: var(--space); }
+.row-event { border-left-color: var(--event); }
+.row-unexplained { border-left-color: var(--alarm); }
+.row-unexplained .num { color: var(--alarm); font-size: 19px; }
+.lead { color: var(--space); font-weight: 640; }
+.alert details { margin-top: 11px; border-top: 1px solid var(--line); padding-top: 10px; font-size: 14px; line-height: 1.45; }
+.alert summary { cursor: pointer; color: var(--muted); font-size: 15px; }
+.alert summary:hover { color: var(--text); }
+.alert h3 { font-size: 14px; font-weight: 620; color: var(--muted); margin: 12px 0 4px; }
+.note { margin-top: 10px; }
+.muted { color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip { padding: 2px 9px; border-radius: 999px; background: var(--ink-3); }
+.alert ol, .alert ul { margin: 0; padding-left: 20px; }
+.alert li + li { margin-top: 3px; }
+
+.empty { padding: 15vh 10vw; max-width: 60ch; }
+.empty h1 { font-size: 32px; font-stretch: 122%; margin-bottom: 12px; }
+.empty p { color: var(--muted); line-height: 1.5; }
+
+@media (max-width: 1000px) {
+  .app { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+  .top { flex-wrap: wrap; }
+  .clock { margin-left: 0; }
+  .side { margin-top: 20px; }
+  .stage-head { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alert, .crew-card, .body .heart, .body .plate { animation: none !important; }
+}
+
+/* ---------- mission strip, provenance ---------- */
+.strip { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; margin-bottom: 16px; font-size: 14px; color: var(--muted); }
+.strip span + span::before { content: ""; display: inline-block; width: 1px; height: 12px; background: var(--line); margin: 0 12px; vertical-align: -1px; }
+.strip span:first-child { color: var(--text); font-weight: 620; }
+
+/* ---------- Earth-normal limit on the chart ---------- */
+.fixed-limit { stroke: var(--text); stroke-width: 1.3; stroke-dasharray: 2 5; opacity: 0.75; }
+.figure .fixed-text { fill: var(--text); font-size: 14px; opacity: 0.85; }
+
+/* ---------- astronaut card ---------- */
+.alert .step { font-size: 14px; font-weight: 700; letter-spacing: 0.06em; color: var(--muted); margin: 13px 0 3px; }
+.alert .step:first-of-type { color: var(--alarm); }
+.step-text { line-height: 1.4; }
+.step-text strong { color: var(--alarm); }
+.step-list { margin: 0; padding-left: 20px; line-height: 1.35; font-size: 15px; }
+.step-list li + li { margin-top: 3px; }
+.assumption { color: var(--muted); font-style: italic; }
+.not-dx { margin-top: 12px; font-weight: 700; }
+.alert details .sum { margin-top: 12px; }
+.alert details.questions { margin-top: 6px; border-top: 0; padding-top: 0; }
+.alert { padding: 13px 16px; }
+.alert .step { margin: 10px 0 2px; }
+.side { gap: 10px; }
+/* unselected crew: one line each, name left and status right */
+.crew-row { grid-template-columns: 26px 1fr auto; align-items: baseline; padding: 8px 12px; }
+.crew-row .crew-mark { grid-row: auto; }
+.crew-row .crew-state { text-align: right; }
+
+/* demo header controls */
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 9px; border: 1px solid var(--line); background: var(--ink-2); }
+.seg-opt { padding: 5px 12px; border-radius: 6px; font-size: 15px; font-weight: 520; color: var(--muted); white-space: nowrap; }
+.seg-opt:hover { color: var(--text); }
+.seg-opt[aria-pressed="true"] { background: var(--ink-3); color: var(--text); }
+.seg-unit { font-size: 13px; font-weight: 440; color: var(--muted); margin-left: 3px; }
+
+/* watched days, handover note */
+/* A single day above the range: a hollow ring in the neutral reading colour. Red stays for sustained excursions, amber for logged events. */
+.dot-watch { fill: var(--ink); stroke: var(--text); stroke-width: 1.5; }
+.tip-watch { margin-top: 6px; padding-top: 7px; border-top: 1px solid var(--line); color: var(--muted); line-height: 1.35; }
+.alert h3.handover-title { color: var(--text); font-size: 15px; margin: 14px 0 0; }
+.handover-sub { color: var(--muted); }
+.handover-sub + .note { margin-top: 6px; }
+
+```

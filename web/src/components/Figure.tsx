@@ -141,8 +141,24 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const snAlerts = mission.alerts.filter(
     (a) => a.detector === "space_normal" && a.level === "red" && a.crew_id === member.id && a.day <= dayNow);
   const rangeTopNow = y(s.band_high[dayIndex] - s.events[dayIndex]);
-  const earthLabelY = (earthTop + earthBottom) / 2;
-  const spaceLabelY = Math.min(rangeTopNow + 4, earthLabelY - 48); // keep the two labels apart early on
+  // Right-hand labels: each wants to sit beside its own band or line. Lay them out top to bottom and
+  // push neighbours apart so two-line labels never overlap each other or the chart.
+  const limitShown = [s.fixed_high, s.fixed_low].filter((l): l is number => l !== null && l > yLo && l < yHi);
+  const wanted = [
+    { key: "space", y: rangeTopNow + 4 },
+    { key: "preflight", y: (earthTop + earthBottom) / 2 },
+    ...limitShown.map((l, k) => ({ key: `limit${k}`, y: y(l) + 5 })),
+  ].sort((p, q) => p.y - q.y);
+  const LABEL_GAP = 46;
+  for (let k = 1; k < wanted.length; k++) wanted[k].y = Math.max(wanted[k].y, wanted[k - 1].y + LABEL_GAP);
+  const overflow = wanted[wanted.length - 1].y + 22 - chartBottom;
+  if (overflow > 0) {
+    wanted[wanted.length - 1].y -= overflow;
+    for (let k = wanted.length - 2; k >= 0; k--) wanted[k].y = Math.min(wanted[k].y, wanted[k + 1].y - LABEL_GAP);
+  }
+  const labelY = Object.fromEntries(wanted.map((w) => [w.key, w.y]));
+  const earthLabelY = labelY.preflight;
+  const spaceLabelY = labelY.space;
 
   const majors = mission.events.filter((e) => e.type !== "exercise" && e.day <= dayNow);
   const firstMajor = majors[0];
@@ -240,11 +256,13 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
         <text x={right + 16} y={earthLabelY} className="band-label earth-text">Pre-flight range</text>
         <text x={right + 16} y={earthLabelY + 19} className="band-sub">personal, fixed at launch</text>
         {/* Earth normal: one limit for everyone */}
-        {[s.fixed_high, s.fixed_low].map((limit, k) => limit !== null && limit > yLo && limit < yHi && (
+        {limitShown.map((limit, k) => (
           <g key={k}>
             <line x1={GUTTER_L} x2={right} y1={y(limit)} y2={y(limit)} className="fixed-limit" />
-            <text x={GUTTER_L + 8} y={y(limit) + (k === 0 ? -7 : 17)} className="fixed-text">
-              Earth normal {k === 0 ? "upper" : "lower"} limit, same for everyone
+            <line x1={right} x2={right + 10} y1={y(limit)} y2={labelY[`limit${k}`] - 5} className="fixed-leader" />
+            <text x={right + 16} y={labelY[`limit${k}`]} className="band-label fixed-text">Earth normal</text>
+            <text x={right + 16} y={labelY[`limit${k}`] + 19} className="band-sub">
+              {limit === s.fixed_high ? "upper" : "lower"} limit, same for all
             </text>
           </g>
         ))}

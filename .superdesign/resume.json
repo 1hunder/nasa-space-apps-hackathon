@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "targets": {
+    "/": {
+      "targetKind": "existing-ui",
+      "projectId": "bc530f51-212e-4b22-85b1-e90aa73f312d",
+      "baselineDraftId": "200325ca-2526-4582-87ff-85510edfa870",
+      "activeDraftId": "200325ca-2526-4582-87ff-85510edfa870",
+      "referenceIds": [],
+      "contextFiles": [
+        "web/src/App.tsx",
+        "web/src/components/Figure.tsx",
+        "web/src/components/CrewList.tsx",
+        "web/src/components/BodyFigure.tsx",
+        "web/src/components/AlertPanel.tsx",
+        "web/src/labels.ts",
+        "web/src/styles.css"
+      ],
+      "fingerprints": {
+        "web/src/App.tsx": "1b5090c428ade542dedcac897d7f8d3eef234e76666756c7d65bb3d2901d8430",
+        "web/src/components/Figure.tsx": "b7e23fa1c879d4a39c093cf9fd6bc03370ad1e9ad1fd1150f7a5ad96e8e3ee1c",
+        "web/src/components/CrewList.tsx": "e2a7d5de6ade35a0bd2b571a60cbccad912e2bf48955bdcd1d7d4deb24c31c88",
+        "web/src/components/BodyFigure.tsx": "930e95a82aa303dcaf7a08ccf93997838c93357948a95fb264dabdb24ebe81d2",
+        "web/src/components/AlertPanel.tsx": "447e0c2729488fde248aaa9ea6f35b45d36a74fd19cc03119c9f18ccff63801d",
+        "web/src/labels.ts": "0ca9030a61b3a107ac00e7511b70ec6bde228e46fd387addc81cae63724973ee",
+        "web/src/styles.css": "9d81e9620bc8e9ee8a2c3f584d3eb9a196354d86c8bcf53619a2e3ccd74b143c"
+      },
+      "components": [],
+      "drafts": {
+        "200325ca-2526-4582-87ff-85510edfa870": {
+          "title": "Current mission dashboard",
+          "visualDirection": "faithful reproduction (baseline)",
+          "currentVersion": 1
+        },
+        "7f18dca8-2ad4-4494-be4c-f26a7f36b780": {
+          "title": "Space-Normal Mission Health OS",
+          "visualDirection": "dark product: nav rail, replay scrubber, photo avatars, monitor cards, numbered astronaut card",
+          "parentDraftId": "200325ca-2526-4582-87ff-85510edfa870",
+          "currentVersion": 1
+        },
+        "6ffbfd21-9669-47b5-a384-a0555281acbc": {
+          "title": "Space-Normal Light Edition",
+          "visualDirection": "light clinical: three columns, white cards, Mars photo banner, Start check button",
+          "parentDraftId": "200325ca-2526-4582-87ff-85510edfa870",
+          "currentVersion": 1
+        }
+      }
+    }
+  }
+}

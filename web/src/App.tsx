@@ -34,25 +34,36 @@ export function App() {
   const p = mission.provenance;
 
   return (
-    <div className="app">
+    <div className="app" style={{ "--transit": (r.day - mission.days[0]) / (lastDay - mission.days[0]) } as React.CSSProperties}>
+      {/* Backdrop: star field and Mars, which grows a little as the transit progresses. */}
+      <div className="sky" aria-hidden="true"><div className="mars" /></div>
+
       <header className="top">
-        <h1>Space-Normal</h1>
-        <div className="clock">
-          <span className="clock-day">Day {dayNow}</span>
-          <span className="clock-of">of {lastDay}</span>
-          {mission.samples_per_day > 1 && (
-            <span className="clock-hour">{String(Math.min(23, Math.floor((r.day - Math.floor(r.day)) * 24))).padStart(2, "0")}:00</span>
-          )}
+        <div className="brand">
+          <svg className="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <ellipse cx="16" cy="16" rx="14" ry="6.2" transform="rotate(-24 16 16)" />
+            <circle cx="16" cy="16" r="5.4" className="brand-core" />
+            <circle cx="27.6" cy="10.4" r="1.9" className="brand-dot" />
+          </svg>
+          <h1>Space-Normal</h1>
+        </div>
+        <div className="mission">
+          <span className="mission-name">Mars transit</span>
+          <div className="clock">
+            <span className="clock-day">Day {dayNow}</span>
+            <span className="clock-of">of {lastDay}</span>
+            {mission.samples_per_day > 1 && (
+              <span className="clock-hour">{String(Math.min(23, Math.floor((r.day - Math.floor(r.day)) * 24))).padStart(2, "0")}:00</span>
+            )}
+          </div>
         </div>
         <button className="play" onClick={r.toggle}>
+          <svg viewBox="0 0 12 12" aria-hidden="true">
+            {r.playing ? <path d="M2 1h3v10H2zM7 1h3v10H7z" /> : <path d="M2.500 1l8 5-8 5z" />}
+          </svg>
           {r.playing ? "Pause" : r.day >= lastDay ? "Replay" : r.day > mission.days[0] ? "Continue" : "Play"}
         </button>
       </header>
-
-      <p className="strip">
-        <span>Mars transit</span>
-        <span>day {dayNow}</span>
-      </p>
 
       <main className="stage">
         <div className="stage-head">
@@ -85,6 +96,7 @@ export function App() {
             Data in this replay: adaptation {PROVENANCE_LABEL[p.adaptation]}, illness {PROVENANCE_LABEL[p.illness]},
             events {PROVENANCE_LABEL[p.events]}; the journal readings are mocked and no language model runs.
             Keys: space plays or pauses, R restarts, the arrow keys step one day, D shows or hides details.
+            Mars image: NASA/JPL/USGS.
           </p>
         )}
       </main>

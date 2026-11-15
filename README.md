@@ -31,6 +31,10 @@ Open the printed URL and press space. One replay takes about 13 seconds and stop
 - `configs/scenarios.yaml` also defines `healthy_crew`, `outbreak` and `shared_event` for the pipeline and the tests. Only scenarios marked `demo: true` there are built into `web/public/cache/`.
 - The cached mission is synthetic, with a seed picked by hand for a clean replay (`configs/scenarios.yaml`). It illustrates the idea; it is not a result.
 
+### Credits
+
+The Mars image behind the dashboard is "Global Color Views of Mars" (PIA00407), a Viking Orbiter mosaic, credit NASA/JPL/USGS. Its use does not imply NASA endorsement. The star field is generated in code. Typeface: Archivo (SIL Open Font License).
+
 ## Layout
 
 ```

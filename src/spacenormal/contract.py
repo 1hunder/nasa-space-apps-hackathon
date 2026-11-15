@@ -29,8 +29,10 @@ class VitalSeries(_Strict):
     z: list[float | None]
     band_low: list[float]
     band_high: list[float]
-    earth_low: list[float]         # fixed band around the pre-mission baseline
+    earth_low: list[float]         # personal pre-flight range: fixed band around the pre-mission baseline
     earth_high: list[float]
+    fixed_low: float | None        # "Earth normal": the same clinical limit for everyone, if one is set
+    fixed_high: float | None
 
 
 class SystemsDay(_Strict):
@@ -72,6 +74,12 @@ class Episode(_Strict):
     provenance: Provenance
 
 
+BODY_REGIONS: tuple[str, ...] = (
+    "head", "neck", "shoulders", "chest", "abdomen", "back",
+    "upper_arms", "forearms", "hands", "thighs", "knees", "calves", "feet",
+)
+
+
 class JournalEntry(_Strict):
     day: int
     hour: int
@@ -80,6 +88,8 @@ class JournalEntry(_Strict):
     category: str
     effect: str                    # the reader's interpretation
     accounted: bool                # True when the model already treats it as a logged event
+    region: str | None             # body area a pain or symptom report refers to (BODY_REGIONS), if any
+    side: Literal["left", "right", "both"] | None
     reader: Literal["mock", "llm"]
 
 
@@ -135,6 +145,8 @@ class Mission(_Strict):
                 raise ValueError(f"{member.id}: vitals must be exactly {VITALS}")
             for name, series in member.vitals.items():
                 for field, values in series:
+                    if field in ("fixed_low", "fixed_high"):
+                        continue
                     if field == "y_hourly":
                         if len(values) != n * self.samples_per_day:
                             raise ValueError(f"{member.id}.{name}.y_hourly: wrong length")
@@ -161,6 +173,8 @@ class Mission(_Strict):
             if not set(ca.crew_ids) <= crew_ids or len(ca.crew_ids) != len(ca.onsets):
                 raise ValueError(f"crew alert on day {ca.day} is inconsistent")
         for j in self.journal:
+            if j.region is not None and j.region not in BODY_REGIONS:
+                raise ValueError(f"journal entry on day {j.day}: unknown body region {j.region}")
             if not set(j.crew_ids) <= crew_ids or j.day not in day_set or not 0 <= j.hour <= 23:
                 raise ValueError(f"journal entry on day {j.day} is inconsistent")
         for ep in self.episodes:

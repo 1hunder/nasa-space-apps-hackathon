@@ -28,9 +28,9 @@ export function useReplay(): Replay {
   const [index, setIndex] = useState<MissionIndex | null>(null);
   const [mission, setMission] = useState<Mission | null>(null);
   const [error, setError] = useState<string | null>(null);
-  // ?scenario=transplant_outbreak&day=40 opens a specific moment (used for bookmarks and screenshots).
+  // ?scenario=outbreak&day=40 opens a specific moment (used for bookmarks and screenshots).
   const params = useRef(new URLSearchParams(window.location.search));
-  const [scenario, setScenario] = useState(params.current.get("scenario") ?? "transplant_single");
+  const [scenario, setScenario] = useState(params.current.get("scenario") ?? "single_illness");
   const [day, setDayState] = useState(1);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);

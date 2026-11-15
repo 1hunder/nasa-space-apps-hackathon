@@ -19,7 +19,7 @@ const GUTTER_R = 172;
 const CHART_TOP = 26;
 const DECOMP_H = 64;
 const LANE_H = 46;
-const SIMPLE_LANES: Detector[] = ["frozen_baseline", "space_normal"];
+const SIMPLE_LANES: Detector[] = ["fixed_thresholds", "frozen_baseline", "space_normal"];
 
 function useWidth(): [React.RefObject<HTMLDivElement>, number] {
   const ref = useRef<HTMLDivElement>(null);
@@ -71,7 +71,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const days = mission.days;
   const n = days.length;
   // The chart takes the height the window can spare; detail rows trade some of it away.
-  const spare = Math.max(380, Math.min(640, window.innerHeight - 384 - reserve));
+  const spare = Math.max(380, Math.min(640, window.innerHeight - 430 - reserve));
   const chartBottom = detail ? Math.max(260, spare - 190) : spare;
   const plotW = Math.max(240, width - GUTTER_L - GUTTER_R);
   const right = GUTTER_L + plotW;
@@ -82,6 +82,11 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const [yLo, yHi] = useMemo(() => {
     const values = [...s.band_low, ...s.band_high, ...s.earth_low, ...s.earth_high,
       ...(s.y.filter((v) => v !== null) as number[])];
+    // Show the Earth-normal limit when it is close enough to matter for this vital.
+    const span = Math.max(...values) - Math.min(...values);
+    for (const limit of [s.fixed_low, s.fixed_high]) {
+      if (limit !== null && limit > Math.min(...values) - span * 0.25 && limit < Math.max(...values) + span * 0.25) values.push(limit);
+    }
     // Hourly readings scatter wider than daily means; let the extremes clip rather than flatten the chart.
     const hourly = (s.y_hourly.filter((v) => v !== null) as number[]).sort((a, b) => a - b);
     if (hourly.length) values.push(hourly[Math.floor(hourly.length * 0.01)], hourly[Math.floor(hourly.length * 0.99)]);
@@ -165,7 +170,10 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   const axisY = lanesTop + lanes.length * LANE_H + 4;
   const height = axisY + 26;
   const reds = mission.alerts.filter((a) => a.level === "red");
-  const knownIllness = mission.episodes.filter((e) => e.onset_day <= dayNow + 3).length;
+  // An illness is known once its symptoms have started. A monitor has missed it only when the
+  // detection window (3 days past onset) has closed without a hit.
+  const started = mission.episodes.filter((e) => e.onset_day <= dayNow).map((e) => e.crew_id);
+  const closed = mission.episodes.filter((e) => e.onset_day + 3 < dayNow).map((e) => e.crew_id);
 
   const dayAt = (e: React.PointerEvent<SVGRectElement>) => {
     const box = e.currentTarget.getBoundingClientRect();
@@ -206,7 +214,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
   return (
     <div ref={ref} className="figure">
       <svg width={width} height={height} role="img"
-        aria-label={`${name} for ${member.name} against the fixed Earth range and the moving Space-Normal range`}>
+        aria-label={`${name} for ${member.name} against the Earth-normal limit, the fixed pre-flight range and the moving Space-Normal range`}>
         <defs>
           <pattern id="earth-hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(40)">
             <rect width="7" height="7" fill="var(--earth-fill)" />
@@ -226,8 +234,17 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
         <rect x={GUTTER_L} y={earthTop} width={plotW} height={earthBottom - earthTop} fill="url(#earth-hatch)" />
         <line x1={GUTTER_L} x2={right} y1={earthTop} y2={earthTop} className="earth-edge" />
         <line x1={GUTTER_L} x2={right} y1={earthBottom} y2={earthBottom} className="earth-edge" />
-        <text x={right + 16} y={earthLabelY} className="band-label earth-text">Earth normal</text>
-        <text x={right + 16} y={earthLabelY + 19} className="band-sub">fixed before launch</text>
+        <text x={right + 16} y={earthLabelY} className="band-label earth-text">Pre-flight range</text>
+        <text x={right + 16} y={earthLabelY + 19} className="band-sub">personal, fixed at launch</text>
+        {/* Earth normal: one limit for everyone */}
+        {[s.fixed_high, s.fixed_low].map((limit, k) => limit !== null && limit > yLo && limit < yHi && (
+          <g key={k}>
+            <line x1={GUTTER_L} x2={right} y1={y(limit)} y2={y(limit)} className="fixed-limit" />
+            <text x={GUTTER_L + 8} y={y(limit) + (k === 0 ? -7 : 17)} className="fixed-text">
+              Earth normal {k === 0 ? "upper" : "lower"} limit, same for everyone
+            </text>
+          </g>
+        ))}
 
         {/* Space-Normal: revealed as the mission runs */}
         <g clipPath="url(#reveal)">
@@ -275,7 +292,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
         {/* crew journal */}
         <text x={GUTTER_L} y={journalTitle} className="row-title">
           Crew journal
-          <tspan className="lane-how" dx="10">free text, read by the assistant</tspan>
+          <tspan className="lane-how" dx="10">free text; the assistant reading is mocked in this demo</tspan>
         </text>
         <line x1={GUTTER_L} x2={right} y1={journalY} y2={journalY} className="lane-line" />
         {entries.map((j, k) => (
@@ -288,7 +305,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
 
         {detail && (
           <g>
-            <text x={GUTTER_L} y={decompTitle} className="row-title">What moved each reading away from the Earth baseline</text>
+            <text x={GUTTER_L} y={decompTitle} className="row-title">What moved each reading away from the pre-flight baseline</text>
             <line x1={GUTTER_L} x2={right} y1={zeroY} y2={zeroY} className="grid" />
             <g clipPath="url(#reveal)">
               {days.map((d, i) => {
@@ -324,7 +341,10 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
           const top = lanesTop + row * LANE_H;
           const seen = reds.filter((a) => a.detector === det && a.day <= dayNow);
           const falseAlarms = seen.filter((a) => a.truth === "false_alarm").length;
-          const hits = new Set(seen.filter((a) => a.truth === "hit").map((a) => a.crew_id)).size;
+          const caught = new Set(seen.filter((a) => a.truth === "hit").map((a) => a.crew_id));
+          const hits = caught.size;
+          const knownIllness = new Set([...started, ...caught]).size;
+          const pending = started.some((c) => !caught.has(c) && !closed.includes(c));
           const isSN = det === "space_normal";
           const trackY = top + 33;
           return (
@@ -344,7 +364,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
               </text>
               <text x={right + 16} y={top + 39} className="lane-how">
                 {knownIllness === 0 ? "no illness so far"
-                  : knownIllness === 1 ? (hits ? "illness caught" : "illness missed")
+                  : knownIllness === 1 ? (hits ? "illness caught" : pending ? "illness not flagged yet" : "illness missed")
                   : `${hits} of ${knownIllness} illnesses caught`}
               </text>
             </g>
@@ -370,7 +390,7 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
               Day {j.day}, {String(j.hour).padStart(2, "0")}:00, {j.crew_ids.length > 1 ? "whole crew" : member.name}
             </p>
             <p className="tip-quote">“{j.text}”</p>
-            <p className="tip-read">Assistant's reading: {j.category}</p>
+            <p className="tip-read">Assistant's reading (mock): {j.category}</p>
             <p className={j.accounted ? "tip-effect accounted" : "tip-effect"}>{j.effect}</p>
           </div>
         );
@@ -387,14 +407,15 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
             <p className="tip-day">Day {days[tip]}</p>
             <p className="tip-value">{fixed(v, dg)} <small>{VITAL_LABEL[vital].unit}</small></p>
             <dl>
-              <dt>Earth baseline</dt><dd>{fixed(s.baseline[tip], dg)}</dd>
+              <dt>Pre-flight baseline</dt><dd>{fixed(s.baseline[tip], dg)}</dd>
               <dt className="t-adapt">Expected adaptation</dt><dd>{signed(s.adaptation[tip], dg)}</dd>
               <dt className="t-event">Logged events</dt><dd>{signed(s.events[tip], dg)}</dd>
               <dt className={z > 2 ? "t-unexplained" : "t-noise"}>{z > 2 ? "Unexplained" : "Day-to-day variation"}</dt>
               <dd>{signed(s.residual[tip] ?? 0, dg)}</dd>
             </dl>
             <p className={`tip-verdict ${v > s.band_high[tip] ? "bad" : ""}`}>{verdict}</p>
-            {outsideEarth && <p className="tip-earth">Outside Earth normal</p>}
+            {outsideEarth && <p className="tip-earth">Outside the pre-flight range</p>}
+            {s.fixed_high !== null && v > s.fixed_high && <p className="tip-earth">Above the Earth-normal limit</p>}
           </div>
         );
       })()}

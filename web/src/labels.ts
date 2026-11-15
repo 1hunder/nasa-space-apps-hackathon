@@ -1,9 +1,9 @@
 import type { Detector, Vital } from "./contract";
 
 export const SCENARIO_LABEL: Record<string, string> = {
-  real_null: "Healthy crew",
-  transplant_single: "One crew member falls ill",
-  transplant_outbreak: "Illness spreads",
+  healthy_crew: "Healthy crew",
+  single_illness: "One crew member falls ill",
+  outbreak: "Illness spreads",
   shared_event: "Schedule change",
 };
 
@@ -16,9 +16,9 @@ export const VITAL_LABEL: Record<Vital, { name: string; unit: string }> = {
 };
 
 export const DETECTOR_LABEL: Record<Detector, { name: string; how: string }> = {
-  fixed_thresholds: { name: "Fixed clinical limits", how: "Same limits for everyone" },
-  frozen_baseline: { name: "Earth-normal monitor", how: "Personal baseline, fixed before launch" },
-  rolling_14: { name: "Rolling recalibration", how: "Normal = the last 14 days" },
+  fixed_thresholds: { name: "Earth normal", how: "Same limits for everyone" },
+  frozen_baseline: { name: "Pre-flight range", how: "Personal range fixed before launch (NASA CDSS concept)" },
+  rolling_14: { name: "Rolling 14-day baseline", how: "Normal = the last 14 days" },
   space_normal: { name: "Space-Normal", how: "Normal moves with the expected adaptation" },
 };
 

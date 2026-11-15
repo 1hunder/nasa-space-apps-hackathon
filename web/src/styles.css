@@ -30,15 +30,15 @@ button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px
 
 .app {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 318px;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 348px;
+  grid-template-rows: auto auto minmax(0, 1fr);
   gap: 0 36px;
   min-height: 100vh;
   padding: 22px 36px 20px;
 }
 
 /* ---------- top bar ---------- */
-.top { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; margin-bottom: 26px; }
+.top { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; margin-bottom: 10px; }
 .top h1 { font-size: 26px; font-weight: 760; font-stretch: 122%; letter-spacing: -0.01em; margin-right: 6px; }
 .pick select {
   appearance: none; padding: 8px 34px 8px 13px; border-radius: 9px; border: 1px solid var(--line);
@@ -149,41 +149,74 @@ button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px
 .state-unexplained.crew-row { border-color: rgba(255, 90, 106, 0.55); }
 .state-crew.crew-row { border-color: rgba(182, 147, 255, 0.55); }
 
-/* The selected crew member opens into a card with the body figure. */
+/* The selected crew member opens into a card. The body map is its main content. */
 .crew-card {
-  display: grid; grid-template-columns: 86px 1fr; column-gap: 14px; align-items: center;
-  padding: 9px 14px 9px 10px; margin: 4px 0; border-radius: 14px;
+  --report: #c9cff0;       /* the crew's own words: same pale mark as the journal row of the chart */
+  display: grid; grid-template-columns: 90px 1fr; column-gap: 16px; align-items: start;
+  padding: 7px 14px 7px 12px; margin: 4px 0; border-radius: 14px;
   background: linear-gradient(160deg, var(--ink-3), var(--ink-2) 70%);
   border: 1.5px solid var(--line); animation: open 0.28s ease-out;
 }
 @keyframes open { from { opacity: 0; transform: scale(0.97); } }
 .crew-card.state-unexplained { border-color: var(--alarm); }
 .crew-card.state-crew { border-color: var(--crew); }
-.crew-card-text { display: flex; flex-direction: column; min-width: 0; }
+.crew-card-text { display: flex; flex-direction: column; min-width: 0; padding-top: 14px; }
 .crew-card .crew-name { font-size: 19px; font-weight: 700; font-stretch: 108%; line-height: 1.15; }
-.systems { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-.part { display: grid; grid-template-columns: 12px auto 1fr; align-items: baseline; column-gap: 7px; font-size: 14px; }
-.part-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--space); align-self: center; }
-.part-state { color: var(--muted); text-align: right; }
-.part-event .part-dot { background: var(--event); }
-.part-event .part-state { color: var(--event); }
-.part-unexplained .part-dot { background: var(--alarm); }
-.part-unexplained .part-state { color: var(--alarm); font-weight: 620; }
-.part-crew .part-dot { background: var(--crew); }
-.part-crew .part-state { color: var(--crew); font-weight: 620; }
+.readout { display: flex; flex-direction: column; gap: 3px; margin-top: 12px; padding-left: 10px; border-left: 2px solid transparent; font-size: 14px; line-height: 1.32; }
+.readout:not(:empty) { border-left-color: var(--space); }
+.readout-title { font-weight: 660; }
+.readout-quote { color: var(--text); }
+.readout-day { display: block; color: var(--muted); }
+.readout-report:not(:empty) { border-left: 2px dotted var(--report); }
+.readout-event:not(:empty) { border-left-color: var(--event); }
+.readout-unexplained:not(:empty) { border-left-color: var(--alarm); }
+.readout-crew:not(:empty) { border-left-color: var(--crew); }
 
-.body { width: 86px; height: 158px; overflow: visible; }
+/* Body map. Detector states are colour plus form: expected = thin solid outline and dim organ,
+   logged event = dashed outline and hatched organ, unexplained = heavy outline, haloed solid organ, motion,
+   crew-wide = long-dash heavy outline and striped haloed organ. */
+.body { width: 90px; height: 177px; overflow: visible; }
 .sys { color: var(--space); }
 .sys-event { color: var(--event); }
 .sys-unexplained { color: var(--alarm); }
 .sys-crew { color: var(--crew); }
-.body .outline { fill: url(#body-fill); stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
-.body .organ { fill: currentColor; stroke: var(--ink-2); stroke-width: 1.5; opacity: 0.9; }
-.sys-expected .organ { opacity: 0.62; }
+.body .glow { opacity: 0.55; pointer-events: none; }
+.sys-unexplained .glow, .sys-crew .glow { opacity: 1; }
+.body .plate { fill: currentColor; fill-opacity: 0.1; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: round; }
+.sys-event .plate { stroke-dasharray: 3.5 2.5; }
+.sys-unexplained .plate { fill-opacity: 0.2; stroke-width: 2.3; }
+.sys-crew .plate { fill-opacity: 0.2; stroke-width: 2.3; stroke-dasharray: 9 3; }
+.body .vertebra { fill: currentColor; opacity: 0.3; }
+.body .organ { fill: currentColor; fill-opacity: 0.5; stroke: none; }
+.body .heart { fill-opacity: 1; }
+.sys-event .organ { fill: url(#bf-hatch); fill-opacity: 1; stroke: currentColor; stroke-width: 1.2; }
+.sys-unexplained .organ { fill-opacity: 1; stroke: currentColor; stroke-width: 5; stroke-opacity: 0.38; paint-order: stroke; stroke-linejoin: round; }
+.sys-crew .organ { fill: url(#bf-stripes); fill-opacity: 1; stroke: currentColor; stroke-width: 5; stroke-opacity: 0.38; paint-order: stroke; stroke-linejoin: round; }
+.body .heart, .sys-event .heart, .sys-unexplained .heart, .sys-crew .heart { stroke: var(--ink-2); stroke-width: 1.3; stroke-opacity: 1; paint-order: normal; }
+.body .halo { display: none; fill: currentColor; fill-opacity: 0.22; stroke: currentColor; stroke-width: 1.4; }
+.sys-unexplained .halo, .sys-crew .halo { display: inline; }
+.pat-event { fill: var(--event); }
+.pat-event-bg { fill: var(--event); opacity: 0.25; }
+.pat-crew { fill: var(--crew); }
+.pat-crew-bg { fill: var(--crew); opacity: 0.25; }
 .sys-unexplained .heart, .sys-crew .heart { transform-box: fill-box; transform-origin: center; animation: beat 0.85s ease-in-out infinite; }
-@keyframes beat { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.32); } }
-.sys-unexplained .outline, .sys-crew .outline { animation: fever 1.7s ease-in-out infinite; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.28); } }
+.sys-unexplained .lung, .sys-crew .lung { transform-box: fill-box; transform-origin: center top; animation: breathe 2.6s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.07); } }
+.sys-unexplained .plate, .sys-crew .plate { animation: fever 1.7s ease-in-out infinite; }
 @keyframes fever { 50% { stroke-opacity: 0.45; } }
+
+/* A crew member's own report (journal): pale dotted plate plus a ringed dot. Still, never red. */
+.pat-report { fill: var(--report); }
+.pat-report-bg { fill: var(--report); opacity: 0.22; }
+.body .plate.reported { fill: url(#bf-dots); fill-opacity: 1; stroke: var(--report); stroke-width: 2; stroke-dasharray: none; animation: none; }
+.body .spine.reported .vertebra { fill: var(--report); opacity: 1; stroke: var(--ink-2); stroke-width: 1; }
+.body .region { cursor: help; outline: none; }
+.body .region:focus-visible .plate.reported, .body .region:hover .plate.reported { stroke: var(--text); stroke-width: 2.8; }
+.body .region:focus-visible .spine.reported .vertebra, .body .region:hover .spine.reported .vertebra { fill: var(--text); }
+.body .markers { pointer-events: none; }
+.marker-ring { fill: var(--ink-2); fill-opacity: 0.55; stroke: var(--report); stroke-width: 1.5; }
+.marker-dot { fill: var(--report); stroke: var(--ink); stroke-width: 1.2; }
 
 .quiet { color: var(--muted); padding: 12px 14px; border-top: 1px solid var(--line); }
 .quiet span { color: var(--space); font-weight: 800; margin-right: 6px; }
@@ -230,5 +263,37 @@ button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .alert, .crew-card, .body .heart, .body .outline { animation: none !important; }
+  .alert, .crew-card, .body .heart, .body .lung, .body .plate { animation: none !important; }
 }
+
+/* ---------- mission strip, provenance ---------- */
+.strip { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; margin-bottom: 16px; font-size: 14px; color: var(--muted); }
+.strip span + span::before { content: ""; display: inline-block; width: 1px; height: 12px; background: var(--line); margin: 0 12px; vertical-align: -1px; }
+.strip span:first-child { color: var(--text); font-weight: 620; }
+.strip-note { font-style: italic; }
+.strip-prov { margin-left: auto; color: var(--space); }
+.strip-prov::before { display: none !important; }
+.strip-prov.syn { color: var(--event); border: 1px solid rgba(244, 183, 64, 0.55); border-radius: 999px; padding: 2px 11px; }
+
+/* ---------- Earth-normal limit on the chart ---------- */
+.fixed-limit { stroke: var(--text); stroke-width: 1.3; stroke-dasharray: 2 5; opacity: 0.75; }
+.figure .fixed-text { fill: var(--text); font-size: 14px; opacity: 0.85; }
+
+/* ---------- astronaut card ---------- */
+.alert .step { font-size: 14px; font-weight: 700; letter-spacing: 0.06em; color: var(--muted); margin: 13px 0 3px; }
+.alert .step:first-of-type { color: var(--alarm); }
+.step-text { line-height: 1.4; }
+.step-text strong { color: var(--alarm); }
+.step-list { margin: 0; padding-left: 20px; line-height: 1.35; font-size: 15px; }
+.step-list li + li { margin-top: 3px; }
+.assumption { color: var(--muted); font-style: italic; }
+.not-dx { margin-top: 12px; font-weight: 700; }
+.alert details .sum { margin-top: 12px; }
+.alert details.questions { margin-top: 6px; border-top: 0; padding-top: 0; }
+.alert { padding: 13px 16px; }
+.alert .step { margin: 10px 0 2px; }
+.side { gap: 10px; }
+/* unselected crew: one line each, name left and status right */
+.crew-row { grid-template-columns: 26px 1fr auto; align-items: baseline; padding: 8px 12px; }
+.crew-row .crew-mark { grid-row: auto; }
+.crew-row .crew-state { text-align: right; }

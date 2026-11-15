@@ -36,6 +36,8 @@ export function App() {
   const lastDay = mission.days[mission.days.length - 1];
   const outbreak = mission.crew_alerts.find((c) => c.day <= dayNow);
   const first = (id: string) => (mission.crew.find((c) => c.id === id)?.name ?? id).split(" ")[0];
+  const synthetic = [mission.provenance.adaptation, mission.provenance.illness, mission.provenance.events]
+    .every((v) => v === "SYNTHETIC" || v === "NONE");
   const p = mission.provenance;
 
   return (
@@ -62,6 +64,18 @@ export function App() {
         </button>
       </header>
 
+      <p className="strip">
+        <span>Mars transit</span>
+        <span>day {dayNow}</span>
+        <span>one-way delay up to 22 min</span>
+        <span>no physician on board</span>
+        <span className="strip-note">demo assumptions</span>
+        <span className={synthetic ? "strip-prov syn" : "strip-prov"}
+          title="Where the data in this replay comes from. Counts on this screen illustrate the idea; they are not measured results.">
+          {synthetic ? "SYNTHETIC: flight-like, literature-based. Illustration, not a result." : "Ground analog: NASA bed rest"}
+        </span>
+      </p>
+
       <main className="stage">
         <div className="stage-head">
           <h2>{member.name}</h2>
@@ -78,9 +92,9 @@ export function App() {
 
         {outbreak && (
           <div className="outbreak" role="status">
-            <strong>Crew-wide drift.</strong>{" "}
-            {outbreak.crew_ids.map((id, i) => `${first(id)} from day ${outbreak.onsets[i]}`).join(", ")}.
-            No logged event explains it.
+            <strong>Unexplained crew-wide shift: check the habitat and a possible outbreak.</strong>{" "}
+            {outbreak.crew_ids.map((id, i) => [id, outbreak.onsets[i]] as const).filter(([, d]) => d <= dayNow)
+              .map(([id, d]) => `${first(id)} from day ${d}`).join(", ")}. No logged event explains it.
           </div>
         )}
 
@@ -91,7 +105,8 @@ export function App() {
           <p className="fineprint">
             Adaptation: {PROVENANCE_LABEL[p.adaptation]}. Illness: {PROVENANCE_LABEL[p.illness]}. Events:{" "}
             {PROVENANCE_LABEL[p.events]}. Heart, lungs and body temperature are tracked; eyes, bone, muscle and immune
-            function are not monitored yet. The faint line is the hourly readings with each person's time-of-day pattern
+            function are not monitored yet. Core temperature drift follows a forehead heat-flux sensor estimate
+            (Stahn 2017); clinical fever limits assume oral or rectal readings. The Earth-normal limits are placeholders. The faint line is the hourly readings with each person's time-of-day pattern
             removed; the bold line is the daily mean, which the ranges and monitors use. Click a point for that day's breakdown or a journal mark for the entry, drag to scrub. Journal readings are
             mocked here; no language model runs in this demo. They add context and never raise or lower an alert. Keys: space to play, R to restart, arrows to step, D for details.
           </p>

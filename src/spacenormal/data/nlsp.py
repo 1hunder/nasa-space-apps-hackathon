@@ -1,6 +1,6 @@
 """Loader for NASA Life Sciences Portal bed rest daily vitals (UTMB Campaigns 1, 3, CFT70).
 
-The 30 per-subject files use 13 different header layouts, so columns are matched by
+The 29 per-subject files use 13 different header layouts, so columns are matched by
 alias. Output follows spacenormal.data.schema (plus `block`, `date`, `comment`).
 
 Split discipline: `load_daily("fit")` is always allowed. The two test splits raise

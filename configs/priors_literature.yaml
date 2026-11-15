@@ -1,22 +1,23 @@
-# Flight-mode only. Extend only with cited, hand-checked rows.
+# Flight-mode only. Not loaded by any code yet. Rows marked "unverified" have not been checked against
+# the team's research notes (docs/research/) and must not be cited.
 core_temp_c:
   shape: exponential
-  amplitude: {mean: 1.0, sd: 0.4}
+  amplitude: {mean: 1.0, sd: 0.4}            # sd is an assumption
   tau_days: {log_mean: 3.22, log_sd: 0.5}   # ~25 d, plateau after ~75 d
-  sources: ["Stahn 2017, Sci Rep (n=11; forehead core-temp sensor)"]
+  sources: ["Stahn 2017, Sci Rep (n=11 as reported, not verified in full text; forehead heat-flux sensor)"]
 sleep_min:
   shape: step
   in_flight_mean_min: 363      # ~6.0-6.1 h vs 8.5 h scheduled
   sd_min: 45                   # assumption
-  sources: ["Barger 2014, Lancet Neurol"]
+  sources: ["Barger 2014, Lancet Neurol"]   # unverified
 night_rhr_flight:
-  shape: zero_mean             # in-flight resting HR ~ unchanged vs preflight supine
+  shape: zero_mean             # 24-h HR unchanged (Norsk 2015); the result depends on reference posture
   amplitude_pct: {mean: 0.0, sd: 5.0}   # assumption
-  sources: ["Norsk 2015", "Hughson 2012", "Otsuka 2018"]
-motion_sickness:
+  sources: ["Norsk 2015", "Hughson 2012 (unverified)", "Otsuka 2018 (unverified)"]
+motion_sickness:                # unverified
   incidence: [0.6, 0.8]
   duration_hours: [8, 72]
 excluded:
   hrv: conflicting evidence; absent from datasets
-  plasma_volume_hb: "context only (plasma -10 to -17%; Hb rises in flight; anemia at landing)"
+  plasma_volume_hb: "context only; in-flight values unverified"
   co2_on_vitals: "no evidence at ISS levels -> no assumed effect"

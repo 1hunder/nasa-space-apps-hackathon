@@ -1,20 +1,20 @@
 # crew: index into the crew list. onset: in-bed day, or null for a random day after burn-in.
 # demo_seed: used only by scripts/build_demo_cache.py. These seeds were picked by hand so the
 # dashboard replay tells a clean story; the cached missions are illustrations, not results.
-real_null:
-  demo_seed: 78
+healthy_crew:
+  demo_seed: 25
   illness: []
   shared_events: []
 
-transplant_single:
-  demo_seed: 87
+single_illness:
+  demo_seed: 192
   illness:
     - {crew: 2, onset: 41}
   shared_events:
     - {type: schedule_shift, day: 24, duration: 3}
 
-transplant_outbreak:
-  demo_seed: 841
+outbreak:
+  demo_seed: 407
   illness:
     - {crew: 0, onset: 38}
     - {crew: 2, onset: 40}
@@ -23,7 +23,7 @@ transplant_outbreak:
     - {type: schedule_shift, day: 24, duration: 3}
 
 shared_event:
-  demo_seed: 29
+  demo_seed: 27
   illness: []
   shared_events:
     - {type: schedule_shift, day: 30, duration: 3}

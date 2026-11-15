@@ -54,4 +54,4 @@ Nie powołujemy się na lukę **Med07** (zamknięta). Publicznych, ponumerowanyc
 Dane: NASA Life Sciences Portal — Bed Rest Case Report Form (nlsp.nasa.gov); Stanford COVID-19 Wearables (Mishra et al. 2020; Alavi et al. 2022).
 Dokumenty NASA: N1–N10 powyżej.
 Publikacje: Stahn 2017; Trudel 2022; Norsk 2015; Ferraro 2026; Scott 2023; Zheng 2023; Baevsky 2006/2013; Mishra 2020.
-Narzędzia: wpisać faktycznie użyte biblioteki, narzędzia AI do wideo/obrazów/głosu i muzykę (z licencją).
+Narzędzia (kod): Python 3.11 z numpy, pandas, scipy, statsmodels, pydantic, PyYAML, requests, matplotlib, pyarrow, openpyxl, pytest, hypothesis, uv; dashboard: React, Vite, TypeScript, krój Archivo (pakiet `@fontsource-variable/archivo`, licencja SIL OFL); asystent kodowania AI: Claude Code (Anthropic). **Do uzupełnienia:** narzędzia AI do wideo/obrazów/głosu i muzyka (z licencją).

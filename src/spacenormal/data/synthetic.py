@@ -162,7 +162,7 @@ def make_mission(
     for entry in jr["shared"]:
         journal.append({"day": int(rng.integers(5, m["in_days"] - 3)), "hour": int(rng.integers(9, 18)),
                         "crew_ids": list(crew), "accounted": False, **entry})
-    journal = [{**j, "reader": "mock"} for j in sorted(journal, key=lambda j: (j["day"], j["hour"]))]
+    journal = [{"region": None, "side": None, **j, "reader": "mock"} for j in sorted(journal, key=lambda j: (j["day"], j["hour"]))]
 
     daily = pd.concat(daily_rows, ignore_index=True)[list(DAILY_COLUMNS)]
     events = pd.DataFrame(event_rows, columns=list(EVENTS_COLUMNS))

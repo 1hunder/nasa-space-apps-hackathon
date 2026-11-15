@@ -2,7 +2,7 @@ seed: 20261114
 
 mission:
   pre_days: 13
-  in_days: 70
+  in_days: 90          # docs/00-kontekst.md §5 draws the mission to day 90
   crew_size: 4
   # Display names for the demo crew (the team). Ids stay C1..C4 internally.
   crew_names: [Anna Uhalnik, Davyd Antoniuk, Petro Melnyk, Viktor Kulyk]
@@ -36,25 +36,29 @@ crew:
 
 baselines:
   rolling_windows: [14]
+  # "Earth normal": the same limits for everyone. Placeholders chosen by the team, pending review by a
+  # medical mentor (docs/00-kontekst.md §11). Temperature follows the 37.5 C line in docs/00-kontekst.md §5.
   fixed_thresholds:
     pulse: {high: 100, low: 45}
-    temp_c: {high: 38.0}
+    temp_c: {high: 37.5}
     resp_rate: {high: 22}
     sbp: {high: 150, low: 90}
     dbp: {high: 95}
 
 # SYNTHETIC mock, sized from published spaceflight findings and our NASA bed rest fit set
 # (see docs/data_notes.md, "How big the expected shifts are"). None of these numbers is a result.
-#   temp_c  +1.0 C over ~2.5 months in flight        Stahn et al. 2017, Sci Rep
+#   temp_c  +1.0 C over ~2.5 months in flight        Stahn et al. 2017, Sci Rep (forehead heat-flux estimate)
 #   sbp/dbp -8 to -10 mmHg (24 h ambulatory)          Norsk et al. 2015, J Physiol
-#   pulse   unchanged in flight (Norsk 2015); +4.5 bpm median by days 41-60 in NASA bed rest
-#   resp    no shift in NASA bed rest
+#   pulse   unchanged in flight (Norsk 2015). The bed rest drift (+4.5 bpm) is NOT used in flight-like mode.
+#   resp    no shift assumed (no flight data in our research notes; none in NASA bed rest)
+# Assumed, with no source: every time constant (tau), the person-to-person spread, the illness sizes,
+# the logged-event effects (beta), the time-of-day amplitudes and the noise levels.
 # Readings are hourly; the model and detectors work on daily means.
 synthetic:
   samples_per_day: 24
   gap_rate: 0.02
-  scale_sd: 0.2
-  scale_clip: [0.6, 1.3]   # keeps the largest drift near the published mean, not beyond it
+  scale_sd: 0.15
+  scale_clip: [0.7, 1.2]   # assumption; keeps individual drifts close to the published mean
   tau_log_sd: 0.15
   noise_df: 5
   hour_ar: 0.6
@@ -66,17 +70,17 @@ synthetic:
       noise_sd: 2.0          # day-to-day SD of the daily mean
       hour_sd: 4.0           # hour-to-hour SD within a day
       circadian: 6.0         # amplitude of the time-of-day pattern
-      amp: 4.0
+      amp: 0.0             # unchanged in flight (Norsk 2015)
       tau: 18.0
       sigma_floor: 1.0
       beta: {room_temp_c: 0.3, exercise: 1.0, schedule_shift: 4.0}
     temp_c:
-      base_mean: 36.6
-      base_sd: 0.15
+      base_mean: 36.8
+      base_sd: 0.12
       noise_sd: 0.12
       hour_sd: 0.15
       circadian: 0.3
-      amp: 0.9
+      amp: 1.0
       tau: 25.0
       sigma_floor: 0.08
       beta: {room_temp_c: 0.03, exercise: 0.0, schedule_shift: 0.3}

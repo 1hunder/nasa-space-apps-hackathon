@@ -17,7 +17,7 @@ def _decompose(mission, cfg, cid="C1"):
 
 
 def test_decomposition_adds_up(make, cfg):
-    _, _, dec = _decompose(make("transplant_single"), cfg)
+    _, _, dec = _decompose(make("single_illness"), cfg)
     for d in dec.values():
         ok = np.isfinite(d.y)
         np.testing.assert_allclose((d.baseline + d.adaptation + d.events + d.residual)[ok], d.y[ok])
@@ -25,7 +25,7 @@ def test_decomposition_adds_up(make, cfg):
 
 
 def test_scale_is_bounded_and_frozen_after_day_21(make, cfg):
-    _, _, dec = _decompose(make("real_null", 3), cfg)
+    _, _, dec = _decompose(make("healthy_crew", 3), cfg)
     lo, hi = cfg["model"]["scale_bounds"]
     for d in dec.values():
         assert ((d.scale >= lo) & (d.scale <= hi)).all()
@@ -34,7 +34,7 @@ def test_scale_is_bounded_and_frozen_after_day_21(make, cfg):
 
 def test_scoring_is_causal(make, cfg):
     """Changing later days must not change earlier z-scores."""
-    sub, ev, dec = _decompose(make("real_null", 5), cfg)
+    sub, ev, dec = _decompose(make("healthy_crew", 5), cfg)
     tampered = sub.copy()
     tampered.loc[tampered["study_day"] > 15, "pulse"] += 25
     dec2 = decompose_subject(tampered, ev, cfg["synthetic"]["priors"], cfg)
@@ -46,7 +46,7 @@ def test_scale_recovers_a_strong_adaptation(make, cfg):
     """Averaged over people, the fitted scale tracks the true one."""
     errs = []
     for seed in range(12):
-        m = make("real_null", seed)
+        m = make("healthy_crew", seed)
         for cid in m.crew:
             _, _, dec = _decompose(m, cfg, cid)
             t = m.truth[(m.truth.subject_id == cid) & (m.truth.vital == "pulse") & (m.truth.study_day == 70)]

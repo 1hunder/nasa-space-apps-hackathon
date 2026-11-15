@@ -1,9 +1,10 @@
 import type { Alert, Mission, Vital } from "../contract";
 import { DIGITS, VITAL_LABEL, fixed, signed } from "../labels";
 
+/** The astronaut's card: what we see, what to check now, when to escalate. Never a diagnosis. */
 export function AlertPanel({ mission, alert, viewing }: { mission: Mission; alert: Alert | null; viewing: Vital }) {
   if (!alert) {
-    return <p className="quiet"><span aria-hidden="true">✓</span> No unexplained change so far.</p>;
+    return <p className="quiet"><span aria-hidden="true">✓</span> No unexplained change so far. No action needed today.</p>;
   }
 
   const member = mission.crew.find((c) => c.id === alert.crew_id)!;
@@ -16,8 +17,9 @@ export function AlertPanel({ mission, alert, viewing }: { mission: Mission; aler
   const note = mission.notes[alert.id];
   const episode = mission.episodes.find((e) => e.crew_id === alert.crew_id);
   const lead = episode ? episode.onset_day - alert.day : null;
+  const firstName = member.name.split(" ")[0];
   const rows: [string, string, string][] = [
-    ["Earth baseline", fixed(s.baseline[i], dg), ""],
+    ["Pre-flight baseline", fixed(s.baseline[i], dg), ""],
     ["Expected adaptation", signed(s.adaptation[i], dg), "row-adapt"],
     ["Logged events", signed(s.events[i], dg), "row-event"],
     ["Unexplained", signed(s.residual[i] ?? 0, dg), "row-unexplained"],
@@ -25,44 +27,67 @@ export function AlertPanel({ mission, alert, viewing }: { mission: Mission; aler
 
   return (
     <section className="alert" key={alert.id} aria-live="polite">
-      <p className="alert-kicker">Day {alert.day}</p>
-      <h2>{member.name}: unexplained rise in {name.toLowerCase()}</h2>
+      <p className="alert-kicker">Card for {firstName}, day {alert.day}</p>
 
-      <div className="sum">
-        <div className="sum-total">
-          <span>Daily mean</span>
-          <strong>{fixed(s.y[i] ?? 0, dg)} <small>{unit}</small></strong>
-        </div>
-        {rows.map(([label, value, cls]) => (
-          <div key={label} className={`sum-row ${cls}`}>
-            <span>{label}</span><span className="num">{value}</span>
-          </div>
-        ))}
-      </div>
+      <h3 className="step">OBSERVATION</h3>
+      <p className="step-text">
+        {name} is <strong>{fixed(s.residual[i] ?? 0, dg)} {unit}</strong> above what is expected for you today.
+        No logged event explains it.
+      </p>
 
-      {lead !== null && lead > 0 && (
-        <p className="lead">Flagged {lead} {lead === 1 ? "day" : "days"} before symptoms start.</p>
-      )}
-
+      <h3 className="step">CHECK NOW</h3>
+      <p className="step-text">
+        Repeat the reading at rest{note ? `, then answer ${note.questions.length} questions (about 1 minute).` : "."}
+      </p>
       {note && (
-        <details>
-          <summary>Note for the flight surgeon</summary>
-          <p className="note">{note.text.split("\n")[0]}</p>
-          <p className="chips">
-            <span className="chip">{note.numbers_verified ? "Numbers verified against data" : "Numbers not verified"}</span>
-            <span className="chip">{note.bytes} bytes to downlink</span>
-          </p>
-          <p className="note muted">The detector sets the severity. The assistant can add context or escalate, never lower an alert.</p>
-          {note.context_items.length > 0 && (
-            <>
-              <h3>Possible contributors, unverified</h3>
-              <ul>{note.context_items.map((c) => <li key={c.source_ref}>{c.text}</li>)}</ul>
-            </>
-          )}
-          <h3>Ask the crew member</h3>
-          <ol>{note.questions.map((q) => <li key={q}>{q}</li>)}</ol>
+        <details className="questions">
+          <summary>Show the questions</summary>
+          <ol className="step-list">{note.questions.map((q) => <li key={q}>{q}</li>)}</ol>
         </details>
       )}
+
+      <h3 className="step">ESCALATE IF</h3>
+      <p className="step-text">
+        Still outside your range tomorrow, or a medical limit is crossed
+        <span className="assumption"> (limits are placeholders)</span>.
+        {note && <> Flight-surgeon packet ready, {note.bytes} bytes.</>}
+      </p>
+
+      <p className="not-dx">Not a diagnosis.</p>
+
+      <details>
+        <summary>Numbers and flight-surgeon note</summary>
+        <div className="sum">
+          <div className="sum-total">
+            <span>Daily mean</span>
+            <strong>{fixed(s.y[i] ?? 0, dg)} <small>{unit}</small></strong>
+          </div>
+          {rows.map(([label, value, cls]) => (
+            <div key={label} className={`sum-row ${cls}`}>
+              <span>{label}</span><span className="num">{value}</span>
+            </div>
+          ))}
+        </div>
+        {lead !== null && lead > 0 && (
+          <p className="lead">In this simulation the illness was planted: flagged {lead} {lead === 1 ? "day" : "days"} before its symptoms start.</p>
+        )}
+        {note && (
+          <>
+            <p className="note">{note.text.split("\n")[0]}</p>
+            <p className="chips">
+              <span className="chip">{note.numbers_verified ? "Numbers verified against data" : "Numbers not verified"}</span>
+              <span className="chip">{note.bytes} bytes to downlink</span>
+            </p>
+            <p className="note muted">The detector alone raises and grades alerts. The assistant only words the note; it cannot raise, delay or lower an alert.</p>
+            {note.context_items.length > 0 && (
+              <>
+                <h3>Possible contributors, unverified</h3>
+                <ul>{note.context_items.map((c) => <li key={c.source_ref}>{c.text}</li>)}</ul>
+              </>
+            )}
+          </>
+        )}
+      </details>
     </section>
   );
 }

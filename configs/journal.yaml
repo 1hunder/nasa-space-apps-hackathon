@@ -1,37 +1,51 @@
 # Mock crew journal: free-text entries and the reading a language model would return for each.
 # No language model runs in the demo; `reader: mock` is carried into the dashboard data.
-# effect: what the entry could plausibly do to vital signs. Entries never change the simulated vitals,
+# region / side: the body area a pain or symptom report refers to (see BODY_REGIONS in contract.py).
+# effect: what the entry could plausibly do to vital signs. These readings are the team's own wording,
+# not taken from the research notes; treat them as illustrations. Entries never change the simulated vitals,
 # except the schedule shift, which is tied to the simulated shared event (accounted: true).
 personal:
   - {text: "Slept badly, woke twice. Fan noise in the sleep station.", category: sleep, effect: "Could raise next-day pulse slightly. Not modelled."}
   - {text: "Skipped the afternoon coffee today.", category: nutrition, effect: "No expected effect on vital signs."}
-  - {text: "Long EVA prep briefing, four hours in the airlock mock-up.", category: workload, effect: "No expected effect on vital signs."}
-  - {text: "Resistance session felt harder than usual, cut the last set.", category: exercise, effect: "Could raise pulse for a few hours. Not modelled."}
+  - {text: "EVA procedures review, four hours.", category: workload, effect: "No expected effect on vital signs."}
+  - {text: "Resistance session felt harder than usual, cut the last set.", category: exercise, effect: "Could raise pulse for a few hours. Not modelled.", region: thighs, side: both}
   - {text: "Ate late, around 22:00, after the comms window.", category: nutrition, effect: "No expected effect on vital signs."}
-  - {text: "Headache after the CO2 scrubber swap, gone by evening.", category: symptom, effect: "Worth asking about if vitals also change. No change expected on its own."}
-  - {text: "Video call with family. Good mood.", category: wellbeing, effect: "No expected effect on vital signs."}
-  - {text: "Took one ibuprofen for a sore shoulder.", category: medication, effect: "Can lower a temperature reading for several hours. Not modelled."}
+  - {text: "Headache after the CO2 scrubber swap, gone by evening.", category: symptom, effect: "Worth asking about if vitals also change. No change expected on its own.", region: head}
+  - {text: "Recorded a video message for family. Good mood.", category: wellbeing, effect: "No expected effect on vital signs."}
+  - {text: "Took one ibuprofen for a sore shoulder.", category: medication, effect: "Can lower a temperature reading for several hours. Not modelled.", region: shoulders, side: right}
   - {text: "Ignored the hydration reminder, drank maybe one litre today.", category: nutrition, effect: "Could raise pulse slightly. Not modelled."}
   - {text: "Movie night ran late, lights out at 01:00.", category: sleep, effect: "Could raise next-day pulse slightly. Not modelled."}
   - {text: "Cleaned the treadmill harness. No change to the exercise plan.", category: maintenance, effect: "No expected effect on vital signs."}
-  - {text: "Stuffy nose on waking, cleared after an hour.", category: symptom, effect: "Common with fluid shift in weightlessness. Worth asking about if vitals also change."}
+  - {text: "Stuffy nose on waking, cleared after an hour.", category: symptom, effect: "Often reported by crews. Worth asking about if vitals also change.", region: head}
   - {text: "Swapped sleep stations with a crewmate.", category: sleep, effect: "No expected effect on vital signs."}
-  - {text: "Cargo unloading most of the day.", category: workload, effect: "Could raise daytime pulse. Not modelled."}
+  - {text: "Stowage audit most of the day.", category: workload, effect: "Could raise daytime pulse. Not modelled."}
   - {text: "Tried the new rehydrated curry. Too spicy.", category: nutrition, effect: "No expected effect on vital signs."}
-  - {text: "Sore calves after the treadmill session.", category: symptom, effect: "No expected effect on vital signs."}
+  - {text: "Sore calves after the treadmill session.", category: symptom, effect: "No expected effect on vital signs.", region: calves, side: both}
   - {text: "Napped for forty minutes after lunch.", category: sleep, effect: "No expected effect on daily means."}
   - {text: "Second espresso pouch before the robotics session.", category: nutrition, effect: "Could raise pulse for a few hours. Not modelled."}
-  - {text: "Eyes felt dry, used drops twice.", category: symptom, effect: "No expected effect on vital signs."}
+  - {text: "Eyes felt dry, used drops twice.", category: symptom, effect: "No expected effect on vital signs.", region: head}
   - {text: "Spent three hours rerouting cables behind rack four. Awkward posture.", category: workload, effect: "No expected effect on vital signs."}
   - {text: "Felt a bit low today, kept to myself.", category: wellbeing, effect: "Worth a check-in. No expected effect on vital signs."}
   - {text: "Did the full treadmill protocol, felt strong.", category: exercise, effect: "Planned exercise. No change expected beyond the session."}
   - {text: "Woke up before the alarm, could not get back to sleep.", category: sleep, effect: "Could raise next-day pulse slightly. Not modelled."}
-  - {text: "Lower back ache in the morning, eased after stretching.", category: symptom, effect: "Common in weightlessness. No expected effect on vital signs."}
+  - {text: "Lower back ache in the morning, eased after stretching.", category: symptom, effect: "Often reported by crews. No expected effect on vital signs.", region: back}
+  - {text: "Left knee aches after the squat session.", category: pain, effect: "Musculoskeletal. No expected effect on vital signs.", region: knees, side: left}
+  - {text: "Right wrist sore after the glove fit check.", category: pain, effect: "Musculoskeletal. No expected effect on vital signs.", region: hands, side: right}
+  - {text: "Migraine with light sensitivity, lay down for two hours.", category: pain, effect: "Worth asking about if it returns. Can raise pulse while it lasts. Not modelled.", region: head}
+  - {text: "Neck stiff after sleeping in the harness.", category: pain, effect: "Musculoskeletal. No expected effect on vital signs.", region: neck}
+  - {text: "Forearm cramps during the torque wrench task.", category: pain, effect: "Musculoskeletal. No expected effect on vital signs.", region: forearms, side: right}
+  - {text: "Pulled something in my right thigh on the treadmill.", category: pain, effect: "Musculoskeletal. May limit exercise for a few days. Not modelled.", region: thighs, side: right}
+  - {text: "Fingers numb for a few minutes after the cold stowage job.", category: symptom, effect: "No expected effect on vital signs.", region: hands, side: both}
+  - {text: "Tight chest muscles after the bench pulls.", category: pain, effect: "Musculoskeletal, linked to exercise. Ask again if it occurs at rest.", region: chest}
+  - {text: "Abdominal cramp after dinner, passed in an hour.", category: symptom, effect: "No expected effect on vital signs.", region: abdomen}
+  - {text: "Left shoulder clicks when I reach overhead, mild pain.", category: pain, effect: "Musculoskeletal. No expected effect on vital signs.", region: shoulders, side: left}
+  - {text: "Upper arms sore the day after the resistance session.", category: pain, effect: "Expected after exercise. No expected effect on vital signs.", region: upper_arms, side: both}
+  - {text: "Feet feel tender, the skin on the soles is getting soft.", category: symptom, effect: "Often reported by crews. No expected effect on vital signs.", region: feet, side: both}
 shared:
   - {text: "Fire drill, all hands.", category: workload, effect: "No expected effect on daily means."}
-  - {text: "Weekly conference with the flight surgeon. Nothing to report.", category: medical, effect: "No expected effect on vital signs."}
+  - {text: "Weekly medical report sent to the flight surgeon. Nothing to report.", category: medical, effect: "No expected effect on vital signs."}
 schedule_shift:
-  text: "Sleep period moved three hours earlier for the docking rehearsal."
+  text: "Sleep period moved three hours earlier for the course-correction burn."
   category: schedule
   effect: "Raises pulse and temperature for a few days. Already accounted for as a logged event."
-personal_entries_per_mission: 30
+personal_entries_per_mission: 40

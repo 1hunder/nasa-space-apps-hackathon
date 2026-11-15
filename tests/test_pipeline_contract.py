@@ -14,12 +14,12 @@ REPO = Path(__file__).resolve().parents[1]
 
 @pytest.fixture(scope="module")
 def single(make, cfg):
-    return make("transplant_single", 1), run_pipeline(make("transplant_single", 1), cfg)
+    return make("single_illness", 1), run_pipeline(make("single_illness", 1), cfg)
 
 
-def test_pipeline_output_matches_contract(single):
+def test_pipeline_output_matches_contract(single, cfg):
     _, out = single
-    assert out.days == list(range(1, 71))
+    assert out.days == list(range(1, cfg["mission"]["in_days"] + 1))
     assert [c.id for c in out.crew] == ["C1", "C2", "C3", "C4"]
     assert set(a.detector for a in out.alerts) <= set(DETECTORS)
     assert out.provenance.adaptation == "SYNTHETIC"
@@ -27,7 +27,7 @@ def test_pipeline_output_matches_contract(single):
 
 def test_no_space_normal_red_during_burn_in(make, cfg):
     for seed in range(5):
-        out = run_pipeline(make("real_null", seed), cfg)
+        out = run_pipeline(make("healthy_crew", seed), cfg)
         assert not [a for a in out.alerts if a.detector == "space_normal" and a.level == "red" and a.day <= 3]
 
 
@@ -49,7 +49,7 @@ def test_planted_illness_is_flagged_on_most_seeds(make, cfg):
     """Smoke check on SYNTHETIC data only: the ill crew member goes red near onset."""
     hits = 0
     for seed in range(10):
-        m = make("transplant_single", seed)
+        m = make("single_illness", seed)
         ep = m.episodes.iloc[0]
         out = run_pipeline(m, cfg)
         hits += any(
@@ -61,7 +61,7 @@ def test_planted_illness_is_flagged_on_most_seeds(make, cfg):
 
 
 def test_outbreak_scenario_raises_a_crew_alert_on_most_seeds(make, cfg):
-    fired = sum(bool(run_pipeline(make("transplant_outbreak", s), cfg).crew_alerts) for s in range(10))
+    fired = sum(bool(run_pipeline(make("outbreak", s), cfg).crew_alerts) for s in range(10))
     assert fired >= 8
 
 
@@ -92,7 +92,7 @@ def test_demo_cache_builds_and_validates(tmp_path):
                             cwd=REPO, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
 
-    (tmp_path / "mission_synthetic_real_null.json").write_text("{}")
+    (tmp_path / "mission_synthetic_healthy_crew.json").write_text("{}")
     result = subprocess.run([py, "scripts/validate_contract.py", str(tmp_path)],
                             cwd=REPO, capture_output=True, text=True)
     assert result.returncode == 1

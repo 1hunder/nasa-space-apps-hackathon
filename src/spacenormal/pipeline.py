@@ -180,6 +180,8 @@ def run_pipeline(mission: Mission, cfg: dict[str, Any] | None = None,
                     "residual": _series(d.residual, True), "z": _series(d.z, True),
                     "band_low": _series(d.band_low), "band_high": _series(d.band_high),
                     "earth_low": _series(d.earth_low), "earth_high": _series(d.earth_high),
+                    "fixed_low": cfg["baselines"]["fixed_thresholds"].get(v, {}).get("low"),
+                    "fixed_high": cfg["baselines"]["fixed_thresholds"].get(v, {}).get("high"),
                 } for v, d in dec.items()
             },
             "systems": _system_states(dec, sn_levels[cid] == RED, crew_days[cid], days),

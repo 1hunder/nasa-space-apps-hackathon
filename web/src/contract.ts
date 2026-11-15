@@ -23,9 +23,12 @@ export interface VitalSeries {
   z: (number | null)[];
   band_low: number[];
   band_high: number[];
-  /** Fixed band around the pre-mission baseline: what an Earth-calibrated monitor calls normal. */
+  /** Personal pre-flight range: a fixed band around the pre-mission baseline (NASA CDSS concept). */
   earth_low: number[];
   earth_high: number[];
+  /** "Earth normal": the same clinical limit for everyone, if one is set for this vital. */
+  fixed_low: number | null;
+  fixed_high: number | null;
 }
 
 export interface SystemsDay {
@@ -69,6 +72,12 @@ export interface Episode {
   provenance: Provenance;
 }
 
+export const BODY_REGIONS = [
+  "head", "neck", "shoulders", "chest", "abdomen", "back",
+  "upper_arms", "forearms", "hands", "thighs", "knees", "calves", "feet",
+] as const;
+export type BodyRegion = (typeof BODY_REGIONS)[number];
+
 /** A free-text crew journal entry and how the assistant read it. Context only, never a detector input. */
 export interface JournalEntry {
   day: number;
@@ -79,6 +88,9 @@ export interface JournalEntry {
   effect: string;
   /** True when the model already treats it as a logged event. */
   accounted: boolean;
+  /** Body area a pain or symptom report refers to, if any. */
+  region: BodyRegion | null;
+  side: "left" | "right" | "both" | null;
   reader: "mock" | "llm";
 }
 

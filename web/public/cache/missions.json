@@ -1,9 +1,9 @@
 {
   "missions": [
     {
-      "file": "mission_synthetic_real_null.json",
-      "mission_id": "synthetic_real_null",
-      "scenario": "real_null",
+      "file": "mission_synthetic_healthy_crew.json",
+      "mission_id": "synthetic_healthy_crew",
+      "scenario": "healthy_crew",
       "provenance": {
         "adaptation": "SYNTHETIC",
         "illness": "NONE",
@@ -11,9 +11,9 @@
       }
     },
     {
-      "file": "mission_synthetic_transplant_single.json",
-      "mission_id": "synthetic_transplant_single",
-      "scenario": "transplant_single",
+      "file": "mission_synthetic_single_illness.json",
+      "mission_id": "synthetic_single_illness",
+      "scenario": "single_illness",
       "provenance": {
         "adaptation": "SYNTHETIC",
         "illness": "SYNTHETIC",
@@ -21,9 +21,9 @@
       }
     },
     {
-      "file": "mission_synthetic_transplant_outbreak.json",
-      "mission_id": "synthetic_transplant_outbreak",
-      "scenario": "transplant_outbreak",
+      "file": "mission_synthetic_outbreak.json",
+      "mission_id": "synthetic_outbreak",
+      "scenario": "outbreak",
       "provenance": {
         "adaptation": "SYNTHETIC",
         "illness": "SYNTHETIC",

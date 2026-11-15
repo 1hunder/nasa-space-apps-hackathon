@@ -29,7 +29,7 @@ Uwaga: [`PLAN.md`](PLAN.md) to specyfikacja sprzed researchu. Gdzie przeczy [`do
 | Zadanie | Czytaj |
 |---|---|
 | Kod: pipeline, model, detektory, ewaluacja | [`PLAN.md`](PLAN.md) (specyfikacja, EN) + **delta** w [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §4 + [`docs/data_notes.md`](docs/data_notes.md) |
-| Kod: dashboard / UI (`web/`) | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
+| Kod: dashboard / UI (`web/`) | [`ZADANIA-VIKTOR-DASHBOARD.md`](ZADANIA-VIKTOR-DASHBOARD.md) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
 | Deploy | [`README.md`](README.md) (uruchomienie) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §5 |
 | Design ekranu, film 30 s | [`ZADANIA-ALEX-DESIGN.md`](ZADANIA-ALEX-DESIGN.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §1 |
 | Co robić teraz / stan faz P0–P8 | [`docs/05-stan-prac.md`](docs/05-stan-prac.md) |

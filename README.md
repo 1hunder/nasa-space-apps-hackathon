@@ -26,9 +26,10 @@ Open the printed URL and press space. One replay takes about 13 seconds and stop
 
 - The default view shows only the chart, the two monitors and the crew list. "Show details" (or D) adds the other two monitors and the per-day breakdown; the alert card expands to the flight-surgeon note.
 - The "Crew journal" row holds free-text entries (`configs/journal.yaml`). Click a mark to read the entry and how the assistant read it. The readings are mocked: no language model runs in the demo, and entries never raise or lower an alert.
-- Keys: space play/pause, R restart, D details, arrow keys step one day, 1–4 switch scenario. Click a point for that day's breakdown; drag on the chart to scrub. The replay stops when Space-Normal raises an alert; Play continues.
-- `?scenario=outbreak&day=40` opens a specific moment. Scenarios: `healthy_crew`, `single_illness`, `outbreak`, `shared_event`.
-- The four cached missions are synthetic, with seeds picked by hand for a clean replay (`configs/scenarios.yaml`). They illustrate the idea; they are not results.
+- Keys: space play/pause, R restart, D details, arrow keys step one day. Two vitals are offered, core temperature (default) and pulse; the other three stay in the data and the detector. Click a point for that day's breakdown; drag on the chart to scrub. The replay stops when Space-Normal raises an alert; Play continues.
+- The dashboard shows one scenario, `single_illness` ("One crew member falls ill"); there is no scenario picker. `?day=40` opens a specific day.
+- `configs/scenarios.yaml` also defines `healthy_crew`, `outbreak` and `shared_event` for the pipeline and the tests. Only scenarios marked `demo: true` there are built into `web/public/cache/`.
+- The cached mission is synthetic, with a seed picked by hand for a clean replay (`configs/scenarios.yaml`). It illustrates the idea; it is not a result.
 
 ## Layout
 

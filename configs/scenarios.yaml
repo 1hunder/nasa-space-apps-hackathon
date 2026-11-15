@@ -1,12 +1,15 @@
 # crew: index into the crew list. onset: in-bed day, or null for a random day after burn-in.
 # demo_seed: used only by scripts/build_demo_cache.py. These seeds were picked by hand so the
 # dashboard replay tells a clean story; the cached missions are illustrations, not results.
+# demo: true marks the scenarios that script builds for the dashboard. The others stay here for
+# the pipeline and the tests; they are just not shown in the UI.
 healthy_crew:
   demo_seed: 25
   illness: []
   shared_events: []
 
 single_illness:
+  demo: true
   demo_seed: 192
   illness:
     - {crew: 2, onset: 41}

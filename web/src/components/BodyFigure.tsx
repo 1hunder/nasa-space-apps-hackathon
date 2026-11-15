@@ -1,6 +1,6 @@
 import type { BodyRegion, JournalEntry, State } from "../contract";
 
-export type System = "cardio" | "resp" | "thermo";
+export type System = "cardio" | "thermo";
 
 /** A self-reported pain or symptom stays fully lit this many days after the journal entry... */
 export const PAIN_VISIBLE_DAYS = 4;
@@ -24,7 +24,7 @@ export function activeReports(journal: JournalEntry[], crewId: string, dayNow: n
     });
 }
 
-const SYSTEM_NAME: Record<System, string> = { cardio: "Heart", resp: "Lungs", thermo: "Body temperature" };
+const SYSTEM_NAME: Record<System, string> = { cardio: "Heart", thermo: "Body temperature" };
 const STATE_WORD: Record<State, string> = {
   expected: "as expected", event: "explained by a logged event", unexplained: "unexplained change",
   crew: "crew-wide drift", not_monitored: "not monitored",
@@ -75,11 +75,8 @@ const PAIRED: { region: BodyRegion; d: string; at: [number, number] }[] = [
 const SPINE_Y = [52, 60.5, 69, 77.5, 86, 94.5, 103, 111.5, 120, 128.5, 137];
 const SPINE_AT: [number, number] = [66, 114];
 
-const LUNGS = [
-  "M62,57 C53,57 46,66 46,79 L46,89 C46,93.5 50.5,94 54,91.5 L62,86 Z",
-  "M70,57 C79,57 86,66 86,79 L86,89 C86,93.5 81.5,94 78,91.5 L70,86 Z",
-];
-const HEART = "M71,70 c3,-4.500 11,-2 9.500,4.500 c-1.200,5 -9.500,10 -9.500,10 s-8.300,-5 -9.500,-10 c-1.500,-6.500 6.500,-9 9.500,-4.500 z";
+/** The only organ drawn: pulse is the one organ-level sign on screen. Sits on the person's left of the spine. */
+const HEART = "M71.5,68.5 c3.6,-5.4 13.2,-2.4 11.4,5.4 c-1.44,6 -11.4,12 -11.4,12 s-9.96,-6 -11.4,-12 c-1.8,-7.8 7.8,-10.8 11.4,-5.4 z";
 const MIRROR = `matrix(-1 0 0 1 ${W} 0)`;
 
 const covering = (shape: Shape, reports: PainReport[]) =>
@@ -106,13 +103,13 @@ export function describe(key: string | null, parts: Record<System, State>, repor
 }
 
 /**
- * Body map. Detector states: plate outlines and glow = body temperature, lobes = lungs, heart = circulation.
+ * Body map. Detector states: plate outlines and glow = body temperature, heart = pulse.
  * Self-reports from the crew journal: dotted pale plate with a ringed dot, never the alarm colour.
  */
 export function BodyFigure({ parts, reports, onInspect }: {
   parts: Record<System, State>; reports: PainReport[]; onInspect: (key: string | null) => void;
 }) {
-  const { cardio, resp, thermo } = parts;
+  const { cardio, thermo } = parts;
   const watch = (key: string) => ({ onMouseEnter: () => onInspect(key), onMouseLeave: () => onInspect(null) });
   const sysTip = (name: System) => `${SYSTEM_NAME[name]}: ${STATE_WORD[parts[name]]}`;
   const markers: { key: string; x: number; y: number; strength: number }[] = [];
@@ -143,7 +140,7 @@ export function BodyFigure({ parts, reports, onInspect }: {
   );
 
   const summary = [
-    ...(["cardio", "resp", "thermo"] as System[]).map(sysTip),
+    ...(["cardio", "thermo"] as System[]).map(sysTip),
     ...reports.map((r) => tipText([r])),
   ].join(". ");
 
@@ -182,13 +179,9 @@ export function BodyFigure({ parts, reports, onInspect }: {
         {plate({ id: "back:mid", region: "back", side: "mid" }, SPINE_AT, false, spine)}
       </g>
 
-      <g className={`sys sys-${resp}`} {...watch("sys:resp")}>
-        <title>{sysTip("resp")}</title>
-        {LUNGS.map((d) => <path key={d} className="organ lung" d={d} />)}
-      </g>
       <g className={`sys sys-${cardio}`} {...watch("sys:cardio")}>
         <title>{sysTip("cardio")}</title>
-        <circle className="halo" cx={71} cy={75.5} r={12.5} />
+        <circle className="halo" cx={71.5} cy={75.5} r={15.5} />
         <path className="organ heart" d={HEART} />
       </g>
 

@@ -1,11 +1,11 @@
 import type { Detector, Vital } from "./contract";
 
 export const SCENARIO_LABEL: Record<string, string> = {
-  healthy_crew: "Healthy crew",
   single_illness: "One crew member falls ill",
-  outbreak: "Illness spreads",
-  shared_event: "Schedule change",
 };
+
+/** Vitals offered in the demo UI. The contract and the detector still carry all five. */
+export const DEMO_VITALS: Vital[] = ["temp_c", "pulse"];
 
 export const VITAL_LABEL: Record<Vital, { name: string; unit: string }> = {
   pulse: { name: "Pulse", unit: "bpm" },

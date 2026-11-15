@@ -20,6 +20,9 @@ const CHART_TOP = 26;
 const DECOMP_H = 64;
 const LANE_H = 46;
 const SIMPLE_LANES: Detector[] = ["fixed_thresholds", "frozen_baseline", "space_normal"];
+// A Space-Normal red alert counts as active from its day until this many days after it,
+// and for as long after that as the reading stays above the range without a break.
+const ALERT_ACTIVE_DAYS = 3;
 
 function useWidth(): [React.RefObject<HTMLDivElement>, number] {
   const ref = useRef<HTMLDivElement>(null);
@@ -259,7 +262,10 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
             // One noisy day is not a finding: mark a reading only if it stays high for two days, or is far out.
             const high = (j: number) => (s.z[j] ?? 0) > 2;
             const unexplained = d > 3 && high(i) && v > s.band_high[i] && (high(i - 1) || high(i + 1) || (s.z[i] ?? 0) > 3);
-            return <circle key={d} cx={x(d)} cy={y(v)} r={unexplained ? 5 : 2.6} className={unexplained ? "dot dot-red" : "dot"} />;
+            // Above the range without meeting that rule: watched, not alarmed. A hollow ring, never red or amber.
+            const watched = !unexplained && v > s.band_high[i];
+            return <circle key={d} cx={x(d)} cy={y(v)} r={unexplained ? 5 : watched ? 4 : 2.6}
+              className={unexplained ? "dot dot-red" : watched ? "dot dot-watch" : "dot"} />;
           })}
         </g>
         {dayIndex >= 5 && (
@@ -400,6 +406,12 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
         const z = s.z[tip] ?? 0;
         const verdict = v > s.band_high[tip] ? "Above the expected range" : v < s.band_low[tip] ? "Below the expected range" : "Inside the expected range";
         const outsideEarth = v > s.earth_high[tip] || v < s.earth_low[tip];
+        const above = v > s.band_high[tip];
+        // First day of the unbroken run of above-range days that ends at the picked day.
+        let runStart = tip;
+        while (above && runStart > 0 && s.y[runStart - 1] !== null && (s.y[runStart - 1] as number) > s.band_high[runStart - 1]) runStart--;
+        const alertActive = mission.alerts.some((a) => a.detector === "space_normal" && a.level === "red"
+          && a.crew_id === member.id && a.day <= days[tip] && a.day >= days[runStart] - ALERT_ACTIVE_DAYS);
         const px = x(days[tip]), py = y(v);
         return (
           <div className={`tip ${py < 190 ? "tip-below" : ""}`} role="dialog" aria-label={`Day ${days[tip]} reading`}
@@ -413,7 +425,10 @@ export function Figure({ mission, member, vital, day, dayIndex, detail, reserve,
               <dt className={z > 2 ? "t-unexplained" : "t-noise"}>{z > 2 ? "Unexplained" : "Day-to-day variation"}</dt>
               <dd>{signed(s.residual[tip] ?? 0, dg)}</dd>
             </dl>
-            <p className={`tip-verdict ${v > s.band_high[tip] ? "bad" : ""}`}>{verdict}</p>
+            <p className={`tip-verdict ${above ? "bad" : ""}`}>{verdict}</p>
+            {above && !alertActive && (
+              <p className="tip-watch">One day outside the range is watched, not alarmed. An alert needs a persistent shift.</p>
+            )}
             {outsideEarth && <p className="tip-earth">Outside the pre-flight range</p>}
             {s.fixed_high !== null && v > s.fixed_high && <p className="tip-earth">Above the Earth-normal limit</p>}
           </div>

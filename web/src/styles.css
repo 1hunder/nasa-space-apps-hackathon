@@ -201,8 +201,6 @@ button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px
 .pat-crew-bg { fill: var(--crew); opacity: 0.25; }
 .sys-unexplained .heart, .sys-crew .heart { transform-box: fill-box; transform-origin: center; animation: beat 0.85s ease-in-out infinite; }
 @keyframes beat { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.28); } }
-.sys-unexplained .lung, .sys-crew .lung { transform-box: fill-box; transform-origin: center top; animation: breathe 2.6s ease-in-out infinite; }
-@keyframes breathe { 50% { transform: scale(1.07); } }
 .sys-unexplained .plate, .sys-crew .plate { animation: fever 1.7s ease-in-out infinite; }
 @keyframes fever { 50% { stroke-opacity: 0.45; } }
 
@@ -263,7 +261,7 @@ button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .alert, .crew-card, .body .heart, .body .lung, .body .plate { animation: none !important; }
+  .alert, .crew-card, .body .heart, .body .plate { animation: none !important; }
 }
 
 /* ---------- mission strip, provenance ---------- */
@@ -293,3 +291,18 @@ button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px
 .crew-row { grid-template-columns: 26px 1fr auto; align-items: baseline; padding: 8px 12px; }
 .crew-row .crew-mark { grid-row: auto; }
 .crew-row .crew-state { text-align: right; }
+
+/* demo header controls */
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 9px; border: 1px solid var(--line); background: var(--ink-2); }
+.seg-opt { padding: 5px 12px; border-radius: 6px; font-size: 15px; font-weight: 520; color: var(--muted); white-space: nowrap; }
+.seg-opt:hover { color: var(--text); }
+.seg-opt[aria-pressed="true"] { background: var(--ink-3); color: var(--text); }
+.seg-unit { font-size: 13px; font-weight: 440; color: var(--muted); margin-left: 3px; }
+
+/* watched days, handover note */
+/* A single day above the range: a hollow ring in the neutral reading colour. Red stays for sustained excursions, amber for logged events. */
+.dot-watch { fill: var(--ink); stroke: var(--text); stroke-width: 1.5; }
+.tip-watch { margin-top: 6px; padding-top: 7px; border-top: 1px solid var(--line); color: var(--muted); line-height: 1.35; }
+.alert h3.handover-title { color: var(--text); font-size: 15px; margin: 14px 0 0; }
+.handover-sub { color: var(--muted); }
+.handover-sub + .note { margin-top: 6px; }

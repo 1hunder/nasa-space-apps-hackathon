@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { VITALS, type Vital } from "./contract";
 import { AlertPanel } from "./components/AlertPanel";
 import { CrewList } from "./components/CrewList";
 import { Figure } from "./components/Figure";
-import { PROVENANCE_LABEL, SCENARIO_LABEL, VITAL_LABEL } from "./labels";
+import { DEMO_VITALS, PROVENANCE_LABEL, VITAL_LABEL } from "./labels";
 import { useReplay } from "./useReplay";
 
 export function App() {
@@ -19,10 +18,6 @@ export function App() {
       else if (e.key === "d" || e.key === "D") setDetail((d) => !d);
       else if (e.key === "ArrowRight") r.setDay(Math.floor(r.day) + 1);
       else if (e.key === "ArrowLeft") r.setDay(Math.ceil(r.day) - 1);
-      else if (index && /^[1-9]$/.test(e.key)) {
-        const entry = index.missions[Number(e.key) - 1];
-        if (entry) r.setScenario(entry.scenario);
-      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -42,14 +37,6 @@ export function App() {
     <div className="app">
       <header className="top">
         <h1>Space-Normal</h1>
-        <label className="pick">
-          <span className="sr">Scenario</span>
-          <select value={mission.scenario} onChange={(e) => r.setScenario(e.target.value)}>
-            {index.missions.map((m) => (
-              <option key={m.scenario} value={m.scenario}>{SCENARIO_LABEL[m.scenario] ?? m.scenario}</option>
-            ))}
-          </select>
-        </label>
         <div className="clock">
           <span className="clock-day">Day {dayNow}</span>
           <span className="clock-of">of {lastDay}</span>
@@ -70,12 +57,13 @@ export function App() {
       <main className="stage">
         <div className="stage-head">
           <h2>{member.name}</h2>
-          <label className="pick">
-            <span className="sr">Vital sign</span>
-            <select value={r.vital} onChange={(e) => r.setVital(e.target.value as Vital)}>
-              {VITALS.map((v) => <option key={v} value={v}>{VITAL_LABEL[v].name}, {VITAL_LABEL[v].unit}</option>)}
-            </select>
-          </label>
+          <div className="seg" role="group" aria-label="Vital sign">
+            {DEMO_VITALS.map((v) => (
+              <button key={v} type="button" className="seg-opt" aria-pressed={r.vital === v} onClick={() => r.setVital(v)}>
+                {VITAL_LABEL[v].name} <span className="seg-unit">{VITAL_LABEL[v].unit}</span>
+              </button>
+            ))}
+          </div>
           <button className="more" onClick={() => setDetail((d) => !d)} aria-expanded={detail}>
             {detail ? "Hide details" : "Show details"}
           </button>
@@ -94,12 +82,9 @@ export function App() {
 
         {detail && (
           <p className="fineprint">
-            Adaptation: {PROVENANCE_LABEL[p.adaptation]}. Illness: {PROVENANCE_LABEL[p.illness]}. Events:{" "}
-            {PROVENANCE_LABEL[p.events]}. Heart, lungs and body temperature are tracked; eyes, bone, muscle and immune
-            function are not monitored yet. Core temperature drift follows a forehead heat-flux sensor estimate
-            (Stahn 2017); clinical fever limits assume oral or rectal readings. The Earth-normal limits are placeholders. The faint line is the hourly readings with each person's time-of-day pattern
-            removed; the bold line is the daily mean, which the ranges and monitors use. Click a point for that day's breakdown or a journal mark for the entry, drag to scrub. Journal readings are
-            mocked here; no language model runs in this demo. They add context and never raise or lower an alert. Keys: space to play, R to restart, arrows to step, D for details.
+            Data in this replay: adaptation {PROVENANCE_LABEL[p.adaptation]}, illness {PROVENANCE_LABEL[p.illness]},
+            events {PROVENANCE_LABEL[p.events]}; the journal readings are mocked and no language model runs.
+            Keys: space plays or pauses, R restarts, the arrow keys step one day, D shows or hides details.
           </p>
         )}
       </main>

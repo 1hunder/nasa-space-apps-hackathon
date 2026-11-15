@@ -1,5 +1,5 @@
 import type { Alert, Mission, Vital } from "../contract";
-import { DIGITS, VITAL_LABEL, fixed, signed } from "../labels";
+import { DEMO_VITALS, DIGITS, VITAL_LABEL, fixed, signed } from "../labels";
 
 /** The astronaut's card: what we see, what to check now, when to escalate. Never a diagnosis. */
 export function AlertPanel({ mission, alert, viewing }: { mission: Mission; alert: Alert | null; viewing: Vital }) {
@@ -10,7 +10,10 @@ export function AlertPanel({ mission, alert, viewing }: { mission: Mission; aler
   const member = mission.crew.find((c) => c.id === alert.crew_id)!;
   const i = mission.days.indexOf(alert.day);
   // Explain the vital on screen when it is also clearly off that day; otherwise the one that led the alert.
-  const vital = (member.vitals[viewing].z[i] ?? 0) > 2 ? viewing : alert.vital;
+  // Only vitals the demo shows are ever explained; an alert led by any other falls back to temperature.
+  const shown = (v: Vital) => DEMO_VITALS.includes(v);
+  const led: Vital = shown(alert.vital) ? alert.vital : "temp_c";
+  const vital = shown(viewing) && (member.vitals[viewing].z[i] ?? 0) > 2 ? viewing : led;
   const s = member.vitals[vital];
   const { name, unit } = VITAL_LABEL[vital];
   const dg = DIGITS[vital];
@@ -50,13 +53,13 @@ export function AlertPanel({ mission, alert, viewing }: { mission: Mission; aler
       <p className="step-text">
         Still outside your range tomorrow, or a medical limit is crossed
         <span className="assumption"> (limits are placeholders)</span>.
-        {note && <> Flight-surgeon packet ready, {note.bytes} bytes.</>}
+        {note && <> Handover note ready, {note.bytes} bytes.</>}
       </p>
 
       <p className="not-dx">Not a diagnosis.</p>
 
       <details>
-        <summary>Numbers and flight-surgeon note</summary>
+        <summary>Numbers and handover note</summary>
         <div className="sum">
           <div className="sum-total">
             <span>Daily mean</span>
@@ -73,6 +76,8 @@ export function AlertPanel({ mission, alert, viewing }: { mission: Mission; aler
         )}
         {note && (
           <>
+            <h3 className="handover-title">Handover note</h3>
+            <p className="handover-sub">for the flight surgeon or a diagnostic assistant</p>
             <p className="note">{note.text.split("\n")[0]}</p>
             <p className="chips">
               <span className="chip">{note.numbers_verified ? "Numbers verified against data" : "Numbers not verified"}</span>

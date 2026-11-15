@@ -3,7 +3,8 @@ import type { Mission, State, Vital } from "../contract";
 import { BodyFigure, activeReports, describe, type PainReport, type System } from "./BodyFigure";
 
 const ALERT_DAYS = 10; // how long a Space-Normal alert keeps a crew member marked
-const SYSTEM_OF: Record<Vital, System> = { pulse: "cardio", sbp: "cardio", dbp: "cardio", resp_rate: "resp", temp_c: "thermo" };
+// Breathing rate is not shown in the UI, so it maps to no part of the figure.
+const SYSTEM_OF: Partial<Record<Vital, System>> = { pulse: "cardio", sbp: "cardio", dbp: "cardio", temp_c: "thermo" };
 
 const SHORT: Record<State, string> = {
   expected: "As expected",
@@ -61,9 +62,8 @@ export function CrewList({ mission, dayIndex, crewId, onSelect }: {
         const systemState = (name: System): State =>
           alerts.length && (alerts.some((a) => SYSTEM_OF[a.vital] === name) || sys[name] === "unexplained" || sys[name] === "crew")
             ? flagged : sys[name] === "event" ? "event" : "expected";
-        const parts = { cardio: systemState("cardio"), resp: systemState("resp"), thermo: systemState("thermo") };
-        const states = Object.values(parts);
-        const state: State = alerts.length ? flagged : states.includes("event") ? "event" : "expected";
+        const parts = { cardio: systemState("cardio"), thermo: systemState("thermo") };
+        const state: State = alerts.length ? flagged : parts.cardio === "event" || parts.thermo === "event" ? "event" : "expected";
         const selected = m.id === crewId;
 
         if (!selected) {

@@ -1,42 +1,12 @@
 {
   "missions": [
     {
-      "file": "mission_synthetic_healthy_crew.json",
-      "mission_id": "synthetic_healthy_crew",
-      "scenario": "healthy_crew",
-      "provenance": {
-        "adaptation": "SYNTHETIC",
-        "illness": "NONE",
-        "events": "SYNTHETIC"
-      }
-    },
-    {
       "file": "mission_synthetic_single_illness.json",
       "mission_id": "synthetic_single_illness",
       "scenario": "single_illness",
       "provenance": {
         "adaptation": "SYNTHETIC",
         "illness": "SYNTHETIC",
-        "events": "SYNTHETIC"
-      }
-    },
-    {
-      "file": "mission_synthetic_outbreak.json",
-      "mission_id": "synthetic_outbreak",
-      "scenario": "outbreak",
-      "provenance": {
-        "adaptation": "SYNTHETIC",
-        "illness": "SYNTHETIC",
-        "events": "SYNTHETIC"
-      }
-    },
-    {
-      "file": "mission_synthetic_shared_event.json",
-      "mission_id": "synthetic_shared_event",
-      "scenario": "shared_event",
-      "provenance": {
-        "adaptation": "SYNTHETIC",
-        "illness": "NONE",
         "events": "SYNTHETIC"
       }
     }

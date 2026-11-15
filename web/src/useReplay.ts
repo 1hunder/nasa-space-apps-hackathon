@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Alert, Mission, MissionIndex, Vital } from "./contract";
+import { DEMO_VITALS } from "./labels";
 
 const FULL_REPLAY_SECONDS = 13; // one mission at 1x
 
@@ -28,7 +29,8 @@ export function useReplay(): Replay {
   const [index, setIndex] = useState<MissionIndex | null>(null);
   const [mission, setMission] = useState<Mission | null>(null);
   const [error, setError] = useState<string | null>(null);
-  // ?scenario=outbreak&day=40 opens a specific moment (used for bookmarks and screenshots).
+  // ?day=40 opens a specific moment (used for bookmarks and screenshots). ?scenario= still works,
+  // but the demo cache holds one mission; an unknown scenario falls back to the first one listed.
   const params = useRef(new URLSearchParams(window.location.search));
   const [scenario, setScenario] = useState(params.current.get("scenario") ?? "single_illness");
   const [day, setDayState] = useState(1);
@@ -99,7 +101,9 @@ export function useReplay(): Replay {
           // Stay on the vital being watched if it is also clearly off; otherwise show the one that led the alert.
           const i = mission.days.indexOf(crossed.day);
           const member = mission.crew.find((c) => c.id === crossed.crew_id);
-          setVital((v) => ((member?.vitals[v].z[i] ?? 0) > 2 ? v : crossed.vital));
+          // Only the vitals the demo offers can be shown; anything else falls back to temperature.
+          const lead: Vital = DEMO_VITALS.includes(crossed.vital) ? crossed.vital : "temp_c";
+          setVital((v) => ((member?.vitals[v].z[i] ?? 0) > 2 ? v : lead));
         }
         dayRef.current = next;
         setDayState(next);

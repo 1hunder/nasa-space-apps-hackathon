@@ -3,6 +3,8 @@
     python scripts/build_demo_cache.py --synthetic --out web/public/cache
 
 Only the synthetic fallback exists so far; real-data caches arrive with P5.
+Only scenarios marked `demo: true` in configs/scenarios.yaml are built; mission files left over
+from scenarios that are no longer marked are removed, so missions.json always matches the folder.
 """
 
 from __future__ import annotations
@@ -36,7 +38,10 @@ def main() -> None:
     args.out.mkdir(parents=True, exist_ok=True)
 
     index, rows = [], []
-    for name, spec in load_scenarios().items():
+    demo = {name: spec for name, spec in load_scenarios().items() if spec.get("demo")}
+    if not demo:
+        raise SystemExit("No scenario in configs/scenarios.yaml is marked demo: true.")
+    for name, spec in demo.items():
         scenario = Scenario.from_dict(name, spec)
         rng = np.random.default_rng(spec["demo_seed"])
         raw = synthetic.make_mission(crew, scenario, rng, cfg)
@@ -49,6 +54,10 @@ def main() -> None:
         red = Counter(a.detector for a in mission.alerts if a.level == "red")
         rows.append((name, [red.get(d, 0) for d in DETECTORS], len(mission.crew_alerts), len(mission.notes)))
 
+    keep = {entry["file"] for entry in index}
+    for stale in args.out.glob("mission_*.json"):
+        if stale.name not in keep:
+            stale.unlink()
     (args.out / "missions.json").write_text(json.dumps({"missions": index}, indent=2), encoding="utf-8")
 
     print("SYNTHETIC — illustrative missions with hand-picked seeds, not a result. Red alerts per detector:")

@@ -60,6 +60,16 @@ canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 .foot{position:absolute;left:110px;right:110px;bottom:58px;font-size:14px;line-height:1.5;color:rgba(242,244,247,.46);letter-spacing:.03em}
 .foot b{color:var(--dim);font-weight:500}
 .teal{color:var(--teal)} .mars{color:var(--mars)} .red{color:var(--red)} .amber{color:var(--amber)}
+/* film-subtitle caption: one line per slide, lower third, centered */
+.cap{position:absolute;left:60px;right:60px;bottom:100px;text-align:center;font-size:44px;line-height:1.15;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:#fff;text-shadow:0 2px 28px rgba(0,0,0,.85)}
+.cap small{display:block;font-size:19px;letter-spacing:.26em;color:var(--dim);margin-top:14px;font-weight:400;text-shadow:none}
+.cap.fever{color:#ff8a8a;text-shadow:0 0 36px rgba(255,77,77,.55)}
+.cap.fever.on{animation:fever 1.6s ease-in-out 2}
+@keyframes fever{0%,100%{text-shadow:0 0 24px rgba(255,77,77,.35)}50%{text-shadow:0 0 70px rgba(255,77,77,.85)}}
+/* one tiny, low-contrast source line per slide */
+.src1{position:absolute;left:110px;right:110px;bottom:52px;font-size:13px;line-height:1.3;color:rgba(242,244,247,.36);
+  letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
 
 /* film overlays */
 .grain{position:fixed;inset:-50%;z-index:6;pointer-events:none;opacity:.07;mix-blend-mode:screen;animation:grain 1s steps(6) infinite}
@@ -73,12 +83,12 @@ canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 #hint{position:fixed;top:1.1vh;left:1.4vw;z-index:9;font:13px/1 var(--font);letter-spacing:.1em;color:var(--faint);transition:opacity 1.5s}
 
 /* ---------- S1 hook ---------- */
-.hook{display:grid;grid-template-columns:540px minmax(0,1fr);gap:80px;align-items:center;height:100%}
-.hook .txt{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
-.hook .temp{font-size:200px;margin-top:20px}
-.hook .hero-line{margin-top:20px}
+.hook{display:grid;grid-template-columns:500px 560px;gap:90px;justify-content:center;align-items:center;height:600px;margin-top:-10px}
+.hook .txt{display:flex;flex-direction:column;align-items:center;text-align:center}
+.hook .day{font-size:24px;letter-spacing:.5em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-right:-.5em}
+.hook .temp{font-size:210px;margin-top:18px}
 /* portal: astronaut clip seen through a hologram ring (crop excludes suit patch) */
-.portal{position:relative;width:540px;height:540px}
+.portal{position:relative;width:500px;height:500px}
 .portal .pv{position:absolute;inset:34px;border-radius:50%;overflow:hidden;background:#05080b;clip-path:circle(50% at 50% 50%)}
 .portal video{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:contrast(1.1) saturate(1.15) brightness(.92);transform:scale(1.04)}
 .portal .pv:after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
@@ -115,69 +125,54 @@ canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 @keyframes blink{0%,100%{box-shadow:0 0 0 rgba(255,77,77,0)}50%{box-shadow:0 0 60px rgba(255,77,77,.55);background:rgba(255,77,77,.22)}}
 
 /* ---------- S2 problem ---------- */
-.prob{display:grid;grid-template-columns:1fr;height:100%}
-.link-svg{width:100%;height:300px;margin-top:28px}
-.items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:30px}
-.item{border-top:1px solid rgba(56,225,212,.45);padding-top:18px}
-.item .big{font-size:64px;font-weight:300;letter-spacing:.02em}
-.item .lbl{font-size:23px;color:var(--dim);margin-top:8px;line-height:1.35}
+.link-svg{display:block;width:1180px;height:240px;margin:14px auto 0}
+.nums{display:grid;grid-template-columns:repeat(3,360px);gap:70px;justify-content:center;margin-top:34px;text-align:center}
+.num .big{font-size:150px;font-weight:200;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.num .big small{font-size:44px;font-weight:400;letter-spacing:.14em;margin-left:10px;color:var(--teal)}
+.num .lbl{font-size:21px;white-space:nowrap;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:18px}
 
 /* ---------- S3 chart ---------- */
-.chart-wrap{display:grid;grid-template-columns:1000px 1fr;gap:34px;margin-top:22px;align-items:start}
-.chart{width:1000px;height:540px;overflow:visible}
+.chart{display:block;width:1380px;height:552px;margin-top:6px;overflow:visible}
 .chart text{font-family:var(--font)}
-.verdict{border:1px solid rgba(242,244,247,.18);background:rgba(8,14,20,.55);border-radius:6px;padding:18px 20px;margin-bottom:18px;backdrop-filter:blur(6px)}
-.verdict h4{font-size:22px;font-weight:500;letter-spacing:.08em;margin-bottom:12px}
-.verdict .row{display:flex;justify-content:space-between;gap:14px;font-size:17px;padding:7px 0;border-top:1px solid rgba(242,244,247,.08)}
-.verdict .row .k{color:var(--dim)}
-.syn-label{position:absolute;right:110px;top:104px}
+.syn-label{position:absolute;right:110px;top:58px}
 
 /* ---------- S4 product ---------- */
-.prod{display:grid;grid-template-columns:780px 1fr;gap:60px;margin-top:60px;align-items:start}
-.card{border:1px solid rgba(56,225,212,.55);border-radius:8px;background:linear-gradient(180deg, rgba(56,225,212,.10), rgba(56,225,212,.03));
-  box-shadow:0 0 60px rgba(56,225,212,.15), inset 0 0 40px rgba(56,225,212,.05);padding:26px 30px;position:relative;overflow:hidden}
-.card:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg, rgba(56,225,212,.05) 0 1px, transparent 1px 4px);pointer-events:none}
-.card .hdr{display:flex;justify-content:space-between;font-size:14px;letter-spacing:.24em;color:var(--teal);text-transform:uppercase;padding-bottom:14px;border-bottom:1px solid rgba(56,225,212,.3)}
-.card .r{padding:18px 0 14px;border-bottom:1px solid rgba(56,225,212,.14)}
+.card{width:860px;margin:6px auto 0;border:1px solid rgba(56,225,212,.55);border-radius:22px;
+  background:linear-gradient(180deg, rgba(56,225,212,.11), rgba(56,225,212,.03));
+  box-shadow:0 0 90px rgba(56,225,212,.16), inset 0 0 40px rgba(56,225,212,.05);padding:26px 40px 12px;position:relative;overflow:hidden}
+.card:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg, rgba(56,225,212,.04) 0 1px, transparent 1px 4px);pointer-events:none}
+.card .hdr{display:flex;justify-content:space-between;font-size:15px;letter-spacing:.28em;color:var(--teal);text-transform:uppercase;padding-bottom:14px;border-bottom:1px solid rgba(56,225,212,.3)}
+.card .r{padding:18px 0 16px;border-bottom:1px solid rgba(56,225,212,.14)}
 .card .r:last-child{border-bottom:0}
-.card .r .h{font-size:15px;letter-spacing:.28em;font-weight:600}
-.card .r .t{font-size:26px;margin-top:8px;line-height:1.35}
-.users .u{display:flex;gap:18px;align-items:flex-start;padding:18px 0;border-bottom:1px solid rgba(242,244,247,.1)}
-.users .ic{width:46px;height:46px;flex:0 0 46px;border:1px solid var(--teal);border-radius:50%;display:grid;place-items:center;color:var(--teal);font-size:20px}
-.users .n{font-size:27px}
-.users .d{font-size:20px;color:var(--dim);margin-top:4px}
-.llm{margin-top:30px;font-size:21px;color:var(--amber);letter-spacing:.03em}
+.card .r .h{font-size:16px;letter-spacing:.3em;font-weight:600}
+.card .r .t{font-size:32px;margin-top:8px;line-height:1.25;font-weight:300}
+.users{display:flex;justify-content:center;gap:90px;margin-top:30px}
+.users .u{display:flex;flex-direction:column;align-items:center;gap:12px}
+.users .ic{width:58px;height:58px;border:1px solid var(--teal);border-radius:50%;display:grid;place-items:center;color:var(--teal);font-size:24px;box-shadow:0 0 26px rgba(56,225,212,.25)}
+.users .n{font-size:21px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 
 /* ---------- S5 proof ---------- */
-.proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;margin-top:60px}
-.pc{border:1px solid rgba(242,244,247,.16);border-radius:6px;padding:36px 32px;min-height:270px;background:rgba(8,14,20,.5)}
-.pc .big{font-size:64px;white-space:nowrap;font-weight:300;letter-spacing:.04em;color:var(--teal);line-height:1}
-.pc .lbl{font-size:25px;margin-top:20px;line-height:1.4}
-.pc .lbl .small{display:block;margin-top:10px;font-size:19px}
-.limit{margin-top:40px;border-left:3px solid var(--amber);padding:16px 24px;font-size:27px;line-height:1.4;background:rgba(255,181,71,.06)}
+.proof{display:grid;grid-template-columns:repeat(3,430px);gap:40px;justify-content:center;margin-top:150px;text-align:center}
+.tok .big{font-size:76px;white-space:nowrap;font-weight:200;letter-spacing:.02em;color:var(--teal);line-height:1;height:150px;display:flex;align-items:flex-end;justify-content:center;text-shadow:0 0 40px rgba(56,225,212,.3)}
+.tok .big.n{font-size:128px;letter-spacing:-.02em}
+.tok .lbl{font-size:22px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-top:20px}
 .headline-x{display:none} /* PLAN A: show when docs/claims.md has the headline number */
 
 /* ---------- S6 difference ---------- */
-.diff{display:grid;grid-template-columns:minmax(0,1fr) 270px minmax(0,1fr);gap:0;margin-top:80px;align-items:center}
-.col{border-radius:8px;padding:36px 36px;min-height:340px}
-.col.sn{border:1px solid rgba(56,225,212,.6);background:rgba(56,225,212,.07);box-shadow:0 0 70px rgba(56,225,212,.12)}
-.col.cmo{border:1px solid rgba(242,244,247,.22);background:rgba(242,244,247,.03)}
-.col .who{font-size:15px;letter-spacing:.28em;text-transform:uppercase}
-.col .q{font-size:46px;line-height:1.2;margin-top:18px;font-weight:300}
-.col .w{font-size:21px;color:var(--dim);margin-top:18px;line-height:1.45}
-.arrow{text-align:center;color:var(--teal);font-size:19px;letter-spacing:.06em;line-height:1.45;padding:0 14px}
-.arrow svg{width:220px;height:40px;display:block;margin:8px auto}
-.prior{margin-top:44px;font-size:21px;color:var(--dim);line-height:1.5}
+.diff{display:grid;grid-template-columns:560px 200px 560px;justify-content:center;align-items:center;margin-top:140px;text-align:center}
+.qa .who{font-size:17px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim)}
+.qa .q{font-size:62px;line-height:1.15;margin-top:22px;font-weight:300}
+.qa.sn .who{color:var(--teal)} .qa.sn .q{color:var(--teal);text-shadow:0 0 40px rgba(56,225,212,.3)}
+.arrow svg{width:170px;height:40px;display:block;margin:0 auto}
 
 /* ---------- S7 close ---------- */
 .close{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center}
-.callback{font-size:38px;letter-spacing:.12em;text-transform:uppercase;font-weight:300}
+.callback{font-size:30px;letter-spacing:.24em;text-transform:uppercase;font-weight:300;color:var(--dim)}
 .callback b{font-weight:500;color:var(--teal)}
-.wordmark{font-size:92px;letter-spacing:.16em;font-weight:600;margin-top:46px}
+.wordmark{font-size:104px;letter-spacing:.16em;font-weight:600;margin-top:46px}
 .beat-line{width:900px;height:90px;margin-top:4px}
-.tagline{font-size:30px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:8px}
-.url{font-size:20px;letter-spacing:.12em;color:var(--teal);margin-top:28px}
-
+.tagline{font-size:32px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);margin-top:8px}
+.url{font-size:16px;letter-spacing:.14em;color:var(--teal);margin-top:30px;opacity:.7}
 /* ---------- S8 sources ---------- */
 .src{columns:2;column-gap:56px;margin-top:26px;font-size:14px;line-height:1.45;color:var(--dim)}
 .src li{break-inside:avoid;margin:0 0 9px 18px}
@@ -226,76 +221,59 @@ const TOTAL = 150; // 2:30
 const CONFIG = {
   slides: [
     { key:"hook", title:"Dzień 80", time:[0,15], beats:1,
-      glow:{mars:[78,40,62], teal:[18,70,0]},
-      text:{ kicker:"Dzień 80 · W drodze na Marsa", from:36.6, to:37.7,
-             line:"{HERO}. Zdrowa?", alarm:"Gorączka?", alarmSub:"ziemska norma: powyżej 37,5 °C" },
-      foot:["<b>SYNTHETIC</b> — scenariusz flight-like oparty na literaturze · zdrowy astronauta: ok. +1 °C w spoczynku po ~2,5 mies. lotu — Stahn i in. 2017, Sci Rep"],
-      notes:"SZKIC: Poznajcie {HERO}. Dzień 80 w drodze na Marsa. Termometr pokazuje 37,7 stopnia. [klik] Na Ziemi każdy system powie: gorączka. Tylko że u zdrowego astronauty temperatura w spoczynku rośnie o około stopień. Czy {HERO} jest chora?" },
+      glow:{mars:[78,40,62], teal:[22,55,40]},
+      text:{ day:"Dzień 80", from:36.6, to:37.7, cap:"Gorączka?" },
+      src:"SYNTHETIC · scenariusz flight-like · Stahn i in. 2017, Sci Rep",
+      notes:"Dzień osiemdziesiąty w drodze na Marsa. {HERO} rano mierzy temperaturę. Trzydzieści siedem i siedem. [klik] Na Ziemi lekarz powiedziałby: gorączka. Czy {HERO} jest chora?" },
 
-    { key:"problem", title:"Nie ma kogo zapytać", time:[15,35], beats:0,
+    { key:"problem", title:"Nie ma kogo zapytać", time:[15,35], beats:3,
       glow:{mars:[86,30,40], teal:[12,30,30]},
-      text:{ kicker:"Problem", title:"Nie ma kogo zapytać",
-             items:[ ["do 22 min","sygnał w jedną stronę — pytanie i odpowiedź to nawet 44 min"],
-                     ["~2 tygodnie","bez łączności przy koniunkcji Słońca"],
-                     ["0 lekarzy","wymaganych na pokładzie — oficer medyczny nie musi być lekarzem"] ],
-             earth:"Ziemia", mars:"Mars", delay:"do 22 min →" },
-      foot:["<b>Źródła:</b> ASCEND/NASA — Communication Delays, Disruptions, and Blackouts for Crewed Mars Missions · NASA 2025 Architecture Update · HRP 48021 · NASA-STD-3001 Vol 1 Rev C · Moon to Mars TH-8LM (NPS 1001.104): brak ewakuacji i pomocy z Ziemi"],
-      notes:"SZKIC: I nie ma kogo zapytać. Wiadomość do Ziemi leci do 22 minut w jedną stronę, a przy koniunkcji Słońca łączności nie ma nawet przez dwa tygodnie. Ewakuacji nie ma. A standard NASA nie wymaga lekarza na pokładzie." },
+      text:{ cap:"Nie ma kogo zapytać.", earth:"Ziemia", mars:"Mars",
+             nums:[ ["22","min","maks. opóźnienie"], ["~2","tyg.","ciszy radiowej"], ["0","","lekarzy wymaganych"] ] },
+      src:"Źródła: ASCEND/NASA — Communication Delays… for Crewed Mars Missions · NASA 2025 Architecture Update · HRP 48021 · NASA-STD-3001 Vol 1 Rev C · TH-8LM",
+      notes:"[klik] Problem w tym, że nie ma kogo zapytać. [klik] Wiadomość do Ziemi leci do dwudziestu dwóch minut. [klik] Czasem trwa ok. dwóch tygodni cisza. [klik] A standard NASA nie wymaga lekarza na pokładzie. Jest oficer medyczny — po krótkim szkoleniu." },
 
     { key:"chart", title:"Jej norma się przesuwa", time:[35,65], beats:5,
       glow:{mars:[90,20,30], teal:[40,60,70]},
-      text:{ kicker:"Rozwiązanie · Space-Normal", title:"Jej norma się przesuwa. Ziemska — nie.",
-             sub:"Siatka centylowa — dla astronauty.",
-             earthLbl:"Ziemska norma · 37,5 °C", preLbl:"Zakres sprzed lotu", corLbl:"Korytarz Space-Normal",
-             xLbl:"dzień misji", syn:"SYNTHETIC · flight-like, oparte na literaturze (Stahn 2017)",
-             vA:{ h:"37,7 °C · dzień 80", rows:[["Ziemska norma","fałszywy alarm ✗","red"],["Zakres sprzed lotu","fałszywy alarm ✗","red"],["Korytarz","normalne dla niej ✓","teal"]] },
-             vB:{ h:"37,0 °C · dzień 80", rows:[["Ziemska norma","OK — przeoczenie","amber"],["Korytarz","poza korytarzem — sprawdź","teal"]] } },
-      foot:["<b>Źródła:</b> Stahn i in. 2017, Sci Rep (temperatura głęboka w locie) · NASA CDSS ConOps HRP-48033 (2021): „pre-flight determined reference ranges” · Wykres poglądowy, SYNTHETIC"],
-      notes:"SZKIC: Ziemska norma jest płaska. [klik] Płaski jest też osobisty zakres sprzed lotu — tak dziś wygląda koncepcja NASA. [klik] A ciało w kosmosie powinno się zmieniać. Space-Normal to siatka centylowa dla astronauty: korytarz, który ugina się z dniem misji. [klik] 37,7 u {HERO}: obie płaskie normy krzyczą, korytarz mówi — normalne. [klik] A 37,0? Według Ziemi OK. Dla niej — sygnał: sprawdź." },
+      text:{ cap:"Jej norma się przesuwa.", sub:"Siatka centylowa dla astronauty",
+             earthLbl:"Ziemska norma", preLbl:"Zakres sprzed lotu", corLbl:"Jej korytarz",
+             xLbl:"dzień misji", syn:"SYNTHETIC · flight-like, literatura (Stahn 2017)" },
+      src:"Źródła: Stahn i in. 2017, Sci Rep · NASA CDSS ConOps HRP-48033 (2021): „pre-flight determined reference ranges” · wykres poglądowy, SYNTHETIC",
+      notes:"[klik] Spójrzmy na temperaturę Vegi. [klik] Ziemska norma jest jedna — dla wszystkich. [klik] Zakres sprzed lotu jest osobisty, ale płaski. [klik] A ciało w kosmosie powinno się zmieniać. Zdrowy astronauta po paru miesiącach może mieć ok. trzydziestu ośmiu stopni. Dlatego Space-Normal rysuje każdemu jego korytarz. Jak siatka centylowa u pediatry — tylko zamiast wieku jest dzień misji. [klik] Trzydzieści siedem i siedem? Dla Vegi w dniu osiemdziesiątym to norma. [klik] A równe trzydzieści siedem? Dla Ziemi — OK. Dla niej — sygnał: sprawdź." },
 
     { key:"product", title:"Każdego ranka: 3 linijki", time:[65,85], beats:1,
-      glow:{mars:[8,85,30], teal:[30,45,80]},
-      text:{ kicker:"Produkt", title:"Każdego ranka: 3 linijki",
+      glow:{mars:[8,85,30], teal:[50,40,80]},
+      text:{ cap:"Każdego ranka. Trzy linijki.",
              card:{ hdr:["Morning check · Day 80","{HERO}"],
-                    rows:[ ["OBSERVATION","teal","Temperature 37.0 °C — below your corridor for day 80 (expected 37.5–38.0 °C).", false],
-                           ["CHECK NOW","amber","Re-measure after 30 min rest. Check heart rate. Log sleep and symptoms.", false],
-                           ["ESCALATE IF","red","Still outside your corridor tomorrow, or {threshold} → contact Crew Medical Officer.", true] ] },
-             users:[ ["◉","Astronauta","karta: co widzimy, co sprawdzić, kiedy eskalować"],
-                     ["✚","Oficer medyczny załogi","nie lekarz — widzi całą załogę naraz"],
-                     ["⊕","Lekarz lotu na Ziemi","mały pakiet z opóźnieniem, tylko gdy coś wypadło"] ],
-             llm:"LLM tylko formułuje tekst. Nie decyduje o alarmie." },
-      foot:["<b>Źródła:</b> NASA-STD-3001 Vol 1 Rev C („monitoring, and trending vital signs”) · EIMO ConOps 2024 (opóźnienia = większe obciążenie poznawcze) · ADD Rev C 2025, RT-3 · Karta: SYNTHETIC demo; progi eskalacji = placeholder"],
-      notes:"SZKIC: Każdego ranka astronauta dostaje trzy linijki: co widzimy, co sprawdzić teraz, kiedy eskalować. [klik] Oficer medyczny — który nie musi być lekarzem — widzi całą załogę. Lekarz na Ziemi dostaje mały pakiet. Model językowy tylko pisze tekst — nie decyduje o alarmie." },
+                    rows:[ ["OBSERVATION","teal","37.0 °C — below your day-80 corridor.", false],
+                           ["CHECK NOW","amber","Re-measure after rest. Check heart rate.", false],
+                           ["ESCALATE IF","red","Still outside tomorrow, or {threshold}.", true] ] },
+             users:[ ["◉","astronauta"], ["✚","oficer medyczny"], ["⊕","lekarz na Ziemi"] ] },
+      src:"Źródło: NASA-STD-3001 Vol 1 Rev C („monitoring, and trending vital signs”) · karta: demo SYNTHETIC · progi eskalacji = placeholder",
+      notes:"[klik] Co dostaje {HERO}? Każdego ranka trzy linijki: co widzimy, co sprawdzić teraz, kiedy eskalować. [klik] Oficer medyczny widzi całą załogę. Lekarz na Ziemi dostaje krótki pakiet — tylko gdy ktoś wypada z korytarza. Alarmu nie wywołuje AI. Liczy go przejrzysta statystyka, offline." },
 
-    { key:"proof", title:"Sprawdzone na danych NASA", time:[85,115], beats:1,
+    { key:"proof", title:"Zbudowane na danych NASA", time:[85,115], beats:0,
       glow:{mars:[80,80,40], teal:[20,25,60]},
-      text:{ kicker:"Dowód", title:"Sprawdzone na danych NASA",
-             cards:[ ["BED REST","NASA — naziemny analog nieważkości","tygodnie leżenia z głową 6° w dół"],
-                     ["18 → 11","18 osób: dopasowanie · 11 osób: zamknięty test","test nigdy nie służył do strojenia"],
-                     ["STANFORD","prawdziwe sygnatury chorób","COVID-19 wearables, wszczepiane w dane bed rest"] ],
-             headline:"{X} fałszywych alarmów na załogo-miesiąc vs {Y} dla najlepszej metody bazowej · wykryto {S}% chorób, mediana {L} dni przed objawami",
-             limit:"Bed rest to analog naziemny, nie lot. Scenariusze lotu oznaczone SYNTHETIC.",
-             step:"To dokładnie krok, którego NASA wymaga: walidacja stopniowa, już teraz (Moon to Mars HBS-2LM)." },
-      foot:["<b>Źródła:</b> NASA Life Sciences Portal — Bed Rest (nlsp.nasa.gov), Campaign 1 + 3, CFT70 · Stanford COVID-19 Wearables — Mishra i in. 2020, Nat Biomed Eng · Moon to Mars Objectives HBS-2LM (NPS 1001.104)"],
-      notes:"SZKIC: Zbudowaliśmy to na prawdziwych danych NASA z bed rest — to naziemny analog nieważkości. Dopasowanie na 18 osobach, test na 11 innych, zamknięty do momentu zamrożenia metody. Prawdziwe sygnatury chorób bierzemy z danych Stanforda. [klik] Uczciwie: to analog, nie lot — i dokładnie taki krok walidacji NASA zapisała w celu HBS-2LM." },
+      text:{ cap:"Zbudowane na danych NASA.", limit:"analog naziemny · nie lot",
+             cards:[ ["BED REST","NASA",false], ["18 + 11","nauka · zamknięty test",true], ["STANFORD","prawdziwe choroby",false] ],
+             headline:"{X} fałszywych alarmów na załogo-miesiąc vs {Y} dla najlepszej metody bazowej · wykryto {S}% chorób, mediana {L} dni przed objawami" },
+      src:"Źródła: NASA Life Sciences Portal — Bed Rest (Campaign 1 + 3, CFT70) · Stanford COVID-19 Wearables — Mishra i in. 2020 · Moon to Mars HBS-2LM",
+      notes:"[klik] Budujemy to na prawdziwych danych NASA z eksperymentów bed rest. Ludzie leżą tygodniami z głową lekko w dół — tak NASA symuluje nieważkość. Osiemnaście osób do nauki. Jedenaście w zamkniętym teście — kod blokuje do nich dostęp, dopóki nie zamrozimy modelu. Choroby to prawdziwe sygnały z badań Stanforda. Uczciwie: bed rest to analog naziemny, nie lot. Tryb lotu w demo jest oznaczony jako syntetyczny." },
 
     { key:"diff", title:"Warstwa przed diagnozą", time:[115,135], beats:1,
-      glow:{mars:[85,60,30], teal:[15,55,70]},
-      text:{ kicker:"Różnica", title:"Warstwa przed diagnozą",
-             sn:{ who:"Space-Normal", q:"„Czy to jeszcze normalne u mnie — dziś?”", w:"każdego ranka, zanim coś zaboli · codzienne pomiary + osobisty korytarz zależny od dnia misji · alarm bez LLM" },
-             cmo:{ who:"CMO-DA · NASA JSC", q:"„Co mi jest?”", w:"gdy pojawią się objawy · z Google (2025) → offline z Red Hat (2026) · LLM + model wizyjny" },
-             arrow:"kontekst: co odstaje, od kiedy, wobec jakiej normy",
-             arrow2:"→ asystent typu CMO-DA · lekarz na Ziemi",
-             prior:"Osobisty baseline nie jest nowy (Bajewski / IBMP; NASA CDSS HRP-48033). Nowe: korytarz ugina się z fazą misji. Zaprojektowane, by zasilać asystentów typu CMO-DA — bez integracji." },
-      foot:["<b>Źródła (blogi firm, nie NASA):</b> Google Cloud 2025 — How Google and NASA are testing AI for medical care in space · Red Hat 2026 — RamaLama tested by NASA (CMO-DA offline) · Baevsky, PMID 25509871 · HRP-48033"],
-      notes:"SZKIC: NASA testuje już asystenta CMO-DA — najpierw z Google, teraz offline z Red Hat. Odpowiada na pytanie: co mi jest? [klik] My odpowiadamy na pytanie wcześniejsze: czy to jeszcze normalne u mnie, dziś? I przekazujemy tę odpowiedź dalej — asystentowi i lekarzowi." },
+      glow:{mars:[85,55,34], teal:[15,55,50]},
+      text:{ cap:"Warstwa przed diagnozą.",
+             sn:{ who:"Space-Normal", q:"„Czy to normalne — u&nbsp;mnie, dziś?”" },
+             cmo:{ who:"CMO-DA · NASA JSC", q:"„Co mi jest?”" } },
+      src:"Źródła (blogi firm, nie NASA): Google Cloud 2025 · Red Hat 2026 · prior art: Baevsky / IBMP, NASA CDSS HRP-48033",
+      notes:"[klik] NASA już testuje asystenta CMO-DA — najpierw z Google, teraz offline z Red Hat. On odpowiada na pytanie: co mi jest? [klik] My — na pytanie wcześniejsze: czy to jeszcze normalne — u mnie, dziś? I przekazujemy tę odpowiedź dalej. Osobisty baseline nie jest nowy. Nowy jest korytarz, który ugina się z misją." },
 
-    { key:"close", title:"Twoja norma — w kosmosie", time:[135,150], beats:1,
+    { key:"close", title:"Twoja norma. W kosmosie.", time:[135,150], beats:1,
       glow:{mars:[50,96,70], teal:[50,40,40]},
-      text:{ callback:"Dzień 80. {HERO}: <b>37,7 °C — w swoim korytarzu ✓</b>",
-             word:"SPACE-NORMAL", tagline:"Twoja norma — w kosmosie.", url:APP_URL },
-      foot:[],
-      notes:"SZKIC: Wróćmy do dnia 80. {HERO} ma 37,7 — i jest w swoim korytarzu. Nikt nie panikuje, nikt niczego nie przeoczył. [klik] Space-Normal. Twoja norma — w kosmosie. Dziękuję." },
+      text:{ callback:"Dzień 80 · <b>37,7 °C ✓</b>",
+             word:"SPACE-NORMAL", tagline:"Twoja norma. W kosmosie.", url:APP_URL },
+      src:"",
+      notes:"[klik] Dzień osiemdziesiąty. {HERO}: trzydzieści siedem i siedem — w swoim korytarzu. Na Marsie nie zapytasz lekarza. Ale możesz wiedzieć, co jest normalne — dla ciebie. [klik] Space-Normal. Twoja norma. W kosmosie." },
 
     { key:"sources", title:"Źródła (Q&A)", time:null, beats:0,
       glow:{mars:[95,90,20], teal:[5,10,20]},
@@ -323,7 +301,7 @@ const CONFIG = {
                ["CSA Bio-Monitor / Astroskin","https://www.asc-csa.gc.ca/eng/sciences/bio-monitor.asp"],
                ["Dane: NASA Life Sciences Portal — Bed Rest","https://nlsp.nasa.gov"]
              ] },
-      foot:[],
+      src:"",
       notes:"Slajd zapasowy na Q&A. Nie pokazywać w trakcie 2:30." }
   ]
 };
@@ -333,7 +311,7 @@ const H = s => String(s).replace(/\{HERO\}/g, HERO);
 const S = CONFIG.slides;
 
 /* ---------- chart geometry (synthetic, illustrative) ---------- */
-const CH = { W:1000, H:540, x0:90, x1:960, y0:470, y1:30, dMax:120, tMin:36.0, tMax:38.4 };
+const CH = { W:1380, H:552, x0:80, x1:1300, y0:490, y1:24, dMax:120, tMin:36.0, tMax:38.4 };
 const X = d => CH.x0 + (d/CH.dMax)*(CH.x1-CH.x0);
 const Y = t => CH.y0 - ((t-CH.tMin)/(CH.tMax-CH.tMin))*(CH.y0-CH.y1);
 const center = d => 36.7 + 1.1*(1-Math.exp(-d/24));
@@ -344,12 +322,14 @@ function corridorPaths(){
   const band = "M"+up.map(p=>p.join(",")).join(" L")+" L"+lo.reverse().map(p=>p.join(",")).join(" L")+" Z";
   const line = "M"+mid.map(p=>p.join(",")).join(" L");
   let dots="";
-  for(let d=1; d<80; d+=2){ const n=Math.sin(d*12.9898)*43758.5453; const r=(n-Math.floor(n)-.5)*0.28; dots+=`<circle cx="${X(d)}" cy="${Y(center(d)+r)}" r="3" fill="#38e1d4" opacity=".55"/>`; }
+  for(let d=1; d<80; d+=2){ const n=Math.sin(d*12.9898)*43758.5453; const r=(n-Math.floor(n)-.5)*0.28; dots+=`<circle cx="${X(d)}" cy="${Y(center(d)+r)}" r="3.5" fill="#38e1d4" opacity=".5"/>`; }
   return {band,line,dots};
 }
 
 /* ---------- scene builders ---------- */
-const foot = s => s.foot.length ? `<div class="foot" data-beat="0" style="--i:6">${s.foot.map(H).join("<br>")}</div>` : "";
+const src = s => s.src ? `<div class="src1" data-beat="0" style="--i:6">${H(s.src)}</div>` : "";
+const cap = (txt,beat,i,extra="",cls="") => `<div class="cap ${cls}" ${extra} data-beat="${beat}" style="--i:${i}">${H(txt)}</div>`;
+const mark = (x,y,txt,col,anchor="start") => `<g><circle cx="${x}" cy="${y-7}" r="17" fill="rgba(0,0,0,.55)" stroke="${col}" stroke-width="1.5"/><text x="${x}" y="${y}" fill="${col}" font-size="20" font-weight="600" text-anchor="middle">${txt}</text></g>`;
 const B = {
   hook(s){ const t=s.text; return `
     <div class="hook">
@@ -364,131 +344,114 @@ const B = {
         </svg>
       </div>
       <div class="txt">
-        <div class="kicker" data-beat="0" style="--i:0">${H(t.kicker)}</div>
+        <div class="day" data-beat="0" style="--i:0">${H(t.day)}</div>
         <div class="temp" id="temp" data-beat="0" style="--i:1">${t.from.toFixed(1).replace(".",",")}<small>°C</small></div>
-        <div class="hero-line" data-beat="0" style="--i:3">${H(t.line)}</div>
-        <div class="alarm-box" id="alarm" data-beat="1">⚠ ${H(t.alarm)}<span>${H(t.alarmSub)}</span></div>
       </div>
-    </div>${foot(s)}`; },
+    </div>
+    ${cap(t.cap,1,0,'id="alarm"',"fever")}${src(s)}`; },
 
   problem(s){ const t=s.text; return `
-    <div class="kicker" data-beat="0" style="--i:0">${t.kicker}</div>
-    <div class="title" data-beat="0" style="--i:1">${t.title}</div>
-    <svg class="link-svg" viewBox="0 0 1380 280" data-beat="0" style="--i:2">
+    <svg class="link-svg" viewBox="0 0 1180 240" data-beat="0" style="--i:0">
       <defs>
         <radialGradient id="gE"><stop offset="0" stop-color="#7fb8ff"/><stop offset=".55" stop-color="#2d6fd6"/><stop offset="1" stop-color="#0b2a5c"/></radialGradient>
         <radialGradient id="gM"><stop offset="0" stop-color="#ffb07a"/><stop offset=".55" stop-color="#e0703a"/><stop offset="1" stop-color="#5a230c"/></radialGradient>
-        <filter id="glw"><feGaussianBlur stdDeviation="8"/></filter>
+        <filter id="glw"><feGaussianBlur stdDeviation="10"/></filter>
       </defs>
-      <circle cx="140" cy="140" r="78" fill="#2d6fd6" opacity=".35" filter="url(#glw)"/>
-      <circle cx="140" cy="140" r="62" fill="url(#gE)"/>
-      <circle cx="1240" cy="140" r="56" fill="#e0703a" opacity=".35" filter="url(#glw)"/>
-      <circle cx="1240" cy="140" r="44" fill="url(#gM)"/>
-      <path id="sig" d="M215,140 C520,40 860,40 1180,140" fill="none" stroke="rgba(56,225,212,.45)" stroke-width="2" stroke-dasharray="6 10"/>
+      <circle cx="110" cy="130" r="74" fill="#2d6fd6" opacity=".35" filter="url(#glw)"/>
+      <circle cx="110" cy="130" r="58" fill="url(#gE)"/>
+      <circle cx="1070" cy="130" r="54" fill="#e0703a" opacity=".35" filter="url(#glw)"/>
+      <circle cx="1070" cy="130" r="42" fill="url(#gM)"/>
+      <path id="sig" d="M185,130 C450,20 730,20 1010,130" fill="none" stroke="rgba(56,225,212,.4)" stroke-width="2" stroke-dasharray="6 10"/>
       <circle r="7" fill="#38e1d4"><animateMotion dur="7s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#sig"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="7s" repeatCount="indefinite"/></circle>
-      <circle r="16" fill="#38e1d4" opacity=".18"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#sig"/></animateMotion></circle>
-      <text x="140" y="255" fill="rgba(242,244,247,.7)" font-size="20" letter-spacing="5" text-anchor="middle">${t.earth.toUpperCase()}</text>
-      <text x="1240" y="255" fill="rgba(242,244,247,.7)" font-size="20" letter-spacing="5" text-anchor="middle">${t.mars.toUpperCase()}</text>
-      <text x="690" y="48" fill="#38e1d4" font-size="22" letter-spacing="4" text-anchor="middle">${t.delay.toUpperCase()}</text>
+      <circle r="18" fill="#38e1d4" opacity=".18"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#sig"/></animateMotion></circle>
+      <text x="110" y="226" fill="rgba(242,244,247,.6)" font-size="17" letter-spacing="6" text-anchor="middle">${t.earth.toUpperCase()}</text>
+      <text x="1070" y="226" fill="rgba(242,244,247,.6)" font-size="17" letter-spacing="6" text-anchor="middle">${t.mars.toUpperCase()}</text>
     </svg>
-    <div class="items">
-      ${t.items.map((it,i)=>`<div class="item" data-beat="0" style="--i:${4+i*3}"><div class="big">${it[0]}</div><div class="lbl">${it[1]}</div></div>`).join("")}
-    </div>${foot(s)}`; },
+    <div class="nums">
+      ${t.nums.map((n,i)=>`<div class="num" data-beat="${i+1}"><div class="big">${n[0]}${n[1]?`<small>${n[1].toUpperCase()}</small>`:""}</div><div class="lbl">${n[2]}</div></div>`).join("")}
+    </div>
+    ${cap(t.cap,0,2)}${src(s)}`; },
 
   chart(s){ const t=s.text, c=corridorPaths();
     const yt=[36.5,37.0,37.5,38.0], xt=[0,30,60,90,120];
+    const xA=X(80);
     return `
-    <div class="kicker" data-beat="0" style="--i:0">${t.kicker}</div>
-    <div class="title" data-beat="0" style="--i:1;font-size:46px">${t.title}</div>
     <div class="syn-label" data-beat="0" style="--i:2"><span class="tag syn">${t.syn}</span></div>
-    <div class="chart-wrap">
-      <svg class="chart" viewBox="0 0 ${CH.W} ${CH.H}">
-        <defs>
-          <clipPath id="corClip"><rect id="corRect" x="0" y="0" width="0" height="${CH.H}"/></clipPath>
-          <linearGradient id="corG" x1="0" x2="1"><stop offset="0" stop-color="#38e1d4" stop-opacity=".16"/><stop offset="1" stop-color="#38e1d4" stop-opacity=".32"/></linearGradient>
-        </defs>
-        <g data-beat="0" style="--i:2">
-          ${yt.map(v=>`<line x1="${CH.x0}" x2="${CH.x1}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(242,244,247,.07)"/><text x="${CH.x0-14}" y="${Y(v)+6}" fill="rgba(242,244,247,.5)" font-size="16" text-anchor="end">${v.toFixed(1).replace(".",",")}</text>`).join("")}
-          ${xt.map(v=>`<text x="${X(v)}" y="${CH.y0+30}" fill="rgba(242,244,247,.5)" font-size="16" text-anchor="middle">${v===0?"start":v}</text>`).join("")}
-          <text x="${CH.x1}" y="${CH.y0+56}" fill="rgba(242,244,247,.4)" font-size="14" letter-spacing="3" text-anchor="end">${t.xLbl.toUpperCase()} →</text>
-          <text x="${CH.x0-14}" y="${CH.y1-6}" fill="rgba(242,244,247,.4)" font-size="14" text-anchor="end">°C</text>
-          <line x1="${CH.x0}" x2="${CH.x1}" y1="${CH.y0}" y2="${CH.y0}" stroke="rgba(242,244,247,.25)"/>
+    <svg class="chart" viewBox="0 0 ${CH.W} ${CH.H}">
+      <defs>
+        <clipPath id="corClip"><rect id="corRect" x="0" y="0" width="0" height="${CH.H}"/></clipPath>
+        <linearGradient id="corG" x1="0" x2="1"><stop offset="0" stop-color="#38e1d4" stop-opacity=".14"/><stop offset="1" stop-color="#38e1d4" stop-opacity=".30"/></linearGradient>
+      </defs>
+      <g data-beat="0" style="--i:1">
+        ${yt.map(v=>`<line x1="${CH.x0}" x2="${CH.x1}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(242,244,247,.06)"/><text x="${CH.x0-16}" y="${Y(v)+6}" fill="rgba(242,244,247,.42)" font-size="17" text-anchor="end">${v.toFixed(1).replace(".",",")}</text>`).join("")}
+        ${xt.map(v=>`<text x="${X(v)}" y="${CH.y0+32}" fill="rgba(242,244,247,.42)" font-size="17" text-anchor="middle">${v===0?"start":v}</text>`).join("")}
+        <text x="${CH.x1}" y="${CH.y0+58}" fill="rgba(242,244,247,.36)" font-size="14" letter-spacing="4" text-anchor="end">${t.xLbl.toUpperCase()} →</text>
+        <text x="${CH.x0-16}" y="${CH.y1-4}" fill="rgba(242,244,247,.36)" font-size="15" text-anchor="end">°C</text>
+        <line x1="${CH.x0}" x2="${CH.x1}" y1="${CH.y0}" y2="${CH.y0}" stroke="rgba(242,244,247,.22)"/>
+      </g>
+      <g data-beat="1">
+        <rect x="${CH.x0}" y="${Y(38.4)}" width="${CH.x1-CH.x0}" height="${Y(37.5)-Y(38.4)}" fill="rgba(255,77,77,.05)"/>
+        <line x1="${CH.x0}" x2="${CH.x1}" y1="${Y(37.5)}" y2="${Y(37.5)}" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="10 8"/>
+        <text x="${CH.x0+14}" y="${Y(37.5)+30}" fill="#ff8a8a" font-size="22" letter-spacing="3">${t.earthLbl.toUpperCase()}</text>
+      </g>
+      <g data-beat="2">
+        <rect x="${CH.x0}" y="${Y(36.9)}" width="${CH.x1-CH.x0}" height="${Y(36.4)-Y(36.9)}" rx="6" fill="rgba(200,208,216,.11)" stroke="rgba(200,208,216,.3)"/>
+        <text x="${CH.x0+14}" y="${Y(36.4)-16}" fill="rgba(220,226,232,.75)" font-size="22" letter-spacing="3">${t.preLbl.toUpperCase()}</text>
+      </g>
+      <g data-beat="3">
+        <g clip-path="url(#corClip)">
+          <path d="${c.band}" fill="url(#corG)" stroke="rgba(56,225,212,.6)" stroke-width="1.6"/>
+          <path d="${c.line}" fill="none" stroke="#38e1d4" stroke-width="2" opacity=".55" stroke-dasharray="2 7"/>
+          ${c.dots}
         </g>
-        <g data-beat="1">
-          <rect x="${CH.x0}" y="${Y(38.4)}" width="${CH.x1-CH.x0}" height="${Y(37.5)-Y(38.4)}" fill="rgba(255,77,77,.07)"/>
-          <line x1="${CH.x0}" x2="${CH.x1}" y1="${Y(37.5)}" y2="${Y(37.5)}" stroke="#ff4d4d" stroke-width="2.5" stroke-dasharray="10 8"/>
-          <text x="${CH.x0+10}" y="${Y(37.5)-12}" fill="#ff7a7a" font-size="18" letter-spacing="1.5">${t.earthLbl}</text>
-        </g>
-        <g data-beat="2">
-          <rect x="${CH.x0}" y="${Y(36.9)}" width="${CH.x1-CH.x0}" height="${Y(36.4)-Y(36.9)}" fill="rgba(200,208,216,.13)" stroke="rgba(200,208,216,.35)"/>
-          <text x="${CH.x1-10}" y="${Y(36.4)-12}" fill="rgba(220,226,232,.75)" font-size="18" text-anchor="end" letter-spacing="1.5">${t.preLbl}</text>
-        </g>
-        <g data-beat="3" id="corG3">
-          <g clip-path="url(#corClip)">
-            <path d="${c.band}" fill="url(#corG)" stroke="rgba(56,225,212,.55)" stroke-width="1.5"/>
-            <path d="${c.line}" fill="none" stroke="#38e1d4" stroke-width="2" opacity=".6" stroke-dasharray="2 6"/>
-            ${c.dots}
-          </g>
-          <text x="${X(96)}" y="${Y(center(96)+HALF)-14}" fill="#38e1d4" font-size="19" letter-spacing="1.5" text-anchor="middle">${t.corLbl}</text>
-        </g>
-        <g data-beat="4" id="dotA">
-          <line x1="${X(80)}" x2="${X(80)}" y1="${CH.y1}" y2="${CH.y0}" stroke="rgba(242,244,247,.2)" stroke-dasharray="3 5"/>
-          <circle cx="${X(80)}" cy="${Y(37.7)}" r="22" fill="#38e1d4" opacity=".18"/>
-          <circle cx="${X(80)}" cy="${Y(37.7)}" r="9" fill="#fff" stroke="#38e1d4" stroke-width="3"/>
-          <text x="${X(80)+18}" y="${Y(37.7)-18}" fill="#fff" font-size="20">37,7</text>
-        </g>
-        <g data-beat="5">
-          <circle cx="${X(80)}" cy="${Y(37.0)}" r="9" fill="none" stroke="#ffb547" stroke-width="3"/>
-          <circle cx="${X(80)}" cy="${Y(37.0)}" r="9" fill="none" stroke="#ffb547" stroke-width="2"><animate attributeName="r" values="9;30" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".9;0" dur="1.8s" repeatCount="indefinite"/></circle>
-          <text x="${X(80)+18}" y="${Y(37.0)+7}" fill="#ffb547" font-size="20">37,0</text>
-        </g>
-      </svg>
-      <div>
-        <div class="sub" data-beat="3" style="margin:0 0 22px;font-size:26px;color:var(--teal)">${t.sub}</div>
-        ${[["vA",4],["vB",5]].map(([k,b])=>`<div class="verdict" data-beat="${b}"><h4>${t[k].h}</h4>${t[k].rows.map((r,i)=>`<div class="row" ><span class="k">${r[0]}</span><span class="${r[2]}">${r[1]}</span></div>`).join("")}</div>`).join("")}
-      </div>
-    </div>${foot(s)}`; },
+        <text x="${X(108)}" y="${Y(center(108)+HALF)-18}" fill="#38e1d4" font-size="24" letter-spacing="3" text-anchor="middle">${t.corLbl.toUpperCase()}</text>
+      </g>
+      <g data-beat="4" id="dotA">
+        <line x1="${xA}" x2="${xA}" y1="${CH.y1+20}" y2="${CH.y0}" stroke="rgba(242,244,247,.18)" stroke-dasharray="3 6"/>
+        <circle cx="${xA}" cy="${Y(37.7)}" r="24" fill="#38e1d4" opacity=".18"/>
+        <circle cx="${xA}" cy="${Y(37.7)}" r="10" fill="#fff" stroke="#38e1d4" stroke-width="3"/>
+        <text x="${xA-22}" y="${Y(37.7)-20}" fill="#fff" font-size="24" text-anchor="end">37,7</text>
+        ${mark(xA+44, Y(37.7)+8, "✓", "#38e1d4")}
+        ${mark(xA-44, Y(37.5)+30, "✗", "#ff6b6b")}
+        ${mark(xA-44, Y(36.65)+8, "✗", "#ff6b6b")}
+      </g>
+      <g data-beat="5">
+        <circle cx="${xA}" cy="${Y(37.0)}" r="10" fill="none" stroke="#ffb547" stroke-width="3"/>
+        <circle cx="${xA}" cy="${Y(37.0)}" r="10" fill="none" stroke="#ffb547" stroke-width="2"><animate attributeName="r" values="10;32" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".9;0" dur="1.8s" repeatCount="indefinite"/></circle>
+        <text x="${xA-22}" y="${Y(37.0)+8}" fill="#ffb547" font-size="24" text-anchor="end">37,0</text>
+        ${mark(xA+44, Y(37.0)+8, "!", "#ffb547")}
+        <text x="${xA+84}" y="${Y(37.5)+30}" fill="#ffb547" font-size="20" letter-spacing="2">OK?</text>
+      </g>
+    </svg>
+    ${cap(t.cap+`<small>${t.sub}</small>`,3,0)}${src(s)}`; },
 
   product(s){ const t=s.text; return `
-    <div class="kicker" data-beat="0" style="--i:0">${t.kicker}</div>
-    <div class="title" data-beat="0" style="--i:1">${t.title}</div>
-    <div class="prod">
-      <div class="card" data-beat="0" style="--i:2">
-        <div class="hdr"><span>${H(t.card.hdr[0])}</span><span>${H(t.card.hdr[1])}</span></div>
-        ${t.card.rows.map((r,i)=>`<div class="r" data-beat="0" style="--i:${4+i*3}"><div class="h ${r[1]}">${r[0]}${r[3]?'<span class="tag ph">placeholder</span>':''}</div><div class="t">${H(r[2])}</div></div>`).join("")}
-      </div>
-      <div class="users">
-        ${t.users.map((u,i)=>`<div class="u" data-beat="1" style="--i:${i*2}"><div class="ic">${u[0]}</div><div><div class="n">${u[1]}</div><div class="d">${u[2]}</div></div></div>`).join("")}
-        <div class="llm" data-beat="1" style="--i:7">${t.llm}</div>
-      </div>
-    </div>${foot(s)}`; },
+    <div class="card" data-beat="0" style="--i:0">
+      <div class="hdr"><span>${H(t.card.hdr[0])}</span><span>${H(t.card.hdr[1])}</span></div>
+      ${t.card.rows.map((r,i)=>`<div class="r" data-beat="0" style="--i:${2+i*2}"><div class="h ${r[1]}">${r[0]}${r[3]?'<span class="tag ph">placeholder</span>':''}</div><div class="t">${H(r[2])}</div></div>`).join("")}
+    </div>
+    <div class="users">
+      ${t.users.map((u,i)=>`<div class="u" data-beat="1" style="--i:${i*2}"><div class="ic">${u[0]}</div><div class="n">${u[1]}</div></div>`).join("")}
+    </div>
+    ${cap(t.cap,0,8)}${src(s)}`; },
 
   proof(s){ const t=s.text; return `
-    <div class="kicker" data-beat="0" style="--i:0">${t.kicker}</div>
-    <div class="title" data-beat="0" style="--i:1">${t.title}</div>
     <div class="proof">
-      ${t.cards.map((c,i)=>`<div class="pc" data-beat="0" style="--i:${3+i*2}"><div class="big">${c[0]}</div><div class="lbl">${c[1]}<span class="small">${c[2]}</span></div></div>`).join("")}
+      ${t.cards.map((c,i)=>`<div class="tok" data-beat="0" style="--i:${i*3}"><div class="big${c[2]?" n":""}">${c[0]}</div><div class="lbl">${c[1]}</div></div>`).join("")}
     </div>
     <!-- PLAN A: when docs/claims.md has results, remove display:none in .headline-x and fill {X},{Y},{S},{L} ONLY from claims.md -->
-    <div class="headline-x limit" style="border-color:var(--teal)">${t.headline}</div>
-    <div class="limit" data-beat="1" style="--i:0">${t.limit}</div>
-    <div class="sub" data-beat="1" style="--i:2;font-size:20px">${t.step}</div>
-    ${foot(s)}`; },
+    <div class="headline-x">${t.headline}</div>
+    ${cap(t.cap+`<small>${t.limit}</small>`,0,9)}${src(s)}`; },
 
   diff(s){ const t=s.text; return `
-    <div class="kicker" data-beat="0" style="--i:0">${t.kicker}</div>
-    <div class="title" data-beat="0" style="--i:1">${t.title}</div>
     <div class="diff">
-      <div class="col sn" data-beat="1" style="--i:0"><div class="who teal">${t.sn.who}</div><div class="q">${t.sn.q}</div><div class="w">${t.sn.w}</div></div>
+      <div class="qa sn" data-beat="1" style="--i:0"><div class="who">${t.sn.who}</div><div class="q">${t.sn.q}</div></div>
       <div class="arrow" data-beat="1" style="--i:3">
-        ${t.arrow}
-        <svg viewBox="0 0 220 40"><path d="M5,20 L200,20" stroke="#38e1d4" stroke-width="2" class="draw" pathLength="1"/><path d="M188,8 L208,20 L188,32" fill="none" stroke="#38e1d4" stroke-width="2"/></svg>
-        <span style="color:var(--dim)">${t.arrow2}</span>
+        <svg viewBox="0 0 170 40"><path d="M5,20 L150,20" stroke="#38e1d4" stroke-width="2" class="draw" pathLength="1"/><path d="M140,8 L160,20 L140,32" fill="none" stroke="#38e1d4" stroke-width="2"/></svg>
       </div>
-      <div class="col cmo" data-beat="0" style="--i:3"><div class="who">${t.cmo.who}</div><div class="q">${t.cmo.q}</div><div class="w">${t.cmo.w}</div></div>
+      <div class="qa cmo" data-beat="0" style="--i:0"><div class="who">${t.cmo.who}</div><div class="q">${t.cmo.q}</div></div>
     </div>
-    <div class="prior" data-beat="1" style="--i:5">${t.prior}</div>
-    ${foot(s)}`; },
+    ${cap(t.cap,0,3)}${src(s)}`; },
 
   close(s){ const t=s.text; return `
     <div class="close">
@@ -824,7 +787,7 @@ function updatePresenter(onlyTime){
     d.getElementById("px").textContent="Następny: "+S[0].title; return; }
   d.getElementById("ps").textContent=`Slajd ${cur+1}/${S.length} · ${s.title} · klik ${beat}/${s.beats}`;
   d.getElementById("pg").textContent= s.time ? `cel: ${fmt(s.time[0])} – ${fmt(s.time[1])}` : "poza czasem (Q&A)";
-  d.getElementById("pn").innerHTML=H(s.notes).replace(/\[klik\]/g,'<span class="beat">[klik]</span>');
+  d.getElementById("pn").innerHTML=H(s.notes).replace(/\n/g,"<br><br>").replace(/\[klik\]/g,'<span class="beat">[klik]</span>');
   d.getElementById("px").textContent= cur<S.length-1 ? "Następny: "+S[cur+1].title : "Koniec";
 }
 

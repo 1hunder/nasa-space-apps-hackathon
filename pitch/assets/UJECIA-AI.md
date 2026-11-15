@@ -13,9 +13,9 @@ Do każdego promptu dopisz na końcu:
 | # | Plik | Typ | Prompt |
 |---|---|---|---|
 | 1 | `hero.jpg` | obraz | Portrait of a fictional female astronaut in a plain white EVA helmet, gold visor half-raised, calm expression, soft teal rim light, deep space background, unbranded suit with no patches |
-| 2 | `helmet.mp4` | I2V z #1 | Very slow dolly push-in on the astronaut's helmet, Earth reflected and drifting in the visor, subtle breathing, faint teal HUD glow |
+| 2 | `astro.mp4` | I2V z #1 | Very slow dolly push-in on the astronaut's helmet, Earth reflected and drifting in the visor, subtle breathing, faint teal HUD glow |
 | 3 | `planets.mp4` | wideo | Earth in the foreground and Mars far away in black space, thin atmosphere limb glow, distant stars, very slow push toward Mars |
-| 4 | `hologram.mp4` | wideo | Translucent teal holographic human body scan rotating slowly above a dark console, heart and lungs glowing, scanning line moving top to bottom, seamless loop |
+| 4 | `holo.mp4` | wideo | Translucent teal holographic human body scan rotating slowly above a dark console, heart and lungs glowing, scanning line moving top to bottom, seamless loop |
 | 5 | `habitat.mp4` | wideo | Inflatable Mars habitat module on red dunes at sunset, blue Martian sunset sky, dust drifting, slow lateral crane move, warm window light |
 
 Kolejność ważności: 1 → 2 → 3. Ujęcia 4–5 tylko jeśli starczy czasu.

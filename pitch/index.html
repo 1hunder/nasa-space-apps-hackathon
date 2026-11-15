@@ -73,7 +73,37 @@ canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 #hint{position:fixed;top:1.1vh;left:1.4vw;z-index:9;font:13px/1 var(--font);letter-spacing:.1em;color:var(--faint);transition:opacity 1.5s}
 
 /* ---------- S1 hook ---------- */
-.hook{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center}
+.hook{display:grid;grid-template-columns:540px minmax(0,1fr);gap:80px;align-items:center;height:100%}
+.hook .txt{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+.hook .temp{font-size:200px;margin-top:20px}
+.hook .hero-line{margin-top:20px}
+/* portal: astronaut clip seen through a hologram ring (crop excludes suit patch) */
+.portal{position:relative;width:540px;height:540px}
+.portal .pv{position:absolute;inset:34px;border-radius:50%;overflow:hidden;background:#05080b;clip-path:circle(50% at 50% 50%)}
+.portal video{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:contrast(1.1) saturate(1.15) brightness(.92);transform:scale(1.04)}
+.portal .pv:after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(56,225,212,.07) 0 1px, transparent 1px 3px),
+             radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 50%, rgba(0,0,0,.78) 100%);
+  box-shadow:inset 0 0 70px rgba(56,225,212,.28)}
+.portal .ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 10px rgba(56,225,212,.75))}
+.portal .ring circle,.portal .ring path{transition:stroke .6s}
+.portal .ring .spin{transform-box:view-box;transform-origin:50% 50%;animation:spin 48s linear infinite}
+.portal.alarm .ring .c1{stroke:#ff4d4d}
+.portal.alarm .ring{filter:drop-shadow(0 0 14px rgba(255,77,77,.8))}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* intro planets layer + hologram bridge (film clips, captions cut out) */
+#intro{position:fixed;inset:0;z-index:2;display:grid;place-items:center;pointer-events:none;opacity:0;visibility:hidden}
+#intro video{width:90vw;height:auto;max-height:94vh;object-fit:cover;filter:contrast(1.08) saturate(1.12);
+  -webkit-mask-image:radial-gradient(ellipse 58% 62% at 50% 50%, #000 55%, transparent 100%);
+          mask-image:radial-gradient(ellipse 58% 62% at 50% 50%, #000 55%, transparent 100%)}
+#holo{position:fixed;left:50%;top:50%;height:62vh;aspect-ratio:360/432;z-index:4;pointer-events:none;opacity:0;visibility:hidden}
+#holo video{width:100%;height:100%;object-fit:cover;filter:saturate(1.15);
+  -webkit-mask-image:radial-gradient(ellipse 50% 52% at 50% 50%, #000 58%, transparent 100%);
+          mask-image:radial-gradient(ellipse 50% 52% at 50% 50%, #000 58%, transparent 100%)}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+.wordmark.hold{opacity:0!important}
+/* GSAP drives scene transforms/opacity when loaded */
+.gs .scene{transition:none!important;filter:none!important}
 .temp{font-size:230px;font-weight:200;letter-spacing:-.02em;line-height:1;margin-top:26px;font-variant-numeric:tabular-nums;transition:color .6s, text-shadow .6s}
 .temp small{font-size:80px;font-weight:300;margin-left:10px;color:var(--dim)}
 .temp.alarm{color:#ff6b6b;text-shadow:0 0 50px rgba(255,77,77,.45)}
@@ -168,7 +198,10 @@ canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 <canvas id="stars"></canvas>
 <div class="glow mars" id="glowMars"></div>
 <div class="glow teal" id="glowTeal"></div>
+<div id="intro"><video id="vPlanets" src="assets/planets.mp4" muted playsinline preload="auto"></video></div>
 <div class="stage" id="stage"></div>
+<div id="holo"><video id="vHolo" src="assets/holo.mp4" muted playsinline preload="auto"></video></div>
+<canvas id="fx"></canvas>
 <div class="vignette"></div>
 <div class="grain" id="grain"></div>
 <div class="bar top"></div><div class="bar bot"></div>
@@ -176,6 +209,8 @@ canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 <div id="timer">0:00 / 2:30</div>
 <div id="hint">→ dalej · ← wstecz · F pełny ekran · P notatki · T timer</div>
 
+<!-- GSAP 3.13.0, vendored for offline use (classic script, works on file://). Missing → CSS fallback. -->
+<script src="vendor/gsap.min.js"></script>
 <script>
 /* =================================================================
    CONFIG — ALL EDITABLE TEXT LIVES HERE.
@@ -318,10 +353,22 @@ const foot = s => s.foot.length ? `<div class="foot" data-beat="0" style="--i:6"
 const B = {
   hook(s){ const t=s.text; return `
     <div class="hook">
-      <div class="kicker" data-beat="0" style="--i:0">${H(t.kicker)}</div>
-      <div class="temp" id="temp" data-beat="0" style="--i:1">${t.from.toFixed(1).replace(".",",")}<small>°C</small></div>
-      <div class="hero-line" data-beat="0" style="--i:3">${H(t.line)}</div>
-      <div class="alarm-box" id="alarm" data-beat="1">⚠ ${H(t.alarm)}<span>${H(t.alarmSub)}</span></div>
+      <div class="portal" id="portal">
+        <div class="pv" id="pv"><video id="vAstro" src="assets/astro.mp4" muted playsinline preload="auto"></video></div>
+        <svg class="ring" id="ring" viewBox="0 0 540 540">
+          <circle class="c1" cx="270" cy="270" r="236" fill="none" stroke="#38e1d4" stroke-width="2"/>
+          <g class="spin">
+            <circle cx="270" cy="270" r="256" fill="none" stroke="#38e1d4" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="2 9"/>
+            <path d="M270 4v16M270 520v16M4 270h16M520 270h16" stroke="#38e1d4" stroke-width="2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="txt">
+        <div class="kicker" data-beat="0" style="--i:0">${H(t.kicker)}</div>
+        <div class="temp" id="temp" data-beat="0" style="--i:1">${t.from.toFixed(1).replace(".",",")}<small>°C</small></div>
+        <div class="hero-line" data-beat="0" style="--i:3">${H(t.line)}</div>
+        <div class="alarm-box" id="alarm" data-beat="1">⚠ ${H(t.alarm)}<span>${H(t.alarmSub)}</span></div>
+      </div>
     </div>${foot(s)}`; },
 
   problem(s){ const t=s.text; return `
@@ -480,15 +527,98 @@ addEventListener("resize", fit); fit();
 let cur=0, beat=0;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* ---------- cinematic layer (GSAP; falls back to CSS transitions) ---------- */
+const G = window.gsap || null;
+const CINE = !!G && !reduce;
+if(CINE) document.body.classList.add("gs");
+let started = !CINE;           // false = black pre-roll; first press plays the intro
+let tl = null;                 // active slide-to-slide timeline (2nd press fast-forwards it)
+let shown = 0;                 // scene currently on screen
+const warp = { speed: reduce ? 0 : .6 };
+const $ = id => document.getElementById(id);
+function playV(v,rate){ try{ v.currentTime=0; v.playbackRate=rate; const p=v.play(); if(p) p.catch(()=>{}); }catch(e){} }
+
+function applyBeats(i){
+  scenes[i].querySelectorAll("[data-beat]").forEach(el=>{
+    el.classList.toggle("on", i===cur && started && +el.dataset.beat<=beat);
+  });
+}
+function push(A,B){
+  return G.timeline({defaults:{ease:"expo.inOut"}})
+    .to(warp,{speed:26,duration:.7,ease:"expo.in"},0)
+    .fromTo(A,{scale:1,autoAlpha:1},{scale:2.5,autoAlpha:0,duration:1.1},0)
+    .fromTo(B,{scale:.35,autoAlpha:0},{scale:1,autoAlpha:1,duration:1.2},.35)
+    .to(warp,{speed:.6,duration:.9,ease:"expo.out"},.75);
+}
+const TR = {
+  // problem → corridor: fly through a hologram body ("the body changes") into the chart
+  "1>2": (A,B)=>{ const h=$("holo"), v=$("vHolo");
+    return G.timeline({defaults:{ease:"expo.inOut"}})
+      .to(warp,{speed:22,duration:.6,ease:"expo.in"},0)
+      .fromTo(A,{scale:1,autoAlpha:1},{scale:2.5,autoAlpha:0,duration:1.0},0)
+      .call(()=>{ playV(v,.8) },null,.25)
+      .fromTo(h,{xPercent:-50,yPercent:-50,autoAlpha:0,scale:.45},{autoAlpha:1,scale:1,duration:.9,ease:"expo.out"},.3)
+      .to(h,{scale:3.4,autoAlpha:0,duration:1.0,ease:"expo.in"},1.45)
+      .fromTo(B,{scale:.35,autoAlpha:0},{scale:1,autoAlpha:1,duration:1.2},1.7)
+      .to(warp,{speed:.6,duration:.9,ease:"expo.out"},1.95); }
+};
+const ENTRY = { "1>2":1.7 };   // when the incoming scene appears (beats start then)
+function transition(a,b,dir){
+  if(tl) tl.progress(1);
+  const A=scenes[a], B=scenes[b];
+  if(dir===0){ G.set(scenes,{autoAlpha:0,scale:1}); G.set(B,{autoAlpha:1,scale:1}); applyBeats(b); return; }
+  if(dir<0){
+    tl=G.timeline().to(A,{autoAlpha:0,scale:1,duration:.4}).fromTo(B,{autoAlpha:0,scale:1},{autoAlpha:1,scale:1,duration:.4},0);
+    applyBeats(b); return;
+  }
+  const key=a+">"+b;
+  tl=(TR[key]||push)(A,B);
+  tl.call(()=>applyBeats(b), null, ENTRY[key] ?? .35);
+}
+
+/* intro: black → planets push-in → warp → portal opens on the astronaut → slide-1 overlays */
+function setPortal(open){
+  const ring=$("ring"), pv=$("pv");
+  if(open){ G.set(ring,{autoAlpha:1,scale:1,rotation:0,transformOrigin:"50% 50%"}); G.set(pv,{clipPath:"circle(50% at 50% 50%)"}); }
+  else    { G.set(ring,{autoAlpha:0,scale:.2,transformOrigin:"50% 50%"}); G.set(pv,{clipPath:"circle(0% at 50% 50%)"}); }
+}
+function astroLoop(){
+  const va=$("vAstro"); playV(va,.25);
+  if(CINE) G.fromTo(va,{scale:1.04},{scale:1.16,duration:16,ease:"none"});
+}
+function warmVideos(){
+  ["vHolo"].forEach(id=>{ const v=$(id); try{ v.play().then(()=>{ v.pause(); v.currentTime=0; }).catch(()=>{}); }catch(e){} });
+}
+function playIntro(){
+  started=true; warmVideos();
+  const I=$("intro"), vp=$("vPlanets"), ring=$("ring"), pv=$("pv");
+  playV(vp,.38);
+  G.set(I,{transformOrigin:"68% 50%"});
+  tl=G.timeline()
+    .fromTo(I,{autoAlpha:0,scale:1},{autoAlpha:1,duration:1.0,ease:"power2.out"},0)
+    .to(I,{scale:1.8,duration:3.4,ease:"power2.in"},0)
+    .to(warp,{speed:16,duration:1.6,ease:"expo.in"},1.0)
+    .call(astroLoop,null,2.3)
+    .fromTo(ring,{scale:.2,autoAlpha:0,rotation:-90},{scale:1,autoAlpha:1,rotation:0,duration:1.6,ease:"expo.out"},2.3)
+    .fromTo(pv,{clipPath:"circle(0% at 50% 50%)"},{clipPath:"circle(50% at 50% 50%)",duration:1.5,ease:"expo.out"},2.45)
+    .to(I,{autoAlpha:0,duration:.9,ease:"power1.in"},2.6)
+    .to(warp,{speed:.6,duration:1.4,ease:"expo.out"},2.7)
+    .call(()=>render(1),null,3.3);
+}
+function finishIntro(){
+  if(started) return;
+  started=true; G.set($("intro"),{autoAlpha:0}); setPortal(true); astroLoop();
+}
+
 function render(dir){
+  const changed = shown!==cur;
   scenes.forEach((sc,i)=>{
     sc.classList.toggle("active", i===cur);
     sc.classList.toggle("past", i<cur);
-    sc.querySelectorAll("[data-beat]").forEach(el=>{
-      const on = i===cur && +el.dataset.beat<=beat;
-      el.classList.toggle("on", on);
-    });
+    if(!(CINE && changed && dir>0 && i===cur)) applyBeats(i);
   });
+  if(CINE && changed) transition(shown, cur, dir);
+  shown=cur;
   // glows
   const g=S[cur].glow;
   place(document.getElementById("glowMars"), g.mars);
@@ -501,9 +631,12 @@ function render(dir){
 }
 function place(el,[x,y,size]){ const px=size*innerWidth/100; el.style.width=el.style.height=px+"px"; el.style.left=(x*innerWidth/100-px/2)+"px"; el.style.top=(y*innerHeight/100-px/2)+"px"; el.style.opacity=size?1:0; }
 
-function next(){ startTimer(); if(beat<S[cur].beats){beat++;render(1);} else if(cur<S.length-1){cur++;beat=0;render(1);} }
-function prev(){ if(beat>0){beat--;render(-1);} else if(cur>0){cur--;beat=S[cur].beats;render(-1);} }
-function go(i){ if(i>=0&&i<S.length){cur=i;beat=0;render(0);} }
+function busy(){ if(tl && tl.isActive()){ tl.progress(1); return true; } return false; } // 2nd press = fast-forward
+function next(){ if(busy()) return; startTimer();
+  if(!started){ playIntro(); updatePresenter(); return; }
+  if(beat<S[cur].beats){beat++;render(1);} else if(cur<S.length-1){cur++;beat=0;render(1);} }
+function prev(){ if(busy()) return; if(beat>0){beat--;render(-1);} else if(cur>0){cur--;beat=S[cur].beats;render(-1);} }
+function go(i){ if(i>=0&&i<S.length){ if(tl) tl.progress(1); if(CINE) finishIntro(); cur=i;beat=0;render(0);} }
 
 /* ---------- per-slide animation hooks ---------- */
 let tempAnim=null, corAnim=null;
@@ -513,11 +646,16 @@ function hooks(dir){
   const temp=document.getElementById("temp"), alarm=document.getElementById("alarm");
   if(k==="hook"){
     const t=S[cur].text;
-    if(beat===0 && dir>=0){ animateNum(temp,t.from,t.to,2400); }
+    if(!started){ cancelAnimationFrame(tempAnim); setTemp(temp,t.from); }
+    else if(beat===0 && dir>=0){ animateNum(temp,t.from,t.to,2400); }
     else { cancelAnimationFrame(tempAnim); setTemp(temp,t.to); }
     temp.classList.toggle("alarm", beat>=1);
     alarm.classList.toggle("on", beat>=1);
+    $("portal").classList.toggle("alarm", beat>=1);
   } else { cancelAnimationFrame(tempAnim); temp.classList.remove("alarm"); }
+  // close: particle wordmark on the logo beat
+  if(k==="close" && beat===1 && dir>0) assembleWordmark();
+  else if(!(k==="close" && beat>=1) || dir===0) stopParticles();
   // chart: corridor reveal
   const rect=document.getElementById("corRect");
   if(k==="chart"){
@@ -526,6 +664,38 @@ function hooks(dir){
     else { cancelAnimationFrame(corAnim); rect.setAttribute("width", 0); }
     document.getElementById("dotA").style.opacity = beat>=5 ? .45 : "";
   }
+}
+/* closing wordmark assembles from particles (text pixels → targets) */
+const fxc=$("fx"), fxx=fxc.getContext("2d"); let partAnim=null;
+function stopParticles(){ cancelAnimationFrame(partAnim); partAnim=null; fxx.clearRect(0,0,fxc.width,fxc.height);
+  const wm=document.querySelector(".wordmark"); if(wm) wm.classList.remove("hold"); }
+function assembleWordmark(){
+  const wm=document.querySelector(".wordmark"); if(!wm || !CINE) return;
+  stopParticles();
+  const D=Math.min(2,devicePixelRatio||1); fxc.width=innerWidth*D; fxc.height=innerHeight*D; fxc.style.opacity=1;
+  wm.style.transition="none"; wm.style.transform="none"; const r=wm.getBoundingClientRect(); wm.style.transition=""; wm.style.transform="";
+  wm.classList.add("hold");
+  const cs=getComputedStyle(wm), sc=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--s"))||1;
+  const fs=parseFloat(cs.fontSize)*sc, off=document.createElement("canvas"), W=Math.ceil(r.width*D), Hh=Math.ceil(r.height*D);
+  off.width=W; off.height=Hh; const o=off.getContext("2d");
+  o.font=`${cs.fontWeight} ${fs*D}px ${cs.fontFamily}`; o.textAlign="center"; o.textBaseline="middle"; o.fillStyle="#fff";
+  try{ o.letterSpacing=(fs*.16*D)+"px"; }catch(e){}
+  o.fillText(wm.textContent.trim(), W/2+fs*.08*D, Hh/2);
+  const data=o.getImageData(0,0,W,Hh).data, P=[], step=Math.max(3,Math.round(3*D));
+  for(let y=0;y<Hh;y+=step) for(let x=0;x<W;x+=step) if(data[(y*W+x)*4+3]>140){
+    const a=Math.random()*6.283, d=(.35+Math.random()*.6)*fxc.width;
+    P.push({tx:r.left*D+x, ty:r.top*D+y, sx:fxc.width/2+Math.cos(a)*d, sy:fxc.height*.42+Math.sin(a)*d*.6, dl:Math.random()*.45});
+  }
+  const t0=performance.now(), dur=1.5;
+  const tick=now=>{
+    const t=(now-t0)/1000; fxx.clearRect(0,0,fxc.width,fxc.height);
+    for(const p of P){ const k=Math.max(0,Math.min(1,(t-p.dl)/dur)), e=k===1?1:1-Math.pow(2,-10*k);
+      const x=p.sx+(p.tx-p.sx)*e, y=p.sy+(p.ty-p.sy)*e;
+      fxx.fillStyle = k<1 ? `rgba(120,240,230,${.35+.65*k})` : "#f2f4f7"; fxx.fillRect(x,y,step*.7,step*.7); }
+    if(t<dur+.5){ partAnim=requestAnimationFrame(tick); }
+    else { wm.classList.remove("hold"); G.to(fxc,{opacity:0,duration:.7,onComplete:()=>{ fxx.clearRect(0,0,fxc.width,fxc.height); }}); partAnim=null; }
+  };
+  partAnim=requestAnimationFrame(tick);
 }
 function setTemp(el,v){ el.innerHTML=v.toFixed(1).replace(".",",")+"<small>°C</small>"; }
 function animateNum(el,a,b,ms){
@@ -573,8 +743,31 @@ function drawStars(now){
     const r=st.s*DPR*.6;
     cx.beginPath(); cx.arc(x,y,r,0,6.283); cx.fill();
   }
+  drawWarp(dt);
   requestAnimationFrame(drawStars);
 }
+/* z-depth warp layer: always drifts slowly toward camera; GSAP tweens warp.speed in transitions */
+let wst=[];
+const newW = z => ({ x:Math.random()*2-1, y:(Math.random()*2-1)*.62, z, pz:z });
+function initWarp(){ wst=[]; for(let i=0;i<520;i++) wst.push(newW(.05+Math.random()*.95)); }
+function drawWarp(dt){
+  const sp=warp.speed; if(sp<=0.01) return;
+  const w=cv.width, h=cv.height, fx=w*.5, fy=h*.5, F=w*.36;
+  const amt=Math.min(1,.1+sp/12);
+  cx.lineCap="round";
+  for(const s of wst){
+    s.pz=s.z; s.z-=sp*dt*0.00022;
+    if(s.z<=.03){ Object.assign(s,newW(1)); continue; }
+    const x=fx+s.x/s.z*F, y=fy+s.y/s.z*F;
+    if(x<-80||x>w+80||y<-80||y>h+80){ Object.assign(s,newW(1)); continue; }
+    const px=fx+s.x/s.pz*F, py=fy+s.y/s.pz*F;
+    const a=amt*Math.min(1,(1-s.z)*1.3);
+    cx.strokeStyle=`rgba(205,245,240,${a.toFixed(3)})`;
+    cx.lineWidth=Math.max(.7,(1-s.z)*2.4)*DPR;
+    cx.beginPath(); cx.moveTo(px,py); cx.lineTo(x+.01,y); cx.stroke();
+  }
+}
+initWarp();
 addEventListener("resize", ()=>{ initStars(); render(0); });
 initStars(); requestAnimationFrame(drawStars);
 
@@ -626,6 +819,9 @@ function updatePresenter(onlyTime){
   pt.textContent=fmt(e)+" / "+fmt(TOTAL);
   pt.className = e>=TOTAL?"over":(e>=140?"warn":"");
   if(onlyTime) return;
+  if(!started){ d.getElementById("ps").textContent="Start · czarny ekran"; d.getElementById("pg").textContent="cel: 0:00";
+    d.getElementById("pn").innerHTML='<span class="beat">[klik]</span> = intro: planety → zbliżenie → portal z astronautką (ok. 4 s), potem slajd 1.';
+    d.getElementById("px").textContent="Następny: "+S[0].title; return; }
   d.getElementById("ps").textContent=`Slajd ${cur+1}/${S.length} · ${s.title} · klik ${beat}/${s.beats}`;
   d.getElementById("pg").textContent= s.time ? `cel: ${fmt(s.time[0])} – ${fmt(s.time[1])}` : "poza czasem (Q&A)";
   d.getElementById("pn").innerHTML=H(s.notes).replace(/\[klik\]/g,'<span class="beat">[klik]</span>');
@@ -648,7 +844,15 @@ document.addEventListener("keydown", onKey);
 document.addEventListener("click", e=>{ if(e.target.closest("a")) return; next(); document.getElementById("hint").style.opacity=0; });
 
 /* restore position from hash (#slide.beat) */
-(function(){ const m=location.hash.match(/^#(\d+)(?:\.(\d+))?/); if(m){ cur=Math.min(S.length-1,Math.max(0,+m[1]-1)); beat=Math.min(S[cur].beats,+(m[2]||0)); } render(0); })();
+(function(){
+  const m=location.hash.match(/^#(\d+)(?:\.(\d+))?/);
+  if(CINE){ G.set(scenes,{autoAlpha:0,scale:1}); G.set(scenes[0],{autoAlpha:1}); G.set($("holo"),{xPercent:-50,yPercent:-50}); }
+  const resume = m && !(m[1]==="1" && (m[2]||"0")==="0");   // #1.0 (or no hash) = play intro
+  if(resume){ cur=Math.min(S.length-1,Math.max(0,+m[1]-1)); beat=Math.min(S[cur].beats,+(m[2]||0)); }
+  if(CINE){ if(resume) finishIntro(); else setPortal(false); }
+  else astroLoop();
+  shown=-1; render(0); shown=cur;
+})();
 setTimeout(()=>{ document.getElementById("hint").style.opacity=0; }, 6000);
 </script>
 </body>

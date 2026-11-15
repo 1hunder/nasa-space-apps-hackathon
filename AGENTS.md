@@ -32,6 +32,7 @@ Uwaga: [`PLAN.md`](PLAN.md) to specyfikacja sprzed researchu. Gdzie przeczy [`do
 | Kod: dashboard / UI (`web/`) | [`ZADANIA-VIKTOR-DASHBOARD.md`](ZADANIA-VIKTOR-DASHBOARD.md) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
 | Deploy | [`README.md`](README.md) (uruchomienie) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §5 |
 | Design ekranu, film 30 s | [`ZADANIA-ALEX-DESIGN.md`](ZADANIA-ALEX-DESIGN.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §1 |
+| Prezentacja pitchowa | [`pitch/index.html`](pitch/index.html) (jedyna aktualna) + [`pitch/SKRYPT.md`](pitch/SKRYPT.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §2. `pitch/legacy/` jest wycofane — nie edytuj |
 | Co robić teraz / stan faz P0–P8 | [`docs/05-stan-prac.md`](docs/05-stan-prac.md) |
 | Teksty: pitch, film, strona zgłoszenia | [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) + [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) + [`docs/00-kontekst.md`](docs/00-kontekst.md) §10 |
 | Pole References | [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) §4 |

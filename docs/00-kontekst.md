@@ -82,23 +82,39 @@ Jak to działa technicznie (szczegóły: [`../PLAN.md`](../PLAN.md)): pomiar = o
 - **Nie diagnoza.** Mówimy „wypadłeś z korytarza, sprawdź X”, nie „masz grypę”.
 - **Nie czas rzeczywisty.** Pomiar raz dziennie, rano.
 - **Nie dane z lotu.** Analog naziemny (bed rest) + literatura, zawsze tak oznaczone.
-- **Nie konkurencja dla CMO-DA** (Google + NASA, 2025) — uzupełnienie (sekcja 8).
+- **Nie konkurencja dla CMO-DA** (NASA JSC z Google 2025, offline z Red Hat 2026) — brakująca warstwa *przed* nim (sekcja 8).
 - **Nie LLM, który decyduje.** Tekst może formułować LLM, ale nie może wywołać, opóźnić ani obniżyć alarmu. Rdzeń to przejrzysta statystyka, działa offline.
 
 ## 8. Przewaga i nowość
 
-**Wobec CMO-DA** („Crew Medical Officer Digital Assistant”, Google + NASA, sierpień 2025 — proof-of-concept CDSS, diagnozuje na podstawie „reported symptoms”):
+**Wobec CMO-DA** („Crew Medical Officer Digital Assistant”). To **jeden system w dwóch etapach**, nie dwa agenty:
+- **sierpień 2025, Google:** proof-of-concept CDSS, diagnoza i leczenie na podstawie „reported symptoms”, trenowany na literaturze lotów kosmicznych;
+- **czerwiec 2026, Red Hat:** ten sam CMO-DA przeniesiony z chmury na **pełne offline/edge** (RamaLama na naziemnym bliźniaku HPE Spaceborne Computer), LLM + model wizyjny (tekst i obrazy). Status: testy naziemne w NASA JSC, potem demo dla kierownictwa NASA i ISS.
+
+Źródła to **blogi firm, nie NASA** ([`02-dowody-nasa.md`](02-dowody-nasa.md) §3). Żaden z wpisów nie wspomina o danych z czujników/wearables, codziennym monitoringu, osobistym baseline ani adaptacji do nieważkości.
 
 | | CMO-DA | Space-Normal |
 |---|---|---|
-| Kiedy działa | gdy astronauta już źle się czuje | każdego ranka, zanim ktoś coś poczuje |
-| Na czym | słowa astronauty + ogólna wiedza medyczna | codzienne pomiary + jak ciało *tej osoby* powinno się zmieniać *w tym dniu* |
+| Pytanie, na które odpowiada | „co mi jest i jak to leczyć?” | „czy to jeszcze normalne *u mnie*, *dziś*?” |
+| Kiedy działa | gdy astronauta już coś zgłasza | każdego ranka, zanim ktoś coś poczuje |
+| Na czym | objawy (tekst, obraz) + literatura medyczna | codzienne pomiary + jak ciało *tej osoby* powinno się zmieniać *w tym dniu* |
 | Wynik | „prawdopodobnie X, leczenie Y” | „wypadłeś ze swojego korytarza, sprawdź temperaturę, eskaluj, jeśli…” |
 | Adaptacja do kosmosu | publicznie nic o tym | rdzeń produktu |
-| Technologia | duży model językowy | przejrzysta statystyka, każda liczba wytłumaczalna, offline |
+| Kto decyduje | duży model językowy | przejrzysta, deterministyczna statystyka; LLM nie decyduje o alarmie |
+| Offline | **tak (od 2026)** — to już nie nasza różnica | tak |
 
-Zdanie na scenę: *„CMO-DA to lekarz, do którego idziesz, kiedy boli. Space-Normal to codzienny przegląd, który mówi ci, że warto iść — zanim zaboli.”*
-Nie mówimy: „jesteśmy dokładniejsi od CMO-DA”; nie cytujemy procentów trafności CMO-DA (tylko prasa).
+W ramie NASA HRP (Prevention → Diagnosis → Treatment) CMO-DA siedzi w **Diagnosis/Treatment**, Space-Normal w **Prevention** („Crew Preventive Health Monitoring”).
+
+**Pozycjonowanie: brakująca warstwa *przed* asystentem diagnostycznym.** Surowe pomiary nic nie dadzą modelowi językowemu, jeśli nie wie, co jest normalne u tej osoby w tym dniu misji. Korytarz to właśnie ten punkt odniesienia. Gdy ktoś wypada z korytarza, Space-Normal oddaje uporządkowany kontekst („co odstaje, od kiedy, wobec jakiej normy”) — do asystenta typu CMO-DA i do pakietu dla lekarza na Ziemi.
+
+Zdania na scenę:
+- *„We know NASA is already testing CMO-DA, first with Google, now offline with Red Hat. It answers ‘what's wrong with me?’. Space-Normal answers the question before it: ‘is this still normal for me, today?’ — and hands that answer over.”*
+- *„CMO-DA to lekarz, do którego idziesz, kiedy boli. Space-Normal to codzienny przegląd, który mówi ci, że warto iść — zanim zaboli.”*
+
+Nie mówimy:
+- „jesteśmy dokładniejsi od CMO-DA”; nie cytujemy procentów trafności CMO-DA (tylko prasa);
+- „rozszerzenie agenta Google”, „integrated with / tested with CMO-DA” — nie mamy współpracy ani integracji. Wolno: „designed to feed assistants like CMO-DA”;
+- „działamy offline, a CMO-DA nie” — nieaktualne od czerwca 2026.
 
 **Nowość (Creativity):** osobisty baseline sam w sobie **nie jest nowy** — mówimy to wprost i wymieniamy poprzedników: rosyjska diagnostyka prenozologiczna Bajewskiego (IBMP, HRV), koncepcja CDSS NASA (zakresy sprzed lotu), RCV w medycynie laboratoryjnej (Ferraro i in. 2026). **Nowe** jest to, że korytarz **ugina się z fazą misji** i jest jawny, wizualny, per osoba. Takiego działającego systemu nie znaleźliśmy w publicznej literaturze.
 

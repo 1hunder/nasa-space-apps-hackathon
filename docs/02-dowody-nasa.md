@@ -20,6 +20,12 @@ Każde zdanie w pitchu i filmie musi dać się podpiąć pod wiersz z tego pliku
 | N9 | „Delays / lack of ground support = increased task demand, task switching & higher cognitive load” | **EIMO ConOps** 2024 ([NTRS](https://ntrs.nasa.gov/citations/20240001402)) | 3 linijki zamiast surowych danych |
 | N10 | Opóźnienie do 22 min w jedną stronę; przerwy w łączności od dni do tygodni | ASCEND/NASA ([PDF](https://ntrs.nasa.gov/api/citations/20220013418/downloads/ASCEND-Communication%20Delays%2C%20Disruptions%2C%20and%20Blackouts%20for%20Crewed%20Mars%20Missions.pdf)); [2025 Architecture Update](https://www.nasa.gov/wp-content/uploads/2025/12/2025-architecture-update-for-publication.pdf) | Pełne działanie offline; pakiet w kolejce |
 
+| N11 | „Assess and store vital signs … e.g., blood pressure, oxygen saturation, heart rate, respiratory rate, etc.”; dla misji autonomicznych „Monitor and trend vital signs” | **OCHMO-TB-033** Spaceflight Experience and Medical Care, Rev D 2023 ([PDF](https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-033-spaceflight-experience-medical-care.pdf)) | Tętno w demo; uwaga: temperatury **nie ma** na tej liście |
+| N12 | „uses biosensors to collect vital signs from the patient, such as blood pressure, heart rate, oxygen saturation, temperature, and respiratory rate”; scenariusz tranzytu: „The medical system detects a change in the crewmember's heart rate data…”, „a flag is placed in her record for the caregiver…” | **HRP 48021** Medical System ConOps for Mars Exploration Mission-11, ExMC 2020 ([PDF](https://ntrs.nasa.gov/api/citations/20200001715/downloads/20200001715.pdf)); zastrzeżenie: technologie „only representative” | Temperatura + tętno w demo; flaga dla opiekuna = karta / handover note |
+| N13 | „Derived body core temperature and heart rhythm (real-time) are desired for microgravity operations” | **NASA-STD-3001 Vol 2 Rev F** (2026), uzasadnienie [V2 11023] — kontekst EVA ([PDF](https://standards.nasa.gov/system/files/tmp/NASA-STD-3001%20Vol%202%20Rev%20F.pdf)) | Temperatura głęboka jako parametr wskazany z nazwy (EVA, nie codzienny monitoring) |
+
+Uwaga do N1–N13: NASA-STD-3001 Vol 1 [V1 3004] h mówi tylko „vital signs” bez listy. Publicznej listy parametrów badania PHS na ISS nie znaleziono [BRAK]. Źródła NASA, że HR lub temperatura są wczesnym wskaźnikiem infekcji **u astronautów**, nie znaleziono [BRAK] — ten dowód jest ziemski (Stanford, Mishra 2020). Stahn 2017 to praca ESA/DLR, nie NASA.
+
 Nie powołujemy się na lukę **Med07** (zamknięta). Publicznych, ponumerowanych wymagań EIMO nie ma — EIMO to koncepcja/prezentacje.
 
 ## 2. Fakty fizjologiczne (zdrowy astronauta vs norma)
@@ -44,14 +50,16 @@ Nie powołujemy się na lukę **Med07** (zamknięta). Publicznych, ponumerowanyc
 | Ferraro i in. 2026, CCLM ([doi](https://doi.org/10.1515/cclm-2025-0526)) | postulat kosmicznych reference change values dla biomarkerów | My dla parametrów życiowych, działający prototyp |
 | Scott i in. 2023, Nat Mach Intell ([link](https://www.nature.com/articles/s42256-023-00617-5)) | „the best baseline for an individual is oneself”, rekomendacje warsztatu NASA | Jw. — realizujemy ten postulat |
 | Zheng i in. 2023, Front Physiol | 27 astronautów, zalecają osobisty baseline | Retrospektywnie; my prospektywnie, dziennie |
-| CMO-DA, Google + NASA 2025 ([blog](https://cloud.google.com/blog/topics/public-sector/how-google-and-nasa-are-testing-ai-for-medical-care-in-space)) | diagnoza zgłoszonych objawów (reaktywna) | My proaktywnie, przed objawami; uzupełniamy |
-| CSA Bio-Monitor / Astroskin | zbiera parametry, analiza na Ziemi | My interpretujemy na pokładzie |
+| CMO-DA, Google + NASA 2025 ([blog Google](https://cloud.google.com/blog/topics/public-sector/how-google-and-nasa-are-testing-ai-for-medical-care-in-space)) | diagnoza i leczenie zgłoszonych objawów (reaktywna), LLM trenowany na literaturze lotów | My proaktywnie, przed objawami; warstwa *przed* diagnozą, która daje jej kontekst |
+| CMO-DA offline, NASA JSC + Red Hat, czerwiec 2026 ([blog Red Hat](https://www.redhat.com/en/blog/moon-and-beyond-ramalama-being-tested-nasa-potentially-support-medical-ai-assistant-future-deep-space-missions)) | ten sam CMO-DA na edge, bez chmury (RamaLama, HPE Spaceborne Computer), LLM + model wizyjny; testy naziemne | Offline **nie** jest już naszą różnicą. Różnica: dzienne pomiary vs osobisty korytarz zależny od fazy; alarm bez LLM |
+| CSA Bio-Monitor / Astroskin ([CSA](https://www.asc-csa.gc.ca/eng/sciences/bio-monitor.asp)) | zbiera parametry (tętno/EKG, ciśnienie, oddech, temperatura **skóry**, SpO2, aktywność), analiza na Ziemi | My interpretujemy na pokładzie |
 
 **Korekta:** praca CCLM 2026 to **Ferraro i in.**, nie „Kerremans i in.” (błąd we wcześniejszych dokumentach).
 
 ## 4. Lista do pola References (zgłoszenie, EN)
 
 Dane: NASA Life Sciences Portal — Bed Rest Case Report Form (nlsp.nasa.gov); Stanford COVID-19 Wearables (Mishra et al. 2020; Alavi et al. 2022).
-Dokumenty NASA: N1–N10 powyżej.
+Dokumenty NASA: N1–N13 powyżej.
 Publikacje: Stahn 2017; Trudel 2022; Norsk 2015; Ferraro 2026; Scott 2023; Zheng 2023; Baevsky 2006/2013; Mishra 2020.
+Prior art (blogi firm): Google Cloud, „How Google and NASA are testing AI for medical care in space” (2025); Red Hat blog: RamaLama tested by NASA to support a medical AI assistant (2026), https://www.redhat.com/en/blog/moon-and-beyond-ramalama-being-tested-nasa-potentially-support-medical-ai-assistant-future-deep-space-missions .
 Narzędzia: wpisać faktycznie użyte biblioteki, narzędzia AI do wideo/obrazów/głosu i muzykę (z licencją).

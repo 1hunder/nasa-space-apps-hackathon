@@ -1,14 +1,15 @@
 # Space-Normal — film 30 s i pitch 3 min
 
 Dla: Petro (pitch), Alex (film), Anna (napisy, montaż, AI-wideo).
-Format: najpierw **film ≤ 30 s** w zgłoszeniu (EN lub napisy EN), potem **3 min pitchu na żywo bez slajdów**.
+Format: **film ≤ 30 s** w zgłoszeniu (EN lub napisy EN) + **pitch na żywo z deckiem**.
+Deck: [`pitch/index.html`](../pitch/index.html) — jedyna aktualna prezentacja (wersja kinowa, jeden plik, PL, 2:30). Skrypt słowo w słowo: [`pitch/SKRYPT.md`](../pitch/SKRYPT.md).
 Wszystkie liczby: z `docs/claims.md` albo [`02-dowody-nasa.md`](02-dowody-nasa.md).
 
 ---
 
-## 1. Film 30 s — decyzja: film, nie slajdy
+## 1. Film 30 s do zgłoszenia — nie slajdy
 
-Film to dobry wybór: wyróżnia nas, mamy designera, a wykres z uginającym się korytarzem **musi być zobaczony** — w pitchu bez slajdów jurorzy go nie zobaczą, więc film jest jedynym miejscem na ten obraz.
+W samym zgłoszeniu idzie film, nie zrzuty slajdów: wyróżnia nas, mamy designera, a wykres z uginającym się korytarzem **musi być zobaczony**. Na żywo ten sam obraz niesie slajd `chart` w decku.
 
 Zasady:
 - **Wykres w filmie = prawdziwe nagranie ekranu naszego dashboardu**, nie animacja AI. To dowód, że produkt działa (Validity). AI-wideo tylko na ujęcia klimatu (statek, astronauta, Mars).
@@ -28,9 +29,33 @@ Zasady:
 | 20–26 | **Nagranie dashboardu:** tętno Chena wypada z korytarza, ziemska norma milczy → karta OBSERVATION / CHECK NOW / ESCALATE IF | „It flags what adaptation can't explain — and tells you what to check.” |
 | 26–30 | Liczba główna z `claims.md` + „Tested on NASA bed rest data (ground analog)” + nazwa | „Space-Normal. Your normal, for space.” |
 
-## 2. Pitch 3 min (bez slajdów)
+## 2. Pitch na żywo — deck
 
-Cel: juror ma **zobaczyć w głowie** jeden obraz — siatkę centylową z kanałem, który ugina się w trakcie misji.
+**Prezentacja:** [`pitch/index.html`](../pitch/index.html). Otwierasz plik w przeglądarce, działa offline (GSAP i filmy leżą w `pitch/vendor/` i `pitch/assets/`). Klawisze: `→` / spacja / klik dalej · `←` wstecz · `F` pełny ekran · `P` okno notatek prelegenta · `T` stoper 2:30 · `R` reset stopera · `1`–`8` skok do slajdu.
+
+Pierwsze naciśnięcie odpala intro: dojazd do planet, przelot, portal otwiera się na astronautce. Potem dopiero slajd 1. Hash w adresie to `#slajd.klik`, np. `#3.2`, więc do próby wracasz tam, gdzie skończyłeś.
+
+| # | Klucz | Kotwica | Klików |
+|---|---|---|---|
+| 1 | `hook` | Dzień 80 · 37,7 °C · „Gorączka?” | 1 |
+| 2 | `problem` | Nie ma kogo zapytać (22 min · ~2 tyg. · 0 lekarzy) | 3 |
+| 3 | `chart` | Jej norma się przesuwa | 5 |
+| 4 | `product` | Trzy linijki | 1 |
+| 5 | `proof` | Dane NASA (bed rest · 18 + 11 · Stanford) | 0 |
+| 6 | `diff` | Warstwa przed diagnozą (vs CMO-DA) | 1 |
+| 7 | `close` | Space-Normal · twoja norma · link do aplikacji | 1 |
+| 8 | `sources` | Źródła — slajd zapasowy na Q&A | 0 |
+
+Zasady przy edycji decku:
+- Cały tekst siedzi w obiekcie `CONFIG` na górze `<script>` — slajdy generują się z niego. Nie dopisuj tekstu do HTML.
+- Notatki (`notes:` w `CONFIG`) muszą zgadzać się ze [`pitch/SKRYPT.md`](../pitch/SKRYPT.md) — jeden `[klik]` = jeden `beat`.
+- Link do aplikacji jest w jednym miejscu: stała `APP_URL`. Wyświetla się w rogu (dolny pas) i na slajdzie zamykającym.
+- Żadnych liczb wyników, dopóki `docs/claims.md` jest stubem. Nie wstawiaj placeholderów `{X}` do slajdów — były, zostały usunięte.
+- `pitch/legacy/index.html` to odrzucony wariant na Reveal.js. Nie edytuj go.
+
+### Wariant zapasowy: 3 min bez slajdów
+
+Jeśli nie ma projektora. Cel: juror ma **zobaczyć w głowie** jeden obraz — siatkę centylową z kanałem, który ugina się w trakcie misji.
 
 | Czas | Część | Treść (szkic, mówić własnymi słowami) |
 |---|---|---|

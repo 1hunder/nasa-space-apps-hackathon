@@ -22,6 +22,20 @@ make demo-synthetic          # writes the JSON the dashboard reads
 cd web && npm install && npm run dev
 ```
 
+## Pitch deck
+
+[`pitch/index.html`](pitch/index.html) is the deck we present — one self-contained cinematic file, fully offline (GSAP and the clips live in `pitch/vendor/` and `pitch/assets/`). Open it in a browser; no build step.
+
+```bash
+open pitch/index.html
+```
+
+Keys: `→` / space / click next · `←` back · `F` fullscreen · `P` presenter notes window · `T` rehearsal timer · `R` reset it · `1`–`8` jump to a slide. The first press plays the intro; the address hash is `#slide.beat`, so a rehearsal resumes where it stopped.
+
+Every slide's text lives in the `CONFIG` object at the top of the script, speaker notes included — edit there, not in the markup. The app link shown in the corner and on the closing slide comes from the single `APP_URL` constant. Spoken script, synced click by click: [`pitch/SKRYPT.md`](pitch/SKRYPT.md). Slide list and editing rules: [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) section 2.
+
+[`pitch/legacy/index.html`](pitch/legacy/index.html) is a Reveal.js rebuild we did not keep, left as a record only.
+
 Open the printed URL and press space. One replay takes about 13 seconds and stops when Space-Normal raises an alert: core temperature drifts above the "Earth normal" limit and out of the flat personal pre-flight range, both of which collect false alarms in this simulation, while it stays inside the moving Space-Normal range until illness starts. Readings are hourly; ranges and monitors work on daily means. The temperature and blood-pressure drifts follow published spaceflight findings; pulse is unchanged, as in flight. Time constants, illness sizes and event effects are assumptions (`docs/data_notes.md`, section 5).
 
 - The default view shows only the chart, the two monitors and the crew list. "Show details" (or D) adds the other two monitors and the per-day breakdown; the alert card expands to the flight-surgeon note.

@@ -8,7 +8,8 @@ Kolejność czytania dla nowej osoby: **00 → 05 → 01 → 02 → 03 → 04**.
 | [`00-kontekst.md`](00-kontekst.md) | **Źródło prawdy:** misja, problem, korytarz, użytkownicy, przewaga, co wolno mówić | wszyscy | aktualny |
 | [`01-produkt-i-zakres.md`](01-produkt-i-zakres.md) | Ekran, zasady designu, must/should/roadmapa, **delta względem `PLAN.md`** | Alex, Viktor, Davyd, agenci kodujący | aktualny |
 | [`02-dowody-nasa.md`](02-dowody-nasa.md) | Wymagania NASA → funkcje (cytaty + linki), fakty, prior art, lista References | Petro, Anna, agenci piszący teksty | aktualny |
-| [`03-pitch-i-film.md`](03-pitch-i-film.md) | Storyboard filmu 30 s, pitch 3 min, odpowiedzi na pytania jurorów | Petro, Alex, Anna | aktualny |
+| [`03-pitch-i-film.md`](03-pitch-i-film.md) | Storyboard filmu 30 s, deck pitchowy i jego slajdy, odpowiedzi na pytania jurorów | Petro, Alex, Anna | aktualny |
+| [`../pitch/index.html`](../pitch/index.html) | **Prezentacja pitchowa** (wersja kinowa, jeden plik, offline, PL). Skrypt: [`../pitch/SKRYPT.md`](../pitch/SKRYPT.md) | Petro | aktualny |
 | [`04-zespol-i-plan.md`](04-zespol-i-plan.md) | Role, harmonogram 8 h, checkpointy, zasady iteracji | wszyscy | aktualny |
 | [`05-stan-prac.md`](05-stan-prac.md) | Co działa, czego brakuje, następne zadania z ownerami, plan B | wszyscy | **aktualizowany na bieżąco** |
 | [`claims.md`](claims.md) | Wyniki do cytowania (generuje pipeline w P5); dziś stub | wszyscy | stub |
@@ -29,3 +30,5 @@ Kolejność czytania dla nowej osoby: **00 → 05 → 01 → 02 → 03 → 04**.
 ## Archiwum (nie używać jako źródła decyzji)
 
 [`archiwum/`](archiwum/): `merged-concept.md` (zastąpiony przez 00/01), `brainstorm-handoff-petro.md`, `summary-v1.md`, `dowody-normy-ziemskie-v1.md` (zastąpiony przez raport), `przekazanie-2026-11-14.md`. Uwaga: w archiwum są nieaktualne dane (np. „24 min”, „Kerremans i in.”).
+
+Odrzucony wariant prezentacji: [`../pitch/legacy/index.html`](../pitch/legacy/index.html) (przebudowa na Reveal.js). Zostaje jako zapis, nie edytujemy.

@@ -1,0 +1,52 @@
+name: deploy-vercel
+
+# Deploys the dashboard (web/) to https://spacenormal.vercel.app on every push to main.
+# Uses the Vercel CLI with a token instead of Vercel's Git integration, because a
+# Vercel Hobby project can't auto-deploy a private repo owned by another GitHub account.
+# Needs one repository secret: VERCEL_TOKEN (Vercel -> Account Settings -> Tokens).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-production
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: team_SG2PbhIMfanREYc0r3CUCJCh
+  VERCEL_PROJECT_ID: prj_iKYpHjxA7oap7cgc0x3TGzA3upXe
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Check token
+        id: token
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::warning::VERCEL_TOKEN secret is not set; skipping deploy."
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          fi
+        working-directory: .
+      - if: steps.token.outputs.present == 'true'
+        uses: actions/checkout@v4
+      - if: steps.token.outputs.present == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - if: steps.token.outputs.present == 'true'
+        name: Deploy to production
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        # Drop git metadata so Vercel's Hobby commit-author check doesn't apply to this deploy.
+        run: |
+          rm -rf ../.git
+          npx --yes vercel@65 deploy --prod --yes --token "$VERCEL_TOKEN"

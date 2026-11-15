@@ -62,6 +62,9 @@ class Mission:
     # Optional finer-grained readings behind `daily`: subject_id, study_day, hour, <vitals>,
     # with each person's time-of-day pattern already removed. `daily` holds their daily means.
     hourly: pd.DataFrame | None = field(default=None, repr=False)
+    # Free-text journal entries with a reader's interpretation: dicts with day, hour, crew_ids,
+    # text, category, effect, accounted, reader. Context only; never an input to the detector.
+    journal: list[dict] = field(default_factory=list)
 
 
 class MissionBuilder(Protocol):

@@ -15,6 +15,8 @@ make demo-synthetic   # synthetic missions -> model -> detectors -> web/public/c
 
 ## Dashboard
 
+Live: https://spacenormal.vercel.app. Every push to `main` redeploys it (`.github/workflows/deploy-vercel.yml`, needs the `VERCEL_TOKEN` repo secret); manual deploy: `cd web && npx vercel deploy --prod`.
+
 ```bash
 make demo-synthetic          # writes the JSON the dashboard reads
 cd web && npm install && npm run dev
@@ -23,7 +25,8 @@ cd web && npm install && npm run dev
 Open the printed URL and press space. One replay takes about 15 seconds: core temperature drifts out of the flat "Earth normal" band while the Earth-calibrated monitor collects false alarms, stays inside the moving Space-Normal range, then leaves it when illness starts. Readings are hourly; ranges and monitors work on daily means. The size of each drift follows published spaceflight findings (`docs/data_notes.md`, section 5).
 
 - The default view shows only the chart, the two monitors and the crew list. "Show details" (or D) adds the other two monitors and the per-day breakdown; the alert card expands to the flight-surgeon note.
-- Keys: space play/pause, R restart, D details, arrow keys step one day, 1–4 switch scenario. Drag on the chart to scrub.
+- The "Crew journal" row holds free-text entries (`configs/journal.yaml`). Click a mark to read the entry and how the assistant read it. The readings are mocked: no language model runs in the demo, and entries never raise or lower an alert.
+- Keys: space play/pause, R restart, D details, arrow keys step one day, 1–4 switch scenario. Click a point for that day's breakdown; drag on the chart to scrub. The replay stops when Space-Normal raises an alert; Play continues.
 - `?scenario=transplant_outbreak&day=40` opens a specific moment.
 - The four cached missions are synthetic, with seeds picked by hand for a clean replay (`configs/scenarios.yaml`). They illustrate the idea; they are not results.
 

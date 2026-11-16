@@ -4,8 +4,8 @@ mission:
   pre_days: 13
   in_days: 90          # docs/00-kontekst.md §5 draws the mission to day 90
   crew_size: 4
-  # Display names for the demo crew (the team). Ids stay C1..C4 internally.
-  crew_names: [Anna Uhalnik, Davyd Antoniuk, Petro Melnyk, Viktor Kulyk]
+  # Fictional display names for the demo crew. Ids stay C1..C4 internally.
+  crew_names: [Mara Lindqvist, Omar Haddad, Elena Vasquez, Theo Nakamura]
   burn_in_days: 3
 
 model:

@@ -5,6 +5,70 @@ Crew health monitoring that knows how a body under microgravity is *expected* to
 - Spec: [`PLAN.md`](PLAN.md) · Kontekst projektu (PL): [`docs/README.md`](docs/README.md) · Diagram: [`Space-Normal-architecture.png`](Space-Normal-architecture.png)
 - **Status:** pipeline, NASA bed rest loader and demo dashboard work. The dashboard replays synthetic missions; every output so far is labelled `SYNTHETIC` and is not a result.
 
+## Why Earth norms do not work in space
+
+A healthy astronaut does not stay inside clinical reference ranges. After about two and a half
+months in orbit, resting core temperature rises by roughly 1 °C and can approach 38 °C
+([Stahn et al. 2017](https://doi.org/10.1038/s41598-017-15560-w), 11 astronauts). After landing,
+5 of 13 astronauts met the WHO criteria for anemia
+([Trudel et al. 2022](https://pmc.ncbi.nlm.nih.gov/articles/PMC8799460/)). Blood pressure drops,
+cardiac output rises by about 41 % and resting pulse barely moves
+(Norsk et al. 2015, J Physiol 593:573, 8 astronauts). None of this is illness.
+
+A monitor built on hospital thresholds therefore fails in both directions: it fires on healthy
+adaptation, and it stays quiet while a real change hides inside a range that is wrong for this
+person on this day.
+
+On a Mars transit that matters more than in low Earth orbit. A message takes up to 22 minutes one
+way, the link can go silent for around two weeks near solar conjunction, there is no evacuation,
+and NASA-STD-3001 does not require a physician on board. The crew has to make the first call
+itself.
+
+## The idea: a corridor instead of a line
+
+A growth chart does not compare a child to the average adult. It compares the child to where that
+child is expected to be at that age. Space-Normal does the same for an astronaut: a personal
+corridor of expected values that bends with the day of the mission.
+
+For every vital sign and every day, the model builds the expectation from four parts:
+
+1. the person's own pre-flight baseline,
+2. the adaptation expected on that mission day, scaled to how strongly this person adapts,
+3. the logged events of the day — the workout, the shifted sleep schedule, the cabin CO2,
+4. the spread that is normal between people.
+
+What is left after subtracting all of it is the **residual**. The detector only ever looks at the
+residual, so planned exercise is *explained* rather than alarmed. A CUSUM accumulates small
+persistent deviations into an amber or red alert, and a crew layer raises a separate alert when
+several crew members drift together with no logged event to explain it.
+
+The dashboard shows the corridor next to the two baselines it competes with: `Earth normal` (the
+same clinical thresholds for everyone) and `Pre-flight range` (a flat personal band from the days
+before the mission, the idea behind NASA's own CDSS concept). Both are flat. Only the corridor
+bends.
+
+## What each user gets
+
+- **The astronaut** gets a card with three lines: OBSERVATION (what we see, in their own numbers),
+  CHECK NOW (a one-minute action), ESCALATE IF (the condition that sends it further). It always
+  ends with "Not a diagnosis."
+- **The Crew Medical Officer** — a crew member with short medical training, not a physician — sees
+  the whole crew and the outbreak layer.
+- **The flight surgeon on Earth** gets a small queued packet, and only when someone actually leaves
+  their corridor.
+
+## Two rules the code enforces
+
+**No language model raises an alarm.** Severity comes from a deterministic statistic that runs
+offline. A model may only phrase the sentence, and every number it writes is verified against the
+data before the note is sent; if verification fails, the plain template goes out instead. A model
+can never raise, lower or delay an alert.
+
+**The held-out test set is locked in code.** `src/spacenormal/data/nlsp.py` raises `TestSetLocked`
+for CFT70 and Campaign 3 blocks G/H until `docs/claims.md` contains a configuration hash, which
+only the evaluation step writes. Tuning on the test set is not a matter of discipline here; the
+loader refuses.
+
 ## Run
 
 ```bash

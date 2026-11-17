@@ -1,6 +1,6 @@
 # Space-Normal — dowody: wymagania NASA, fakty, źródła
 
-Dla: Petro (pitch), Anna (pole References), agentów piszących teksty.
+Dla: pitchu, pola References i agentów piszących teksty.
 Każde zdanie w pitchu i filmie musi dać się podpiąć pod wiersz z tego pliku. Notatki źródłowe: [`research/`](research/).
 
 ---

@@ -1,6 +1,6 @@
 # Space-Normal — film 30 s i pitch 3 min
 
-Dla: Petro (pitch), Alex (film), Anna (napisy, montaż, AI-wideo).
+Dla: pitchu, filmu, napisów i montażu.
 Format: **film ≤ 30 s** w zgłoszeniu (EN lub napisy EN) + **pitch na żywo z deckiem**.
 Deck: [`pitch/index.html`](../pitch/index.html) — jedyna aktualna prezentacja (wersja kinowa, jeden plik, PL, 2:30). Skrypt słowo w słowo: [`pitch/SKRYPT.md`](../pitch/SKRYPT.md).
 Wszystkie liczby: z `docs/claims.md` albo [`02-dowody-nasa.md`](02-dowody-nasa.md).
@@ -26,7 +26,7 @@ Zasady:
 | 4–8 | Napisy jeden po drugim: „22 min one-way delay” · „2-week blackouts” · „no evacuation” | „Messages take up to 22 minutes. Sometimes weeks of silence.” |
 | 8–12 | AI: astronautka mierzy temperaturę; na ekranie 37.7°C, czerwony alarm „FEVER?” | „And a healthy astronaut can run 38 degrees.” |
 | 12–20 | **Nagranie dashboardu:** płaskie pasy (Earth normal, Pre-flight) migają alarmami; uginający się korytarz Space-Normal zostaje spokojny | „Space-Normal knows how *your* body should change on *this* day of the mission.” |
-| 20–26 | **Nagranie dashboardu:** tętno Chena wypada z korytarza, ziemska norma milczy → karta OBSERVATION / CHECK NOW / ESCALATE IF | „It flags what adaptation can't explain — and tells you what to check.” |
+| 20–26 | **Nagranie dashboardu:** tętno Eleny wypada z korytarza, ziemska norma milczy → karta OBSERVATION / CHECK NOW / ESCALATE IF | „It flags what adaptation can't explain — and tells you what to check.” |
 | 26–30 | Liczba główna z `claims.md` + „Tested on NASA bed rest data (ground analog)” + nazwa | „Space-Normal. Your normal, for space.” |
 
 ## 2. Pitch na żywo — deck
@@ -51,7 +51,6 @@ Zasady przy edycji decku:
 - Notatki (`notes:` w `CONFIG`) muszą zgadzać się ze [`pitch/SKRYPT.md`](../pitch/SKRYPT.md) — jeden `[klik]` = jeden `beat`.
 - Link do aplikacji jest w jednym miejscu: stała `APP_URL`. Wyświetla się w rogu (dolny pas) i na slajdzie zamykającym.
 - Żadnych liczb wyników, dopóki `docs/claims.md` jest stubem. Nie wstawiaj placeholderów `{X}` do slajdów — były, zostały usunięte.
-- `pitch/legacy/index.html` to odrzucony wariant na Reveal.js. Nie edytuj go.
 
 ### Wariant zapasowy: 3 min bez slajdów
 

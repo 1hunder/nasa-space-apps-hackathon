@@ -2,7 +2,7 @@
 
 Crew health monitoring that knows how a body under microgravity is *expected* to change, and alarms only on what is left over after removing the personal baseline, the expected adaptation for that day, and the effects of logged events. NASA Space Apps hackathon prototype.
 
-- Spec: [`PLAN.md`](PLAN.md) · Kontekst projektu (PL): [`docs/README.md`](docs/README.md)
+- Spec: [`PLAN.md`](PLAN.md) · Kontekst projektu (PL): [`docs/README.md`](docs/README.md) · Diagram: [`Space-Normal-architecture.png`](Space-Normal-architecture.png)
 - **Status:** pipeline, NASA bed rest loader and demo dashboard work. The dashboard replays synthetic missions; every output so far is labelled `SYNTHETIC` and is not a result.
 
 ## Run
@@ -15,7 +15,7 @@ make demo-synthetic   # synthetic missions -> model -> detectors -> web/public/c
 
 ## Dashboard
 
-Live: https://spacenormal.vercel.app. Every push to `main` redeploys it (`.github/workflows/deploy-vercel.yml`, needs the `VERCEL_TOKEN` repo secret); manual deploy: `cd web && npx vercel deploy --prod`.
+Live: https://spacenormal.vercel.app. The dashboard is a static Vite build (`cd web && npm run build` writes `web/dist/`), so any static host will serve it.
 
 ```bash
 make demo-synthetic          # writes the JSON the dashboard reads
@@ -34,7 +34,6 @@ Keys: `→` / space / click next · `←` back · `F` fullscreen · `P` presente
 
 Every slide's text lives in the `CONFIG` object at the top of the script, speaker notes included — edit there, not in the markup. The app link shown in the corner and on the closing slide comes from the single `APP_URL` constant. Spoken script, synced click by click: [`pitch/SKRYPT.md`](pitch/SKRYPT.md). Slide list and editing rules: [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) section 2.
 
-[`pitch/legacy/index.html`](pitch/legacy/index.html) is a Reveal.js rebuild we did not keep, left as a record only.
 
 Open the printed URL and press space. One replay takes about 13 seconds and stops when Space-Normal raises an alert: core temperature drifts above the "Earth normal" limit and out of the flat personal pre-flight range, both of which collect false alarms in this simulation, while it stays inside the moving Space-Normal range until illness starts. Readings are hourly; ranges and monitors work on daily means. The temperature and blood-pressure drifts follow published spaceflight findings; pulse is unchanged, as in flight. Time constants, illness sizes and event effects are assumptions (`docs/data_notes.md`, section 5).
 

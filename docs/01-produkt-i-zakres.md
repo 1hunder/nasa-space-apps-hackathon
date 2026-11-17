@@ -1,7 +1,7 @@
 # Space-Normal — produkt, ekrany i zakres
 
-Dla: Alex (design), Viktor i Davyd (implementacja), agentów kodujących.
-Kontekst i uzasadnienie: [`00-kontekst.md`](00-kontekst.md). Specyfikacja techniczna: [`../PLAN.md`](../PLAN.md) (EN, Viktor). Ten plik mówi, **co z PLAN.md zmienia się po researchu** i **co projektujemy**.
+Dla: designu, implementacji i agentów kodujących.
+Kontekst i uzasadnienie: [`00-kontekst.md`](00-kontekst.md). Specyfikacja techniczna: [`../PLAN.md`](../PLAN.md) (EN). Ten plik mówi, **co z PLAN.md zmienia się po researchu** i **co projektujemy**.
 
 ---
 
@@ -14,17 +14,17 @@ Dashboard już istnieje (`web/`, replay syntetycznych misji, ok. 15 s). Projektu
 │ MARS TRANSIT · DAY 80 · ONE-WAY DELAY 22 MIN · NO PHYSICIAN ON BOARD     │  ← pasek misji (założenia demo)
 │ [ANALOG DATA: NASA bed rest]  [FLIGHT-LIKE: literature, synthetic]        │  ← etykiety pochodzenia, zawsze widoczne
 ├───────────────┬──────────────────────────────────────────────────────────┤
-│ CREW          │  Anna · Core temperature                                 │
-│ ● Anna   ok   │                                                          │
-│ ● Ben    ok   │  ═══════ Earth normal (flat) ══════════════════════════  │
-│ ● Chen   !    │        ╭───── Space-Normal corridor (bends) ─────╮       │
-│ ● Dara   ok   │  ▓▓▓▓▓▓ Pre-flight range (flat, NASA CDSS idea) ▓▓▓▓▓▓   │
+│ CREW          │  Mara · Core temperature                                 │
+│ ● Mara   ok   │                                                          │
+│ ● Omar   ok   │  ═══════ Earth normal (flat) ══════════════════════════  │
+│ ● Elena  !    │        ╭───── Space-Normal corridor (bends) ─────╮       │
+│ ● Theo   ok   │  ▓▓▓▓▓▓ Pre-flight range (flat, NASA CDSS idea) ▓▓▓▓▓▓   │
 │               │  start   |adaptation|   steady state   |  day 80 ●       │  ← fazy misji na osi X
 │               │                                                          │
 │               │  Alarms:  Earth normal ███ ██ ████   Pre-flight ██████   │
 │               │           Space-Normal  ·  ·  ·  (quiet)                 │
 ├───────────────┴──────────────────────────────────────────────────────────┤
-│ CARD FOR CHEN                                                            │
+│ CARD FOR ELENA                                                           │
 │ OBSERVATION   Resting pulse +9 bpm above YOUR expected range for day 80. │
 │               Not explained by logged exercise, sleep shift or cabin.    │
 │ CHECK NOW     Take temperature · answer 3 questions (~1 min)             │

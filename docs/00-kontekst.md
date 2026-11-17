@@ -1,6 +1,6 @@
 # Space-Normal — kontekst projektu (źródło prawdy)
 
-**Stan na:** 2026-11-14 · **Właściciel:** Petro · **Status:** kierunek zaakceptowany przez team leada.
+**Stan na:** 2026-11-14 · **Status:** kierunek zaakceptowany.
 Jeśli inny dokument mówi coś innego niż ten, **wygrywa ten**. Zmiany kierunku wpisujemy tutaj.
 
 ---
@@ -147,6 +147,6 @@ Każda liczba w filmie i pitchu musi pochodzić z `docs/claims.md` generowanego 
 
 ## 11. Otwarte decyzje
 
-1. **Liczba główna** (headline): po ewaluacji CFT70 — Viktor podaje, Petro akceptuje treść zdania.
+1. **Liczba główna** (headline): do uzupełnienia po ewaluacji CFT70, wyłącznie z `docs/claims.md`.
 2. **Limity bezpieczeństwa i progi „eskaluj, jeśli”** — bez mentora medycznego oznaczamy jako placeholdery.
 3. **Format zgłoszenia:** film 30 s (rekomendowany) — patrz [`03-pitch-i-film.md`](03-pitch-i-film.md).

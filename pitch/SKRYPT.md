@@ -36,7 +36,7 @@ Alarmu **nie** wywołuje AI. Liczy go przejrzysta statystyka, **offline**.
 Osiemnaście osób do nauki. **Jedenaście** w zamkniętym teście — kod blokuje do nich dostęp, dopóki nie zamrozimy modelu.
 Choroby to **prawdziwe** sygnały z badań Stanforda.
 Uczciwie: bed rest to analog **naziemny**, nie lot. Tryb lotu w demo jest oznaczony jako **syntetyczny**.
-*(Plan A — tylko jeśli Viktor wpisze liczbę do `docs/claims.md`: „Na zamkniętym teście: {X} …”)*
+*(Plan A — tylko jeśli w `docs/claims.md` jest liczba: „Na zamkniętym teście: {X} …”)*
 
 ### 6 · Różnica (1:55–2:15) — kotwica: „PRZED DIAGNOZĄ”
 **[klik]** NASA już testuje asystenta **CMO-DA** — najpierw z Google, teraz offline z Red Hat. On odpowiada na pytanie: **co mi jest?**
@@ -53,5 +53,5 @@ Na Marsie nie zapytasz lekarza. Ale możesz wiedzieć, co jest normalne — **dl
 1. 2× przeczytaj na głos z kartki, popraw słowa, które nie są „twoje”.
 2. 3× z prezentacją i stoperem (T). Cel: koniec ok. 2:20.
 3. 2× bez kartki, tylko z tytułów slajdów.
-4. 1× przed kimś z zespołu + nagranie telefonem.
-5. Q&A: kto odpowiada na co — `docs/03-pitch-i-film.md` §3 (Viktor: model/dane, Davyd: aplikacja, Petro: NASA/produkt).
+4. 1× przed inną osobą + nagranie telefonem.
+5. Q&A: przygotowane odpowiedzi — `docs/03-pitch-i-film.md` §3.

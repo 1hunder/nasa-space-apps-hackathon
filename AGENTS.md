@@ -16,27 +16,24 @@ Ten plik obowiązuje każdego agenta AI w tym repo (Claude Code, Codex, Cursor i
 ## 2. Kolejność czytania
 
 1. [`docs/00-kontekst.md`](docs/00-kontekst.md) — **źródło prawdy.** Jeśli inny plik mu przeczy, wygrywa ten.
-2. [`docs/05-stan-prac.md`](docs/05-stan-prac.md) — **co już działa, co następne, kto nad czym pracuje.** Nie zaczynaj zadania, które ma innego ownera, bez pytania.
+2. [`docs/05-stan-prac.md`](docs/05-stan-prac.md) — **co już działa, a czego jeszcze nie ma.**
 3. Plik dla Twojego zadania (tabela w §3).
 4. [`docs/README.md`](docs/README.md) — pełna mapa dokumentów.
 
 Uwaga: [`PLAN.md`](PLAN.md) to specyfikacja sprzed researchu. Gdzie przeczy [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §4, wygrywa `01` §4.
-
-**Nie używaj** [`docs/archiwum/`](docs/archiwum/) jako źródła decyzji. Są tam nieaktualne dane, np. „24 min” i „Kerremans i in.”.
 
 ## 3. Jakie zadanie → co przeczytać
 
 | Zadanie | Czytaj |
 |---|---|
 | Kod: pipeline, model, detektory, ewaluacja | [`PLAN.md`](PLAN.md) (specyfikacja, EN) + **delta** w [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §4 + [`docs/data_notes.md`](docs/data_notes.md) |
-| Kod: dashboard / UI (`web/`) | [`ZADANIA-VIKTOR-DASHBOARD.md`](ZADANIA-VIKTOR-DASHBOARD.md) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
+| Kod: dashboard / UI (`web/`) | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
 | Deploy | [`README.md`](README.md) (uruchomienie) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §5 |
-| Design ekranu, film 30 s | [`ZADANIA-ALEX-DESIGN.md`](ZADANIA-ALEX-DESIGN.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §1 |
-| Prezentacja pitchowa | [`pitch/index.html`](pitch/index.html) (jedyna aktualna) + [`pitch/SKRYPT.md`](pitch/SKRYPT.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §2. `pitch/legacy/` jest wycofane — nie edytuj |
-| Co robić teraz / stan faz P0–P8 | [`docs/05-stan-prac.md`](docs/05-stan-prac.md) |
+| Design ekranu, film 30 s | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §1 |
+| Prezentacja pitchowa | [`pitch/index.html`](pitch/index.html) (jedyna aktualna) + [`pitch/SKRYPT.md`](pitch/SKRYPT.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §2 |
+| Stan faz P0–P8 | [`docs/05-stan-prac.md`](docs/05-stan-prac.md) |
 | Teksty: pitch, film, strona zgłoszenia | [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) + [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) + [`docs/00-kontekst.md`](docs/00-kontekst.md) §10 |
 | Pole References | [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) §4 |
-| Organizacja pracy, terminy | [`docs/04-zespol-i-plan.md`](docs/04-zespol-i-plan.md) + [`docs/zrodla/judging-awards-guide-2026.pdf`](docs/zrodla/judging-awards-guide-2026.pdf) |
 
 ## 4. Research: które pytanie → który plik
 
@@ -73,7 +70,7 @@ W notatkach research każde twierdzenie ma tag ([FAKT]/[CZĘŚCIOWE]/[BRAK] albo
    - „jesteśmy dokładniejsi niż CMO-DA”.
 5. **Wydzielony test** (CFT70, Campaign 3 G/H) nigdy nie służy do strojenia. Loader blokuje go, dopóki w `docs/claims.md` nie ma hasha konfiguracji. Nie obchodź tej blokady.
 6. **LLM nie decyduje o alarmie.** Może tylko sformułować tekst. Nie może alarmu wywołać, opóźnić ani obniżyć.
-7. **Bez logo NASA** i bez stylizacji na oficjalny produkt NASA. Bez prawdziwych osób w materiałach generowanych przez AI (wideo, obrazy, głos). Załoga w demo dashboardu ma imiona fikcyjne (`configs/default.yaml` -> `mission.crew_names`); nie wstawiamy tam imion ani nazwisk członków zespołu — decyzja z 2026-11-16.
+7. **Bez logo NASA** i bez stylizacji na oficjalny produkt NASA. Bez prawdziwych osób w materiałach generowanych przez AI (wideo, obrazy, głos). Załoga w demo dashboardu ma imiona fikcyjne (`configs/default.yaml` -> `mission.crew_names`); nie wstawiamy tam imion ani nazwisk prawdziwych osób.
 8. **Każde zewnętrzne źródło, narzędzie i asset** (w tym narzędzia AI) dopisz do listy References.
 
 ## 6. Kod i polecenia
@@ -87,12 +84,11 @@ cd web && npm install && npm run dev   # dashboard
 
 Układ kodu jest opisany w [`README.md`](README.md) (sekcja Layout). Kontrakt danych dashboardu to `web/src/contract.ts`, a jego lustro w pydantic to `src/spacenormal/contract.py`. Kontrakt zmieniamy po obu stronach naraz.
 
-## 7. Git i praca zespołowa
+## 7. Git
 
-- `main` to kod (PR-y Viktora i Davyda). `V2` to dokumenty Petra, które trafiają do `main` przez PR. Nie pushuj na cudzy branch.
+- Pracujemy na branchach tematycznych; do `main` wchodzimy przez PR.
 - Commit message po angielsku, w stylu Conventional Commits (`feat:`, `fix:`, `docs:`).
-- Zmianę kierunku produktu wprowadza tylko Petro, w `docs/00-kontekst.md`. Jeśli zadanie jej wymaga, zatrzymaj się i zapytaj.
-- Role, harmonogram i zamrożenia (zakres na T+3h, funkcje na T+5h) są w [`docs/04-zespol-i-plan.md`](docs/04-zespol-i-plan.md).
+- Zmiana kierunku produktu = edycja [`docs/00-kontekst.md`](docs/00-kontekst.md). Jeśli zadanie jej wymaga, zatrzymaj się i zapytaj.
 
 ## 8. Słowniczek
 

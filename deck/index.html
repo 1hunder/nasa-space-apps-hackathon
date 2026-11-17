@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Space-Normal — pitch</title>
+<title>Space-Normal — prezentacja</title>
 <style>
 /* ================================================================
-   SPACE-NORMAL · PITCH DECK (offline, single file)
+   SPACE-NORMAL · PRESENTATION DECK (offline, single file)
    Keys: → Space PageDown click = next · ← PageUp = back
-         F fullscreen · T timer · R reset timer · P presenter · 1–8 jump
+         F fullscreen · T timer · R reset timer · 1–8 jump
    All texts live in the CONFIG object at the top of the <script>.
    ================================================================ */
 :root{
@@ -211,7 +211,7 @@ body.brand-on #brand{opacity:1}
 <div class="bar top"></div><div class="bar bot"></div>
 <div class="progress" id="progress"></div>
 <div id="timer">0:00 / 2:30</div>
-<div id="hint">→ dalej · ← wstecz · F pełny ekran · P notatki · T timer</div>
+<div id="hint">→ dalej · ← wstecz · F pełny ekran · T timer</div>
 <div id="brand"><svg class="mk" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="mkFadeBug" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#38e1d4" stop-opacity=".20"/><stop offset="1" stop-color="#38e1d4" stop-opacity="0"/></linearGradient></defs><path d="M2 18 C12 12.5 26 7.5 40 5 L40 35 C26 32.5 12 27.5 2 22 Z" fill="url(#mkFadeBug)"/><path class="edge" d="M2 18 C12 12.5 26 7.5 40 5"/><path class="edge" d="M2 22 C12 27.5 26 32.5 40 35"/><circle class="dot" cx="29" cy="19.4" r="4.2"/></svg><span class="wm">Space-Normal</span><span class="sep">·</span><span class="u" id="brandUrl"></span></div>
 
 <!-- GSAP 3.13.0, vendored for offline use (classic script, works on file://). Missing → CSS fallback. -->
@@ -220,9 +220,8 @@ body.brand-on #brand{opacity:1}
 /* =================================================================
    CONFIG — ALL EDITABLE TEXT LIVES HERE.
    HERO: astronaut name (undecided). APP_URL: public dashboard link.
-   time: [start, end] seconds within the 2:30 pitch (null = untimed).
+   time: [start, end] seconds within the 2:30 run (null = untimed).
    beats: number of extra clicks inside the slide before moving on.
-   notes: Polish speaker notes (SZKIC = draft). {HERO} is substituted.
    ================================================================= */
 const HERO = "Vega";
 const APP_URL = "https://spacenormal.vercel.app/";          // public dashboard
@@ -234,23 +233,20 @@ const CONFIG = {
     { key:"hook", title:"Dzień 80", time:[0,15], beats:1,
       glow:{mars:[78,40,62], teal:[22,55,40]},
       text:{ day:"Dzień 80", from:36.6, to:37.7, cap:"Gorączka?" },
-      src:"SYNTHETIC · scenariusz flight-like · Stahn i in. 2017, Sci Rep",
-      notes:"Dzień osiemdziesiąty w drodze na Marsa. {HERO} rano mierzy temperaturę. Trzydzieści siedem i siedem. [klik] Na Ziemi lekarz powiedziałby: gorączka. Czy {HERO} jest chora?" },
+      src:"SYNTHETIC · scenariusz flight-like · Stahn i in. 2017, Sci Rep" },
 
     { key:"problem", title:"Nie ma kogo zapytać", time:[15,35], beats:3,
       glow:{mars:[86,30,40], teal:[12,30,30]},
       text:{ cap:"Nie ma kogo zapytać.", earth:"Ziemia", mars:"Mars",
              nums:[ ["22","min","maks. opóźnienie"], ["~2","tyg.","ciszy radiowej"], ["0","","lekarzy wymaganych"] ] },
-      src:"Źródła: ASCEND/NASA — Communication Delays… for Crewed Mars Missions · NASA 2025 Architecture Update · HRP 48021 · NASA-STD-3001 Vol 1 Rev C · TH-8LM",
-      notes:"[klik] Problem w tym, że nie ma kogo zapytać. [klik] Wiadomość do Ziemi leci do dwudziestu dwóch minut. [klik] Czasem trwa ok. dwóch tygodni cisza. [klik] A standard NASA nie wymaga lekarza na pokładzie. Jest oficer medyczny — po krótkim szkoleniu." },
+      src:"Źródła: ASCEND/NASA — Communication Delays… for Crewed Mars Missions · NASA 2025 Architecture Update · HRP 48021 · NASA-STD-3001 Vol 1 Rev C · TH-8LM" },
 
     { key:"chart", title:"Jej norma się przesuwa", time:[35,65], beats:5,
       glow:{mars:[90,20,30], teal:[40,60,70]},
       text:{ cap:"Jej norma się przesuwa.", sub:"Siatka centylowa dla astronauty",
              earthLbl:"Ziemska norma", preLbl:"Zakres sprzed lotu", corLbl:"Jej korytarz",
              xLbl:"dzień misji", syn:"SYNTHETIC · flight-like, literatura (Stahn 2017)" },
-      src:"Źródła: Stahn i in. 2017, Sci Rep · NASA CDSS ConOps HRP-48033 (2021): „pre-flight determined reference ranges” · wykres poglądowy, SYNTHETIC",
-      notes:"[klik] Spójrzmy na temperaturę Vegi. [klik] Ziemska norma jest jedna — dla wszystkich. [klik] Zakres sprzed lotu jest osobisty, ale płaski. [klik] A ciało w kosmosie powinno się zmieniać. Zdrowy astronauta po paru miesiącach może mieć ok. trzydziestu ośmiu stopni. Dlatego Space-Normal rysuje każdemu jego korytarz. Jak siatka centylowa u pediatry — tylko zamiast wieku jest dzień misji. [klik] Trzydzieści siedem i siedem? Dla Vegi w dniu osiemdziesiątym to norma. [klik] A równe trzydzieści siedem? Dla Ziemi — OK. Dla niej — sygnał: sprawdź." },
+      src:"Źródła: Stahn i in. 2017, Sci Rep · NASA CDSS ConOps HRP-48033 (2021): „pre-flight determined reference ranges” · wykres poglądowy, SYNTHETIC" },
 
     { key:"product", title:"Każdego ranka: 3 linijki", time:[65,85], beats:1,
       glow:{mars:[8,85,30], teal:[50,40,80]},
@@ -260,30 +256,26 @@ const CONFIG = {
                            ["CHECK NOW","amber","Re-measure after rest. Check heart rate.", false],
                            ["ESCALATE IF","red","Still outside the corridor tomorrow, or new symptoms.", false] ] },
              users:[ ["◉","astronauta"], ["✚","oficer medyczny"], ["⊕","lekarz na Ziemi"] ] },
-      src:"Źródło: NASA-STD-3001 Vol 1 Rev C („monitoring, and trending vital signs”) · karta: demo SYNTHETIC",
-      notes:"[klik] Co dostaje {HERO}? Każdego ranka trzy linijki: co widzimy, co sprawdzić teraz, kiedy eskalować. [klik] Oficer medyczny widzi całą załogę. Lekarz na Ziemi dostaje krótki pakiet — tylko gdy ktoś wypada z korytarza. Alarmu nie wywołuje AI. Liczy go przejrzysta statystyka, offline." },
+      src:"Źródło: NASA-STD-3001 Vol 1 Rev C („monitoring, and trending vital signs”) · karta: demo SYNTHETIC" },
 
     { key:"proof", title:"Zbudowane na danych NASA", time:[85,115], beats:0,
       glow:{mars:[80,80,40], teal:[20,25,60]},
       text:{ cap:"Zbudowane na danych NASA.", limit:"analog naziemny · nie lot",
              cards:[ ["BED REST","NASA",false], ["18 + 11","nauka · zamknięty test",true], ["STANFORD","prawdziwe choroby",false] ] },
-      src:"Źródła: NASA Life Sciences Portal — Bed Rest (Campaign 1 + 3, CFT70) · Stanford COVID-19 Wearables — Mishra i in. 2020 · Moon to Mars HBS-2LM",
-      notes:"[klik] Budujemy to na prawdziwych danych NASA z eksperymentów bed rest. Ludzie leżą tygodniami z głową lekko w dół — tak NASA symuluje nieważkość. Osiemnaście osób do nauki. Jedenaście w zamkniętym teście — kod blokuje do nich dostęp, dopóki nie zamrozimy modelu. Choroby to prawdziwe sygnały z badań Stanforda. Uczciwie: bed rest to analog naziemny, nie lot. Tryb lotu w demo jest oznaczony jako syntetyczny." },
+      src:"Źródła: NASA Life Sciences Portal — Bed Rest (Campaign 1 + 3, CFT70) · Stanford COVID-19 Wearables — Mishra i in. 2020 · Moon to Mars HBS-2LM" },
 
     { key:"diff", title:"Warstwa przed diagnozą", time:[115,135], beats:1,
       glow:{mars:[85,55,34], teal:[15,55,50]},
       text:{ cap:"Warstwa przed diagnozą.",
              sn:{ who:"Space-Normal", q:"„Czy to normalne — u&nbsp;mnie, dziś?”" },
              cmo:{ who:"CMO-DA · NASA JSC", q:"„Co mi jest?”" } },
-      src:"Źródła (blogi firm, nie NASA): Google Cloud 2025 · Red Hat 2026 · prior art: Baevsky / IBMP, NASA CDSS HRP-48033",
-      notes:"[klik] NASA już testuje asystenta CMO-DA — najpierw z Google, teraz offline z Red Hat. On odpowiada na pytanie: co mi jest? [klik] My — na pytanie wcześniejsze: czy to jeszcze normalne — u mnie, dziś? I przekazujemy tę odpowiedź dalej. Osobisty baseline nie jest nowy. Nowy jest korytarz, który ugina się z misją." },
+      src:"Źródła (blogi firm, nie NASA): Google Cloud 2025 · Red Hat 2026 · prior art: Baevsky / IBMP, NASA CDSS HRP-48033" },
 
     { key:"close", title:"Twoja norma. W kosmosie.", time:[135,150], beats:1,
       glow:{mars:[50,96,70], teal:[50,40,40]},
       text:{ callback:"Dzień 80 · <b>37,7 °C ✓</b>",
              word:"SPACE-NORMAL", tagline:"Twoja norma. W kosmosie.", url:APP_URL_SHORT },
-      src:"",
-      notes:"[klik] Dzień osiemdziesiąty. {HERO}: trzydzieści siedem i siedem — w swoim korytarzu. Na Marsie nie zapytasz lekarza. Ale możesz wiedzieć, co jest normalne — dla ciebie. [klik] Space-Normal. Twoja norma. W kosmosie." },
+      src:"" },
 
     { key:"sources", title:"Źródła (Q&A)", time:null, beats:0,
       glow:{mars:[95,90,20], teal:[5,10,20]},
@@ -314,8 +306,7 @@ const CONFIG = {
                ["Narzędzia: GSAP 3.13 (GreenSock), Claude Code (Anthropic)",""],
                ["Ujęcia AI (astro/holo/planets.mp4): Higgsfield (Kling / Veo, image-to-video) — osoba fikcyjna, bez logo i naszywek",""]
              ] },
-      src:"",
-      notes:"Slajd zapasowy na Q&A. Nie pokazywać w trakcie 2:30." }
+      src:"" }
   ]
 };
 /* ======================= END OF CONFIG ======================= */
@@ -605,13 +596,12 @@ function render(dir){
   camTarget = {x: cur*160, y: Math.sin(cur*1.3)*60, z: 1+cur*.02};
   hooks(dir);
   try{ history.replaceState(null,"","#"+(cur+1)+"."+beat); }catch(e){}
-  updatePresenter();
 }
 function place(el,[x,y,size]){ const px=size*innerWidth/100; el.style.width=el.style.height=px+"px"; el.style.left=(x*innerWidth/100-px/2)+"px"; el.style.top=(y*innerHeight/100-px/2)+"px"; el.style.opacity=size?1:0; }
 
 function busy(){ if(tl && tl.isActive()){ tl.progress(1); return true; } return false; } // 2nd press = fast-forward
 function next(){ if(busy()) return; startTimer();
-  if(!started){ playIntro(); updatePresenter(); return; }
+  if(!started){ playIntro(); return; }
   if(beat<S[cur].beats){beat++;render(1);} else if(cur<S.length-1){cur++;beat=0;render(1);} }
 function prev(){ if(busy()) return; if(beat>0){beat--;render(-1);} else if(cur>0){cur--;beat=S[cur].beats;render(-1);} }
 function go(i){ if(i>=0&&i<S.length){ if(tl) tl.progress(1); if(CINE) finishIntro(); cur=i;beat=0;render(0);} }
@@ -765,46 +755,7 @@ setInterval(()=>{
   timerEl.textContent=fmt(e)+" / "+fmt(TOTAL);
   timerEl.classList.toggle("warn", e>=140 && e<TOTAL);
   timerEl.classList.toggle("over", e>=TOTAL);
-  updatePresenter(true);
 },250);
-
-/* ---------- presenter window ----------
-   Direct window reference (BroadcastChannel is unreliable for file:// pages). */
-let pw=null;
-function openPresenter(){
-  pw=window.open("", "spacenormal-presenter", "width=900,height=640");
-  if(!pw) return;
-  pw.document.open();
-  pw.document.write(`<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Presenter — Space-Normal</title>
-  <style>body{margin:0;background:#05080b;color:#eef;font-family:${getComputedStyle(document.body).fontFamily};padding:28px 34px}
-  .top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #234;padding-bottom:14px}
-  #pt{font-size:56px;font-variant-numeric:tabular-nums;font-weight:300}#pt.warn{color:#ffb547}#pt.over{color:#ff4d4d}
-  #ps{font-size:18px;color:#8aa;letter-spacing:.1em;text-transform:uppercase}
-  #pn{font-size:30px;line-height:1.45;margin-top:22px}#pn .beat{color:#38e1d4}
-  #px{margin-top:26px;font-size:18px;color:#789}#pg{font-size:18px;color:#38e1d4;margin-top:6px}
-  small{color:#567}</style></head><body>
-  <div class="top"><div id="ps"></div><div id="pt">0:00</div></div>
-  <div id="pg"></div><div id="pn"></div><div id="px"></div>
-  <p><small>→ / PageDown / Space = dalej · ← / PageUp = wstecz · R = reset timera</small></p></body></html>`);
-  pw.document.close();
-  pw.document.addEventListener("keydown", onKey);
-  updatePresenter();
-}
-function updatePresenter(onlyTime){
-  if(!pw || pw.closed) return;
-  const d=pw.document, s=S[cur], e=elapsed();
-  const pt=d.getElementById("pt"); if(!pt) return;
-  pt.textContent=fmt(e)+" / "+fmt(TOTAL);
-  pt.className = e>=TOTAL?"over":(e>=140?"warn":"");
-  if(onlyTime) return;
-  if(!started){ d.getElementById("ps").textContent="Start · czarny ekran"; d.getElementById("pg").textContent="cel: 0:00";
-    d.getElementById("pn").innerHTML='<span class="beat">[klik]</span> = intro: planety → zbliżenie → portal z astronautką (ok. 4 s), potem slajd 1.';
-    d.getElementById("px").textContent="Następny: "+S[0].title; return; }
-  d.getElementById("ps").textContent=`Slajd ${cur+1}/${S.length} · ${s.title} · klik ${beat}/${s.beats}`;
-  d.getElementById("pg").textContent= s.time ? `cel: ${fmt(s.time[0])} – ${fmt(s.time[1])}` : "poza czasem (Q&A)";
-  d.getElementById("pn").innerHTML=H(s.notes).replace(/\n/g,"<br><br>").replace(/\[klik\]/g,'<span class="beat">[klik]</span>');
-  d.getElementById("px").textContent= cur<S.length-1 ? "Następny: "+S[cur+1].title : "Koniec";
-}
 
 /* ---------- input ---------- */
 function onKey(e){
@@ -814,7 +765,6 @@ function onKey(e){
   else if(k==="f"||k==="F"){ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
   else if(k==="t"||k==="T"){ timerEl.style.display = timerEl.style.display==="block"?"none":"block"; }
   else if(k==="r"||k==="R"){ t0=null; }
-  else if(k==="p"||k==="P"){ openPresenter(); }
   else if(/^[1-8]$/.test(k)){ go(+k-1); }
   document.getElementById("hint").style.opacity=0;
 }

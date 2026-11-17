@@ -1,6 +1,6 @@
 # Claims — wyniki do cytowania
 
-**Stan: BRAK WYNIKÓW.** Ewaluacja na wydzielonym teście (faza P5 z `PLAN.md`) jeszcze się nie odbyła. Do tego czasu w filmie, pitchu i na stronie zgłoszenia używamy tylko placeholderów `{X}`, `{Y}`, `{S}` — **nie wpisujemy żadnych liczb wyników**.
+**Stan: BRAK WYNIKÓW.** Ewaluacja na wydzielonym teście (faza P5 z `PLAN.md`) jeszcze się nie odbyła. Do tego czasu w filmie, prezentacji i na stronie zgłoszenia używamy tylko placeholderów `{X}`, `{Y}`, `{S}` — **nie wpisujemy żadnych liczb wyników**.
 
 ## Jak ten plik powstaje
 

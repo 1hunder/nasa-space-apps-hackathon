@@ -29,10 +29,10 @@ Uwaga: [`PLAN.md`](PLAN.md) to specyfikacja sprzed researchu. Gdzie przeczy [`do
 | Kod: pipeline, model, detektory, ewaluacja | [`PLAN.md`](PLAN.md) (specyfikacja, EN) + **delta** w [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §4 + [`docs/data_notes.md`](docs/data_notes.md) |
 | Kod: dashboard / UI (`web/`) | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 i §4 + `web/src/contract.ts` |
 | Deploy | [`README.md`](README.md) (uruchomienie) + [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §5 |
-| Design ekranu, film 30 s | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §1 |
-| Prezentacja pitchowa | [`pitch/index.html`](pitch/index.html) (jedyna aktualna) + [`pitch/SKRYPT.md`](pitch/SKRYPT.md) + [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) §2 |
+| Design ekranu, film 30 s | [`docs/01-produkt-i-zakres.md`](docs/01-produkt-i-zakres.md) §1–2 |
+| Prezentacja | [`deck/index.html`](deck/index.html) — cały tekst slajdów siedzi w obiekcie `CONFIG` na górze skryptu |
 | Stan faz P0–P8 | [`docs/05-stan-prac.md`](docs/05-stan-prac.md) |
-| Teksty: pitch, film, strona zgłoszenia | [`docs/03-pitch-i-film.md`](docs/03-pitch-i-film.md) + [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) + [`docs/00-kontekst.md`](docs/00-kontekst.md) §10 |
+| Teksty: film, strona zgłoszenia | [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) + [`docs/00-kontekst.md`](docs/00-kontekst.md) §10 |
 | Pole References | [`docs/02-dowody-nasa.md`](docs/02-dowody-nasa.md) §4 |
 
 ## 4. Research: które pytanie → który plik

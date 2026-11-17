@@ -48,7 +48,7 @@ Dashboard już istnieje (`web/`, replay syntetycznych misji, ok. 15 s). Projektu
 
 ## 3. Zakres na hackathon
 
-| Must (bez tego nie ma demo) | Should | Roadmapa (tylko w pitchu) |
+| Must (bez tego nie ma demo) | Should | Roadmapa (tylko w prezentacji) |
 |---|---|---|
 | Ewaluacja na prawdziwych danych NASA: wydzielony test (CFT70, C3 G/H), fałszywe alarmy na osobo-miesiąc vs zakres sprzed lotu / ziemskie progi / rolling | Track D: prawdziwe zdarzenia z logów bed rest (przypadki) | Powierzchnia Marsa i powrót jako kolejne fazy korytarza |
 | Przeszczepione sygnatury chorób (Stanford): czułość i ile dni wcześniej | Pytania samooceny (sen, nastrój, objawy) na karcie — dotyka „behavioral health” z wyzwania | Moduł termiczny w trakcie treningu (Stahn 2017) |
@@ -65,11 +65,11 @@ Nigdy nie wycinamy: wydzielonego testu, porównania z zakresem sprzed lotu, etyk
 |---|---|---|
 | `web/src/labels.ts` | `frozen_baseline` nazwać **„Pre-flight range”** (how: „Personal range fixed before launch — NASA CDSS concept”) zamiast „Earth-normal monitor”. `fixed_thresholds` zostaje jako **„Earth normal”** | NASA planuje właśnie zakres sprzed lotu (HRP-48033); to nasz prawdziwy rywal, nie ziemska norma |
 | Ewaluacja / claims | **Bez zmian względem PLAN.md:** liczba główna = Space-Normal vs **najlepszy** baseline (ziemskie progi, zakres sprzed lotu, rolling) przy wyrównanym budżecie fałszywych alarmów. Porównanie tylko ze słabszym rywalem byłoby wybieraniem wygodnego przeciwnika | Uczciwość (Validity) |
-| Narracja (film, pitch, główny wykres) | Pokazujemy **ziemską normę i zakres sprzed lotu** jako płaskie pasy obok korytarza; rolling zostaje w ewaluacji i w widoku szczegółów | To rozumie juror; zakres sprzed lotu to koncepcja NASA (HRP-48033) |
-| Priorytety UI (PLAN.md §14) | Najpierw: kadry do filmu 30 s (główny wykres + karta + lista załogi) i publiczny link. **Opcjonalne:** ekran Proof, zakładki pod 3-minutowe demo dashboardu, mapa ciała, Data & Honesty — pitch jest na żywo **bez ekranu** | Format: film 30 s + pitch bez slajdów |
+| Narracja (film, prezentacja, główny wykres) | Pokazujemy **ziemską normę i zakres sprzed lotu** jako płaskie pasy obok korytarza; rolling zostaje w ewaluacji i w widoku szczegółów | To rozumie juror; zakres sprzed lotu to koncepcja NASA (HRP-48033) |
+| Priorytety UI (PLAN.md §14) | Najpierw: kadry do filmu 30 s (główny wykres + karta + lista załogi) i publiczny link. **Opcjonalne:** ekran Proof, zakładki pod 3-minutowe demo dashboardu, mapa ciała, Data & Honesty — wystąpienie jest na żywo **bez ekranu** | Format: film 30 s + wystąpienie bez slajdów |
 | Dashboard | Pasek misji: „Mars transit · day N · one-way delay 22 min · no physician on board” (oznaczone jako założenie demo) | Zawężenie do misji na Marsa, NASA-STD-3001 Rev C |
 | Dashboard | Fazy misji na osi X | NASA TH-8LM „throughout all mission phases” |
-| Teksty, pitch, README | 22 min zamiast 24; dodać ~2 tygodnie bez łączności | Źródła NASA |
+| Teksty, prezentacja, README | 22 min zamiast 24; dodać ~2 tygodnie bez łączności | Źródła NASA |
 | Karta | Główny użytkownik = astronauta; CMO = widok załogi | Tekst wyzwania |
 | Scenariusz temperatury | Zostaje jako **flight-like (literatura, syntetyczne)** — w bed rest temperatura się nie zmienia | `data_notes.md` §5 |
 | Tętno z bed rest | Nie przedstawiać jako przewidywania dla lotu | W locie tętno spoczynkowe się nie zmienia (Norsk 2015) |

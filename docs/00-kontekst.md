@@ -143,10 +143,10 @@ Nie mówimy:
 | Osobisty baseline postulują badacze i NASA; my dodajemy zależność od fazy misji | „Nikt wcześniej nie wpadł na osobisty baseline” |
 | Wyniki na danych NASA z bed rest, analog naziemny | Liczby z demo syntetycznego jako wyniki; „zdrowy astronauta ma w kosmosie wyższe tętno” |
 
-Każda liczba w filmie i pitchu musi pochodzić z `docs/claims.md` generowanego przez pipeline albo z cytowanego źródła w [`02-dowody-nasa.md`](02-dowody-nasa.md).
+Każda liczba w filmie i prezentacji musi pochodzić z `docs/claims.md` generowanego przez pipeline albo z cytowanego źródła w [`02-dowody-nasa.md`](02-dowody-nasa.md).
 
 ## 11. Otwarte decyzje
 
 1. **Liczba główna** (headline): do uzupełnienia po ewaluacji CFT70, wyłącznie z `docs/claims.md`.
 2. **Limity bezpieczeństwa i progi „eskaluj, jeśli”** — bez mentora medycznego oznaczamy jako placeholdery.
-3. **Format zgłoszenia:** film 30 s (rekomendowany) — patrz [`03-pitch-i-film.md`](03-pitch-i-film.md).
+3. **Format zgłoszenia:** film 30 s (rekomendowany).

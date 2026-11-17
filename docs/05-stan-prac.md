@@ -12,7 +12,7 @@ Fazy według [`../PLAN.md`](../PLAN.md) §16. Priorytety według [`01-produkt-i-
 | P1 | Pobieranie i loader NASA bed rest (301 plików), pobrane dane Stanford Phase 1 + etykiety + loader, inwentaryzacja danych | `scripts/fetch_nlsp.py`, `src/spacenormal/data/nlsp.py`, `scripts/build_stanford_labels.py`, `src/spacenormal/data/stanford.py`, `docs/data_notes.md` |
 | P4 (częściowo) | Prosty model (baza + adaptacja × skala osobista + zdarzenia → residual), CUSUM, warstwa załogi, baseline'y (ziemskie progi, zakres sprzed lotu, rolling) | `src/spacenormal/model/simple.py`, `detect/`, `baselines.py` |
 | P7 (częściowo) | Dashboard React z replayem 4 syntetycznych misji (90 dni): korytarz (domyślnie temperatura), linia „Earth normal” i pas „Pre-flight range”, odczyty godzinowe w tle i średnie dzienne, wiersz „Crew journal” (mock, bez LLM, nie wpływa na alarm), klikalne punkty i wpisy dziennika, replay zatrzymuje się na alarmie Space-Normal, lista załogi z sylwetką (regiony ciała + zgłoszenia bólu z dziennika), karta astronauty OBSERVATION / CHECK NOW / ESCALATE IF + „Not a diagnosis.”, pasek misji „Mars transit · day N”, link `?scenario=…&day=N` | `web/src/`, `configs/journal.yaml`, `web/src/contract.ts` |
-| Dokumenty | Kontekst, research, mapa wymagań NASA, pitch i film | `docs/` |
+| Dokumenty | Kontekst, research, mapa wymagań NASA, prezentacja i film | `docs/` |
 
 Dashboard jest wdrożony pod https://spacenormal.vercel.app/ (statyczny build `web/`).
 
@@ -38,4 +38,4 @@ Dashboard jest wdrożony pod https://spacenormal.vercel.app/ (statyczny build `w
 2. Alarm w scenariuszu `single_illness` dotyczy temperatury (dzień 40, początek objawów dzień 41), nie tętna jak w storyboardzie `03` §1.
 3. „Twarde limity bezpieczeństwa” z `00` §5 nie istnieją jeszcze w kodzie.
 
-**Plan B, jeśli P2/P5 nie zdążą:** film i pitch na replayu syntetycznym z wyraźną etykietą „synthetic, literature-based”; w pitchu mówimy, że ewaluacja na wydzielonych danych NASA jest przygotowana (loader, blokada testu) i jest następnym krokiem. Żadnych liczb wyników.
+**Plan B, jeśli P2/P5 nie zdążą:** film i prezentacja na replayu syntetycznym z wyraźną etykietą „synthetic, literature-based”; mówimy wtedy, że ewaluacja na wydzielonych danych NASA jest przygotowana (loader, blokada testu) i jest następnym krokiem. Żadnych liczb wyników.

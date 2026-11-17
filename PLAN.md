@@ -1,6 +1,6 @@
 # Space-Normal — implementation plan for Claude Code (v2.1: NASA bed rest data + dashboard spec)
 
-> **Update 2026-11-15 (read first):** product direction and priorities changed after research. Mission framing = crewed Mars transit (22 min one-way delay, not 24); primary user = astronaut, then Crew Medical Officer. Headline comparison stays vs the best baseline. UI priority = frames for the 30 s video + public link; Proof screen and 3-minute dashboard demo are optional (live pitch has no screen). See `AGENTS.md` and `docs/01-produkt-i-zakres.md` §4 (Polish) for the full delta; `docs/05-stan-prac.md` for current status.
+> **Update 2026-11-15 (read first):** product direction and priorities changed after research. Mission framing = crewed Mars transit (22 min one-way delay, not 24); primary user = astronaut, then Crew Medical Officer. Headline comparison stays vs the best baseline. UI priority = frames for the 30 s video + public link; Proof screen and 3-minute dashboard demo are optional (the live talk has no screen). See `AGENTS.md` and `docs/01-produkt-i-zakres.md` §4 (Polish) for the full delta; `docs/05-stan-prac.md` for current status.
 
 ## Kickoff prompt (paste this into Claude Code)
 
@@ -410,7 +410,7 @@ excluded:
 - **Cut order if behind:** P8 items → flight-mode scenario → Data & Honesty screen (move to slides) → alarm-lane animations (keep static ticks).
 - **Never cut:** CFT70 as the untouched test set, Track A real null, the rolling baseline, the matched-budget comparison, provenance badges, the corridor chart, the crew strip.
 
-## 17. Honesty checklist (README and pitch)
+## 17. Honesty checklist (README and presentation)
 
 - Adaptation comes from real NASA head-down-tilt bed rest, a ground analog, not spaceflight. Flight-mode results are synthetic layers on top.
 - Illness signatures are real Earth wearable data (COVID), transplanted. Temperature/RR illness bumps are synthetic.
